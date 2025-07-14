@@ -44,6 +44,7 @@ contract DexUtils {
     mapping(uint256 => address) internal squadSwapFactories;
     mapping(uint256 => address) internal trebleSwapV2Factories;
     mapping(uint256 => address) internal sharkSwapFactories;
+    mapping(uint256 => address) internal alienBaseFactories;
 
     constructor() {
         uniV3Factories[1] = 0x1F98431c8aD98523631AE4a59f267346ea31F984;
@@ -107,6 +108,8 @@ contract DexUtils {
         trebleSwapV2Factories[8453] = 0x6Ae1d7EfA0640b6A2FA393d1EFf21fC38a08cd8f;
 
         sharkSwapFactories[8453] = 0x57592D44eb60011500961EF177BFf8D8691D5a8B;
+
+        alienBaseFactories[8453] = 0x0Fd83557b2be93617c9C1C1B6fd549401C74558C;
     }
 
     /// @notice Resolves the official Uniswap V2 Factory's address.
@@ -257,6 +260,12 @@ contract DexUtils {
     /// @return The address of SharkSwap Factory for the current chain.
     function getSharkSwapFactory() public view returns (address) {
         return safeReturnAddress(sharkSwapFactories[block.chainid]);
+    }
+
+    /// @notice Resolves the official AlienBaseSwap Factory's address.
+    /// @return The address of AlienBaseSwap Factory for the current chain.
+    function getAlienBaseFactory() public view returns (address) {
+        return safeReturnAddress(alienBaseFactories[block.chainid]);
     }
 
     /// @notice Gets a Uniswap V2 pair from a factory for token0 and token1.
