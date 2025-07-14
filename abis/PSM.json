@@ -3,7 +3,7 @@
     "inputs": [],
     "name": "dai",
     "outputs": [
-      { "internalType": "contract DaiAbstract", "name": "", "type": "address" }
+      { "internalType": "address", "name": "", "type": "address" }
     ],
     "stateMutability": "view",
     "type": "function"
@@ -13,7 +13,7 @@
     "name": "gemJoin",
     "outputs": [
       {
-        "internalType": "contract AuthGemJoinAbstract",
+        "internalType": "address",
         "name": "",
         "type": "address"
       }
