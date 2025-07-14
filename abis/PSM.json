@@ -1,0 +1,44 @@
+[
+  {
+    "inputs": [],
+    "name": "dai",
+    "outputs": [
+      { "internalType": "contract DaiAbstract", "name": "", "type": "address" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "gemJoin",
+    "outputs": [
+      {
+        "internalType": "contract AuthGemJoinAbstract",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "usr", "type": "address" },
+      { "internalType": "uint256", "name": "gemAmt", "type": "uint256" }
+    ],
+    "name": "buyGem",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "usr", "type": "address" },
+      { "internalType": "uint256", "name": "gemAmt", "type": "uint256" }
+    ],
+    "name": "sellGem",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
