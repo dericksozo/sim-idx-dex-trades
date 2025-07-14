@@ -7,11 +7,14 @@ import "./types/DexTrades.sol";
 import "./libs/Maker/MakerLib.sol";
 import "./utils/ERC20Metadata.sol";
 import "./MakerPSM.sol";
+import "./UniswapV2.sol";
 
 contract Triggers is BaseTriggers {
     function triggers() external virtual override {
         MakerPSMListener psmListener = new MakerPSMListener();
+        UniswapV2Listener uniswapV2Listener = new UniswapV2Listener();
         addTrigger(chainAbi(Chains.Ethereum, PSM$Abi()), psmListener.triggerOnBuyGemFunction());
         addTrigger(chainAbi(Chains.Ethereum, PSM$Abi()), psmListener.triggerOnSellGemFunction());
+        addTrigger(chainAbi(Chains.Ethereum, UniswapV2Pair$Abi()), uniswapV2Listener.triggerOnSwapEvent());
     }
 }
