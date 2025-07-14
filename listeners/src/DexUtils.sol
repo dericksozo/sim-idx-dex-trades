@@ -38,7 +38,7 @@ contract DexUtils {
     mapping(uint256 => address) internal dodoV2DppFactories;
     mapping(uint256 => address) internal dodoV2DspFactories;
     mapping(uint256 => address) internal dodoV2DvmFactories;
-
+    mapping(uint256 => address) internal ringSwapFactories;
     constructor() {
         uniV3Factories[1] = 0x1F98431c8aD98523631AE4a59f267346ea31F984;
         uniV3Factories[8453] = 0x33128a8fC17869897dcE68Ed026d694621f6FDfD;
@@ -88,6 +88,9 @@ contract DexUtils {
 
         dodoV2DvmFactories[1] = 0x72d220cE168C4f361dD4deE5D826a01AD8598f6C;
         dodoV2DvmFactories[8453] = 0x0226fCE8c969604C3A0AD19c37d1FAFac73e13c2;
+
+        ringSwapFactories[1] = 0xeb2A625B704d73e82946D8d026E1F588Eed06416;
+        ringSwapFactories[8453] = 0x9BfFC3B30D6659e3D84754cc38865B3D60B4980E;
     }
 
     /// @notice Resolves the official Uniswap V2 Factory's address.
@@ -202,6 +205,12 @@ contract DexUtils {
     /// @return The address of Dodo V2 DVM Factory for the current chain.
     function getDodoV2DvmFactory() public view returns (address) {
         return safeReturnAddress(dodoV2DvmFactories[block.chainid]);
+    }
+
+    /// @notice Resolves the official RingSwap Factory's address.
+    /// @return The address of RingSwap Factory for the current chain.
+    function getRingSwapFactory() public view returns (address) {
+        return safeReturnAddress(ringSwapFactories[block.chainid]);
     }
 
     /// @notice Gets a Uniswap V2 pair from a factory for token0 and token1.
