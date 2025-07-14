@@ -24,8 +24,22 @@ contract UniswapV2Listener is UniswapV2Pair$OnSwapEvent, DexUtils {
             trade.dex = "PancakeSwapV2";
         } else if (factory == DexUtils.getShibaSwapV2Factory()) {
             trade.dex = "ShibaSwapV2";
+        } else if (factory == DexUtils.getRingSwapFactory()) {
+            trade.dex = "RingSwap";
+        } else if (factory == DexUtils.getCroDefiSwapFactory()) {
+            trade.dex = "CroDefiSwap";
+        } else if (factory == DexUtils.getDXSwapFactory()) {
+            trade.dex = "DXSwap";
+        } else if (factory == DexUtils.getSquadSwapFactory()) {
+            trade.dex = "SquadSwap";
+        } else if (factory == DexUtils.getTrebleSwapV2Factory()) {
+            trade.dex = "TrebleSwapV2";
+        } else if (factory == DexUtils.getBaseSwapFactory()) {
+            trade.dex = "BaseSwap";
+        } else if (factory == DexUtils.getSharkSwapFactory()) {
+            trade.dex = "SharkSwap";
         } else {
-            trade.dex = "Unknown";
+            return;
         }
         bool zfo = (params.amount0In > 0);
         if (zfo) {

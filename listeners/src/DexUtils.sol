@@ -39,6 +39,12 @@ contract DexUtils {
     mapping(uint256 => address) internal dodoV2DspFactories;
     mapping(uint256 => address) internal dodoV2DvmFactories;
     mapping(uint256 => address) internal ringSwapFactories;
+    mapping(uint256 => address) internal croDefiSwapFactories;
+    mapping(uint256 => address) internal dxSwapFactories;
+    mapping(uint256 => address) internal squadSwapFactories;
+    mapping(uint256 => address) internal trebleSwapV2Factories;
+    mapping(uint256 => address) internal sharkSwapFactories;
+
     constructor() {
         uniV3Factories[1] = 0x1F98431c8aD98523631AE4a59f267346ea31F984;
         uniV3Factories[8453] = 0x33128a8fC17869897dcE68Ed026d694621f6FDfD;
@@ -91,6 +97,16 @@ contract DexUtils {
 
         ringSwapFactories[1] = 0xeb2A625B704d73e82946D8d026E1F588Eed06416;
         ringSwapFactories[8453] = 0x9BfFC3B30D6659e3D84754cc38865B3D60B4980E;
+
+        croDefiSwapFactories[1] = 0x9DEB29c9a4c7A88a3C0257393b7f3335338D9A9D;
+
+        dxSwapFactories[1] = 0xd34971BaB6E5E356fd250715F5dE0492BB070452;
+
+        squadSwapFactories[8453] = 0xba34aA640b8Be02A439221BCbea1f48c1035EEF9;
+
+        trebleSwapV2Factories[8453] = 0x6Ae1d7EfA0640b6A2FA393d1EFf21fC38a08cd8f;
+
+        sharkSwapFactories[8453] = 0x57592D44eb60011500961EF177BFf8D8691D5a8B;
     }
 
     /// @notice Resolves the official Uniswap V2 Factory's address.
@@ -211,6 +227,36 @@ contract DexUtils {
     /// @return The address of RingSwap Factory for the current chain.
     function getRingSwapFactory() public view returns (address) {
         return safeReturnAddress(ringSwapFactories[block.chainid]);
+    }
+
+    /// @notice Resolves the official CroDefiSwap Factory's address.
+    /// @return The address of CroDefiSwap Factory for the current chain.
+    function getCroDefiSwapFactory() public view returns (address) {
+        return safeReturnAddress(croDefiSwapFactories[block.chainid]);
+    }
+
+    /// @notice Resolves the official DXSwap Factory's address.
+    /// @return The address of DXSwap Factory for the current chain.
+    function getDXSwapFactory() public view returns (address) {
+        return safeReturnAddress(dxSwapFactories[block.chainid]);
+    }
+
+    /// @notice Resolves the official SquadSwap Factory's address.
+    /// @return The address of SquadSwap Factory for the current chain.
+    function getSquadSwapFactory() public view returns (address) {
+        return safeReturnAddress(squadSwapFactories[block.chainid]);
+    }
+
+    /// @notice Resolves the official TrebleSwap V2 Factory's address.
+    /// @return The address of TrebleSwap V2 Factory for the current chain.
+    function getTrebleSwapV2Factory() public view returns (address) {
+        return safeReturnAddress(trebleSwapV2Factories[block.chainid]);
+    }
+
+    /// @notice Resolves the official SharkSwap Factory's address.
+    /// @return The address of SharkSwap Factory for the current chain.
+    function getSharkSwapFactory() public view returns (address) {
+        return safeReturnAddress(sharkSwapFactories[block.chainid]);
     }
 
     /// @notice Gets a Uniswap V2 pair from a factory for token0 and token1.
