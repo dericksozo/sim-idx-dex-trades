@@ -38,6 +38,12 @@ contract UniswapV2Listener is UniswapV2Pair$OnSwapEvent, DexUtils {
             trade.dex = "BaseSwap";
         } else if (factory == DexUtils.getSharkSwapFactory()) {
             trade.dex = "SharkSwap";
+        } else if (factory == DexUtils.getRocketSwapFactory()) {
+            trade.dex = "RocketSwap";
+        } else if (factory == DexUtils.getAerodromeFactory()) {
+            trade.dex = "Aerodrome";
+        } else if (factory == DexUtils.getInfusionFactory()) {
+            trade.dex = "Infusion";
         } else {
             return;
         }
