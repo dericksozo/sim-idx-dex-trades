@@ -35,7 +35,7 @@ contract Triggers is BaseTriggers {
         
         addTrigger(
             chainContract(Chains.Ethereum, 0x9008D19f58AAbD9eD0D60971565AA8510560ab41),
-            gpv2SettlementListener.triggerPreExecuteSettleFunction()
+            gpv2SettlementListener.triggerPreSettleFunction()
         );
         addTrigger(
             chainContract(Chains.Ethereum, 0x9008D19f58AAbD9eD0D60971565AA8510560ab41),
@@ -47,7 +47,7 @@ contract Triggers is BaseTriggers {
         );
         addTrigger(
             chainContract(Chains.Base, 0x9008D19f58AAbD9eD0D60971565AA8510560ab41),
-            gpv2SettlementListener.triggerPreExecuteSettleFunction()
+            gpv2SettlementListener.triggerPreSettleFunction()
         );
         addTrigger(
             chainContract(Chains.Base, 0x9008D19f58AAbD9eD0D60971565AA8510560ab41),

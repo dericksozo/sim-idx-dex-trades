@@ -5,11 +5,11 @@ import "sim-idx-generated/Generated.sol";
 import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
 
-contract GPv2SettlementListener is GPv2Settlement$OnPreExecuteSettleFunction, GPv2Settlement$OnSettleFunction, GPv2Settlement$OnTradeEvent {
+contract GPv2SettlementListener is GPv2Settlement$PreSettleFunction, GPv2Settlement$OnSettleFunction, GPv2Settlement$OnTradeEvent {
     bool internal inSettlement = false;
     event DexTrade(DexTradeData);
 
-    function onPreExecuteSettleFunction(FunctionContext memory ctx, GPv2Settlement$PreExecuteSettleFunctionInputs memory inputs)
+    function preSettleFunction(PreFunctionContext memory ctx, GPv2Settlement$SettleFunctionInputs memory inputs)
         external
         override
     {

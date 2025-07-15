@@ -57,7 +57,7 @@ struct GPv2Settlement$SetPreSignatureFunctionInputs {
     bool signed;
 }
 
-struct GPv2Settlement$Data {
+struct GPv2Settlement$GPv2Trade$Data {
     uint256 sellTokenIndex;
     uint256 buyTokenIndex;
     address receiver;
@@ -71,7 +71,7 @@ struct GPv2Settlement$Data {
     bytes signature;
 }
 
-struct GPv2Settlement$Data[][3] {
+struct GPv2Settlement$GPv2Interaction$Data {
     address target;
     uint256 value;
     bytes callData;
@@ -80,8 +80,8 @@ struct GPv2Settlement$Data[][3] {
 struct GPv2Settlement$SettleFunctionInputs {
     address[] tokens;
     uint256[] clearingPrices;
-    GPv2Settlement$Data[] trades;
-    GPv2Settlement$Data[][3] interactions;
+    GPv2Settlement$GPv2Trade$Data[] trades;
+    GPv2Settlement$GPv2Interaction$Data[][3] interactions;
 }
 
 struct GPv2Settlement$SimulateDelegatecallFunctionInputs {
@@ -102,7 +102,7 @@ struct GPv2Settlement$SimulateDelegatecallInternalFunctionOutputs {
     bytes response;
 }
 
-struct GPv2Settlement$BatchSwapStep {
+struct GPv2Settlement$IVault$BatchSwapStep {
     bytes32 poolId;
     uint256 assetInIndex;
     uint256 assetOutIndex;
@@ -111,9 +111,9 @@ struct GPv2Settlement$BatchSwapStep {
 }
 
 struct GPv2Settlement$SwapFunctionInputs {
-    GPv2Settlement$BatchSwapStep[] swaps;
+    GPv2Settlement$IVault$BatchSwapStep[] swaps;
     address[] tokens;
-    GPv2Settlement$Data trade;
+    GPv2Settlement$GPv2Trade$Data trade;
 }
 
 struct GPv2Settlement$VaultFunctionOutputs {
