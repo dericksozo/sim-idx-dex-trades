@@ -11,6 +11,7 @@
 - CoW Protocol
 - Ambient.finance (CrocSwap)
 - Curve.fi
+- Balancer V2
 
 ## Schema
 
