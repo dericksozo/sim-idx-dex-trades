@@ -8,6 +8,7 @@
 - Uniswap V3 (all forks, see a comprehensive list of supported forks [here](./listeners/src/UniswapV3.sol))
 - Sky PSM (prev. Maker PSM)
 - Bancor Carbon
+- CoW Protocol
 
 ## Schema
 
