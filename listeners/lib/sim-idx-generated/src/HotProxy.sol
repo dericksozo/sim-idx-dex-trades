@@ -26,57 +26,57 @@ struct HotProxy$UserCmdFunctionOutputs {
 }
 
 abstract contract HotProxy$OnAcceptCrocProxyRoleFunction {
-    function onAcceptCrocProxyRoleFunction(FunctionContext memory ctx, HotProxy$AcceptCrocProxyRoleFunctionInputs memory inputs, HotProxy$AcceptCrocProxyRoleFunctionOutputs memory outputs) virtual external;
+    function HotProxy$onAcceptCrocProxyRoleFunction(FunctionContext memory ctx, HotProxy$AcceptCrocProxyRoleFunctionInputs memory inputs, HotProxy$AcceptCrocProxyRoleFunctionOutputs memory outputs) virtual external;
 
-    function triggerOnAcceptCrocProxyRoleFunction() view external returns (Trigger memory) {
+    function HotProxy$triggerOnAcceptCrocProxyRoleFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "HotProxy",
             selector: bytes4(0xac54c0fc),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onAcceptCrocProxyRoleFunction.selector
+            handlerSelector: this.HotProxy$onAcceptCrocProxyRoleFunction.selector
         });
     }
 }
 
 abstract contract HotProxy$PreAcceptCrocProxyRoleFunction {
-    function preAcceptCrocProxyRoleFunction(PreFunctionContext memory ctx, HotProxy$AcceptCrocProxyRoleFunctionInputs memory inputs) virtual external;
+    function HotProxy$preAcceptCrocProxyRoleFunction(PreFunctionContext memory ctx, HotProxy$AcceptCrocProxyRoleFunctionInputs memory inputs) virtual external;
 
-    function triggerPreAcceptCrocProxyRoleFunction() view external returns (Trigger memory) {
+    function HotProxy$triggerPreAcceptCrocProxyRoleFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "HotProxy",
             selector: bytes4(0xac54c0fc),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preAcceptCrocProxyRoleFunction.selector
+            handlerSelector: this.HotProxy$preAcceptCrocProxyRoleFunction.selector
         });
     }
 }
 
 abstract contract HotProxy$OnUserCmdFunction {
-    function onUserCmdFunction(FunctionContext memory ctx, HotProxy$UserCmdFunctionInputs memory inputs, HotProxy$UserCmdFunctionOutputs memory outputs) virtual external;
+    function HotProxy$onUserCmdFunction(FunctionContext memory ctx, HotProxy$UserCmdFunctionInputs memory inputs, HotProxy$UserCmdFunctionOutputs memory outputs) virtual external;
 
-    function triggerOnUserCmdFunction() view external returns (Trigger memory) {
+    function HotProxy$triggerOnUserCmdFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "HotProxy",
             selector: bytes4(0xf96dc788),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onUserCmdFunction.selector
+            handlerSelector: this.HotProxy$onUserCmdFunction.selector
         });
     }
 }
 
 abstract contract HotProxy$PreUserCmdFunction {
-    function preUserCmdFunction(PreFunctionContext memory ctx, HotProxy$UserCmdFunctionInputs memory inputs) virtual external;
+    function HotProxy$preUserCmdFunction(PreFunctionContext memory ctx, HotProxy$UserCmdFunctionInputs memory inputs) virtual external;
 
-    function triggerPreUserCmdFunction() view external returns (Trigger memory) {
+    function HotProxy$triggerPreUserCmdFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "HotProxy",
             selector: bytes4(0xf96dc788),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preUserCmdFunction.selector
+            handlerSelector: this.HotProxy$preUserCmdFunction.selector
         });
     }
 }

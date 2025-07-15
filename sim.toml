@@ -1,2 +1,5 @@
 [app]
 name = "sim-idx-dex-trades"
+
+[listeners]
+codegen_naming_convention = "abi_prefix"
