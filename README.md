@@ -7,6 +7,7 @@
 - Uniswap V2 (all forks, see a comprehensive list of supported forks [here](./listeners/src/UniswapV2.sol))
 - Uniswap V3 (all forks, see a comprehensive list of supported forks [here](./listeners/src/UniswapV3.sol))
 - Sky PSM (prev. Maker PSM)
+- Bancor Carbon
 
 ## Schema
 
