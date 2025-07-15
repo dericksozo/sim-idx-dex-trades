@@ -8,7 +8,7 @@ import "./utils/ERC20Metadata.sol";
 contract CrocSwapListener is HotProxy$OnUserCmdFunction {
     event DexTrade(DexTradeData);
 
-    function onUserCmdFunction(FunctionContext memory ctx, HotProxy$UserCmdFunctionInputs memory inputs, HotProxy$UserCmdFunctionOutputs memory outputs)
+    function HotProxy$onUserCmdFunction(FunctionContext memory ctx, HotProxy$UserCmdFunctionInputs memory inputs, HotProxy$UserCmdFunctionOutputs memory outputs)
         external
         override
     {

@@ -277,855 +277,855 @@ struct UniswapV3Pool$SwapEventParams {
 }
 
 abstract contract UniswapV3Pool$OnBurnEvent {
-    function onBurnEvent(EventContext memory ctx, UniswapV3Pool$BurnEventParams memory inputs) virtual external;
+    function UniswapV3Pool$onBurnEvent(EventContext memory ctx, UniswapV3Pool$BurnEventParams memory inputs) virtual external;
 
-    function triggerOnBurnEvent() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnBurnEvent() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes32(0x0c396cd989a39f4459b5fa1aed6a9a8dcdbc45908acfd67e028cd568da98982c),
             triggerType: TriggerType.EVENT,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onBurnEvent.selector
+            handlerSelector: this.UniswapV3Pool$onBurnEvent.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnCollectEvent {
-    function onCollectEvent(EventContext memory ctx, UniswapV3Pool$CollectEventParams memory inputs) virtual external;
+    function UniswapV3Pool$onCollectEvent(EventContext memory ctx, UniswapV3Pool$CollectEventParams memory inputs) virtual external;
 
-    function triggerOnCollectEvent() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnCollectEvent() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes32(0x70935338e69775456a85ddef226c395fb668b63fa0115f5f20610b388e6ca9c0),
             triggerType: TriggerType.EVENT,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onCollectEvent.selector
+            handlerSelector: this.UniswapV3Pool$onCollectEvent.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnCollectProtocolEvent {
-    function onCollectProtocolEvent(EventContext memory ctx, UniswapV3Pool$CollectProtocolEventParams memory inputs) virtual external;
+    function UniswapV3Pool$onCollectProtocolEvent(EventContext memory ctx, UniswapV3Pool$CollectProtocolEventParams memory inputs) virtual external;
 
-    function triggerOnCollectProtocolEvent() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnCollectProtocolEvent() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes32(0x596b573906218d3411850b26a6b437d6c4522fdb43d2d2386263f86d50b8b151),
             triggerType: TriggerType.EVENT,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onCollectProtocolEvent.selector
+            handlerSelector: this.UniswapV3Pool$onCollectProtocolEvent.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnFlashEvent {
-    function onFlashEvent(EventContext memory ctx, UniswapV3Pool$FlashEventParams memory inputs) virtual external;
+    function UniswapV3Pool$onFlashEvent(EventContext memory ctx, UniswapV3Pool$FlashEventParams memory inputs) virtual external;
 
-    function triggerOnFlashEvent() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnFlashEvent() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes32(0xbdbdb71d7860376ba52b25a5028beea23581364a40522f6bcfb86bb1f2dca633),
             triggerType: TriggerType.EVENT,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onFlashEvent.selector
+            handlerSelector: this.UniswapV3Pool$onFlashEvent.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnIncreaseObservationCardinalityNextEvent {
-    function onIncreaseObservationCardinalityNextEvent(EventContext memory ctx, UniswapV3Pool$IncreaseObservationCardinalityNextEventParams memory inputs) virtual external;
+    function UniswapV3Pool$onIncreaseObservationCardinalityNextEvent(EventContext memory ctx, UniswapV3Pool$IncreaseObservationCardinalityNextEventParams memory inputs) virtual external;
 
-    function triggerOnIncreaseObservationCardinalityNextEvent() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnIncreaseObservationCardinalityNextEvent() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes32(0xac49e518f90a358f652e4400164f05a5d8f7e35e7747279bc3a93dbf584e125a),
             triggerType: TriggerType.EVENT,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onIncreaseObservationCardinalityNextEvent.selector
+            handlerSelector: this.UniswapV3Pool$onIncreaseObservationCardinalityNextEvent.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnInitializeEvent {
-    function onInitializeEvent(EventContext memory ctx, UniswapV3Pool$InitializeEventParams memory inputs) virtual external;
+    function UniswapV3Pool$onInitializeEvent(EventContext memory ctx, UniswapV3Pool$InitializeEventParams memory inputs) virtual external;
 
-    function triggerOnInitializeEvent() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnInitializeEvent() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes32(0x98636036cb66a9c19a37435efc1e90142190214e8abeb821bdba3f2990dd4c95),
             triggerType: TriggerType.EVENT,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onInitializeEvent.selector
+            handlerSelector: this.UniswapV3Pool$onInitializeEvent.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnMintEvent {
-    function onMintEvent(EventContext memory ctx, UniswapV3Pool$MintEventParams memory inputs) virtual external;
+    function UniswapV3Pool$onMintEvent(EventContext memory ctx, UniswapV3Pool$MintEventParams memory inputs) virtual external;
 
-    function triggerOnMintEvent() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnMintEvent() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes32(0x7a53080ba414158be7ec69b987b5fb7d07dee101fe85488f0853ae16239d0bde),
             triggerType: TriggerType.EVENT,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onMintEvent.selector
+            handlerSelector: this.UniswapV3Pool$onMintEvent.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnSetFeeProtocolEvent {
-    function onSetFeeProtocolEvent(EventContext memory ctx, UniswapV3Pool$SetFeeProtocolEventParams memory inputs) virtual external;
+    function UniswapV3Pool$onSetFeeProtocolEvent(EventContext memory ctx, UniswapV3Pool$SetFeeProtocolEventParams memory inputs) virtual external;
 
-    function triggerOnSetFeeProtocolEvent() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnSetFeeProtocolEvent() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes32(0x973d8d92bb299f4af6ce49b52a8adb85ae46b9f214c4c4fc06ac77401237b133),
             triggerType: TriggerType.EVENT,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onSetFeeProtocolEvent.selector
+            handlerSelector: this.UniswapV3Pool$onSetFeeProtocolEvent.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnSwapEvent {
-    function onSwapEvent(EventContext memory ctx, UniswapV3Pool$SwapEventParams memory inputs) virtual external;
+    function UniswapV3Pool$onSwapEvent(EventContext memory ctx, UniswapV3Pool$SwapEventParams memory inputs) virtual external;
 
-    function triggerOnSwapEvent() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnSwapEvent() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes32(0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67),
             triggerType: TriggerType.EVENT,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onSwapEvent.selector
+            handlerSelector: this.UniswapV3Pool$onSwapEvent.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnBurnFunction {
-    function onBurnFunction(FunctionContext memory ctx, UniswapV3Pool$BurnFunctionInputs memory inputs, UniswapV3Pool$BurnFunctionOutputs memory outputs) virtual external;
+    function UniswapV3Pool$onBurnFunction(FunctionContext memory ctx, UniswapV3Pool$BurnFunctionInputs memory inputs, UniswapV3Pool$BurnFunctionOutputs memory outputs) virtual external;
 
-    function triggerOnBurnFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnBurnFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0xa34123a7),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onBurnFunction.selector
+            handlerSelector: this.UniswapV3Pool$onBurnFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$PreBurnFunction {
-    function preBurnFunction(PreFunctionContext memory ctx, UniswapV3Pool$BurnFunctionInputs memory inputs) virtual external;
+    function UniswapV3Pool$preBurnFunction(PreFunctionContext memory ctx, UniswapV3Pool$BurnFunctionInputs memory inputs) virtual external;
 
-    function triggerPreBurnFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerPreBurnFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0xa34123a7),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preBurnFunction.selector
+            handlerSelector: this.UniswapV3Pool$preBurnFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnCollectFunction {
-    function onCollectFunction(FunctionContext memory ctx, UniswapV3Pool$CollectFunctionInputs memory inputs, UniswapV3Pool$CollectFunctionOutputs memory outputs) virtual external;
+    function UniswapV3Pool$onCollectFunction(FunctionContext memory ctx, UniswapV3Pool$CollectFunctionInputs memory inputs, UniswapV3Pool$CollectFunctionOutputs memory outputs) virtual external;
 
-    function triggerOnCollectFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnCollectFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x4f1eb3d8),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onCollectFunction.selector
+            handlerSelector: this.UniswapV3Pool$onCollectFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$PreCollectFunction {
-    function preCollectFunction(PreFunctionContext memory ctx, UniswapV3Pool$CollectFunctionInputs memory inputs) virtual external;
+    function UniswapV3Pool$preCollectFunction(PreFunctionContext memory ctx, UniswapV3Pool$CollectFunctionInputs memory inputs) virtual external;
 
-    function triggerPreCollectFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerPreCollectFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x4f1eb3d8),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preCollectFunction.selector
+            handlerSelector: this.UniswapV3Pool$preCollectFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnCollectProtocolFunction {
-    function onCollectProtocolFunction(FunctionContext memory ctx, UniswapV3Pool$CollectProtocolFunctionInputs memory inputs, UniswapV3Pool$CollectProtocolFunctionOutputs memory outputs) virtual external;
+    function UniswapV3Pool$onCollectProtocolFunction(FunctionContext memory ctx, UniswapV3Pool$CollectProtocolFunctionInputs memory inputs, UniswapV3Pool$CollectProtocolFunctionOutputs memory outputs) virtual external;
 
-    function triggerOnCollectProtocolFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnCollectProtocolFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x85b66729),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onCollectProtocolFunction.selector
+            handlerSelector: this.UniswapV3Pool$onCollectProtocolFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$PreCollectProtocolFunction {
-    function preCollectProtocolFunction(PreFunctionContext memory ctx, UniswapV3Pool$CollectProtocolFunctionInputs memory inputs) virtual external;
+    function UniswapV3Pool$preCollectProtocolFunction(PreFunctionContext memory ctx, UniswapV3Pool$CollectProtocolFunctionInputs memory inputs) virtual external;
 
-    function triggerPreCollectProtocolFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerPreCollectProtocolFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x85b66729),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preCollectProtocolFunction.selector
+            handlerSelector: this.UniswapV3Pool$preCollectProtocolFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnFactoryFunction {
-    function onFactoryFunction(FunctionContext memory ctx, UniswapV3Pool$FactoryFunctionOutputs memory outputs) virtual external;
+    function UniswapV3Pool$onFactoryFunction(FunctionContext memory ctx, UniswapV3Pool$FactoryFunctionOutputs memory outputs) virtual external;
 
-    function triggerOnFactoryFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnFactoryFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0xc45a0155),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onFactoryFunction.selector
+            handlerSelector: this.UniswapV3Pool$onFactoryFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$PreFactoryFunction {
-    function preFactoryFunction(PreFunctionContext memory ctx) virtual external;
+    function UniswapV3Pool$preFactoryFunction(PreFunctionContext memory ctx) virtual external;
 
-    function triggerPreFactoryFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerPreFactoryFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0xc45a0155),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preFactoryFunction.selector
+            handlerSelector: this.UniswapV3Pool$preFactoryFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnFeeFunction {
-    function onFeeFunction(FunctionContext memory ctx, UniswapV3Pool$FeeFunctionOutputs memory outputs) virtual external;
+    function UniswapV3Pool$onFeeFunction(FunctionContext memory ctx, UniswapV3Pool$FeeFunctionOutputs memory outputs) virtual external;
 
-    function triggerOnFeeFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnFeeFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0xddca3f43),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onFeeFunction.selector
+            handlerSelector: this.UniswapV3Pool$onFeeFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$PreFeeFunction {
-    function preFeeFunction(PreFunctionContext memory ctx) virtual external;
+    function UniswapV3Pool$preFeeFunction(PreFunctionContext memory ctx) virtual external;
 
-    function triggerPreFeeFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerPreFeeFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0xddca3f43),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preFeeFunction.selector
+            handlerSelector: this.UniswapV3Pool$preFeeFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnFeeGrowthGlobal0X128Function {
-    function onFeeGrowthGlobal0X128Function(FunctionContext memory ctx, UniswapV3Pool$FeeGrowthGlobal0X128FunctionOutputs memory outputs) virtual external;
+    function UniswapV3Pool$onFeeGrowthGlobal0X128Function(FunctionContext memory ctx, UniswapV3Pool$FeeGrowthGlobal0X128FunctionOutputs memory outputs) virtual external;
 
-    function triggerOnFeeGrowthGlobal0X128Function() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnFeeGrowthGlobal0X128Function() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0xf3058399),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onFeeGrowthGlobal0X128Function.selector
+            handlerSelector: this.UniswapV3Pool$onFeeGrowthGlobal0X128Function.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$PreFeeGrowthGlobal0X128Function {
-    function preFeeGrowthGlobal0X128Function(PreFunctionContext memory ctx) virtual external;
+    function UniswapV3Pool$preFeeGrowthGlobal0X128Function(PreFunctionContext memory ctx) virtual external;
 
-    function triggerPreFeeGrowthGlobal0X128Function() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerPreFeeGrowthGlobal0X128Function() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0xf3058399),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preFeeGrowthGlobal0X128Function.selector
+            handlerSelector: this.UniswapV3Pool$preFeeGrowthGlobal0X128Function.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnFeeGrowthGlobal1X128Function {
-    function onFeeGrowthGlobal1X128Function(FunctionContext memory ctx, UniswapV3Pool$FeeGrowthGlobal1X128FunctionOutputs memory outputs) virtual external;
+    function UniswapV3Pool$onFeeGrowthGlobal1X128Function(FunctionContext memory ctx, UniswapV3Pool$FeeGrowthGlobal1X128FunctionOutputs memory outputs) virtual external;
 
-    function triggerOnFeeGrowthGlobal1X128Function() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnFeeGrowthGlobal1X128Function() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x46141319),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onFeeGrowthGlobal1X128Function.selector
+            handlerSelector: this.UniswapV3Pool$onFeeGrowthGlobal1X128Function.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$PreFeeGrowthGlobal1X128Function {
-    function preFeeGrowthGlobal1X128Function(PreFunctionContext memory ctx) virtual external;
+    function UniswapV3Pool$preFeeGrowthGlobal1X128Function(PreFunctionContext memory ctx) virtual external;
 
-    function triggerPreFeeGrowthGlobal1X128Function() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerPreFeeGrowthGlobal1X128Function() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x46141319),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preFeeGrowthGlobal1X128Function.selector
+            handlerSelector: this.UniswapV3Pool$preFeeGrowthGlobal1X128Function.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnFlashFunction {
-    function onFlashFunction(FunctionContext memory ctx, UniswapV3Pool$FlashFunctionInputs memory inputs) virtual external;
+    function UniswapV3Pool$onFlashFunction(FunctionContext memory ctx, UniswapV3Pool$FlashFunctionInputs memory inputs) virtual external;
 
-    function triggerOnFlashFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnFlashFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x490e6cbc),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onFlashFunction.selector
+            handlerSelector: this.UniswapV3Pool$onFlashFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$PreFlashFunction {
-    function preFlashFunction(PreFunctionContext memory ctx, UniswapV3Pool$FlashFunctionInputs memory inputs) virtual external;
+    function UniswapV3Pool$preFlashFunction(PreFunctionContext memory ctx, UniswapV3Pool$FlashFunctionInputs memory inputs) virtual external;
 
-    function triggerPreFlashFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerPreFlashFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x490e6cbc),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preFlashFunction.selector
+            handlerSelector: this.UniswapV3Pool$preFlashFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnIncreaseObservationCardinalityNextFunction {
-    function onIncreaseObservationCardinalityNextFunction(FunctionContext memory ctx, UniswapV3Pool$IncreaseObservationCardinalityNextFunctionInputs memory inputs) virtual external;
+    function UniswapV3Pool$onIncreaseObservationCardinalityNextFunction(FunctionContext memory ctx, UniswapV3Pool$IncreaseObservationCardinalityNextFunctionInputs memory inputs) virtual external;
 
-    function triggerOnIncreaseObservationCardinalityNextFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnIncreaseObservationCardinalityNextFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x32148f67),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onIncreaseObservationCardinalityNextFunction.selector
+            handlerSelector: this.UniswapV3Pool$onIncreaseObservationCardinalityNextFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$PreIncreaseObservationCardinalityNextFunction {
-    function preIncreaseObservationCardinalityNextFunction(PreFunctionContext memory ctx, UniswapV3Pool$IncreaseObservationCardinalityNextFunctionInputs memory inputs) virtual external;
+    function UniswapV3Pool$preIncreaseObservationCardinalityNextFunction(PreFunctionContext memory ctx, UniswapV3Pool$IncreaseObservationCardinalityNextFunctionInputs memory inputs) virtual external;
 
-    function triggerPreIncreaseObservationCardinalityNextFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerPreIncreaseObservationCardinalityNextFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x32148f67),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preIncreaseObservationCardinalityNextFunction.selector
+            handlerSelector: this.UniswapV3Pool$preIncreaseObservationCardinalityNextFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnInitializeFunction {
-    function onInitializeFunction(FunctionContext memory ctx, UniswapV3Pool$InitializeFunctionInputs memory inputs) virtual external;
+    function UniswapV3Pool$onInitializeFunction(FunctionContext memory ctx, UniswapV3Pool$InitializeFunctionInputs memory inputs) virtual external;
 
-    function triggerOnInitializeFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnInitializeFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0xf637731d),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onInitializeFunction.selector
+            handlerSelector: this.UniswapV3Pool$onInitializeFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$PreInitializeFunction {
-    function preInitializeFunction(PreFunctionContext memory ctx, UniswapV3Pool$InitializeFunctionInputs memory inputs) virtual external;
+    function UniswapV3Pool$preInitializeFunction(PreFunctionContext memory ctx, UniswapV3Pool$InitializeFunctionInputs memory inputs) virtual external;
 
-    function triggerPreInitializeFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerPreInitializeFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0xf637731d),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preInitializeFunction.selector
+            handlerSelector: this.UniswapV3Pool$preInitializeFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnLiquidityFunction {
-    function onLiquidityFunction(FunctionContext memory ctx, UniswapV3Pool$LiquidityFunctionOutputs memory outputs) virtual external;
+    function UniswapV3Pool$onLiquidityFunction(FunctionContext memory ctx, UniswapV3Pool$LiquidityFunctionOutputs memory outputs) virtual external;
 
-    function triggerOnLiquidityFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnLiquidityFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x1a686502),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onLiquidityFunction.selector
+            handlerSelector: this.UniswapV3Pool$onLiquidityFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$PreLiquidityFunction {
-    function preLiquidityFunction(PreFunctionContext memory ctx) virtual external;
+    function UniswapV3Pool$preLiquidityFunction(PreFunctionContext memory ctx) virtual external;
 
-    function triggerPreLiquidityFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerPreLiquidityFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x1a686502),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preLiquidityFunction.selector
+            handlerSelector: this.UniswapV3Pool$preLiquidityFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnMaxLiquidityPerTickFunction {
-    function onMaxLiquidityPerTickFunction(FunctionContext memory ctx, UniswapV3Pool$MaxLiquidityPerTickFunctionOutputs memory outputs) virtual external;
+    function UniswapV3Pool$onMaxLiquidityPerTickFunction(FunctionContext memory ctx, UniswapV3Pool$MaxLiquidityPerTickFunctionOutputs memory outputs) virtual external;
 
-    function triggerOnMaxLiquidityPerTickFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnMaxLiquidityPerTickFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x70cf754a),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onMaxLiquidityPerTickFunction.selector
+            handlerSelector: this.UniswapV3Pool$onMaxLiquidityPerTickFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$PreMaxLiquidityPerTickFunction {
-    function preMaxLiquidityPerTickFunction(PreFunctionContext memory ctx) virtual external;
+    function UniswapV3Pool$preMaxLiquidityPerTickFunction(PreFunctionContext memory ctx) virtual external;
 
-    function triggerPreMaxLiquidityPerTickFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerPreMaxLiquidityPerTickFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x70cf754a),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preMaxLiquidityPerTickFunction.selector
+            handlerSelector: this.UniswapV3Pool$preMaxLiquidityPerTickFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnMintFunction {
-    function onMintFunction(FunctionContext memory ctx, UniswapV3Pool$MintFunctionInputs memory inputs, UniswapV3Pool$MintFunctionOutputs memory outputs) virtual external;
+    function UniswapV3Pool$onMintFunction(FunctionContext memory ctx, UniswapV3Pool$MintFunctionInputs memory inputs, UniswapV3Pool$MintFunctionOutputs memory outputs) virtual external;
 
-    function triggerOnMintFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnMintFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x3c8a7d8d),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onMintFunction.selector
+            handlerSelector: this.UniswapV3Pool$onMintFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$PreMintFunction {
-    function preMintFunction(PreFunctionContext memory ctx, UniswapV3Pool$MintFunctionInputs memory inputs) virtual external;
+    function UniswapV3Pool$preMintFunction(PreFunctionContext memory ctx, UniswapV3Pool$MintFunctionInputs memory inputs) virtual external;
 
-    function triggerPreMintFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerPreMintFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x3c8a7d8d),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preMintFunction.selector
+            handlerSelector: this.UniswapV3Pool$preMintFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnObservationsFunction {
-    function onObservationsFunction(FunctionContext memory ctx, UniswapV3Pool$ObservationsFunctionInputs memory inputs, UniswapV3Pool$ObservationsFunctionOutputs memory outputs) virtual external;
+    function UniswapV3Pool$onObservationsFunction(FunctionContext memory ctx, UniswapV3Pool$ObservationsFunctionInputs memory inputs, UniswapV3Pool$ObservationsFunctionOutputs memory outputs) virtual external;
 
-    function triggerOnObservationsFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnObservationsFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x252c09d7),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onObservationsFunction.selector
+            handlerSelector: this.UniswapV3Pool$onObservationsFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$PreObservationsFunction {
-    function preObservationsFunction(PreFunctionContext memory ctx, UniswapV3Pool$ObservationsFunctionInputs memory inputs) virtual external;
+    function UniswapV3Pool$preObservationsFunction(PreFunctionContext memory ctx, UniswapV3Pool$ObservationsFunctionInputs memory inputs) virtual external;
 
-    function triggerPreObservationsFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerPreObservationsFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x252c09d7),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preObservationsFunction.selector
+            handlerSelector: this.UniswapV3Pool$preObservationsFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnObserveFunction {
-    function onObserveFunction(FunctionContext memory ctx, UniswapV3Pool$ObserveFunctionInputs memory inputs, UniswapV3Pool$ObserveFunctionOutputs memory outputs) virtual external;
+    function UniswapV3Pool$onObserveFunction(FunctionContext memory ctx, UniswapV3Pool$ObserveFunctionInputs memory inputs, UniswapV3Pool$ObserveFunctionOutputs memory outputs) virtual external;
 
-    function triggerOnObserveFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnObserveFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x883bdbfd),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onObserveFunction.selector
+            handlerSelector: this.UniswapV3Pool$onObserveFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$PreObserveFunction {
-    function preObserveFunction(PreFunctionContext memory ctx, UniswapV3Pool$ObserveFunctionInputs memory inputs) virtual external;
+    function UniswapV3Pool$preObserveFunction(PreFunctionContext memory ctx, UniswapV3Pool$ObserveFunctionInputs memory inputs) virtual external;
 
-    function triggerPreObserveFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerPreObserveFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x883bdbfd),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preObserveFunction.selector
+            handlerSelector: this.UniswapV3Pool$preObserveFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnPositionsFunction {
-    function onPositionsFunction(FunctionContext memory ctx, UniswapV3Pool$PositionsFunctionInputs memory inputs, UniswapV3Pool$PositionsFunctionOutputs memory outputs) virtual external;
+    function UniswapV3Pool$onPositionsFunction(FunctionContext memory ctx, UniswapV3Pool$PositionsFunctionInputs memory inputs, UniswapV3Pool$PositionsFunctionOutputs memory outputs) virtual external;
 
-    function triggerOnPositionsFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnPositionsFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x514ea4bf),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onPositionsFunction.selector
+            handlerSelector: this.UniswapV3Pool$onPositionsFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$PrePositionsFunction {
-    function prePositionsFunction(PreFunctionContext memory ctx, UniswapV3Pool$PositionsFunctionInputs memory inputs) virtual external;
+    function UniswapV3Pool$prePositionsFunction(PreFunctionContext memory ctx, UniswapV3Pool$PositionsFunctionInputs memory inputs) virtual external;
 
-    function triggerPrePositionsFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerPrePositionsFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x514ea4bf),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.prePositionsFunction.selector
+            handlerSelector: this.UniswapV3Pool$prePositionsFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnProtocolFeesFunction {
-    function onProtocolFeesFunction(FunctionContext memory ctx, UniswapV3Pool$ProtocolFeesFunctionOutputs memory outputs) virtual external;
+    function UniswapV3Pool$onProtocolFeesFunction(FunctionContext memory ctx, UniswapV3Pool$ProtocolFeesFunctionOutputs memory outputs) virtual external;
 
-    function triggerOnProtocolFeesFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnProtocolFeesFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x1ad8b03b),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onProtocolFeesFunction.selector
+            handlerSelector: this.UniswapV3Pool$onProtocolFeesFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$PreProtocolFeesFunction {
-    function preProtocolFeesFunction(PreFunctionContext memory ctx) virtual external;
+    function UniswapV3Pool$preProtocolFeesFunction(PreFunctionContext memory ctx) virtual external;
 
-    function triggerPreProtocolFeesFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerPreProtocolFeesFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x1ad8b03b),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preProtocolFeesFunction.selector
+            handlerSelector: this.UniswapV3Pool$preProtocolFeesFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnSetFeeProtocolFunction {
-    function onSetFeeProtocolFunction(FunctionContext memory ctx, UniswapV3Pool$SetFeeProtocolFunctionInputs memory inputs) virtual external;
+    function UniswapV3Pool$onSetFeeProtocolFunction(FunctionContext memory ctx, UniswapV3Pool$SetFeeProtocolFunctionInputs memory inputs) virtual external;
 
-    function triggerOnSetFeeProtocolFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnSetFeeProtocolFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x8206a4d1),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onSetFeeProtocolFunction.selector
+            handlerSelector: this.UniswapV3Pool$onSetFeeProtocolFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$PreSetFeeProtocolFunction {
-    function preSetFeeProtocolFunction(PreFunctionContext memory ctx, UniswapV3Pool$SetFeeProtocolFunctionInputs memory inputs) virtual external;
+    function UniswapV3Pool$preSetFeeProtocolFunction(PreFunctionContext memory ctx, UniswapV3Pool$SetFeeProtocolFunctionInputs memory inputs) virtual external;
 
-    function triggerPreSetFeeProtocolFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerPreSetFeeProtocolFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x8206a4d1),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preSetFeeProtocolFunction.selector
+            handlerSelector: this.UniswapV3Pool$preSetFeeProtocolFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnSlot0Function {
-    function onSlot0Function(FunctionContext memory ctx, UniswapV3Pool$Slot0FunctionOutputs memory outputs) virtual external;
+    function UniswapV3Pool$onSlot0Function(FunctionContext memory ctx, UniswapV3Pool$Slot0FunctionOutputs memory outputs) virtual external;
 
-    function triggerOnSlot0Function() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnSlot0Function() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x3850c7bd),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onSlot0Function.selector
+            handlerSelector: this.UniswapV3Pool$onSlot0Function.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$PreSlot0Function {
-    function preSlot0Function(PreFunctionContext memory ctx) virtual external;
+    function UniswapV3Pool$preSlot0Function(PreFunctionContext memory ctx) virtual external;
 
-    function triggerPreSlot0Function() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerPreSlot0Function() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x3850c7bd),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preSlot0Function.selector
+            handlerSelector: this.UniswapV3Pool$preSlot0Function.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnSnapshotCumulativesInsideFunction {
-    function onSnapshotCumulativesInsideFunction(FunctionContext memory ctx, UniswapV3Pool$SnapshotCumulativesInsideFunctionInputs memory inputs, UniswapV3Pool$SnapshotCumulativesInsideFunctionOutputs memory outputs) virtual external;
+    function UniswapV3Pool$onSnapshotCumulativesInsideFunction(FunctionContext memory ctx, UniswapV3Pool$SnapshotCumulativesInsideFunctionInputs memory inputs, UniswapV3Pool$SnapshotCumulativesInsideFunctionOutputs memory outputs) virtual external;
 
-    function triggerOnSnapshotCumulativesInsideFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnSnapshotCumulativesInsideFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0xa38807f2),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onSnapshotCumulativesInsideFunction.selector
+            handlerSelector: this.UniswapV3Pool$onSnapshotCumulativesInsideFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$PreSnapshotCumulativesInsideFunction {
-    function preSnapshotCumulativesInsideFunction(PreFunctionContext memory ctx, UniswapV3Pool$SnapshotCumulativesInsideFunctionInputs memory inputs) virtual external;
+    function UniswapV3Pool$preSnapshotCumulativesInsideFunction(PreFunctionContext memory ctx, UniswapV3Pool$SnapshotCumulativesInsideFunctionInputs memory inputs) virtual external;
 
-    function triggerPreSnapshotCumulativesInsideFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerPreSnapshotCumulativesInsideFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0xa38807f2),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preSnapshotCumulativesInsideFunction.selector
+            handlerSelector: this.UniswapV3Pool$preSnapshotCumulativesInsideFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnSwapFunction {
-    function onSwapFunction(FunctionContext memory ctx, UniswapV3Pool$SwapFunctionInputs memory inputs, UniswapV3Pool$SwapFunctionOutputs memory outputs) virtual external;
+    function UniswapV3Pool$onSwapFunction(FunctionContext memory ctx, UniswapV3Pool$SwapFunctionInputs memory inputs, UniswapV3Pool$SwapFunctionOutputs memory outputs) virtual external;
 
-    function triggerOnSwapFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnSwapFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x128acb08),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onSwapFunction.selector
+            handlerSelector: this.UniswapV3Pool$onSwapFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$PreSwapFunction {
-    function preSwapFunction(PreFunctionContext memory ctx, UniswapV3Pool$SwapFunctionInputs memory inputs) virtual external;
+    function UniswapV3Pool$preSwapFunction(PreFunctionContext memory ctx, UniswapV3Pool$SwapFunctionInputs memory inputs) virtual external;
 
-    function triggerPreSwapFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerPreSwapFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x128acb08),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preSwapFunction.selector
+            handlerSelector: this.UniswapV3Pool$preSwapFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnTickBitmapFunction {
-    function onTickBitmapFunction(FunctionContext memory ctx, UniswapV3Pool$TickBitmapFunctionInputs memory inputs, UniswapV3Pool$TickBitmapFunctionOutputs memory outputs) virtual external;
+    function UniswapV3Pool$onTickBitmapFunction(FunctionContext memory ctx, UniswapV3Pool$TickBitmapFunctionInputs memory inputs, UniswapV3Pool$TickBitmapFunctionOutputs memory outputs) virtual external;
 
-    function triggerOnTickBitmapFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnTickBitmapFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x5339c296),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onTickBitmapFunction.selector
+            handlerSelector: this.UniswapV3Pool$onTickBitmapFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$PreTickBitmapFunction {
-    function preTickBitmapFunction(PreFunctionContext memory ctx, UniswapV3Pool$TickBitmapFunctionInputs memory inputs) virtual external;
+    function UniswapV3Pool$preTickBitmapFunction(PreFunctionContext memory ctx, UniswapV3Pool$TickBitmapFunctionInputs memory inputs) virtual external;
 
-    function triggerPreTickBitmapFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerPreTickBitmapFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x5339c296),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preTickBitmapFunction.selector
+            handlerSelector: this.UniswapV3Pool$preTickBitmapFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnTickSpacingFunction {
-    function onTickSpacingFunction(FunctionContext memory ctx, UniswapV3Pool$TickSpacingFunctionOutputs memory outputs) virtual external;
+    function UniswapV3Pool$onTickSpacingFunction(FunctionContext memory ctx, UniswapV3Pool$TickSpacingFunctionOutputs memory outputs) virtual external;
 
-    function triggerOnTickSpacingFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnTickSpacingFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0xd0c93a7c),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onTickSpacingFunction.selector
+            handlerSelector: this.UniswapV3Pool$onTickSpacingFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$PreTickSpacingFunction {
-    function preTickSpacingFunction(PreFunctionContext memory ctx) virtual external;
+    function UniswapV3Pool$preTickSpacingFunction(PreFunctionContext memory ctx) virtual external;
 
-    function triggerPreTickSpacingFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerPreTickSpacingFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0xd0c93a7c),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preTickSpacingFunction.selector
+            handlerSelector: this.UniswapV3Pool$preTickSpacingFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnTicksFunction {
-    function onTicksFunction(FunctionContext memory ctx, UniswapV3Pool$TicksFunctionInputs memory inputs, UniswapV3Pool$TicksFunctionOutputs memory outputs) virtual external;
+    function UniswapV3Pool$onTicksFunction(FunctionContext memory ctx, UniswapV3Pool$TicksFunctionInputs memory inputs, UniswapV3Pool$TicksFunctionOutputs memory outputs) virtual external;
 
-    function triggerOnTicksFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnTicksFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0xf30dba93),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onTicksFunction.selector
+            handlerSelector: this.UniswapV3Pool$onTicksFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$PreTicksFunction {
-    function preTicksFunction(PreFunctionContext memory ctx, UniswapV3Pool$TicksFunctionInputs memory inputs) virtual external;
+    function UniswapV3Pool$preTicksFunction(PreFunctionContext memory ctx, UniswapV3Pool$TicksFunctionInputs memory inputs) virtual external;
 
-    function triggerPreTicksFunction() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerPreTicksFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0xf30dba93),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preTicksFunction.selector
+            handlerSelector: this.UniswapV3Pool$preTicksFunction.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnToken0Function {
-    function onToken0Function(FunctionContext memory ctx, UniswapV3Pool$Token0FunctionOutputs memory outputs) virtual external;
+    function UniswapV3Pool$onToken0Function(FunctionContext memory ctx, UniswapV3Pool$Token0FunctionOutputs memory outputs) virtual external;
 
-    function triggerOnToken0Function() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnToken0Function() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x0dfe1681),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onToken0Function.selector
+            handlerSelector: this.UniswapV3Pool$onToken0Function.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$PreToken0Function {
-    function preToken0Function(PreFunctionContext memory ctx) virtual external;
+    function UniswapV3Pool$preToken0Function(PreFunctionContext memory ctx) virtual external;
 
-    function triggerPreToken0Function() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerPreToken0Function() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0x0dfe1681),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preToken0Function.selector
+            handlerSelector: this.UniswapV3Pool$preToken0Function.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$OnToken1Function {
-    function onToken1Function(FunctionContext memory ctx, UniswapV3Pool$Token1FunctionOutputs memory outputs) virtual external;
+    function UniswapV3Pool$onToken1Function(FunctionContext memory ctx, UniswapV3Pool$Token1FunctionOutputs memory outputs) virtual external;
 
-    function triggerOnToken1Function() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerOnToken1Function() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0xd21220a7),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onToken1Function.selector
+            handlerSelector: this.UniswapV3Pool$onToken1Function.selector
         });
     }
 }
 
 abstract contract UniswapV3Pool$PreToken1Function {
-    function preToken1Function(PreFunctionContext memory ctx) virtual external;
+    function UniswapV3Pool$preToken1Function(PreFunctionContext memory ctx) virtual external;
 
-    function triggerPreToken1Function() view external returns (Trigger memory) {
+    function UniswapV3Pool$triggerPreToken1Function() view external returns (Trigger memory) {
         return Trigger({
             abiName: "UniswapV3Pool",
             selector: bytes4(0xd21220a7),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preToken1Function.selector
+            handlerSelector: this.UniswapV3Pool$preToken1Function.selector
         });
     }
 }
@@ -1151,45 +1151,45 @@ event Mint(address sender, address owner, int24 tickLower, int24 tickUpper, uint
 event SetFeeProtocol(uint8 feeProtocol0Old, uint8 feeProtocol1Old, uint8 feeProtocol0New, uint8 feeProtocol1New);
 event Swap(address sender, address recipient, int256 amount0, int256 amount1, uint160 sqrtPriceX96, uint128 liquidity, int24 tick);
 
-  function onBurnEvent(EventContext memory ctx, UniswapV3Pool$BurnEventParams memory inputs) virtual external override {
+  function UniswapV3Pool$onBurnEvent(EventContext memory ctx, UniswapV3Pool$BurnEventParams memory inputs) virtual external override {
     emit Burn(inputs.owner, inputs.tickLower, inputs.tickUpper, inputs.amount, inputs.amount0, inputs.amount1);
   }
-function onCollectEvent(EventContext memory ctx, UniswapV3Pool$CollectEventParams memory inputs) virtual external override {
+function UniswapV3Pool$onCollectEvent(EventContext memory ctx, UniswapV3Pool$CollectEventParams memory inputs) virtual external override {
     emit Collect(inputs.owner, inputs.recipient, inputs.tickLower, inputs.tickUpper, inputs.amount0, inputs.amount1);
   }
-function onCollectProtocolEvent(EventContext memory ctx, UniswapV3Pool$CollectProtocolEventParams memory inputs) virtual external override {
+function UniswapV3Pool$onCollectProtocolEvent(EventContext memory ctx, UniswapV3Pool$CollectProtocolEventParams memory inputs) virtual external override {
     emit CollectProtocol(inputs.sender, inputs.recipient, inputs.amount0, inputs.amount1);
   }
-function onFlashEvent(EventContext memory ctx, UniswapV3Pool$FlashEventParams memory inputs) virtual external override {
+function UniswapV3Pool$onFlashEvent(EventContext memory ctx, UniswapV3Pool$FlashEventParams memory inputs) virtual external override {
     emit Flash(inputs.sender, inputs.recipient, inputs.amount0, inputs.amount1, inputs.paid0, inputs.paid1);
   }
-function onIncreaseObservationCardinalityNextEvent(EventContext memory ctx, UniswapV3Pool$IncreaseObservationCardinalityNextEventParams memory inputs) virtual external override {
+function UniswapV3Pool$onIncreaseObservationCardinalityNextEvent(EventContext memory ctx, UniswapV3Pool$IncreaseObservationCardinalityNextEventParams memory inputs) virtual external override {
     emit IncreaseObservationCardinalityNext(inputs.observationCardinalityNextOld, inputs.observationCardinalityNextNew);
   }
-function onInitializeEvent(EventContext memory ctx, UniswapV3Pool$InitializeEventParams memory inputs) virtual external override {
+function UniswapV3Pool$onInitializeEvent(EventContext memory ctx, UniswapV3Pool$InitializeEventParams memory inputs) virtual external override {
     emit Initialize(inputs.sqrtPriceX96, inputs.tick);
   }
-function onMintEvent(EventContext memory ctx, UniswapV3Pool$MintEventParams memory inputs) virtual external override {
+function UniswapV3Pool$onMintEvent(EventContext memory ctx, UniswapV3Pool$MintEventParams memory inputs) virtual external override {
     emit Mint(inputs.sender, inputs.owner, inputs.tickLower, inputs.tickUpper, inputs.amount, inputs.amount0, inputs.amount1);
   }
-function onSetFeeProtocolEvent(EventContext memory ctx, UniswapV3Pool$SetFeeProtocolEventParams memory inputs) virtual external override {
+function UniswapV3Pool$onSetFeeProtocolEvent(EventContext memory ctx, UniswapV3Pool$SetFeeProtocolEventParams memory inputs) virtual external override {
     emit SetFeeProtocol(inputs.feeProtocol0Old, inputs.feeProtocol1Old, inputs.feeProtocol0New, inputs.feeProtocol1New);
   }
-function onSwapEvent(EventContext memory ctx, UniswapV3Pool$SwapEventParams memory inputs) virtual external override {
+function UniswapV3Pool$onSwapEvent(EventContext memory ctx, UniswapV3Pool$SwapEventParams memory inputs) virtual external override {
     emit Swap(inputs.sender, inputs.recipient, inputs.amount0, inputs.amount1, inputs.sqrtPriceX96, inputs.liquidity, inputs.tick);
   }
 
   function allTriggers() view external returns (Trigger[] memory) {
     Trigger[] memory triggers = new Trigger[](9);
-    triggers[0] = this.triggerOnBurnEvent();
-    triggers[1] = this.triggerOnCollectEvent();
-    triggers[2] = this.triggerOnCollectProtocolEvent();
-    triggers[3] = this.triggerOnFlashEvent();
-    triggers[4] = this.triggerOnIncreaseObservationCardinalityNextEvent();
-    triggers[5] = this.triggerOnInitializeEvent();
-    triggers[6] = this.triggerOnMintEvent();
-    triggers[7] = this.triggerOnSetFeeProtocolEvent();
-    triggers[8] = this.triggerOnSwapEvent();
+    triggers[0] = this.UniswapV3Pool$triggerOnBurnEvent();
+    triggers[1] = this.UniswapV3Pool$triggerOnCollectEvent();
+    triggers[2] = this.UniswapV3Pool$triggerOnCollectProtocolEvent();
+    triggers[3] = this.UniswapV3Pool$triggerOnFlashEvent();
+    triggers[4] = this.UniswapV3Pool$triggerOnIncreaseObservationCardinalityNextEvent();
+    triggers[5] = this.UniswapV3Pool$triggerOnInitializeEvent();
+    triggers[6] = this.UniswapV3Pool$triggerOnMintEvent();
+    triggers[7] = this.UniswapV3Pool$triggerOnSetFeeProtocolEvent();
+    triggers[8] = this.UniswapV3Pool$triggerOnSwapEvent();
     return triggers;
   }
 }

@@ -156,491 +156,491 @@ struct GPv2Settlement$TradeEventParams {
 }
 
 abstract contract GPv2Settlement$OnInteractionEvent {
-    function onInteractionEvent(EventContext memory ctx, GPv2Settlement$InteractionEventParams memory inputs) virtual external;
+    function GPv2Settlement$onInteractionEvent(EventContext memory ctx, GPv2Settlement$InteractionEventParams memory inputs) virtual external;
 
-    function triggerOnInteractionEvent() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerOnInteractionEvent() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes32(0xed99827efb37016f2275f98c4bcf71c7551c75d59e9b450f79fa32e60be672c2),
             triggerType: TriggerType.EVENT,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onInteractionEvent.selector
+            handlerSelector: this.GPv2Settlement$onInteractionEvent.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$OnOrderInvalidatedEvent {
-    function onOrderInvalidatedEvent(EventContext memory ctx, GPv2Settlement$OrderInvalidatedEventParams memory inputs) virtual external;
+    function GPv2Settlement$onOrderInvalidatedEvent(EventContext memory ctx, GPv2Settlement$OrderInvalidatedEventParams memory inputs) virtual external;
 
-    function triggerOnOrderInvalidatedEvent() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerOnOrderInvalidatedEvent() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes32(0x875b6cb035bbd4ac6500fabc6d1e4ca5bdc58a3e2b424ccb5c24cdbebeb009a9),
             triggerType: TriggerType.EVENT,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onOrderInvalidatedEvent.selector
+            handlerSelector: this.GPv2Settlement$onOrderInvalidatedEvent.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$OnPreSignatureEvent {
-    function onPreSignatureEvent(EventContext memory ctx, GPv2Settlement$PreSignatureEventParams memory inputs) virtual external;
+    function GPv2Settlement$onPreSignatureEvent(EventContext memory ctx, GPv2Settlement$PreSignatureEventParams memory inputs) virtual external;
 
-    function triggerOnPreSignatureEvent() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerOnPreSignatureEvent() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes32(0x01bf7c8b0ca55deecbea89d7e58295b7ffbf685fd0d96801034ba8c6ffe1c68d),
             triggerType: TriggerType.EVENT,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onPreSignatureEvent.selector
+            handlerSelector: this.GPv2Settlement$onPreSignatureEvent.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$OnSettlementEvent {
-    function onSettlementEvent(EventContext memory ctx, GPv2Settlement$SettlementEventParams memory inputs) virtual external;
+    function GPv2Settlement$onSettlementEvent(EventContext memory ctx, GPv2Settlement$SettlementEventParams memory inputs) virtual external;
 
-    function triggerOnSettlementEvent() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerOnSettlementEvent() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes32(0x40338ce1a7c49204f0099533b1e9a7ee0a3d261f84974ab7af36105b8c4e9db4),
             triggerType: TriggerType.EVENT,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onSettlementEvent.selector
+            handlerSelector: this.GPv2Settlement$onSettlementEvent.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$OnTradeEvent {
-    function onTradeEvent(EventContext memory ctx, GPv2Settlement$TradeEventParams memory inputs) virtual external;
+    function GPv2Settlement$onTradeEvent(EventContext memory ctx, GPv2Settlement$TradeEventParams memory inputs) virtual external;
 
-    function triggerOnTradeEvent() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerOnTradeEvent() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes32(0xa07a543ab8a018198e99ca0184c93fe9050a79400a0a723441f84de1d972cc17),
             triggerType: TriggerType.EVENT,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onTradeEvent.selector
+            handlerSelector: this.GPv2Settlement$onTradeEvent.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$OnAuthenticatorFunction {
-    function onAuthenticatorFunction(FunctionContext memory ctx, GPv2Settlement$AuthenticatorFunctionOutputs memory outputs) virtual external;
+    function GPv2Settlement$onAuthenticatorFunction(FunctionContext memory ctx, GPv2Settlement$AuthenticatorFunctionOutputs memory outputs) virtual external;
 
-    function triggerOnAuthenticatorFunction() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerOnAuthenticatorFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes4(0x2335c76b),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onAuthenticatorFunction.selector
+            handlerSelector: this.GPv2Settlement$onAuthenticatorFunction.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$PreAuthenticatorFunction {
-    function preAuthenticatorFunction(PreFunctionContext memory ctx) virtual external;
+    function GPv2Settlement$preAuthenticatorFunction(PreFunctionContext memory ctx) virtual external;
 
-    function triggerPreAuthenticatorFunction() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerPreAuthenticatorFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes4(0x2335c76b),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preAuthenticatorFunction.selector
+            handlerSelector: this.GPv2Settlement$preAuthenticatorFunction.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$OnDomainSeparatorFunction {
-    function onDomainSeparatorFunction(FunctionContext memory ctx, GPv2Settlement$DomainSeparatorFunctionOutputs memory outputs) virtual external;
+    function GPv2Settlement$onDomainSeparatorFunction(FunctionContext memory ctx, GPv2Settlement$DomainSeparatorFunctionOutputs memory outputs) virtual external;
 
-    function triggerOnDomainSeparatorFunction() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerOnDomainSeparatorFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes4(0xf698da25),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onDomainSeparatorFunction.selector
+            handlerSelector: this.GPv2Settlement$onDomainSeparatorFunction.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$PreDomainSeparatorFunction {
-    function preDomainSeparatorFunction(PreFunctionContext memory ctx) virtual external;
+    function GPv2Settlement$preDomainSeparatorFunction(PreFunctionContext memory ctx) virtual external;
 
-    function triggerPreDomainSeparatorFunction() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerPreDomainSeparatorFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes4(0xf698da25),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preDomainSeparatorFunction.selector
+            handlerSelector: this.GPv2Settlement$preDomainSeparatorFunction.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$OnFilledAmountFunction {
-    function onFilledAmountFunction(FunctionContext memory ctx, GPv2Settlement$FilledAmountFunctionInputs memory inputs, GPv2Settlement$FilledAmountFunctionOutputs memory outputs) virtual external;
+    function GPv2Settlement$onFilledAmountFunction(FunctionContext memory ctx, GPv2Settlement$FilledAmountFunctionInputs memory inputs, GPv2Settlement$FilledAmountFunctionOutputs memory outputs) virtual external;
 
-    function triggerOnFilledAmountFunction() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerOnFilledAmountFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes4(0x2479fb6e),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onFilledAmountFunction.selector
+            handlerSelector: this.GPv2Settlement$onFilledAmountFunction.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$PreFilledAmountFunction {
-    function preFilledAmountFunction(PreFunctionContext memory ctx, GPv2Settlement$FilledAmountFunctionInputs memory inputs) virtual external;
+    function GPv2Settlement$preFilledAmountFunction(PreFunctionContext memory ctx, GPv2Settlement$FilledAmountFunctionInputs memory inputs) virtual external;
 
-    function triggerPreFilledAmountFunction() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerPreFilledAmountFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes4(0x2479fb6e),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preFilledAmountFunction.selector
+            handlerSelector: this.GPv2Settlement$preFilledAmountFunction.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$OnFreeFilledAmountStorageFunction {
-    function onFreeFilledAmountStorageFunction(FunctionContext memory ctx, GPv2Settlement$FreeFilledAmountStorageFunctionInputs memory inputs) virtual external;
+    function GPv2Settlement$onFreeFilledAmountStorageFunction(FunctionContext memory ctx, GPv2Settlement$FreeFilledAmountStorageFunctionInputs memory inputs) virtual external;
 
-    function triggerOnFreeFilledAmountStorageFunction() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerOnFreeFilledAmountStorageFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes4(0xed9f35ce),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onFreeFilledAmountStorageFunction.selector
+            handlerSelector: this.GPv2Settlement$onFreeFilledAmountStorageFunction.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$PreFreeFilledAmountStorageFunction {
-    function preFreeFilledAmountStorageFunction(PreFunctionContext memory ctx, GPv2Settlement$FreeFilledAmountStorageFunctionInputs memory inputs) virtual external;
+    function GPv2Settlement$preFreeFilledAmountStorageFunction(PreFunctionContext memory ctx, GPv2Settlement$FreeFilledAmountStorageFunctionInputs memory inputs) virtual external;
 
-    function triggerPreFreeFilledAmountStorageFunction() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerPreFreeFilledAmountStorageFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes4(0xed9f35ce),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preFreeFilledAmountStorageFunction.selector
+            handlerSelector: this.GPv2Settlement$preFreeFilledAmountStorageFunction.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$OnFreePreSignatureStorageFunction {
-    function onFreePreSignatureStorageFunction(FunctionContext memory ctx, GPv2Settlement$FreePreSignatureStorageFunctionInputs memory inputs) virtual external;
+    function GPv2Settlement$onFreePreSignatureStorageFunction(FunctionContext memory ctx, GPv2Settlement$FreePreSignatureStorageFunctionInputs memory inputs) virtual external;
 
-    function triggerOnFreePreSignatureStorageFunction() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerOnFreePreSignatureStorageFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes4(0xa2a7d51b),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onFreePreSignatureStorageFunction.selector
+            handlerSelector: this.GPv2Settlement$onFreePreSignatureStorageFunction.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$PreFreePreSignatureStorageFunction {
-    function preFreePreSignatureStorageFunction(PreFunctionContext memory ctx, GPv2Settlement$FreePreSignatureStorageFunctionInputs memory inputs) virtual external;
+    function GPv2Settlement$preFreePreSignatureStorageFunction(PreFunctionContext memory ctx, GPv2Settlement$FreePreSignatureStorageFunctionInputs memory inputs) virtual external;
 
-    function triggerPreFreePreSignatureStorageFunction() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerPreFreePreSignatureStorageFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes4(0xa2a7d51b),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preFreePreSignatureStorageFunction.selector
+            handlerSelector: this.GPv2Settlement$preFreePreSignatureStorageFunction.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$OnGetStorageAtFunction {
-    function onGetStorageAtFunction(FunctionContext memory ctx, GPv2Settlement$GetStorageAtFunctionInputs memory inputs, GPv2Settlement$GetStorageAtFunctionOutputs memory outputs) virtual external;
+    function GPv2Settlement$onGetStorageAtFunction(FunctionContext memory ctx, GPv2Settlement$GetStorageAtFunctionInputs memory inputs, GPv2Settlement$GetStorageAtFunctionOutputs memory outputs) virtual external;
 
-    function triggerOnGetStorageAtFunction() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerOnGetStorageAtFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes4(0x5624b25b),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onGetStorageAtFunction.selector
+            handlerSelector: this.GPv2Settlement$onGetStorageAtFunction.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$PreGetStorageAtFunction {
-    function preGetStorageAtFunction(PreFunctionContext memory ctx, GPv2Settlement$GetStorageAtFunctionInputs memory inputs) virtual external;
+    function GPv2Settlement$preGetStorageAtFunction(PreFunctionContext memory ctx, GPv2Settlement$GetStorageAtFunctionInputs memory inputs) virtual external;
 
-    function triggerPreGetStorageAtFunction() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerPreGetStorageAtFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes4(0x5624b25b),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preGetStorageAtFunction.selector
+            handlerSelector: this.GPv2Settlement$preGetStorageAtFunction.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$OnInvalidateOrderFunction {
-    function onInvalidateOrderFunction(FunctionContext memory ctx, GPv2Settlement$InvalidateOrderFunctionInputs memory inputs) virtual external;
+    function GPv2Settlement$onInvalidateOrderFunction(FunctionContext memory ctx, GPv2Settlement$InvalidateOrderFunctionInputs memory inputs) virtual external;
 
-    function triggerOnInvalidateOrderFunction() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerOnInvalidateOrderFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes4(0x15337bc0),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onInvalidateOrderFunction.selector
+            handlerSelector: this.GPv2Settlement$onInvalidateOrderFunction.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$PreInvalidateOrderFunction {
-    function preInvalidateOrderFunction(PreFunctionContext memory ctx, GPv2Settlement$InvalidateOrderFunctionInputs memory inputs) virtual external;
+    function GPv2Settlement$preInvalidateOrderFunction(PreFunctionContext memory ctx, GPv2Settlement$InvalidateOrderFunctionInputs memory inputs) virtual external;
 
-    function triggerPreInvalidateOrderFunction() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerPreInvalidateOrderFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes4(0x15337bc0),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preInvalidateOrderFunction.selector
+            handlerSelector: this.GPv2Settlement$preInvalidateOrderFunction.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$OnPreSignatureFunction {
-    function onPreSignatureFunction(FunctionContext memory ctx, GPv2Settlement$PreSignatureFunctionInputs memory inputs, GPv2Settlement$PreSignatureFunctionOutputs memory outputs) virtual external;
+    function GPv2Settlement$onPreSignatureFunction(FunctionContext memory ctx, GPv2Settlement$PreSignatureFunctionInputs memory inputs, GPv2Settlement$PreSignatureFunctionOutputs memory outputs) virtual external;
 
-    function triggerOnPreSignatureFunction() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerOnPreSignatureFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes4(0xd08d33d1),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onPreSignatureFunction.selector
+            handlerSelector: this.GPv2Settlement$onPreSignatureFunction.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$PrePreSignatureFunction {
-    function prePreSignatureFunction(PreFunctionContext memory ctx, GPv2Settlement$PreSignatureFunctionInputs memory inputs) virtual external;
+    function GPv2Settlement$prePreSignatureFunction(PreFunctionContext memory ctx, GPv2Settlement$PreSignatureFunctionInputs memory inputs) virtual external;
 
-    function triggerPrePreSignatureFunction() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerPrePreSignatureFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes4(0xd08d33d1),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.prePreSignatureFunction.selector
+            handlerSelector: this.GPv2Settlement$prePreSignatureFunction.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$OnSetPreSignatureFunction {
-    function onSetPreSignatureFunction(FunctionContext memory ctx, GPv2Settlement$SetPreSignatureFunctionInputs memory inputs) virtual external;
+    function GPv2Settlement$onSetPreSignatureFunction(FunctionContext memory ctx, GPv2Settlement$SetPreSignatureFunctionInputs memory inputs) virtual external;
 
-    function triggerOnSetPreSignatureFunction() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerOnSetPreSignatureFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes4(0xec6cb13f),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onSetPreSignatureFunction.selector
+            handlerSelector: this.GPv2Settlement$onSetPreSignatureFunction.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$PreSetPreSignatureFunction {
-    function preSetPreSignatureFunction(PreFunctionContext memory ctx, GPv2Settlement$SetPreSignatureFunctionInputs memory inputs) virtual external;
+    function GPv2Settlement$preSetPreSignatureFunction(PreFunctionContext memory ctx, GPv2Settlement$SetPreSignatureFunctionInputs memory inputs) virtual external;
 
-    function triggerPreSetPreSignatureFunction() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerPreSetPreSignatureFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes4(0xec6cb13f),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preSetPreSignatureFunction.selector
+            handlerSelector: this.GPv2Settlement$preSetPreSignatureFunction.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$OnSettleFunction {
-    function onSettleFunction(FunctionContext memory ctx, GPv2Settlement$SettleFunctionInputs memory inputs) virtual external;
+    function GPv2Settlement$onSettleFunction(FunctionContext memory ctx, GPv2Settlement$SettleFunctionInputs memory inputs) virtual external;
 
-    function triggerOnSettleFunction() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerOnSettleFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes4(0x13d79a0b),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onSettleFunction.selector
+            handlerSelector: this.GPv2Settlement$onSettleFunction.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$PreSettleFunction {
-    function preSettleFunction(PreFunctionContext memory ctx, GPv2Settlement$SettleFunctionInputs memory inputs) virtual external;
+    function GPv2Settlement$preSettleFunction(PreFunctionContext memory ctx, GPv2Settlement$SettleFunctionInputs memory inputs) virtual external;
 
-    function triggerPreSettleFunction() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerPreSettleFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes4(0x13d79a0b),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preSettleFunction.selector
+            handlerSelector: this.GPv2Settlement$preSettleFunction.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$OnSimulateDelegatecallFunction {
-    function onSimulateDelegatecallFunction(FunctionContext memory ctx, GPv2Settlement$SimulateDelegatecallFunctionInputs memory inputs, GPv2Settlement$SimulateDelegatecallFunctionOutputs memory outputs) virtual external;
+    function GPv2Settlement$onSimulateDelegatecallFunction(FunctionContext memory ctx, GPv2Settlement$SimulateDelegatecallFunctionInputs memory inputs, GPv2Settlement$SimulateDelegatecallFunctionOutputs memory outputs) virtual external;
 
-    function triggerOnSimulateDelegatecallFunction() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerOnSimulateDelegatecallFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes4(0xf84436bd),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onSimulateDelegatecallFunction.selector
+            handlerSelector: this.GPv2Settlement$onSimulateDelegatecallFunction.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$PreSimulateDelegatecallFunction {
-    function preSimulateDelegatecallFunction(PreFunctionContext memory ctx, GPv2Settlement$SimulateDelegatecallFunctionInputs memory inputs) virtual external;
+    function GPv2Settlement$preSimulateDelegatecallFunction(PreFunctionContext memory ctx, GPv2Settlement$SimulateDelegatecallFunctionInputs memory inputs) virtual external;
 
-    function triggerPreSimulateDelegatecallFunction() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerPreSimulateDelegatecallFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes4(0xf84436bd),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preSimulateDelegatecallFunction.selector
+            handlerSelector: this.GPv2Settlement$preSimulateDelegatecallFunction.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$OnSimulateDelegatecallInternalFunction {
-    function onSimulateDelegatecallInternalFunction(FunctionContext memory ctx, GPv2Settlement$SimulateDelegatecallInternalFunctionInputs memory inputs, GPv2Settlement$SimulateDelegatecallInternalFunctionOutputs memory outputs) virtual external;
+    function GPv2Settlement$onSimulateDelegatecallInternalFunction(FunctionContext memory ctx, GPv2Settlement$SimulateDelegatecallInternalFunctionInputs memory inputs, GPv2Settlement$SimulateDelegatecallInternalFunctionOutputs memory outputs) virtual external;
 
-    function triggerOnSimulateDelegatecallInternalFunction() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerOnSimulateDelegatecallInternalFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes4(0x43218e19),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onSimulateDelegatecallInternalFunction.selector
+            handlerSelector: this.GPv2Settlement$onSimulateDelegatecallInternalFunction.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$PreSimulateDelegatecallInternalFunction {
-    function preSimulateDelegatecallInternalFunction(PreFunctionContext memory ctx, GPv2Settlement$SimulateDelegatecallInternalFunctionInputs memory inputs) virtual external;
+    function GPv2Settlement$preSimulateDelegatecallInternalFunction(PreFunctionContext memory ctx, GPv2Settlement$SimulateDelegatecallInternalFunctionInputs memory inputs) virtual external;
 
-    function triggerPreSimulateDelegatecallInternalFunction() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerPreSimulateDelegatecallInternalFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes4(0x43218e19),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preSimulateDelegatecallInternalFunction.selector
+            handlerSelector: this.GPv2Settlement$preSimulateDelegatecallInternalFunction.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$OnSwapFunction {
-    function onSwapFunction(FunctionContext memory ctx, GPv2Settlement$SwapFunctionInputs memory inputs) virtual external;
+    function GPv2Settlement$onSwapFunction(FunctionContext memory ctx, GPv2Settlement$SwapFunctionInputs memory inputs) virtual external;
 
-    function triggerOnSwapFunction() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerOnSwapFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes4(0x845a101f),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onSwapFunction.selector
+            handlerSelector: this.GPv2Settlement$onSwapFunction.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$PreSwapFunction {
-    function preSwapFunction(PreFunctionContext memory ctx, GPv2Settlement$SwapFunctionInputs memory inputs) virtual external;
+    function GPv2Settlement$preSwapFunction(PreFunctionContext memory ctx, GPv2Settlement$SwapFunctionInputs memory inputs) virtual external;
 
-    function triggerPreSwapFunction() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerPreSwapFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes4(0x845a101f),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preSwapFunction.selector
+            handlerSelector: this.GPv2Settlement$preSwapFunction.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$OnVaultFunction {
-    function onVaultFunction(FunctionContext memory ctx, GPv2Settlement$VaultFunctionOutputs memory outputs) virtual external;
+    function GPv2Settlement$onVaultFunction(FunctionContext memory ctx, GPv2Settlement$VaultFunctionOutputs memory outputs) virtual external;
 
-    function triggerOnVaultFunction() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerOnVaultFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes4(0xfbfa77cf),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onVaultFunction.selector
+            handlerSelector: this.GPv2Settlement$onVaultFunction.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$PreVaultFunction {
-    function preVaultFunction(PreFunctionContext memory ctx) virtual external;
+    function GPv2Settlement$preVaultFunction(PreFunctionContext memory ctx) virtual external;
 
-    function triggerPreVaultFunction() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerPreVaultFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes4(0xfbfa77cf),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preVaultFunction.selector
+            handlerSelector: this.GPv2Settlement$preVaultFunction.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$OnVaultRelayerFunction {
-    function onVaultRelayerFunction(FunctionContext memory ctx, GPv2Settlement$VaultRelayerFunctionOutputs memory outputs) virtual external;
+    function GPv2Settlement$onVaultRelayerFunction(FunctionContext memory ctx, GPv2Settlement$VaultRelayerFunctionOutputs memory outputs) virtual external;
 
-    function triggerOnVaultRelayerFunction() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerOnVaultRelayerFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes4(0x9b552cc2),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onVaultRelayerFunction.selector
+            handlerSelector: this.GPv2Settlement$onVaultRelayerFunction.selector
         });
     }
 }
 
 abstract contract GPv2Settlement$PreVaultRelayerFunction {
-    function preVaultRelayerFunction(PreFunctionContext memory ctx) virtual external;
+    function GPv2Settlement$preVaultRelayerFunction(PreFunctionContext memory ctx) virtual external;
 
-    function triggerPreVaultRelayerFunction() view external returns (Trigger memory) {
+    function GPv2Settlement$triggerPreVaultRelayerFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "GPv2Settlement",
             selector: bytes4(0x9b552cc2),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preVaultRelayerFunction.selector
+            handlerSelector: this.GPv2Settlement$preVaultRelayerFunction.selector
         });
     }
 }
@@ -658,29 +658,29 @@ event PreSignature(address owner, bytes orderUid, bool signed);
 event Settlement(address solver);
 event Trade(address owner, address sellToken, address buyToken, uint256 sellAmount, uint256 buyAmount, uint256 feeAmount, bytes orderUid);
 
-  function onInteractionEvent(EventContext memory ctx, GPv2Settlement$InteractionEventParams memory inputs) virtual external override {
+  function GPv2Settlement$onInteractionEvent(EventContext memory ctx, GPv2Settlement$InteractionEventParams memory inputs) virtual external override {
     emit Interaction(inputs.target, inputs.value, inputs.selector);
   }
-function onOrderInvalidatedEvent(EventContext memory ctx, GPv2Settlement$OrderInvalidatedEventParams memory inputs) virtual external override {
+function GPv2Settlement$onOrderInvalidatedEvent(EventContext memory ctx, GPv2Settlement$OrderInvalidatedEventParams memory inputs) virtual external override {
     emit OrderInvalidated(inputs.owner, inputs.orderUid);
   }
-function onPreSignatureEvent(EventContext memory ctx, GPv2Settlement$PreSignatureEventParams memory inputs) virtual external override {
+function GPv2Settlement$onPreSignatureEvent(EventContext memory ctx, GPv2Settlement$PreSignatureEventParams memory inputs) virtual external override {
     emit PreSignature(inputs.owner, inputs.orderUid, inputs.signed);
   }
-function onSettlementEvent(EventContext memory ctx, GPv2Settlement$SettlementEventParams memory inputs) virtual external override {
+function GPv2Settlement$onSettlementEvent(EventContext memory ctx, GPv2Settlement$SettlementEventParams memory inputs) virtual external override {
     emit Settlement(inputs.solver);
   }
-function onTradeEvent(EventContext memory ctx, GPv2Settlement$TradeEventParams memory inputs) virtual external override {
+function GPv2Settlement$onTradeEvent(EventContext memory ctx, GPv2Settlement$TradeEventParams memory inputs) virtual external override {
     emit Trade(inputs.owner, inputs.sellToken, inputs.buyToken, inputs.sellAmount, inputs.buyAmount, inputs.feeAmount, inputs.orderUid);
   }
 
   function allTriggers() view external returns (Trigger[] memory) {
     Trigger[] memory triggers = new Trigger[](5);
-    triggers[0] = this.triggerOnInteractionEvent();
-    triggers[1] = this.triggerOnOrderInvalidatedEvent();
-    triggers[2] = this.triggerOnPreSignatureEvent();
-    triggers[3] = this.triggerOnSettlementEvent();
-    triggers[4] = this.triggerOnTradeEvent();
+    triggers[0] = this.GPv2Settlement$triggerOnInteractionEvent();
+    triggers[1] = this.GPv2Settlement$triggerOnOrderInvalidatedEvent();
+    triggers[2] = this.GPv2Settlement$triggerOnPreSignatureEvent();
+    triggers[3] = this.GPv2Settlement$triggerOnSettlementEvent();
+    triggers[4] = this.GPv2Settlement$triggerOnTradeEvent();
     return triggers;
   }
 }

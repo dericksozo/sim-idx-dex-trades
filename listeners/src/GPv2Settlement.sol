@@ -9,21 +9,21 @@ contract GPv2SettlementListener is GPv2Settlement$PreSettleFunction, GPv2Settlem
     bool internal inSettlement = false;
     event DexTrade(DexTradeData);
 
-    function preSettleFunction(PreFunctionContext memory ctx, GPv2Settlement$SettleFunctionInputs memory inputs)
+    function GPv2Settlement$preSettleFunction(PreFunctionContext memory ctx, GPv2Settlement$SettleFunctionInputs memory inputs)
         external
         override
     {
         inSettlement = true;
     }
 
-    function onSettleFunction(FunctionContext memory ctx, GPv2Settlement$SettleFunctionInputs memory inputs)
+    function GPv2Settlement$onSettleFunction(FunctionContext memory ctx, GPv2Settlement$SettleFunctionInputs memory inputs)
         external
         override
     {
         inSettlement = false;
     }
 
-    function onTradeEvent(EventContext memory ctx, GPv2Settlement$TradeEventParams memory params)
+    function GPv2Settlement$onTradeEvent(EventContext memory ctx, GPv2Settlement$TradeEventParams memory params)
         external
         override
     {

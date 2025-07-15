@@ -26,113 +26,113 @@ struct PSM$SellGemFunctionInputs {
 }
 
 abstract contract PSM$OnBuyGemFunction {
-    function onBuyGemFunction(FunctionContext memory ctx, PSM$BuyGemFunctionInputs memory inputs) virtual external;
+    function PSM$onBuyGemFunction(FunctionContext memory ctx, PSM$BuyGemFunctionInputs memory inputs) virtual external;
 
-    function triggerOnBuyGemFunction() view external returns (Trigger memory) {
+    function PSM$triggerOnBuyGemFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "PSM",
             selector: bytes4(0x8d7ef9bb),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onBuyGemFunction.selector
+            handlerSelector: this.PSM$onBuyGemFunction.selector
         });
     }
 }
 
 abstract contract PSM$PreBuyGemFunction {
-    function preBuyGemFunction(PreFunctionContext memory ctx, PSM$BuyGemFunctionInputs memory inputs) virtual external;
+    function PSM$preBuyGemFunction(PreFunctionContext memory ctx, PSM$BuyGemFunctionInputs memory inputs) virtual external;
 
-    function triggerPreBuyGemFunction() view external returns (Trigger memory) {
+    function PSM$triggerPreBuyGemFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "PSM",
             selector: bytes4(0x8d7ef9bb),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preBuyGemFunction.selector
+            handlerSelector: this.PSM$preBuyGemFunction.selector
         });
     }
 }
 
 abstract contract PSM$OnDaiFunction {
-    function onDaiFunction(FunctionContext memory ctx, PSM$DaiFunctionOutputs memory outputs) virtual external;
+    function PSM$onDaiFunction(FunctionContext memory ctx, PSM$DaiFunctionOutputs memory outputs) virtual external;
 
-    function triggerOnDaiFunction() view external returns (Trigger memory) {
+    function PSM$triggerOnDaiFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "PSM",
             selector: bytes4(0xf4b9fa75),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onDaiFunction.selector
+            handlerSelector: this.PSM$onDaiFunction.selector
         });
     }
 }
 
 abstract contract PSM$PreDaiFunction {
-    function preDaiFunction(PreFunctionContext memory ctx) virtual external;
+    function PSM$preDaiFunction(PreFunctionContext memory ctx) virtual external;
 
-    function triggerPreDaiFunction() view external returns (Trigger memory) {
+    function PSM$triggerPreDaiFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "PSM",
             selector: bytes4(0xf4b9fa75),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preDaiFunction.selector
+            handlerSelector: this.PSM$preDaiFunction.selector
         });
     }
 }
 
 abstract contract PSM$OnGemJoinFunction {
-    function onGemJoinFunction(FunctionContext memory ctx, PSM$GemJoinFunctionOutputs memory outputs) virtual external;
+    function PSM$onGemJoinFunction(FunctionContext memory ctx, PSM$GemJoinFunctionOutputs memory outputs) virtual external;
 
-    function triggerOnGemJoinFunction() view external returns (Trigger memory) {
+    function PSM$triggerOnGemJoinFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "PSM",
             selector: bytes4(0x01664f66),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onGemJoinFunction.selector
+            handlerSelector: this.PSM$onGemJoinFunction.selector
         });
     }
 }
 
 abstract contract PSM$PreGemJoinFunction {
-    function preGemJoinFunction(PreFunctionContext memory ctx) virtual external;
+    function PSM$preGemJoinFunction(PreFunctionContext memory ctx) virtual external;
 
-    function triggerPreGemJoinFunction() view external returns (Trigger memory) {
+    function PSM$triggerPreGemJoinFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "PSM",
             selector: bytes4(0x01664f66),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preGemJoinFunction.selector
+            handlerSelector: this.PSM$preGemJoinFunction.selector
         });
     }
 }
 
 abstract contract PSM$OnSellGemFunction {
-    function onSellGemFunction(FunctionContext memory ctx, PSM$SellGemFunctionInputs memory inputs) virtual external;
+    function PSM$onSellGemFunction(FunctionContext memory ctx, PSM$SellGemFunctionInputs memory inputs) virtual external;
 
-    function triggerOnSellGemFunction() view external returns (Trigger memory) {
+    function PSM$triggerOnSellGemFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "PSM",
             selector: bytes4(0x95991276),
             triggerType: TriggerType.FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.onSellGemFunction.selector
+            handlerSelector: this.PSM$onSellGemFunction.selector
         });
     }
 }
 
 abstract contract PSM$PreSellGemFunction {
-    function preSellGemFunction(PreFunctionContext memory ctx, PSM$SellGemFunctionInputs memory inputs) virtual external;
+    function PSM$preSellGemFunction(PreFunctionContext memory ctx, PSM$SellGemFunctionInputs memory inputs) virtual external;
 
-    function triggerPreSellGemFunction() view external returns (Trigger memory) {
+    function PSM$triggerPreSellGemFunction() view external returns (Trigger memory) {
         return Trigger({
             abiName: "PSM",
             selector: bytes4(0x95991276),
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
-            handlerSelector: this.preSellGemFunction.selector
+            handlerSelector: this.PSM$preSellGemFunction.selector
         });
     }
 }

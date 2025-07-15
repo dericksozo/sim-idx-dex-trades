@@ -10,7 +10,7 @@ import "./interfaces/Uniswap/UniswapInterfaces.sol";
 contract UniswapV3Listener is UniswapV3Pool$OnSwapFunction, DexUtils {
     event DexTrade(DexTradeData);
 
-    function onSwapFunction(
+    function UniswapV3Pool$onSwapFunction(
         FunctionContext memory ctx,
         UniswapV3Pool$SwapFunctionInputs memory inputs,
         UniswapV3Pool$SwapFunctionOutputs memory outputs
