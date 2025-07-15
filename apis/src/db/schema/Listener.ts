@@ -2,3 +2,24 @@
 import { pgEnum, pgTable as table } from "drizzle-orm/pg-core";
 import * as t from "drizzle-orm/pg-core";
 import { db, types } from "@duneanalytics/sim-idx";
+
+export const dexTrade = table("dex_trade", {
+  chainId: db.uint64('chain_id'),
+  blockNumber: db.uint256('block_number'),
+  blockTimestamp: db.uint256('block_timestamp'),
+  transactionHash: db.bytes32('transaction_hash'),
+  dex: t.text('dex'),
+  fromToken: db.address('from_token'),
+  fromTokenAmt: db.uint256('from_token_amt'),
+  fromTokenName: t.text('from_token_name'),
+  fromTokenSymbol: t.text('from_token_symbol'),
+  fromTokenDecimals: db.uint8('from_token_decimals'),
+  toToken: db.address('to_token'),
+  toTokenAmt: db.uint256('to_token_amt'),
+  toTokenName: t.text('to_token_name'),
+  toTokenSymbol: t.text('to_token_symbol'),
+  toTokenDecimals: db.uint8('to_token_decimals'),
+  txnOriginator: db.address('txn_originator'),
+  recipient: db.address('recipient'),
+  liquidityPool: db.address('liquidity_pool'),
+})
