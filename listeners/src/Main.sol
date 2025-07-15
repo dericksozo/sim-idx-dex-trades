@@ -8,6 +8,7 @@ import "./UniswapV2.sol";
 import "./UniswapV3.sol";
 import "./BancorCarbon.sol";
 import "./GPv2Settlement.sol";
+import "./CrocSwap.sol";
 
 contract Triggers is BaseTriggers {
     function triggers() external virtual override {
@@ -16,6 +17,7 @@ contract Triggers is BaseTriggers {
         UniswapV3Listener uniswapV3Listener = new UniswapV3Listener();
         BancorCarbonListener carbonListener = new BancorCarbonListener();
         GPv2SettlementListener gpv2SettlementListener = new GPv2SettlementListener();
+        CrocSwapListener crocSwapListener = new CrocSwapListener();
 
         addTrigger(chainAbi(Chains.Ethereum, PSM$Abi()), psmListener.triggerOnBuyGemFunction());
         addTrigger(chainAbi(Chains.Ethereum, PSM$Abi()), psmListener.triggerOnSellGemFunction());
@@ -56,6 +58,15 @@ contract Triggers is BaseTriggers {
         addTrigger(
             chainContract(Chains.Base, 0x9008D19f58AAbD9eD0D60971565AA8510560ab41),
             gpv2SettlementListener.triggerOnTradeEvent()
+        );
+
+        addTrigger(
+            chainAbi(Chains.Ethereum, HotProxy$Abi()),
+            crocSwapListener.triggerOnUserCmdFunction()
+        );
+        addTrigger(
+            chainAbi(Chains.Base, HotProxy$Abi()),
+            crocSwapListener.triggerOnUserCmdFunction()
         );
     }
 }
