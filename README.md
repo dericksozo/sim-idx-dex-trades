@@ -9,6 +9,7 @@
 - Sky PSM (prev. Maker PSM)
 - Bancor Carbon
 - CoW Protocol
+- Ambient.finance (CrocSwap)
 
 ## Schema
 
