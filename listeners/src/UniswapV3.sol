@@ -10,8 +10,12 @@ import "./interfaces/Uniswap/UniswapInterfaces.sol";
 contract UniswapV3Listener is UniswapV3Pool$OnSwapFunction, DexUtils {
     event DexTrade(DexTradeData);
 
-    function onSwapFunction(FunctionContext memory ctx, UniswapV3Pool$SwapFunctionInputs memory inputs, UniswapV3Pool$SwapFunctionOutputs memory outputs) external override {
-        (address token0, address token1, ) = DexUtils.getUniswapV3PoolMetadata(ctx.txn.call.callee);
+    function onSwapFunction(
+        FunctionContext memory ctx,
+        UniswapV3Pool$SwapFunctionInputs memory inputs,
+        UniswapV3Pool$SwapFunctionOutputs memory outputs
+    ) external override {
+        (address token0, address token1,) = DexUtils.getUniswapV3PoolMetadata(ctx.txn.call.callee);
         (string memory token0Name, string memory token0Symbol, uint256 token0Decimals) = getMetadata(token0);
         (string memory token1Name, string memory token1Symbol, uint256 token1Decimals) = getMetadata(token1);
         DexTradeData memory trade;
