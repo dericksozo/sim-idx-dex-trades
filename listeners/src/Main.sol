@@ -3,9 +3,6 @@ pragma solidity ^0.8.13;
 
 import "sim-idx-sol/Simidx.sol";
 import "sim-idx-generated/Generated.sol";
-import "./types/DexTrades.sol";
-import "./libs/Maker/MakerLib.sol";
-import "./utils/ERC20Metadata.sol";
 import "./MakerPSM.sol";
 import "./UniswapV2.sol";
 import "./UniswapV3.sol";
