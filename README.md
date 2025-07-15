@@ -10,6 +10,7 @@
 - Bancor Carbon
 - CoW Protocol
 - Ambient.finance (CrocSwap)
+- Curve.fi
 
 ## Schema
 
