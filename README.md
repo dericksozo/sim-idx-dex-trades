@@ -11,9 +11,9 @@
 - Sky PSM (prev. Maker PSM)
 - Bancor Carbon
 - CoW Protocol
-- Ambient.finance (CrocSwap)
+- Ambient.finance (prev. CrocSwap)
 - Curve.fi
-- Balancer V2
+- Balancer V2 (and its Swaap V2 fork)
 - Maverick V1
 
 ## Schema

@@ -32,7 +32,13 @@ contract BalancerV2Listener is Vault$PreSwapFunction, Vault$PreBatchSwapFunction
         (string memory tokenOutName, string memory tokenOutSymbol, uint256 tokenOutDecimals) =
             getMetadata(params.tokenOut);
         DexTradeData memory trade;
-        trade.dex = "BalancerV2";
+        if (ctx.txn.call.callee == DexUtils.getBalancerV2Vault()) {
+            trade.dex = "BalancerV2";
+        } else if (ctx.txn.call.callee == DexUtils.getSwaapV2Vault()) {
+            trade.dex = "SwaapV2";
+        } else {
+            return;
+        }
         trade.fromToken = params.tokenIn;
         trade.fromTokenAmt = params.amountIn;
         trade.fromTokenName = tokenInName;
