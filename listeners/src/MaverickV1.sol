@@ -42,6 +42,7 @@ contract MaverickV1Listener is MaverickPool$OnSwapEvent, DexUtils {
             trade.toTokenSymbol = tokenASymbol;
             trade.toTokenDecimals = uint8(tokenADecimals);
         }
+        trade.dex = "MaverickV1";
         trade.fromTokenAmt = params.amountIn;
         trade.toTokenAmt = params.amountOut;
         trade.chainId = uint64(block.chainid);

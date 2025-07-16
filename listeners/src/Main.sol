@@ -14,6 +14,7 @@ import "./BalancerV2.sol";
 import "./MaverickV1.sol";
 import "./UniswapX.sol";
 import "./UniswapV4.sol";
+import "./DODOV2.sol";
 
 contract Triggers is BaseTriggers {
     function triggers() external virtual override {
@@ -28,6 +29,7 @@ contract Triggers is BaseTriggers {
         MaverickV1Listener maverickV1Listener = new MaverickV1Listener();
         UniswapXListener uniswapXListener = new UniswapXListener();
         UniswapV4Listener uniswapV4Listener = new UniswapV4Listener();
+        DODOV2Listener dodoV2Listener = new DODOV2Listener();
 
         addTrigger(chainAbi(Chains.Ethereum, PSM$Abi()), psmListener.PSM$triggerOnBuyGemFunction());
         addTrigger(chainAbi(Chains.Ethereum, PSM$Abi()), psmListener.PSM$triggerOnSellGemFunction());
@@ -172,5 +174,8 @@ contract Triggers is BaseTriggers {
             chainContract(Chains.Soneium, 0x360E68faCcca8cA495c1B759Fd9EEe466db9FB32),
             uniswapV4Listener.PoolManager$triggerOnSwapFunction()
         );
+
+        addTrigger(chainAbi(Chains.Ethereum, DODOSwap$Abi()), dodoV2Listener.DODOSwap$triggerOnDodoSwapEvent());
+        addTrigger(chainAbi(Chains.Base, DODOSwap$Abi()), dodoV2Listener.DODOSwap$triggerOnDodoSwapEvent());
     }
 }
