@@ -22,6 +22,7 @@
 - DODO V2
 - WooFi
 - Maverick V1
+- Maverick V2
 
 ## Schema
 
