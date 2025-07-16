@@ -14,6 +14,7 @@
 - Ambient.finance (prev. CrocSwap)
 - Curve.fi
 - Balancer V2 (and its Swaap V2 fork)
+- DODO V2
 - Maverick V1
 
 ## Schema
