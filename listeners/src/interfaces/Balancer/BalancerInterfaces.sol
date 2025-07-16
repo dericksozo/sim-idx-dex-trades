@@ -60,11 +60,6 @@ interface IVault {
      */
     function setRelayerApproval(address sender, address relayer, bool approved) external;
 
-    /**
-     * @dev Emitted every time a relayer is approved or disapproved by `setRelayerApproval`.
-     */
-    event RelayerApprovalChanged(address indexed relayer, address indexed sender, bool approved);
-
     // Internal Balance
     //
     // Users can deposit tokens into the Vault, where they are allocated to their Internal Balance, and later
@@ -125,20 +120,6 @@ interface IVault {
         TRANSFER_EXTERNAL
     }
 
-    /**
-     * @dev Emitted when a user's Internal Balance changes, either from calls to `manageUserBalance`, or through
-     * interacting with Pools using Internal Balance.
-     *
-     * Because Internal Balance works exclusively with ERC20 tokens, ETH deposits and withdrawals will use the WETH
-     * address.
-     */
-    event InternalBalanceChanged(address indexed user, address indexed token, int256 delta);
-
-    /**
-     * @dev Emitted when a user's Vault ERC20 allowance is used by the Vault to transfer tokens to an external account.
-     */
-    event ExternalBalanceTransfer(address indexed token, address indexed sender, address recipient, uint256 amount);
-
     // Pools
     //
     // There are three specialization settings for Pools, which allow for cheaper swaps at the cost of reduced
@@ -178,11 +159,6 @@ interface IVault {
     function registerPool(PoolSpecialization specialization) external returns (bytes32);
 
     /**
-     * @dev Emitted when a Pool is registered by calling `registerPool`.
-     */
-    event PoolRegistered(bytes32 indexed poolId, address indexed poolAddress, PoolSpecialization specialization);
-
-    /**
      * @dev Returns a Pool's contract address and specialization setting.
      */
     function getPool(bytes32 poolId) external view returns (address, PoolSpecialization);
@@ -212,11 +188,6 @@ interface IVault {
     function registerTokens(bytes32 poolId, address[] memory tokens, address[] memory assetManagers) external;
 
     /**
-     * @dev Emitted when a Pool registers tokens by calling `registerTokens`.
-     */
-    event TokensRegistered(bytes32 indexed poolId, address[] tokens, address[] assetManagers);
-
-    /**
      * @dev Deregisters `tokens` for the `poolId` Pool. Must be called by the Pool's contract.
      *
      * Only registered tokens (via `registerTokens`) can be deregistered. Additionally, they must have zero total
@@ -228,11 +199,6 @@ interface IVault {
      * Emits a `TokensDeregistered` event.
      */
     function deregisterTokens(bytes32 poolId, address[] memory tokens) external;
-
-    /**
-     * @dev Emitted when a Pool deregisters tokens by calling `deregisterTokens`.
-     */
-    event TokensDeregistered(bytes32 indexed poolId, address[] tokens);
 
     /**
      * @dev Returns detailed information for a Pool's registered token.

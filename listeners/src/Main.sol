@@ -10,6 +10,7 @@ import "./BancorCarbon.sol";
 import "./GPv2Settlement.sol";
 import "./CrocSwap.sol";
 import "./Curve.sol";
+import "./BalancerV2.sol";
 
 contract Triggers is BaseTriggers {
     function triggers() external virtual override {
@@ -20,6 +21,7 @@ contract Triggers is BaseTriggers {
         GPv2SettlementListener gpv2SettlementListener = new GPv2SettlementListener();
         CrocSwapListener crocSwapListener = new CrocSwapListener();
         CurveListener curveListener = new CurveListener();
+        BalancerV2Listener balancerV2Listener = new BalancerV2Listener();
 
         addTrigger(chainAbi(Chains.Ethereum, PSM$Abi()), psmListener.PSM$triggerOnBuyGemFunction());
         addTrigger(chainAbi(Chains.Ethereum, PSM$Abi()), psmListener.PSM$triggerOnSellGemFunction());
@@ -86,6 +88,31 @@ contract Triggers is BaseTriggers {
         addTrigger(
             chainAbi(Chains.Base, TokenExchange$Abi()),
             curveListener.TokenExchange$triggerOnTokenExchangeEvent()
+        );
+
+        addTrigger(
+            chainContract(Chains.Ethereum, 0xBA12222222228d8Ba445958a75a0704d566BF2C8),
+            balancerV2Listener.Vault$triggerPreSwapFunction()
+        );
+        addTrigger(
+            chainContract(Chains.Ethereum, 0xBA12222222228d8Ba445958a75a0704d566BF2C8),
+            balancerV2Listener.Vault$triggerPreBatchSwapFunction()
+        );
+        addTrigger(
+            chainContract(Chains.Ethereum, 0xBA12222222228d8Ba445958a75a0704d566BF2C8),
+            balancerV2Listener.Vault$triggerOnSwapEvent()
+        );
+        addTrigger(
+            chainContract(Chains.Base, 0xBA12222222228d8Ba445958a75a0704d566BF2C8),
+            balancerV2Listener.Vault$triggerPreSwapFunction()
+        );
+        addTrigger(
+            chainContract(Chains.Base, 0xBA12222222228d8Ba445958a75a0704d566BF2C8),
+            balancerV2Listener.Vault$triggerPreBatchSwapFunction()
+        );
+        addTrigger(
+            chainContract(Chains.Base, 0xBA12222222228d8Ba445958a75a0704d566BF2C8),
+            balancerV2Listener.Vault$triggerOnSwapEvent()
         );
     }
 }
