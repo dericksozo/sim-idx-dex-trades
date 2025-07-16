@@ -13,6 +13,7 @@ import "./Curve.sol";
 import "./BalancerV2.sol";
 import "./MaverickV1.sol";
 import "./UniswapX.sol";
+import "./UniswapV4.sol";
 
 contract Triggers is BaseTriggers {
     function triggers() external virtual override {
@@ -26,6 +27,7 @@ contract Triggers is BaseTriggers {
         BalancerV2Listener balancerV2Listener = new BalancerV2Listener();
         MaverickV1Listener maverickV1Listener = new MaverickV1Listener();
         UniswapXListener uniswapXListener = new UniswapXListener();
+        UniswapV4Listener uniswapV4Listener = new UniswapV4Listener();
 
         addTrigger(chainAbi(Chains.Ethereum, PSM$Abi()), psmListener.PSM$triggerOnBuyGemFunction());
         addTrigger(chainAbi(Chains.Ethereum, PSM$Abi()), psmListener.PSM$triggerOnSellGemFunction());
@@ -115,17 +117,60 @@ contract Triggers is BaseTriggers {
         addTrigger(chainAbi(Chains.Ethereum, MaverickPool$Abi()), maverickV1Listener.MaverickPool$triggerOnSwapEvent());
         addTrigger(chainAbi(Chains.Base, MaverickPool$Abi()), maverickV1Listener.MaverickPool$triggerOnSwapEvent());
 
-        addTrigger(ChainIdAbi(1, Reactor$Abi()), uniswapXListener.Reactor$triggerPreExecuteFunction());
-        addTrigger(ChainIdAbi(1, Reactor$Abi()), uniswapXListener.Reactor$triggerPreExecuteBatchFunction());
-        addTrigger(ChainIdAbi(1, Reactor$Abi()), uniswapXListener.Reactor$triggerPreExecuteBatchWithCallbackFunction());
-        addTrigger(ChainIdAbi(1, Reactor$Abi()), uniswapXListener.Reactor$triggerPreExecuteWithCallbackFunction());
-        addTrigger(ChainIdAbi(130, Reactor$Abi()), uniswapXListener.Reactor$triggerPreExecuteFunction());
-        addTrigger(ChainIdAbi(130, Reactor$Abi()), uniswapXListener.Reactor$triggerPreExecuteBatchFunction());
-        addTrigger(ChainIdAbi(130, Reactor$Abi()), uniswapXListener.Reactor$triggerPreExecuteBatchWithCallbackFunction());
-        addTrigger(ChainIdAbi(130, Reactor$Abi()), uniswapXListener.Reactor$triggerPreExecuteWithCallbackFunction());
-        addTrigger(ChainIdAbi(8453, Reactor$Abi()), uniswapXListener.Reactor$triggerPreExecuteFunction());
-        addTrigger(ChainIdAbi(8453, Reactor$Abi()), uniswapXListener.Reactor$triggerPreExecuteBatchFunction());
-        addTrigger(ChainIdAbi(8453, Reactor$Abi()), uniswapXListener.Reactor$triggerPreExecuteBatchWithCallbackFunction());
-        addTrigger(ChainIdAbi(8453, Reactor$Abi()), uniswapXListener.Reactor$triggerPreExecuteWithCallbackFunction());
+        addTrigger(chainAbi(Chains.Ethereum, Reactor$Abi()), uniswapXListener.Reactor$triggerPreExecuteFunction());
+        addTrigger(chainAbi(Chains.Ethereum, Reactor$Abi()), uniswapXListener.Reactor$triggerPreExecuteBatchFunction());
+        addTrigger(
+            chainAbi(Chains.Ethereum, Reactor$Abi()),
+            uniswapXListener.Reactor$triggerPreExecuteBatchWithCallbackFunction()
+        );
+        addTrigger(
+            chainAbi(Chains.Ethereum, Reactor$Abi()), uniswapXListener.Reactor$triggerPreExecuteWithCallbackFunction()
+        );
+        addTrigger(chainAbi(Chains.Unichain, Reactor$Abi()), uniswapXListener.Reactor$triggerPreExecuteFunction());
+        addTrigger(chainAbi(Chains.Unichain, Reactor$Abi()), uniswapXListener.Reactor$triggerPreExecuteBatchFunction());
+        addTrigger(
+            chainAbi(Chains.Unichain, Reactor$Abi()),
+            uniswapXListener.Reactor$triggerPreExecuteBatchWithCallbackFunction()
+        );
+        addTrigger(
+            chainAbi(Chains.Unichain, Reactor$Abi()), uniswapXListener.Reactor$triggerPreExecuteWithCallbackFunction()
+        );
+        addTrigger(chainAbi(Chains.Base, Reactor$Abi()), uniswapXListener.Reactor$triggerPreExecuteFunction());
+        addTrigger(chainAbi(Chains.Base, Reactor$Abi()), uniswapXListener.Reactor$triggerPreExecuteBatchFunction());
+        addTrigger(
+            chainAbi(Chains.Base, Reactor$Abi()), uniswapXListener.Reactor$triggerPreExecuteBatchWithCallbackFunction()
+        );
+        addTrigger(
+            chainAbi(Chains.Base, Reactor$Abi()), uniswapXListener.Reactor$triggerPreExecuteWithCallbackFunction()
+        );
+
+        addTrigger(
+            chainContract(Chains.Ethereum, 0x000000000004444c5dc75cB358380D2e3dE08A90),
+            uniswapV4Listener.PoolManager$triggerOnSwapFunction()
+        );
+        addTrigger(
+            chainContract(Chains.Unichain, 0x1F98400000000000000000000000000000000004),
+            uniswapV4Listener.PoolManager$triggerOnSwapFunction()
+        );
+        addTrigger(
+            chainContract(Chains.Base, 0x498581fF718922c3f8e6A244956aF099B2652b2b),
+            uniswapV4Listener.PoolManager$triggerOnSwapFunction()
+        );
+        addTrigger(
+            chainContract(Chains.Zora, 0x0575338e4C17006aE181B47900A84404247CA30f),
+            uniswapV4Listener.PoolManager$triggerOnSwapFunction()
+        );
+        addTrigger(
+            chainContract(Chains.WorldChain, 0xb1860D529182ac3BC1F51Fa2ABd56662b7D13f33),
+            uniswapV4Listener.PoolManager$triggerOnSwapFunction()
+        );
+        addTrigger(
+            chainContract(Chains.Ink, 0x360E68faCcca8cA495c1B759Fd9EEe466db9FB32),
+            uniswapV4Listener.PoolManager$triggerOnSwapFunction()
+        );
+        addTrigger(
+            chainContract(Chains.Soneium, 0x360E68faCcca8cA495c1B759Fd9EEe466db9FB32),
+            uniswapV4Listener.PoolManager$triggerOnSwapFunction()
+        );
     }
 }
