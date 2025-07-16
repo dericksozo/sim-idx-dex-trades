@@ -90,27 +90,27 @@ contract Triggers is BaseTriggers {
         );
 
         addTrigger(
-            chainContract(Chains.Ethereum, 0xBA12222222228d8Ba445958a75a0704d566BF2C8),
+            chainAbi(Chains.Ethereum, Vault$Abi()),
             balancerV2Listener.Vault$triggerPreSwapFunction()
         );
         addTrigger(
-            chainContract(Chains.Ethereum, 0xBA12222222228d8Ba445958a75a0704d566BF2C8),
+            chainAbi(Chains.Ethereum, Vault$Abi()),
             balancerV2Listener.Vault$triggerPreBatchSwapFunction()
         );
         addTrigger(
-            chainContract(Chains.Ethereum, 0xBA12222222228d8Ba445958a75a0704d566BF2C8),
+            chainAbi(Chains.Ethereum, Vault$Abi()),
             balancerV2Listener.Vault$triggerOnSwapEvent()
         );
         addTrigger(
-            chainContract(Chains.Base, 0xBA12222222228d8Ba445958a75a0704d566BF2C8),
+            chainAbi(Chains.Base, Vault$Abi()),
             balancerV2Listener.Vault$triggerPreSwapFunction()
         );
         addTrigger(
-            chainContract(Chains.Base, 0xBA12222222228d8Ba445958a75a0704d566BF2C8),
+            chainAbi(Chains.Base, Vault$Abi()),
             balancerV2Listener.Vault$triggerPreBatchSwapFunction()
         );
         addTrigger(
-            chainContract(Chains.Base, 0xBA12222222228d8Ba445958a75a0704d566BF2C8),
+            chainAbi(Chains.Base, Vault$Abi()),
             balancerV2Listener.Vault$triggerOnSwapEvent()
         );
 

@@ -35,6 +35,7 @@ contract DexUtils {
     mapping(uint256 => address) internal maverickV1Factories;
     mapping(uint256 => address) internal maverickV2Factories;
     mapping(uint256 => address) internal swaapV2Vaults;
+    mapping(uint256 => address) internal balancerV2Vaults;
     mapping(uint256 => address) internal dodoV2DppFactories;
     mapping(uint256 => address) internal dodoV2DspFactories;
     mapping(uint256 => address) internal dodoV2DvmFactories;
@@ -110,6 +111,9 @@ contract DexUtils {
         sharkSwapFactories[8453] = 0x57592D44eb60011500961EF177BFf8D8691D5a8B;
 
         alienBaseFactories[8453] = 0x0Fd83557b2be93617c9C1C1B6fd549401C74558C;
+
+        balancerV2Vaults[8453] = 0xBA12222222228d8Ba445958a75a0704d566BF2C8;
+        balancerV2Vaults[1] = 0xBA12222222228d8Ba445958a75a0704d566BF2C8;
     }
 
     /// @notice Resolves the official Uniswap V2 Factory's address.
@@ -266,6 +270,12 @@ contract DexUtils {
     /// @return The address of AlienBaseSwap Factory for the current chain.
     function getAlienBaseFactory() public view returns (address) {
         return safeReturnAddress(alienBaseFactories[block.chainid]);
+    }
+
+    /// @notice Resolves the official Balancer V2 Vault's address.
+    /// @return The address of Balancer V2 Vault for the current chain.
+    function getBalancerV2Vault() public view returns (address) {
+        return safeReturnAddress(balancerV2Vaults[block.chainid]);
     }
 
     /// @notice Gets a Uniswap V2 pair from a factory for token0 and token1.
