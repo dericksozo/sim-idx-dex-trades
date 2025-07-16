@@ -14,3 +14,4 @@ import "./TokenExchange.sol";
 import "./UniswapV2Pair.sol";
 import "./UniswapV3Pool.sol";
 import "./Vault.sol";
+import "./WooSwap.sol";

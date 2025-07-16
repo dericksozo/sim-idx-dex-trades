@@ -16,7 +16,8 @@ contract DODOV2Listener is DODOSwap$OnDodoSwapEvent, DexUtils {
         (address baseToken, address quoteToken) = DexUtils.getDodoV2PoolMetadata(ctx.txn.call.callee);
 
         (string memory baseTokenName, string memory baseTokenSymbol, uint256 baseTokenDecimals) = getMetadata(baseToken);
-        (string memory quoteTokenName, string memory quoteTokenSymbol, uint256 quoteTokenDecimals) = getMetadata(quoteToken);
+        (string memory quoteTokenName, string memory quoteTokenSymbol, uint256 quoteTokenDecimals) =
+            getMetadata(quoteToken);
         DexTradeData memory trade;
 
         if (params.fromToken == baseToken) {

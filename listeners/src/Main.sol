@@ -15,6 +15,7 @@ import "./MaverickV1.sol";
 import "./UniswapX.sol";
 import "./UniswapV4.sol";
 import "./DODOV2.sol";
+import "./WooFi.sol";
 
 contract Triggers is BaseTriggers {
     function triggers() external virtual override {
@@ -30,6 +31,7 @@ contract Triggers is BaseTriggers {
         UniswapXListener uniswapXListener = new UniswapXListener();
         UniswapV4Listener uniswapV4Listener = new UniswapV4Listener();
         DODOV2Listener dodoV2Listener = new DODOV2Listener();
+        WooFiListener wooFiListener = new WooFiListener();
 
         addTrigger(chainAbi(Chains.Ethereum, PSM$Abi()), psmListener.PSM$triggerOnBuyGemFunction());
         addTrigger(chainAbi(Chains.Ethereum, PSM$Abi()), psmListener.PSM$triggerOnSellGemFunction());
@@ -91,30 +93,12 @@ contract Triggers is BaseTriggers {
             chainAbi(Chains.Base, TokenExchange$Abi()), curveListener.TokenExchange$triggerOnTokenExchangeEvent()
         );
 
-        addTrigger(
-            chainAbi(Chains.Ethereum, Vault$Abi()),
-            balancerV2Listener.Vault$triggerPreSwapFunction()
-        );
-        addTrigger(
-            chainAbi(Chains.Ethereum, Vault$Abi()),
-            balancerV2Listener.Vault$triggerPreBatchSwapFunction()
-        );
-        addTrigger(
-            chainAbi(Chains.Ethereum, Vault$Abi()),
-            balancerV2Listener.Vault$triggerOnSwapEvent()
-        );
-        addTrigger(
-            chainAbi(Chains.Base, Vault$Abi()),
-            balancerV2Listener.Vault$triggerPreSwapFunction()
-        );
-        addTrigger(
-            chainAbi(Chains.Base, Vault$Abi()),
-            balancerV2Listener.Vault$triggerPreBatchSwapFunction()
-        );
-        addTrigger(
-            chainAbi(Chains.Base, Vault$Abi()),
-            balancerV2Listener.Vault$triggerOnSwapEvent()
-        );
+        addTrigger(chainAbi(Chains.Ethereum, Vault$Abi()), balancerV2Listener.Vault$triggerPreSwapFunction());
+        addTrigger(chainAbi(Chains.Ethereum, Vault$Abi()), balancerV2Listener.Vault$triggerPreBatchSwapFunction());
+        addTrigger(chainAbi(Chains.Ethereum, Vault$Abi()), balancerV2Listener.Vault$triggerOnSwapEvent());
+        addTrigger(chainAbi(Chains.Base, Vault$Abi()), balancerV2Listener.Vault$triggerPreSwapFunction());
+        addTrigger(chainAbi(Chains.Base, Vault$Abi()), balancerV2Listener.Vault$triggerPreBatchSwapFunction());
+        addTrigger(chainAbi(Chains.Base, Vault$Abi()), balancerV2Listener.Vault$triggerOnSwapEvent());
 
         addTrigger(chainAbi(Chains.Ethereum, MaverickPool$Abi()), maverickV1Listener.MaverickPool$triggerOnSwapEvent());
         addTrigger(chainAbi(Chains.Base, MaverickPool$Abi()), maverickV1Listener.MaverickPool$triggerOnSwapEvent());
@@ -177,5 +161,8 @@ contract Triggers is BaseTriggers {
 
         addTrigger(chainAbi(Chains.Ethereum, DODOSwap$Abi()), dodoV2Listener.DODOSwap$triggerOnDodoSwapEvent());
         addTrigger(chainAbi(Chains.Base, DODOSwap$Abi()), dodoV2Listener.DODOSwap$triggerOnDodoSwapEvent());
+
+        addTrigger(chainAbi(Chains.Ethereum, WooSwap$Abi()), wooFiListener.WooSwap$triggerOnWooSwapEvent());
+        addTrigger(chainAbi(Chains.Base, WooSwap$Abi()), wooFiListener.WooSwap$triggerOnWooSwapEvent());
     }
 }
