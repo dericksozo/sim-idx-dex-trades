@@ -8,27 +8,22 @@ import "./utils/ERC20Metadata.sol";
 contract CrocSwapListener is HotProxy$OnUserCmdFunction {
     event DexTrade(DexTradeData);
 
-    function HotProxy$onUserCmdFunction(FunctionContext memory ctx, HotProxy$UserCmdFunctionInputs memory inputs, HotProxy$UserCmdFunctionOutputs memory outputs)
-        external
-        override
-    {
-        (address token0,
-         address token1,
-         ,
-         bool isBuy,
-         ,
-         ,
-         ,
-         ,
-         ,
-         uint8 reserveFlags) = abi.decode(inputs.input, (address , address ,uint256 , bool , bool , uint128 , uint16 ,uint128 , uint128 ,uint8));
+    function HotProxy$onUserCmdFunction(
+        FunctionContext memory ctx,
+        HotProxy$UserCmdFunctionInputs memory inputs,
+        HotProxy$UserCmdFunctionOutputs memory outputs
+    ) external override {
+        (address token0, address token1,, bool isBuy,,,,,, uint8 reserveFlags) =
+            abi.decode(inputs.input, (address, address, uint256, bool, bool, uint128, uint16, uint128, uint128, uint8));
 
         uint128 token0Amt = outputs.outArg0 < 0 ? uint128(-outputs.outArg0) : uint128(outputs.outArg0);
         uint128 token1Amt = outputs.outArg1 < 0 ? uint128(-outputs.outArg1) : uint128(outputs.outArg1);
 
-        (string memory token0Name, string memory token0Symbol, uint256 token0Decimals) = token0 == address(0) ? ("Ether", "ETH", 18) : getMetadata(token0);
-        (string memory token1Name, string memory token1Symbol, uint256 token1Decimals) = token1 == address(0) ? ("Ether", "ETH", 18) : getMetadata(token1);
-        
+        (string memory token0Name, string memory token0Symbol, uint256 token0Decimals) =
+            token0 == address(0) ? ("Ether", "ETH", 18) : getMetadata(token0);
+        (string memory token1Name, string memory token1Symbol, uint256 token1Decimals) =
+            token1 == address(0) ? ("Ether", "ETH", 18) : getMetadata(token1);
+
         DexTradeData memory trade;
         trade.dex = "CrocSwap";
         trade.chainId = uint64(block.chainid);

@@ -9,6 +9,7 @@ import {IVault} from "./interfaces/Balancer/BalancerInterfaces.sol";
 
 contract BalancerV2Listener is Vault$PreSwapFunction, Vault$PreBatchSwapFunction, Vault$OnSwapEvent, DexUtils {
     address internal recipient;
+
     event DexTrade(DexTradeData);
 
     function Vault$preSwapFunction(PreFunctionContext memory ctx, Vault$SwapFunctionInputs memory inputs)
@@ -25,13 +26,11 @@ contract BalancerV2Listener is Vault$PreSwapFunction, Vault$PreBatchSwapFunction
         recipient = inputs.funds.recipient;
     }
 
-    function Vault$onSwapEvent(EventContext memory ctx, Vault$SwapEventParams memory params)
-        external
-        override
-    {
-        (address pool, ) = IVault(ctx.txn.call.callee).getPool(params.poolId);
+    function Vault$onSwapEvent(EventContext memory ctx, Vault$SwapEventParams memory params) external override {
+        (address pool,) = IVault(ctx.txn.call.callee).getPool(params.poolId);
         (string memory tokenInName, string memory tokenInSymbol, uint256 tokenInDecimals) = getMetadata(params.tokenIn);
-        (string memory tokenOutName, string memory tokenOutSymbol, uint256 tokenOutDecimals) = getMetadata(params.tokenOut);
+        (string memory tokenOutName, string memory tokenOutSymbol, uint256 tokenOutDecimals) =
+            getMetadata(params.tokenOut);
         DexTradeData memory trade;
         trade.dex = "BalancerV2";
         trade.fromToken = params.tokenIn;

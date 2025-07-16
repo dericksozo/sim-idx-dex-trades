@@ -5,21 +5,26 @@ import "sim-idx-generated/Generated.sol";
 import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
 
-contract GPv2SettlementListener is GPv2Settlement$PreSettleFunction, GPv2Settlement$OnSettleFunction, GPv2Settlement$OnTradeEvent {
+contract GPv2SettlementListener is
+    GPv2Settlement$PreSettleFunction,
+    GPv2Settlement$OnSettleFunction,
+    GPv2Settlement$OnTradeEvent
+{
     bool internal inSettlement = false;
+
     event DexTrade(DexTradeData);
 
-    function GPv2Settlement$preSettleFunction(PreFunctionContext memory ctx, GPv2Settlement$SettleFunctionInputs memory inputs)
-        external
-        override
-    {
+    function GPv2Settlement$preSettleFunction(
+        PreFunctionContext memory ctx,
+        GPv2Settlement$SettleFunctionInputs memory inputs
+    ) external override {
         inSettlement = true;
     }
 
-    function GPv2Settlement$onSettleFunction(FunctionContext memory ctx, GPv2Settlement$SettleFunctionInputs memory inputs)
-        external
-        override
-    {
+    function GPv2Settlement$onSettleFunction(
+        FunctionContext memory ctx,
+        GPv2Settlement$SettleFunctionInputs memory inputs
+    ) external override {
         inSettlement = false;
     }
 
@@ -27,8 +32,10 @@ contract GPv2SettlementListener is GPv2Settlement$PreSettleFunction, GPv2Settlem
         external
         override
     {
-        (string memory sellTokenName, string memory sellTokenSymbol, uint256 sellTokenDecimals) = getMetadata(params.sellToken);
-        (string memory buyTokenName, string memory buyTokenSymbol, uint256 buyTokenDecimals) = getMetadata(params.buyToken);
+        (string memory sellTokenName, string memory sellTokenSymbol, uint256 sellTokenDecimals) =
+            getMetadata(params.sellToken);
+        (string memory buyTokenName, string memory buyTokenSymbol, uint256 buyTokenDecimals) =
+            getMetadata(params.buyToken);
         DexTradeData memory trade;
         trade.dex = "CoWProtocol";
         trade.fromToken = params.sellToken;

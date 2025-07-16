@@ -10,7 +10,10 @@ import "./interfaces/Uniswap/UniswapInterfaces.sol";
 contract UniswapV2Listener is UniswapV2Pair$OnSwapEvent, DexUtils {
     event DexTrade(DexTradeData);
 
-    function UniswapV2Pair$onSwapEvent(EventContext memory ctx, UniswapV2Pair$SwapEventParams memory params) external override {
+    function UniswapV2Pair$onSwapEvent(EventContext memory ctx, UniswapV2Pair$SwapEventParams memory params)
+        external
+        override
+    {
         (address token0, address token1) = DexUtils.getUniswapV2PairMetadata(ctx.txn.call.callee);
         (string memory token0Name, string memory token0Symbol, uint256 token0Decimals) = getMetadata(token0);
         (string memory token1Name, string memory token1Symbol, uint256 token1Decimals) = getMetadata(token1);

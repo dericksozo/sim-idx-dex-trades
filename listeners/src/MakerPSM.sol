@@ -9,7 +9,10 @@ import "./utils/ERC20Metadata.sol";
 contract MakerPSMListener is PSM$OnBuyGemFunction, PSM$OnSellGemFunction {
     event DexTrade(DexTradeData);
 
-    function PSM$onBuyGemFunction(FunctionContext memory ctx, PSM$BuyGemFunctionInputs memory inputs) external override {
+    function PSM$onBuyGemFunction(FunctionContext memory ctx, PSM$BuyGemFunctionInputs memory inputs)
+        external
+        override
+    {
         address fromToken = MakerUtils.getDai(ctx.txn.call.callee);
         address toToken = MakerUtils.getGem(ctx.txn.call.callee);
         uint256 daiAmt = MakerUtils.getDaiAmt(ctx.txn.call.callee, inputs.gemAmt, false);
@@ -38,7 +41,10 @@ contract MakerPSMListener is PSM$OnBuyGemFunction, PSM$OnSellGemFunction {
         emit DexTrade(trade);
     }
 
-    function PSM$onSellGemFunction(FunctionContext memory ctx, PSM$SellGemFunctionInputs memory inputs) external override {
+    function PSM$onSellGemFunction(FunctionContext memory ctx, PSM$SellGemFunctionInputs memory inputs)
+        external
+        override
+    {
         address toToken = MakerUtils.getDai(ctx.txn.call.callee);
         address fromToken = MakerUtils.getGem(ctx.txn.call.callee);
         uint256 daiAmt = MakerUtils.getDaiAmt(ctx.txn.call.callee, inputs.gemAmt, true);
