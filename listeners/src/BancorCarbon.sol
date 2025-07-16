@@ -8,10 +8,10 @@ import "./utils/ERC20Metadata.sol";
 contract BancorCarbonListener is BancorController$OnTokensTradedEvent {
     event DexTrade(DexTradeData);
 
-    function BancorController$onTokensTradedEvent(EventContext memory ctx, BancorController$TokensTradedEventParams memory params)
-        external
-        override
-    {
+    function BancorController$onTokensTradedEvent(
+        EventContext memory ctx,
+        BancorController$TokensTradedEventParams memory params
+    ) external override {
         (string memory sourceTokenName, string memory sourceTokenSymbol, uint256 sourceTokenDecimals) = params
             .sourceToken == 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE
             ? ("Ether", "ETH", 18)
