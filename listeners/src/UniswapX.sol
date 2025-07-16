@@ -30,10 +30,10 @@ contract UniswapXListener is
         emitTradesFromOrder(order, ctx.txn.call.caller);
     }
 
-    function Reactor$preExecuteBatchFunction(PreFunctionContext memory ctx, Reactor$ExecuteBatchFunctionInputs memory inputs)
-        external
-        override
-    {
+    function Reactor$preExecuteBatchFunction(
+        PreFunctionContext memory ctx,
+        Reactor$ExecuteBatchFunctionInputs memory inputs
+    ) external override {
         txnHash = ctx.txn.hash;
         for (uint256 i = 0; i < inputs.orders.length; i++) {
             ResolvedOrder memory order = this.quote(inputs.orders[i].order, inputs.orders[i].sig);

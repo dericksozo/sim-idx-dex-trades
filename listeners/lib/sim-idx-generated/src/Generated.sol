@@ -7,6 +7,7 @@ import "./HotProxy.sol";
 import "./MaverickPool.sol";
 import "./OldTokenExchange.sol";
 import "./PSM.sol";
+import "./PoolManager.sol";
 import "./Reactor.sol";
 import "./TokenExchange.sol";
 import "./UniswapV2Pair.sol";

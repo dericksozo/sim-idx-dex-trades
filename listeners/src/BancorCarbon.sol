@@ -4,8 +4,9 @@ pragma solidity ^0.8.13;
 import "sim-idx-generated/Generated.sol";
 import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
+import "./NativeTokenResolver.sol";
 
-contract BancorCarbonListener is BancorController$OnTokensTradedEvent {
+contract BancorCarbonListener is BancorController$OnTokensTradedEvent, NativeTokenResolver {
     event DexTrade(DexTradeData);
 
     function BancorController$onTokensTradedEvent(
@@ -14,11 +15,11 @@ contract BancorCarbonListener is BancorController$OnTokensTradedEvent {
     ) external override {
         (string memory sourceTokenName, string memory sourceTokenSymbol, uint256 sourceTokenDecimals) = params
             .sourceToken == 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE
-            ? ("Ether", "ETH", 18)
+            ? (nativeToken[block.chainid].symbol, nativeToken[block.chainid].name, nativeToken[block.chainid].decimals)
             : getMetadata(params.sourceToken);
         (string memory targetTokenName, string memory targetTokenSymbol, uint256 targetTokenDecimals) = params
             .targetToken == 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE
-            ? ("Ether", "ETH", 18)
+            ? (nativeToken[block.chainid].symbol, nativeToken[block.chainid].name, nativeToken[block.chainid].decimals)
             : getMetadata(params.targetToken);
         DexTradeData memory trade;
         trade.dex = "BancorCarbon";
