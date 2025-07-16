@@ -21,6 +21,7 @@ import "./AirSwapV5.sol";
 import "./FluidDex.sol";
 import "./1InchLOPV4.sol";
 import "./KyberSwapLOP.sol";
+import "./MaverickV2.sol";
 
 contract Triggers is BaseTriggers {
     // avoid stack too deep
@@ -43,6 +44,7 @@ contract Triggers is BaseTriggers {
         FluidDexListener fluidDexListener;
         OneInchLOPV4Listener oneInchLOPV4Listener;
         KyberSwapLOPListener kyberSwapLOPListener;
+        MaverickV2Listener maverickV2Listener;
     }
 
     function triggers() external virtual override {
@@ -66,6 +68,7 @@ contract Triggers is BaseTriggers {
         listeners.fluidDexListener = new FluidDexListener();
         listeners.oneInchLOPV4Listener = new OneInchLOPV4Listener();
         listeners.kyberSwapLOPListener = new KyberSwapLOPListener();
+        listeners.maverickV2Listener = new MaverickV2Listener();
 
         addTrigger(chainAbi(Chains.Ethereum, PSM$Abi()), listeners.psmListener.PSM$triggerOnBuyGemFunction());
         addTrigger(chainAbi(Chains.Ethereum, PSM$Abi()), listeners.psmListener.PSM$triggerOnSellGemFunction());
@@ -297,5 +300,7 @@ contract Triggers is BaseTriggers {
         addTrigger(chainContract(Chains.Ethereum, 0x227B0c196eA8db17A665EA6824D972A64202E936), listeners.kyberSwapLOPListener.LimitOrderProtocol$triggerOnFillBatchOrdersToFunction());
         addTrigger(chainContract(Chains.Ethereum, 0x227B0c196eA8db17A665EA6824D972A64202E936), listeners.kyberSwapLOPListener.LimitOrderProtocol$triggerOnFillOrderToWithPermitFunction());
         addTrigger(chainContract(Chains.Base, 0xcab2FA2eeab7065B45CBcF6E3936dDE2506b4f6C), listeners.kyberSwapLOPListener.DSLOProtocol$triggerOnFillOrderToFunction());
+        addTrigger(chainAbi(Chains.Ethereum, MaverickV2Pool$Abi()), maverickV2Listener.MaverickV2Pool$triggerOnPoolSwapEvent());
+        addTrigger(chainAbi(Chains.Base, MaverickV2Pool$Abi()), maverickV2Listener.MaverickV2Pool$triggerOnPoolSwapEvent());
     }
 }

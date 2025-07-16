@@ -12,6 +12,7 @@ import "./GPv2Settlement.sol";
 import "./HotProxy.sol";
 import "./LimitOrderProtocol.sol";
 import "./MaverickPool.sol";
+import "./MaverickV2Pool.sol";
 import "./OldTokenExchange.sol";
 import "./PSM.sol";
 import "./PoolManager.sol";
