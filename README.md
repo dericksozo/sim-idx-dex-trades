@@ -12,6 +12,7 @@
 - Ambient.finance (CrocSwap)
 - Curve.fi
 - Balancer V2
+- Maverick V1
 
 ## Schema
 
