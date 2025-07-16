@@ -9,8 +9,9 @@ import {Currency} from "./libs/UniswapV4/Currency.sol";
 import {PoolKey} from "./libs/UniswapV4/PoolKey.sol";
 import {BalanceDelta, BalanceDeltaLibrary} from "./libs/UniswapV4/BalanceDelta.sol";
 import {IHooks} from "./interfaces/UniswapV4/IHooks.sol";
+import {NativeTokenResolver} from "./NativeTokenResolver.sol";
 
-contract UniswapV4Listener is PoolManager$OnSwapFunction {
+contract UniswapV4Listener is PoolManager$OnSwapFunction, NativeTokenResolver {
     event DexTrade(DexTradeData);
 
     function PoolManager$onSwapFunction(
@@ -18,10 +19,14 @@ contract UniswapV4Listener is PoolManager$OnSwapFunction {
         PoolManager$SwapFunctionInputs memory inputs,
         PoolManager$SwapFunctionOutputs memory outputs
     ) external override {
-        (string memory currency0Symbol, string memory currency0Name, uint256 currency0Decimals) =
-            inputs.key.currency0 == address(0) ? ("ETH", "Ether", 18) : getMetadata(inputs.key.currency0);
-        (string memory currency1Symbol, string memory currency1Name, uint256 currency1Decimals) =
-            inputs.key.currency1 == address(0) ? ("ETH", "Ether", 18) : getMetadata(inputs.key.currency1);
+        (string memory currency0Symbol, string memory currency0Name, uint256 currency0Decimals) = inputs.key.currency0
+            == address(0)
+            ? (nativeToken[block.chainid].symbol, nativeToken[block.chainid].name, nativeToken[block.chainid].decimals)
+            : getMetadata(inputs.key.currency0);
+        (string memory currency1Symbol, string memory currency1Name, uint256 currency1Decimals) = inputs.key.currency1
+            == address(0)
+            ? (nativeToken[block.chainid].symbol, nativeToken[block.chainid].name, nativeToken[block.chainid].decimals)
+            : getMetadata(inputs.key.currency1);
         int128 amount1 = BalanceDeltaLibrary.amount1(BalanceDelta.wrap(outputs.swapDelta));
         int128 amount0 = BalanceDeltaLibrary.amount0(BalanceDelta.wrap(outputs.swapDelta));
         DexTradeData memory trade;

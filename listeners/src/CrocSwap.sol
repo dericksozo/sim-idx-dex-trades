@@ -4,8 +4,9 @@ pragma solidity ^0.8.13;
 import "sim-idx-generated/Generated.sol";
 import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
+import "./NativeTokenResolver.sol";
 
-contract CrocSwapListener is HotProxy$OnUserCmdFunction {
+contract CrocSwapListener is HotProxy$OnUserCmdFunction, NativeTokenResolver {
     event DexTrade(DexTradeData);
 
     function HotProxy$onUserCmdFunction(
@@ -19,10 +20,12 @@ contract CrocSwapListener is HotProxy$OnUserCmdFunction {
         uint128 token0Amt = outputs.outArg0 < 0 ? uint128(-outputs.outArg0) : uint128(outputs.outArg0);
         uint128 token1Amt = outputs.outArg1 < 0 ? uint128(-outputs.outArg1) : uint128(outputs.outArg1);
 
-        (string memory token0Name, string memory token0Symbol, uint256 token0Decimals) =
-            token0 == address(0) ? ("Ether", "ETH", 18) : getMetadata(token0);
-        (string memory token1Name, string memory token1Symbol, uint256 token1Decimals) =
-            token1 == address(0) ? ("Ether", "ETH", 18) : getMetadata(token1);
+        (string memory token0Name, string memory token0Symbol, uint256 token0Decimals) = token0 == address(0)
+            ? (nativeToken[block.chainid].symbol, nativeToken[block.chainid].name, nativeToken[block.chainid].decimals)
+            : getMetadata(token0);
+        (string memory token1Name, string memory token1Symbol, uint256 token1Decimals) = token1 == address(0)
+            ? (nativeToken[block.chainid].symbol, nativeToken[block.chainid].name, nativeToken[block.chainid].decimals)
+            : getMetadata(token1);
 
         DexTradeData memory trade;
         trade.dex = "CrocSwap";
