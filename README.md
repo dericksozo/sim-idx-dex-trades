@@ -8,6 +8,7 @@
 - Uniswap V3 (all forks, see a comprehensive list of supported forks [here](./listeners/src/UniswapV3.sol))
 - Uniswap V4
 - Uniswap X
+- FluidDex
 - Sky PSM (prev. Maker PSM)
 - AirSwap V4
 - AirSwap V5
