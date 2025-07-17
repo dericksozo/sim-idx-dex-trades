@@ -16,6 +16,7 @@ import "./UniswapX.sol";
 import "./UniswapV4.sol";
 import "./DODOV2.sol";
 import "./WooFi.sol";
+import "./AirSwapV4.sol";
 
 contract Triggers is BaseTriggers {
     function triggers() external virtual override {
@@ -32,6 +33,7 @@ contract Triggers is BaseTriggers {
         UniswapV4Listener uniswapV4Listener = new UniswapV4Listener();
         DODOV2Listener dodoV2Listener = new DODOV2Listener();
         WooFiListener wooFiListener = new WooFiListener();
+        AirSwapV4Listener airSwapV4Listener = new AirSwapV4Listener();
 
         addTrigger(chainAbi(Chains.Ethereum, PSM$Abi()), psmListener.PSM$triggerOnBuyGemFunction());
         addTrigger(chainAbi(Chains.Ethereum, PSM$Abi()), psmListener.PSM$triggerOnSellGemFunction());
@@ -164,5 +166,10 @@ contract Triggers is BaseTriggers {
 
         addTrigger(chainAbi(Chains.Ethereum, WooSwap$Abi()), wooFiListener.WooSwap$triggerOnWooSwapEvent());
         addTrigger(chainAbi(Chains.Base, WooSwap$Abi()), wooFiListener.WooSwap$triggerOnWooSwapEvent());
+
+        addTrigger(
+            chainContract(Chains.Ethereum, 0xd82FA167727a4dc6D6F55830A2c47aBbB4b3a0F8),
+            airSwapV4Listener.AirSwapV4$triggerOnSwapErc20Event()
+        );
     }
 }
