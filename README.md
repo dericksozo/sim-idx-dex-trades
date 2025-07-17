@@ -11,6 +11,7 @@
 - FluidDex
 - KyberSwap Limit Order Protocol (incl. Double Signature Limit Order Protocol)
 - 1inch Limit Order Protocol V4
+- Ekubo
 - Sky PSM (prev. Maker PSM)
 - AirSwap V4
 - AirSwap V5
