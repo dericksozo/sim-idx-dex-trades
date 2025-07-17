@@ -10,6 +10,7 @@
 - Uniswap X
 - Sky PSM (prev. Maker PSM)
 - AirSwap V4
+- AirSwap V5
 - Bancor Carbon
 - CoW Protocol
 - Ambient.finance (prev. CrocSwap)
