@@ -22,6 +22,7 @@ import "./FluidDex.sol";
 import "./1InchLOPV4.sol";
 import "./KyberSwapLOP.sol";
 import "./MaverickV2.sol";
+import "./Ekubo.sol";
 
 contract Triggers is BaseTriggers {
     // avoid stack too deep
@@ -45,6 +46,7 @@ contract Triggers is BaseTriggers {
         OneInchLOPV4Listener oneInchLOPV4Listener;
         KyberSwapLOPListener kyberSwapLOPListener;
         MaverickV2Listener maverickV2Listener;
+        EkuboListener ekuboListener;
     }
 
     function triggers() external virtual override {
@@ -69,6 +71,7 @@ contract Triggers is BaseTriggers {
         listeners.oneInchLOPV4Listener = new OneInchLOPV4Listener();
         listeners.kyberSwapLOPListener = new KyberSwapLOPListener();
         listeners.maverickV2Listener = new MaverickV2Listener();
+        listeners.ekuboListener = new EkuboListener();
 
         addTrigger(chainAbi(Chains.Ethereum, PSM$Abi()), listeners.psmListener.PSM$triggerOnBuyGemFunction());
         addTrigger(chainAbi(Chains.Ethereum, PSM$Abi()), listeners.psmListener.PSM$triggerOnSellGemFunction());
@@ -326,6 +329,11 @@ contract Triggers is BaseTriggers {
         addTrigger(
             chainAbi(Chains.Base, MaverickV2Pool$Abi()),
             listeners.maverickV2Listener.MaverickV2Pool$triggerOnPoolSwapEvent()
+        );
+
+        addTrigger(
+            chainContract(Chains.Ethereum, 0xe0e0e08A6A4b9Dc7bD67BCB7aadE5cF48157d444),
+            listeners.ekuboListener.EkuboCore$triggerOnSwap611415377Function()
         );
     }
 }

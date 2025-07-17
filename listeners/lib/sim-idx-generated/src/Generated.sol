@@ -8,6 +8,7 @@ import "./BancorController.sol";
 import "./DODOSwap.sol";
 import "./DSLOProtocol.sol";
 import "./FluidDexT1.sol";
+import "./EkuboCore.sol";
 import "./GPv2Settlement.sol";
 import "./HotProxy.sol";
 import "./LimitOrderProtocol.sol";
