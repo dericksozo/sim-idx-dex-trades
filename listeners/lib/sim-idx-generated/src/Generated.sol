@@ -5,6 +5,7 @@ import "./AirSwapV4.sol";
 import "./AirSwapV5.sol";
 import "./BancorController.sol";
 import "./DODOSwap.sol";
+import "./EkuboCore.sol";
 import "./GPv2Settlement.sol";
 import "./HotProxy.sol";
 import "./MaverickPool.sol";

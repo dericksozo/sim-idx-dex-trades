@@ -18,6 +18,7 @@ import "./DODOV2.sol";
 import "./WooFi.sol";
 import "./AirSwapV4.sol";
 import "./AirSwapV5.sol";
+import "./Ekubo.sol";
 
 contract Triggers is BaseTriggers {
     // avoid stack too deep
@@ -37,6 +38,7 @@ contract Triggers is BaseTriggers {
         WooFiListener wooFiListener;
         AirSwapV4Listener airSwapV4Listener;
         AirSwapV5Listener airSwapV5Listener;
+        EkuboListener ekuboListener;
     }
     function triggers() external virtual override {
         Listeners memory listeners;
@@ -56,6 +58,7 @@ contract Triggers is BaseTriggers {
         listeners.wooFiListener = new WooFiListener();
         listeners.airSwapV4Listener = new AirSwapV4Listener();
         listeners.airSwapV5Listener = new AirSwapV5Listener();
+        listeners.ekuboListener = new EkuboListener();
 
         addTrigger(chainAbi(Chains.Ethereum, PSM$Abi()), listeners.psmListener.PSM$triggerOnBuyGemFunction());
         addTrigger(chainAbi(Chains.Ethereum, PSM$Abi()), listeners.psmListener.PSM$triggerOnSellGemFunction());
@@ -197,5 +200,10 @@ contract Triggers is BaseTriggers {
         addTrigger(chainContract(Chains.Ethereum, 0xD82E10B9A4107939e55fCCa9B53A9ede6CF2fC46), listeners.airSwapV5Listener.AirSwapV5$triggerOnSwapFunction());
         addTrigger(chainContract(Chains.Ethereum, 0xD82E10B9A4107939e55fCCa9B53A9ede6CF2fC46), listeners.airSwapV5Listener.AirSwapV5$triggerOnSwapAnySenderFunction());
         addTrigger(chainContract(Chains.Ethereum, 0xD82E10B9A4107939e55fCCa9B53A9ede6CF2fC46), listeners.airSwapV5Listener.AirSwapV5$triggerOnSwapLightFunction());
+
+        addTrigger(
+            chainContract(Chains.Ethereum, 0xe0e0e08A6A4b9Dc7bD67BCB7aadE5cF48157d444),
+            listeners.ekuboListener.EkuboCore$triggerOnSwap611415377Function()
+        );
     }
 }
