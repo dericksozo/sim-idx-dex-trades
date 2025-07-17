@@ -1,0 +1,61 @@
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.13;
+
+import "sim-idx-generated/Generated.sol";
+import "./types/DexTrades.sol";
+import "./utils/ERC20Metadata.sol";
+import {IFluidDexT1} from "./interfaces/FluidDex/FluidDex.sol";
+import "./NativeTokenResolver.sol";
+
+contract FluidDexListener is FluidDexT1$OnSwapEvent, NativeTokenResolver {
+    event DexTrade(DexTradeData);
+
+    function FluidDexT1$onSwapEvent(EventContext memory ctx, FluidDexT1$SwapEventParams memory params)
+        external
+        override
+    {
+        IFluidDexT1.ConstantViews memory constantsView = IFluidDexT1(ctx.txn.call.callee).constantsView();
+
+        (string memory token0Name, string memory token0Symbol, uint256 token0Decimals) = constantsView.token0
+            == 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE
+            ? (nativeToken[block.chainid].symbol, nativeToken[block.chainid].name, nativeToken[block.chainid].decimals)
+            : getMetadata(constantsView.token0);
+        (string memory token1Name, string memory token1Symbol, uint256 token1Decimals) = constantsView.token1
+            == 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE
+            ? (nativeToken[block.chainid].symbol, nativeToken[block.chainid].name, nativeToken[block.chainid].decimals)
+            : getMetadata(constantsView.token1);
+        DexTradeData memory trade;
+
+        if (params.swap0to1) {
+            trade.fromToken = constantsView.token0;
+            trade.fromTokenName = token0Name;
+            trade.fromTokenSymbol = token0Symbol;
+            trade.fromTokenDecimals = uint8(token0Decimals);
+            trade.toToken = constantsView.token1;
+            trade.toTokenName = token1Name;
+            trade.toTokenSymbol = token1Symbol;
+            trade.toTokenDecimals = uint8(token1Decimals);
+        } else {
+            trade.fromToken = constantsView.token1;
+            trade.fromTokenName = token1Name;
+            trade.fromTokenSymbol = token1Symbol;
+            trade.fromTokenDecimals = uint8(token1Decimals);
+            trade.toToken = constantsView.token0;
+            trade.toTokenName = token0Name;
+            trade.toTokenSymbol = token0Symbol;
+            trade.toTokenDecimals = uint8(token0Decimals);
+        }
+        trade.dex = "FluidDex";
+        trade.fromTokenAmt = params.amountIn;
+        trade.toTokenAmt = params.amountOut;
+        trade.chainId = uint64(block.chainid);
+        trade.blockNumber = block.number;
+        trade.blockTimestamp = block.timestamp;
+        trade.transactionHash = ctx.txn.hash;
+        trade.txnOriginator = tx.origin;
+        trade.recipient = params.to;
+        trade.liquidityPool = ctx.txn.call.callee;
+
+        emit DexTrade(trade);
+    }
+}

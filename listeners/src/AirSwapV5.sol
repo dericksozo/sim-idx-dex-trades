@@ -6,7 +6,12 @@ import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
 import "./DexUtils.sol";
 
-contract AirSwapV5Listener is AirSwapV5$OnSwapFunction, AirSwapV5$OnSwapAnySenderFunction, AirSwapV5$OnSwapLightFunction, DexUtils {
+contract AirSwapV5Listener is
+    AirSwapV5$OnSwapFunction,
+    AirSwapV5$OnSwapAnySenderFunction,
+    AirSwapV5$OnSwapLightFunction,
+    DexUtils
+{
     event DexTrade(DexTradeData);
 
     function AirSwapV5$onSwapFunction(FunctionContext memory ctx, AirSwapV5$SwapFunctionInputs memory inputs)
@@ -41,10 +46,10 @@ contract AirSwapV5Listener is AirSwapV5$OnSwapFunction, AirSwapV5$OnSwapAnySende
         emit DexTrade(trade);
     }
 
-    function AirSwapV5$onSwapAnySenderFunction(FunctionContext memory ctx, AirSwapV5$SwapAnySenderFunctionInputs memory inputs)
-        external
-        override
-    {
+    function AirSwapV5$onSwapAnySenderFunction(
+        FunctionContext memory ctx,
+        AirSwapV5$SwapAnySenderFunctionInputs memory inputs
+    ) external override {
         (string memory fromTokenName, string memory fromTokenSymbol, uint256 fromTokenDecimals) =
             getMetadata(inputs.signerToken);
         (string memory toTokenName, string memory toTokenSymbol, uint256 toTokenDecimals) =
