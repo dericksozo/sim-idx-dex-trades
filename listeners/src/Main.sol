@@ -20,6 +20,7 @@ import "./AirSwapV4.sol";
 import "./AirSwapV5.sol";
 import "./FluidDex.sol";
 import "./1InchLOPV4.sol";
+import "./KyberSwapLOP.sol";
 
 contract Triggers is BaseTriggers {
     // avoid stack too deep
@@ -41,6 +42,7 @@ contract Triggers is BaseTriggers {
         AirSwapV5Listener airSwapV5Listener;
         FluidDexListener fluidDexListener;
         OneInchLOPV4Listener oneInchLOPV4Listener;
+        KyberSwapLOPListener kyberSwapLOPListener;
     }
 
     function triggers() external virtual override {
@@ -63,6 +65,7 @@ contract Triggers is BaseTriggers {
         listeners.airSwapV5Listener = new AirSwapV5Listener();
         listeners.fluidDexListener = new FluidDexListener();
         listeners.oneInchLOPV4Listener = new OneInchLOPV4Listener();
+        listeners.kyberSwapLOPListener = new KyberSwapLOPListener();
 
         addTrigger(chainAbi(Chains.Ethereum, PSM$Abi()), listeners.psmListener.PSM$triggerOnBuyGemFunction());
         addTrigger(chainAbi(Chains.Ethereum, PSM$Abi()), listeners.psmListener.PSM$triggerOnSellGemFunction());
@@ -287,5 +290,12 @@ contract Triggers is BaseTriggers {
             chainContract(Chains.Base, 0x111111125421cA6dc452d289314280a0f8842A65),
             listeners.oneInchLOPV4Listener.AggregationRouterV6$triggerOnFillContractOrderArgsFunction()
         );
+
+        addTrigger(chainContract(Chains.Ethereum, 0xcab2FA2eeab7065B45CBcF6E3936dDE2506b4f6C), listeners.kyberSwapLOPListener.DSLOProtocol$triggerOnFillOrderToFunction());
+        addTrigger(chainContract(Chains.Ethereum, 0x227B0c196eA8db17A665EA6824D972A64202E936), listeners.kyberSwapLOPListener.LimitOrderProtocol$triggerOnFillOrderRfqToFunction());
+        addTrigger(chainContract(Chains.Ethereum, 0x227B0c196eA8db17A665EA6824D972A64202E936), listeners.kyberSwapLOPListener.LimitOrderProtocol$triggerOnFillOrderFunction());
+        addTrigger(chainContract(Chains.Ethereum, 0x227B0c196eA8db17A665EA6824D972A64202E936), listeners.kyberSwapLOPListener.LimitOrderProtocol$triggerOnFillBatchOrdersToFunction());
+        addTrigger(chainContract(Chains.Ethereum, 0x227B0c196eA8db17A665EA6824D972A64202E936), listeners.kyberSwapLOPListener.LimitOrderProtocol$triggerOnFillOrderToWithPermitFunction());
+        addTrigger(chainContract(Chains.Base, 0xcab2FA2eeab7065B45CBcF6E3936dDE2506b4f6C), listeners.kyberSwapLOPListener.DSLOProtocol$triggerOnFillOrderToFunction());
     }
 }
