@@ -226,153 +226,12 @@ struct MaverickV2Pool$TokenBScaleFunctionOutputs {
     uint256 outArg0;
 }
 
-struct MaverickV2Pool$PoolAddLiquidityEventParams {
-    address sender;
-    address recipient;
-    uint256 subaccount;
-    MaverickV2Pool$IMaverickV2Pool$AddLiquidityParams params;
-    uint256 tokenAAmount;
-    uint256 tokenBAmount;
-    uint32[] binIds;
-}
-
-struct MaverickV2Pool$PoolMigrateBinsUpStackEventParams {
-    address sender;
-    uint32 binId;
-    uint32 maxRecursion;
-}
-
-struct MaverickV2Pool$PoolProtocolFeeCollectedEventParams {
-    uint256 feeCollected;
-    bool isTokenA;
-}
-
-struct MaverickV2Pool$PoolRemoveLiquidityEventParams {
-    address sender;
-    address recipient;
-    uint256 subaccount;
-    MaverickV2Pool$IMaverickV2Pool$RemoveLiquidityParams params;
-    uint256 tokenAOut;
-    uint256 tokenBOut;
-}
-
-struct MaverickV2Pool$PoolSetLendingFeeRateEventParams {
-    uint256 lendingFeeRateD18;
-}
-
-struct MaverickV2Pool$PoolSetProtocolFeeRatioEventParams {
-    uint256 protocolFeeRatioD3;
-}
-
-struct MaverickV2Pool$PoolSetVariableFeeEventParams {
-    uint256 newFeeAIn;
-    uint256 newFeeBIn;
-}
-
 struct MaverickV2Pool$PoolSwapEventParams {
     address sender;
     address recipient;
     MaverickV2Pool$IMaverickV2Pool$SwapParams params;
     uint256 amountIn;
     uint256 amountOut;
-}
-
-abstract contract MaverickV2Pool$OnPoolAddLiquidityEvent {
-    function MaverickV2Pool$onPoolAddLiquidityEvent(EventContext memory ctx, MaverickV2Pool$PoolAddLiquidityEventParams memory inputs) virtual external;
-
-    function MaverickV2Pool$triggerOnPoolAddLiquidityEvent() view external returns (Trigger memory) {
-        return Trigger({
-            abiName: "MaverickV2Pool",
-            selector: bytes32(0x16768f4ecc93786618270641524e6209d40480302598062adee1bf55a3e7da29),
-            triggerType: TriggerType.EVENT,
-            listenerCodehash: address(this).codehash,
-            handlerSelector: this.MaverickV2Pool$onPoolAddLiquidityEvent.selector
-        });
-    }
-}
-
-abstract contract MaverickV2Pool$OnPoolMigrateBinsUpStackEvent {
-    function MaverickV2Pool$onPoolMigrateBinsUpStackEvent(EventContext memory ctx, MaverickV2Pool$PoolMigrateBinsUpStackEventParams memory inputs) virtual external;
-
-    function MaverickV2Pool$triggerOnPoolMigrateBinsUpStackEvent() view external returns (Trigger memory) {
-        return Trigger({
-            abiName: "MaverickV2Pool",
-            selector: bytes32(0xb9e7c5717a96d75cf9579180589569b4b4ebd97dcd89d240c3126b85b0b550ba),
-            triggerType: TriggerType.EVENT,
-            listenerCodehash: address(this).codehash,
-            handlerSelector: this.MaverickV2Pool$onPoolMigrateBinsUpStackEvent.selector
-        });
-    }
-}
-
-abstract contract MaverickV2Pool$OnPoolProtocolFeeCollectedEvent {
-    function MaverickV2Pool$onPoolProtocolFeeCollectedEvent(EventContext memory ctx, MaverickV2Pool$PoolProtocolFeeCollectedEventParams memory inputs) virtual external;
-
-    function MaverickV2Pool$triggerOnPoolProtocolFeeCollectedEvent() view external returns (Trigger memory) {
-        return Trigger({
-            abiName: "MaverickV2Pool",
-            selector: bytes32(0x785d1ffef85680b17b93a2322f3b76824d2a10eb1354b5981421fe10dfd5b75f),
-            triggerType: TriggerType.EVENT,
-            listenerCodehash: address(this).codehash,
-            handlerSelector: this.MaverickV2Pool$onPoolProtocolFeeCollectedEvent.selector
-        });
-    }
-}
-
-abstract contract MaverickV2Pool$OnPoolRemoveLiquidityEvent {
-    function MaverickV2Pool$onPoolRemoveLiquidityEvent(EventContext memory ctx, MaverickV2Pool$PoolRemoveLiquidityEventParams memory inputs) virtual external;
-
-    function MaverickV2Pool$triggerOnPoolRemoveLiquidityEvent() view external returns (Trigger memory) {
-        return Trigger({
-            abiName: "MaverickV2Pool",
-            selector: bytes32(0x022484d9ab07e2ea8d2f868574c16404cf7fc639be80032dc1e9a1641bdd2eb1),
-            triggerType: TriggerType.EVENT,
-            listenerCodehash: address(this).codehash,
-            handlerSelector: this.MaverickV2Pool$onPoolRemoveLiquidityEvent.selector
-        });
-    }
-}
-
-abstract contract MaverickV2Pool$OnPoolSetLendingFeeRateEvent {
-    function MaverickV2Pool$onPoolSetLendingFeeRateEvent(EventContext memory ctx, MaverickV2Pool$PoolSetLendingFeeRateEventParams memory inputs) virtual external;
-
-    function MaverickV2Pool$triggerOnPoolSetLendingFeeRateEvent() view external returns (Trigger memory) {
-        return Trigger({
-            abiName: "MaverickV2Pool",
-            selector: bytes32(0x08a624f7710ba1e5c0376921a23d2d2a6757600ccda611a1615a57d1cff218e2),
-            triggerType: TriggerType.EVENT,
-            listenerCodehash: address(this).codehash,
-            handlerSelector: this.MaverickV2Pool$onPoolSetLendingFeeRateEvent.selector
-        });
-    }
-}
-
-abstract contract MaverickV2Pool$OnPoolSetProtocolFeeRatioEvent {
-    function MaverickV2Pool$onPoolSetProtocolFeeRatioEvent(EventContext memory ctx, MaverickV2Pool$PoolSetProtocolFeeRatioEventParams memory inputs) virtual external;
-
-    function MaverickV2Pool$triggerOnPoolSetProtocolFeeRatioEvent() view external returns (Trigger memory) {
-        return Trigger({
-            abiName: "MaverickV2Pool",
-            selector: bytes32(0x8c315eec9a54adc4a7ff999f8b5230281cd9cf25054c184cc427e60bd02368f6),
-            triggerType: TriggerType.EVENT,
-            listenerCodehash: address(this).codehash,
-            handlerSelector: this.MaverickV2Pool$onPoolSetProtocolFeeRatioEvent.selector
-        });
-    }
-}
-
-abstract contract MaverickV2Pool$OnPoolSetVariableFeeEvent {
-    function MaverickV2Pool$onPoolSetVariableFeeEvent(EventContext memory ctx, MaverickV2Pool$PoolSetVariableFeeEventParams memory inputs) virtual external;
-
-    function MaverickV2Pool$triggerOnPoolSetVariableFeeEvent() view external returns (Trigger memory) {
-        return Trigger({
-            abiName: "MaverickV2Pool",
-            selector: bytes32(0x8ce70d54a53997801d36099160d0e5784bb9c06b7a3d6848dcc3433160062f88),
-            triggerType: TriggerType.EVENT,
-            listenerCodehash: address(this).codehash,
-            handlerSelector: this.MaverickV2Pool$onPoolSetVariableFeeEvent.selector
-        });
-    }
 }
 
 abstract contract MaverickV2Pool$OnPoolSwapEvent {
@@ -1202,59 +1061,17 @@ abstract contract MaverickV2Pool$PreTokenBScaleFunction {
 }
 
 contract MaverickV2Pool$EmitAllEvents is
-  MaverickV2Pool$OnPoolAddLiquidityEvent,
-MaverickV2Pool$OnPoolMigrateBinsUpStackEvent,
-MaverickV2Pool$OnPoolProtocolFeeCollectedEvent,
-MaverickV2Pool$OnPoolRemoveLiquidityEvent,
-MaverickV2Pool$OnPoolSetLendingFeeRateEvent,
-MaverickV2Pool$OnPoolSetProtocolFeeRatioEvent,
-MaverickV2Pool$OnPoolSetVariableFeeEvent,
-MaverickV2Pool$OnPoolSwapEvent
+  MaverickV2Pool$OnPoolSwapEvent
 {
-  event PoolAddLiquidity(address sender, address recipient, uint256 subaccount, MaverickV2Pool$IMaverickV2Pool$AddLiquidityParams params, uint256 tokenAAmount, uint256 tokenBAmount, uint32[] binIds);
-event PoolMigrateBinsUpStack(address sender, uint32 binId, uint32 maxRecursion);
-event PoolProtocolFeeCollected(uint256 feeCollected, bool isTokenA);
-event PoolRemoveLiquidity(address sender, address recipient, uint256 subaccount, MaverickV2Pool$IMaverickV2Pool$RemoveLiquidityParams params, uint256 tokenAOut, uint256 tokenBOut);
-event PoolSetLendingFeeRate(uint256 lendingFeeRateD18);
-event PoolSetProtocolFeeRatio(uint256 protocolFeeRatioD3);
-event PoolSetVariableFee(uint256 newFeeAIn, uint256 newFeeBIn);
-event PoolSwap(address sender, address recipient, MaverickV2Pool$IMaverickV2Pool$SwapParams params, uint256 amountIn, uint256 amountOut);
+  event PoolSwap(address sender, address recipient, MaverickV2Pool$IMaverickV2Pool$SwapParams params, uint256 amountIn, uint256 amountOut);
 
-  function MaverickV2Pool$onPoolAddLiquidityEvent(EventContext memory ctx, MaverickV2Pool$PoolAddLiquidityEventParams memory inputs) virtual external override {
-    emit PoolAddLiquidity(inputs.sender, inputs.recipient, inputs.subaccount, inputs.params, inputs.tokenAAmount, inputs.tokenBAmount, inputs.binIds);
-  }
-function MaverickV2Pool$onPoolMigrateBinsUpStackEvent(EventContext memory ctx, MaverickV2Pool$PoolMigrateBinsUpStackEventParams memory inputs) virtual external override {
-    emit PoolMigrateBinsUpStack(inputs.sender, inputs.binId, inputs.maxRecursion);
-  }
-function MaverickV2Pool$onPoolProtocolFeeCollectedEvent(EventContext memory ctx, MaverickV2Pool$PoolProtocolFeeCollectedEventParams memory inputs) virtual external override {
-    emit PoolProtocolFeeCollected(inputs.feeCollected, inputs.isTokenA);
-  }
-function MaverickV2Pool$onPoolRemoveLiquidityEvent(EventContext memory ctx, MaverickV2Pool$PoolRemoveLiquidityEventParams memory inputs) virtual external override {
-    emit PoolRemoveLiquidity(inputs.sender, inputs.recipient, inputs.subaccount, inputs.params, inputs.tokenAOut, inputs.tokenBOut);
-  }
-function MaverickV2Pool$onPoolSetLendingFeeRateEvent(EventContext memory ctx, MaverickV2Pool$PoolSetLendingFeeRateEventParams memory inputs) virtual external override {
-    emit PoolSetLendingFeeRate(inputs.lendingFeeRateD18);
-  }
-function MaverickV2Pool$onPoolSetProtocolFeeRatioEvent(EventContext memory ctx, MaverickV2Pool$PoolSetProtocolFeeRatioEventParams memory inputs) virtual external override {
-    emit PoolSetProtocolFeeRatio(inputs.protocolFeeRatioD3);
-  }
-function MaverickV2Pool$onPoolSetVariableFeeEvent(EventContext memory ctx, MaverickV2Pool$PoolSetVariableFeeEventParams memory inputs) virtual external override {
-    emit PoolSetVariableFee(inputs.newFeeAIn, inputs.newFeeBIn);
-  }
-function MaverickV2Pool$onPoolSwapEvent(EventContext memory ctx, MaverickV2Pool$PoolSwapEventParams memory inputs) virtual external override {
+  function MaverickV2Pool$onPoolSwapEvent(EventContext memory ctx, MaverickV2Pool$PoolSwapEventParams memory inputs) virtual external override {
     emit PoolSwap(inputs.sender, inputs.recipient, inputs.params, inputs.amountIn, inputs.amountOut);
   }
 
   function allTriggers() view external returns (Trigger[] memory) {
-    Trigger[] memory triggers = new Trigger[](8);
-    triggers[0] = this.MaverickV2Pool$triggerOnPoolAddLiquidityEvent();
-    triggers[1] = this.MaverickV2Pool$triggerOnPoolMigrateBinsUpStackEvent();
-    triggers[2] = this.MaverickV2Pool$triggerOnPoolProtocolFeeCollectedEvent();
-    triggers[3] = this.MaverickV2Pool$triggerOnPoolRemoveLiquidityEvent();
-    triggers[4] = this.MaverickV2Pool$triggerOnPoolSetLendingFeeRateEvent();
-    triggers[5] = this.MaverickV2Pool$triggerOnPoolSetProtocolFeeRatioEvent();
-    triggers[6] = this.MaverickV2Pool$triggerOnPoolSetVariableFeeEvent();
-    triggers[7] = this.MaverickV2Pool$triggerOnPoolSwapEvent();
+    Trigger[] memory triggers = new Trigger[](1);
+    triggers[0] = this.MaverickV2Pool$triggerOnPoolSwapEvent();
     return triggers;
   }
 }

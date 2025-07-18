@@ -294,13 +294,38 @@ contract Triggers is BaseTriggers {
             listeners.oneInchLOPV4Listener.AggregationRouterV6$triggerOnFillContractOrderArgsFunction()
         );
 
-        addTrigger(chainContract(Chains.Ethereum, 0xcab2FA2eeab7065B45CBcF6E3936dDE2506b4f6C), listeners.kyberSwapLOPListener.DSLOProtocol$triggerOnFillOrderToFunction());
-        addTrigger(chainContract(Chains.Ethereum, 0x227B0c196eA8db17A665EA6824D972A64202E936), listeners.kyberSwapLOPListener.LimitOrderProtocol$triggerOnFillOrderRfqToFunction());
-        addTrigger(chainContract(Chains.Ethereum, 0x227B0c196eA8db17A665EA6824D972A64202E936), listeners.kyberSwapLOPListener.LimitOrderProtocol$triggerOnFillOrderFunction());
-        addTrigger(chainContract(Chains.Ethereum, 0x227B0c196eA8db17A665EA6824D972A64202E936), listeners.kyberSwapLOPListener.LimitOrderProtocol$triggerOnFillBatchOrdersToFunction());
-        addTrigger(chainContract(Chains.Ethereum, 0x227B0c196eA8db17A665EA6824D972A64202E936), listeners.kyberSwapLOPListener.LimitOrderProtocol$triggerOnFillOrderToWithPermitFunction());
-        addTrigger(chainContract(Chains.Base, 0xcab2FA2eeab7065B45CBcF6E3936dDE2506b4f6C), listeners.kyberSwapLOPListener.DSLOProtocol$triggerOnFillOrderToFunction());
-        addTrigger(chainAbi(Chains.Ethereum, MaverickV2Pool$Abi()), maverickV2Listener.MaverickV2Pool$triggerOnPoolSwapEvent());
-        addTrigger(chainAbi(Chains.Base, MaverickV2Pool$Abi()), maverickV2Listener.MaverickV2Pool$triggerOnPoolSwapEvent());
+        addTrigger(
+            chainContract(Chains.Ethereum, 0xcab2FA2eeab7065B45CBcF6E3936dDE2506b4f6C),
+            listeners.kyberSwapLOPListener.DSLOProtocol$triggerOnFillOrderToFunction()
+        );
+        addTrigger(
+            chainContract(Chains.Ethereum, 0x227B0c196eA8db17A665EA6824D972A64202E936),
+            listeners.kyberSwapLOPListener.LimitOrderProtocol$triggerOnFillOrderRfqToFunction()
+        );
+        addTrigger(
+            chainContract(Chains.Ethereum, 0x227B0c196eA8db17A665EA6824D972A64202E936),
+            listeners.kyberSwapLOPListener.LimitOrderProtocol$triggerOnFillOrderFunction()
+        );
+        addTrigger(
+            chainContract(Chains.Ethereum, 0x227B0c196eA8db17A665EA6824D972A64202E936),
+            listeners.kyberSwapLOPListener.LimitOrderProtocol$triggerOnFillBatchOrdersToFunction()
+        );
+        addTrigger(
+            chainContract(Chains.Ethereum, 0x227B0c196eA8db17A665EA6824D972A64202E936),
+            listeners.kyberSwapLOPListener.LimitOrderProtocol$triggerOnFillOrderToWithPermitFunction()
+        );
+        addTrigger(
+            chainContract(Chains.Base, 0xcab2FA2eeab7065B45CBcF6E3936dDE2506b4f6C),
+            listeners.kyberSwapLOPListener.DSLOProtocol$triggerOnFillOrderToFunction()
+        );
+
+        addTrigger(
+            chainAbi(Chains.Ethereum, MaverickV2Pool$Abi()),
+            listeners.maverickV2Listener.MaverickV2Pool$triggerOnPoolSwapEvent()
+        );
+        addTrigger(
+            chainAbi(Chains.Base, MaverickV2Pool$Abi()),
+            listeners.maverickV2Listener.MaverickV2Pool$triggerOnPoolSwapEvent()
+        );
     }
 }
