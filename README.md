@@ -9,6 +9,7 @@
 - Uniswap V4
 - Uniswap X
 - FluidDex
+- 1inch Limit Order Protocol V4
 - Sky PSM (prev. Maker PSM)
 - AirSwap V4
 - AirSwap V5
