@@ -19,6 +19,7 @@ import "./WooFi.sol";
 import "./AirSwapV4.sol";
 import "./AirSwapV5.sol";
 import "./FluidDex.sol";
+import "./1InchLOPV4.sol";
 
 contract Triggers is BaseTriggers {
     // avoid stack too deep
@@ -39,6 +40,7 @@ contract Triggers is BaseTriggers {
         AirSwapV4Listener airSwapV4Listener;
         AirSwapV5Listener airSwapV5Listener;
         FluidDexListener fluidDexListener;
+        OneInchLOPV4Listener oneInchLOPV4Listener;
     }
 
     function triggers() external virtual override {
@@ -60,6 +62,7 @@ contract Triggers is BaseTriggers {
         listeners.airSwapV4Listener = new AirSwapV4Listener();
         listeners.airSwapV5Listener = new AirSwapV5Listener();
         listeners.fluidDexListener = new FluidDexListener();
+        listeners.oneInchLOPV4Listener = new OneInchLOPV4Listener();
 
         addTrigger(chainAbi(Chains.Ethereum, PSM$Abi()), listeners.psmListener.PSM$triggerOnBuyGemFunction());
         addTrigger(chainAbi(Chains.Ethereum, PSM$Abi()), listeners.psmListener.PSM$triggerOnSellGemFunction());
@@ -251,5 +254,38 @@ contract Triggers is BaseTriggers {
             chainAbi(Chains.Ethereum, FluidDexT1$Abi()), listeners.fluidDexListener.FluidDexT1$triggerOnSwapEvent()
         );
         addTrigger(chainAbi(Chains.Base, FluidDexT1$Abi()), listeners.fluidDexListener.FluidDexT1$triggerOnSwapEvent());
+
+        addTrigger(
+            chainContract(Chains.Ethereum, 0x111111125421cA6dc452d289314280a0f8842A65),
+            listeners.oneInchLOPV4Listener.AggregationRouterV6$triggerOnFillOrderFunction()
+        );
+        addTrigger(
+            chainContract(Chains.Ethereum, 0x111111125421cA6dc452d289314280a0f8842A65),
+            listeners.oneInchLOPV4Listener.AggregationRouterV6$triggerOnFillOrderArgsFunction()
+        );
+        addTrigger(
+            chainContract(Chains.Ethereum, 0x111111125421cA6dc452d289314280a0f8842A65),
+            listeners.oneInchLOPV4Listener.AggregationRouterV6$triggerOnFillContractOrderFunction()
+        );
+        addTrigger(
+            chainContract(Chains.Ethereum, 0x111111125421cA6dc452d289314280a0f8842A65),
+            listeners.oneInchLOPV4Listener.AggregationRouterV6$triggerOnFillContractOrderArgsFunction()
+        );
+        addTrigger(
+            chainContract(Chains.Base, 0x111111125421cA6dc452d289314280a0f8842A65),
+            listeners.oneInchLOPV4Listener.AggregationRouterV6$triggerOnFillOrderFunction()
+        );
+        addTrigger(
+            chainContract(Chains.Base, 0x111111125421cA6dc452d289314280a0f8842A65),
+            listeners.oneInchLOPV4Listener.AggregationRouterV6$triggerOnFillOrderArgsFunction()
+        );
+        addTrigger(
+            chainContract(Chains.Base, 0x111111125421cA6dc452d289314280a0f8842A65),
+            listeners.oneInchLOPV4Listener.AggregationRouterV6$triggerOnFillContractOrderFunction()
+        );
+        addTrigger(
+            chainContract(Chains.Base, 0x111111125421cA6dc452d289314280a0f8842A65),
+            listeners.oneInchLOPV4Listener.AggregationRouterV6$triggerOnFillContractOrderArgsFunction()
+        );
     }
 }
