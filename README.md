@@ -4,11 +4,12 @@
 
 ## Supported DEXs
 
-- Uniswap V2 (all forks, see a comprehensive list of supported forks [here](./listeners/src/UniswapV2.sol))
-- Uniswap V3 (all forks, see a comprehensive list of supported forks [here](./listeners/src/UniswapV3.sol))
+- Uniswap V2 (incl. forks, see a comprehensive list of supported forks [here](./listeners/src/UniswapV2.sol))
+- Uniswap V3 (incl. forks, see a comprehensive list of supported forks [here](./listeners/src/UniswapV3.sol))
 - Uniswap V4
 - Uniswap X
 - FluidDex
+- 1inch Limit Order Protocol V4
 - Sky PSM (prev. Maker PSM)
 - AirSwap V4
 - AirSwap V5
