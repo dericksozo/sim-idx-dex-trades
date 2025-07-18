@@ -25,14 +25,7 @@ contract KyberSwapLOPListener is
         address taker = inputs.params.target;
 
         emitMakerTakerTrades(
-            makerAsset,
-            takerAsset,
-            maker,
-            taker,
-            outputs.outArg0,
-            outputs.outArg1,
-            ctx.txn.call.callee,
-            ctx.txn.hash
+            makerAsset, takerAsset, maker, taker, outputs.outArg0, outputs.outArg1, ctx.txn.call.callee, ctx.txn.hash
         );
     }
 
@@ -47,14 +40,7 @@ contract KyberSwapLOPListener is
         address taker = inputs.target;
 
         emitMakerTakerTrades(
-            makerAsset,
-            takerAsset,
-            maker,
-            taker,
-            outputs.outArg0,
-            outputs.outArg1,
-            ctx.txn.call.callee,
-            ctx.txn.hash
+            makerAsset, takerAsset, maker, taker, outputs.outArg0, outputs.outArg1, ctx.txn.call.callee, ctx.txn.hash
         );
     }
 
@@ -114,14 +100,7 @@ contract KyberSwapLOPListener is
         address taker = inputs.target;
 
         emitMakerTakerTrades(
-            makerAsset,
-            takerAsset,
-            maker,
-            taker,
-            outputs.outArg0,
-            outputs.outArg1,
-            ctx.txn.call.callee,
-            ctx.txn.hash
+            makerAsset, takerAsset, maker, taker, outputs.outArg0, outputs.outArg1, ctx.txn.call.callee, ctx.txn.hash
         );
     }
 
