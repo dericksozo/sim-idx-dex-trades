@@ -335,5 +335,13 @@ contract Triggers is BaseTriggers {
             chainContract(Chains.Ethereum, 0xe0e0e08A6A4b9Dc7bD67BCB7aadE5cF48157d444),
             listeners.ekuboListener.EkuboCore$triggerOnSwap611415377Function()
         );
+        addTrigger(
+            chainContract(Chains.Ethereum, 0xe0e0e08A6A4b9Dc7bD67BCB7aadE5cF48157d444),
+            listeners.ekuboListener.EkuboCore$triggerPreLockFunction()
+        );
+        addTrigger(
+            chainContract(Chains.Ethereum, 0xe0e0e08A6A4b9Dc7bD67BCB7aadE5cF48157d444),
+            listeners.ekuboListener.EkuboCore$triggerOnLockFunction()
+        );
     }
 }

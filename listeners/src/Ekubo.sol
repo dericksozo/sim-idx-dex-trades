@@ -6,9 +6,30 @@ import {getMetadata} from "./utils/ERC20Metadata.sol";
 import "./types/DexTrades.sol";
 import {BalanceDelta, BalanceDeltaLibrary} from "./libs/UniswapV4/BalanceDelta.sol";
 import {NativeTokenResolver} from "./NativeTokenResolver.sol";
+import {EkuboPoolKey} from "./types/Ekubo/PoolKey.sol";
+import {SqrtRatio} from "./types/Ekubo/SqrtRatio.sol";
 
-contract EkuboListener is EkuboCore$OnSwap611415377Function, NativeTokenResolver {
+contract EkuboListener is
+    EkuboCore$OnSwap611415377Function,
+    EkuboCore$PreLockFunction,
+    EkuboCore$OnLockFunction,
+    NativeTokenResolver
+{
+    address internal recipient;
+
     event DexTrade(DexTradeData);
+
+    function EkuboCore$onLockFunction(FunctionContext memory) external override {
+        recipient = address(0);
+    }
+
+    function EkuboCore$preLockFunction(PreFunctionContext memory ctx) external override {
+        if (ctx.txn.call.data[4] != bytes1(0x00)) {
+            // not a swap -- bail out early
+            return;
+        }
+        (,,,,,,,, recipient) = this.decodeSwapData(ctx.txn.call.data);
+    }
 
     function EkuboCore$onSwap611415377Function(
         FunctionContext memory ctx,
@@ -29,7 +50,7 @@ contract EkuboListener is EkuboCore$OnSwap611415377Function, NativeTokenResolver
         trade.blockNumber = uint64(block.number);
         trade.blockTimestamp = uint64(block.timestamp);
         trade.txnOriginator = tx.origin;
-        trade.recipient = ctx.txn.call.caller;
+        trade.recipient = recipient == address(0) ? ctx.txn.call.caller : recipient;
         trade.liquidityPool = ctx.txn.call.callee;
         trade.dex = "Ekubo";
 
@@ -57,5 +78,13 @@ contract EkuboListener is EkuboCore$OnSwap611415377Function, NativeTokenResolver
             trade.toTokenDecimals = uint8(token0Decimals);
         }
         emit DexTrade(trade);
+    }
+
+    function decodeSwapData(bytes calldata data)
+        external
+        pure
+        returns (bytes1, address, EkuboPoolKey memory, bool, int128, SqrtRatio, uint256, int256, address)
+    {
+        return abi.decode(data[4:], (bytes1, address, EkuboPoolKey, bool, int128, SqrtRatio, uint256, int256, address));
     }
 }
