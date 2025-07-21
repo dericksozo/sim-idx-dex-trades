@@ -70,7 +70,7 @@ contract UniswapXListener is
         address makingToken,
         address takingToken,
         address maker,
-        address taker,
+        address,
         uint256 makingAmount,
         uint256 takingAmount,
         address platformContract

@@ -14,7 +14,7 @@ contract CrocSwapListener is HotProxy$OnUserCmdFunction, NativeTokenResolver {
         HotProxy$UserCmdFunctionInputs memory inputs,
         HotProxy$UserCmdFunctionOutputs memory outputs
     ) external override {
-        (address token0, address token1,, bool isBuy,,,,,, uint8 reserveFlags) =
+        (address token0, address token1,, bool isBuy,,,,,,) =
             abi.decode(inputs.input, (address, address, uint256, bool, bool, uint128, uint16, uint128, uint128, uint8));
 
         uint128 token0Amt = outputs.outArg0 < 0 ? uint128(-outputs.outArg0) : uint128(outputs.outArg0);

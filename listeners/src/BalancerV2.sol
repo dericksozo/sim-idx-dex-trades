@@ -12,14 +12,14 @@ contract BalancerV2Listener is Vault$PreSwapFunction, Vault$PreBatchSwapFunction
 
     event DexTrade(DexTradeData);
 
-    function Vault$preSwapFunction(PreFunctionContext memory ctx, Vault$SwapFunctionInputs memory inputs)
+    function Vault$preSwapFunction(PreFunctionContext memory, Vault$SwapFunctionInputs memory inputs)
         external
         override
     {
         recipient = inputs.funds.recipient;
     }
 
-    function Vault$preBatchSwapFunction(PreFunctionContext memory ctx, Vault$BatchSwapFunctionInputs memory inputs)
+    function Vault$preBatchSwapFunction(PreFunctionContext memory, Vault$BatchSwapFunctionInputs memory inputs)
         external
         override
     {
