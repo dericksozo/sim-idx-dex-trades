@@ -19,7 +19,7 @@ contract BalancerV2Listener is Vault$PreSwapFunction, Vault$PreBatchSwapFunction
         recipient = inputs.funds.recipient;
     }
 
-    function Vault$preBatchSwapFunction(PreFunctionContext memory ctx, Vault$BatchSwapFunctionInputs memory inputs)
+    function Vault$preBatchSwapFunction(PreFunctionContext memory, Vault$BatchSwapFunctionInputs memory inputs)
         external
         override
     {
