@@ -12,7 +12,7 @@ contract BalancerV2Listener is Vault$PreSwapFunction, Vault$PreBatchSwapFunction
 
     event DexTrade(DexTradeData);
 
-    function Vault$preSwapFunction(PreFunctionContext memory ctx, Vault$SwapFunctionInputs memory inputs)
+    function Vault$preSwapFunction(PreFunctionContext memory, Vault$SwapFunctionInputs memory inputs)
         external
         override
     {

@@ -73,8 +73,7 @@ contract OneInchLOPV4Listener is
     ) external override {
         address makerAsset;
         address takerAsset;
-        (address target, bytes memory extension, bytes memory interaction) =
-            parseArgs(TakerTraits.wrap(inputs.takerTraits), inputs.args);
+        (address target, bytes memory extension,) = parseArgs(TakerTraits.wrap(inputs.takerTraits), inputs.args);
         if (extension.length > 0) {
             makerAsset = getMakerAssetFromSuffix(extension);
             takerAsset = getTakerAssetFromSuffix(extension);
@@ -121,7 +120,7 @@ contract OneInchLOPV4Listener is
         address makingToken,
         address takingToken,
         address maker,
-        address taker,
+        address,
         uint256 makingAmount,
         uint256 takingAmount,
         address platformContract,
