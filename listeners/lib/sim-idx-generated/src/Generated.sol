@@ -13,6 +13,7 @@ import "./FluidDexT1.sol";
 import "./GPv2Settlement.sol";
 import "./HotProxy.sol";
 import "./LimitOrderProtocol.sol";
+import "./MainnetSettler.sol";
 import "./MaverickPool.sol";
 import "./MaverickV2Pool.sol";
 import "./OldTokenExchange.sol";
