@@ -24,6 +24,7 @@ import "./KyberSwapLOP.sol";
 import "./MaverickV2.sol";
 import "./Ekubo.sol";
 import "./0xProtocol.sol";
+import "./0xSettler.sol";
 
 contract Triggers is BaseTriggers {
     // avoid stack too deep
@@ -49,6 +50,7 @@ contract Triggers is BaseTriggers {
         MaverickV2Listener maverickV2Listener;
         EkuboListener ekuboListener;
         ZeroExProtocolListener zeroExProtocolListener;
+        ZeroExSettlerListener zeroExSettlerListener;
     }
 
     function triggers() external virtual override {
@@ -75,6 +77,7 @@ contract Triggers is BaseTriggers {
         listeners.maverickV2Listener = new MaverickV2Listener();
         listeners.ekuboListener = new EkuboListener();
         listeners.zeroExProtocolListener = new ZeroExProtocolListener();
+        listeners.zeroExSettlerListener = new ZeroExSettlerListener();
 
         addTrigger(chainAbi(Chains.Ethereum, PSM$Abi()), listeners.psmListener.PSM$triggerOnBuyGemFunction());
         addTrigger(chainAbi(Chains.Ethereum, PSM$Abi()), listeners.psmListener.PSM$triggerOnSellGemFunction());
@@ -370,6 +373,11 @@ contract Triggers is BaseTriggers {
         addTrigger(
             chainContract(Chains.Base, 0xDef1C0ded9bec7F1a1670819833240f027b25EfF),
             listeners.zeroExProtocolListener.ExchangeV4$triggerOnLimitOrderFilledEvent()
+        );
+
+        addTrigger(
+            chainAbi(Chains.Ethereum, MainnetSettler$Abi()),
+            listeners.zeroExSettlerListener.MainnetSettler$triggerOnExecuteFunction()
         );
     }
 }
