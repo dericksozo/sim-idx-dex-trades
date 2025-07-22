@@ -24,6 +24,7 @@
 - WooFi
 - Maverick V1
 - Maverick V2
+- 0x Protocol
 
 ## Schema
 
