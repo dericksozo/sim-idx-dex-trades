@@ -69,7 +69,8 @@ contract Triggers is BaseTriggers {
     ProtocolConfigAddress internal bancorCarbonConfig;
     ProtocolConfigAddress internal gpv2SettlementConfig;
     ProtocolConfigAbi internal crocSwapConfig;
-    ProtocolConfigAbi internal curveConfig;
+    ProtocolConfigAbi internal curveOldExchangeConfig;
+    ProtocolConfigAbi internal curveExchangeConfig;
     ProtocolConfigAbi internal balancerV2Config;
     ProtocolConfigAbi internal maverickV1Config;
     ProtocolConfigAbi internal uniswapXConfig;
@@ -79,7 +80,7 @@ contract Triggers is BaseTriggers {
     ProtocolConfigAddress internal airSwapV4Config;
     ProtocolConfigAddress internal airSwapV5Config;
     ProtocolConfigAbi internal fluidDexConfig;
-    ProtocolConfigAbi internal oneInchLOPV4Config;
+    ProtocolConfigAddress internal oneInchLOPV4Config;
     ProtocolConfigAddress internal kyberSwapLOPConfig;
     ProtocolConfigAddress internal kyberSwapDSLOPConfig;
     ProtocolConfigAbi internal maverickV2Config;
@@ -147,6 +148,35 @@ contract Triggers is BaseTriggers {
             chainContract(Chains.Ethereum, 0xe0e0e08A6A4b9Dc7bD67BCB7aadE5cF48157d444);
         zeroExProtocolConfig.chainIdToAddress[Chains.Ethereum] =
             chainContract(Chains.Ethereum, 0xDef1C0ded9bec7F1a1670819833240f027b25EfF);
+        oneInchLOPV4Config.chainIdToAddress[Chains.Ethereum] =
+            chainContract(Chains.Ethereum, 0x111111125421cA6dc452d289314280a0f8842A65);
+        oneInchLOPV4Config.chainIdToAddress[Chains.Base] =
+            chainContract(Chains.Base, 0x111111125421cA6dc452d289314280a0f8842A65);
+
+        // protocol to abi
+        psmConfig.chainIdToAbi[Chains.Ethereum] = chainAbi(Chains.Ethereum, PSM$Abi());
+        univ2Config.chainIdToAbi[Chains.Ethereum] = chainAbi(Chains.Ethereum, UniswapV2Pair$Abi());
+        univ2Config.chainIdToAbi[Chains.Base] = chainAbi(Chains.Base, UniswapV2Pair$Abi());
+        univ3Config.chainIdToAbi[Chains.Ethereum] = chainAbi(Chains.Ethereum, UniswapV3Pool$Abi());
+        univ3Config.chainIdToAbi[Chains.Base] = chainAbi(Chains.Base, UniswapV3Pool$Abi());
+        crocSwapConfig.chainIdToAbi[Chains.Ethereum] = chainAbi(Chains.Ethereum, HotProxy$Abi());
+        crocSwapConfig.chainIdToAbi[Chains.Base] = chainAbi(Chains.Base, HotProxy$Abi());
+        curveOldExchangeConfig.chainIdToAbi[Chains.Ethereum] = chainAbi(Chains.Ethereum, OldTokenExchange$Abi());
+        curveExchangeConfig.chainIdToAbi[Chains.Ethereum] = chainAbi(Chains.Ethereum, TokenExchange$Abi());
+        curveOldExchangeConfig.chainIdToAbi[Chains.Base] = chainAbi(Chains.Base, OldTokenExchange$Abi());
+        curveExchangeConfig.chainIdToAbi[Chains.Base] = chainAbi(Chains.Base, TokenExchange$Abi());
+        balancerV2Config.chainIdToAbi[Chains.Ethereum] = chainAbi(Chains.Ethereum, Vault$Abi());
+        maverickV1Config.chainIdToAbi[Chains.Ethereum] = chainAbi(Chains.Ethereum, MaverickPool$Abi());
+        uniswapXConfig.chainIdToAbi[Chains.Ethereum] = chainAbi(Chains.Ethereum, Reactor$Abi());
+        dodoV2Config.chainIdToAbi[Chains.Ethereum] = chainAbi(Chains.Ethereum, DODOSwap$Abi());
+        dodoV2Config.chainIdToAbi[Chains.Base] = chainAbi(Chains.Base, DODOSwap$Abi());
+        wooFiConfig.chainIdToAbi[Chains.Ethereum] = chainAbi(Chains.Ethereum, WooSwap$Abi());
+        wooFiConfig.chainIdToAbi[Chains.Base] = chainAbi(Chains.Base, WooSwap$Abi());
+        fluidDexConfig.chainIdToAbi[Chains.Ethereum] = chainAbi(Chains.Ethereum, FluidDexT1$Abi());
+        fluidDexConfig.chainIdToAbi[Chains.Base] = chainAbi(Chains.Base, FluidDexT1$Abi());
+        maverickV2Config.chainIdToAbi[Chains.Ethereum] = chainAbi(Chains.Ethereum, MaverickV2Pool$Abi());
+        maverickV2Config.chainIdToAbi[Chains.Base] = chainAbi(Chains.Base, MaverickV2Pool$Abi());
+        zeroExSettlerConfig.chainIdToAbi[Chains.Ethereum] = chainAbi(Chains.Ethereum, MainnetSettler$Abi());
 
         // per protocol supported chains
         univ2Config.chains = [Chains.Ethereum, Chains.Base];
@@ -154,7 +184,8 @@ contract Triggers is BaseTriggers {
         bancorCarbonConfig.chains = [Chains.Ethereum, Chains.Base];
         gpv2SettlementConfig.chains = [Chains.Ethereum, Chains.Base];
         crocSwapConfig.chains = [Chains.Ethereum, Chains.Base];
-        curveConfig.chains = [Chains.Ethereum, Chains.Base];
+        curveOldExchangeConfig.chains = [Chains.Ethereum, Chains.Base];
+        curveExchangeConfig.chains = [Chains.Ethereum, Chains.Base];
         balancerV2Config.chains = [Chains.Ethereum, Chains.Base];
         maverickV1Config.chains = [Chains.Ethereum, Chains.Base];
         uniswapXConfig.chains = [Chains.Ethereum, Chains.Base, Chains.Unichain];
@@ -184,10 +215,8 @@ contract Triggers is BaseTriggers {
             gpv2SettlementListener.GPv2Settlement$triggerOnTradeEvent()
         ];
         crocSwapConfig.triggers = [crocSwapListener.HotProxy$triggerOnUserCmdFunction()];
-        curveConfig.triggers = [
-            curveListener.OldTokenExchange$triggerOnTokenExchangeEvent(),
-            curveListener.TokenExchange$triggerOnTokenExchangeEvent()
-        ];
+        curveOldExchangeConfig.triggers = [curveListener.OldTokenExchange$triggerOnTokenExchangeEvent()];
+        curveExchangeConfig.triggers = [curveListener.TokenExchange$triggerOnTokenExchangeEvent()];
         balancerV2Config.triggers = [
             balancerV2Listener.Vault$triggerPreSwapFunction(),
             balancerV2Listener.Vault$triggerPreBatchSwapFunction(),
@@ -238,16 +267,13 @@ contract Triggers is BaseTriggers {
 
     function addTriggerForProtocol(ProtocolConfigAbi storage config) internal {
         for (uint256 i = 0; i < config.chains.length; i++) {
-            addTriggers(chainAbi(config.chains[i], config.chainIdToAbi[config.chains[i]].abi), config.triggers);
+            addTriggers(config.chainIdToAbi[config.chains[i]], config.triggers);
         }
     }
 
     function addTriggerForProtocol(ProtocolConfigAddress storage config) internal {
         for (uint256 i = 0; i < config.chains.length; i++) {
-            addTriggers(
-                chainContract(config.chains[i], config.chainIdToAddress[config.chains[i]].contractAddress),
-                config.triggers
-            );
+            addTriggers(config.chainIdToAddress[config.chains[i]], config.triggers);
         }
     }
 
@@ -258,7 +284,8 @@ contract Triggers is BaseTriggers {
         addTriggerForProtocol(bancorCarbonConfig);
         addTriggerForProtocol(gpv2SettlementConfig);
         addTriggerForProtocol(crocSwapConfig);
-        addTriggerForProtocol(curveConfig);
+        addTriggerForProtocol(curveOldExchangeConfig);
+        addTriggerForProtocol(curveExchangeConfig);
         addTriggerForProtocol(balancerV2Config);
         addTriggerForProtocol(maverickV1Config);
         addTriggerForProtocol(uniswapXConfig);
