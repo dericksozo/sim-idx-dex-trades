@@ -31,12 +31,12 @@ contract UniswapV4Listener is PoolManager$OnSwapFunction, NativeTokenResolver {
         int128 amount0 = BalanceDeltaLibrary.amount0(BalanceDelta.wrap(outputs.swapDelta));
         DexTradeData memory trade;
         trade.chainId = uint64(block.chainid);
-        trade.transactionHash = ctx.txn.hash;
+        trade.transactionHash = ctx.txn.hash();
         trade.blockNumber = uint64(block.number);
         trade.blockTimestamp = uint64(block.timestamp);
         trade.txnOriginator = tx.origin;
-        trade.recipient = ctx.txn.call.caller;
-        trade.liquidityPool = ctx.txn.call.callee;
+        trade.recipient = ctx.txn.call.caller();
+        trade.liquidityPool = ctx.txn.call.callee();
         trade.dex = "UniswapV4";
 
         if (inputs.params.zeroForOne) {

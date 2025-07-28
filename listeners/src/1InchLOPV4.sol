@@ -29,11 +29,11 @@ contract OneInchLOPV4Listener is
             makerAsset,
             takerAsset,
             maker,
-            ctx.txn.call.caller,
+            ctx.txn.call.caller(),
             outputs.outArg0,
             outputs.outArg1,
-            ctx.txn.call.callee,
-            ctx.txn.hash
+            ctx.txn.call.callee(),
+            ctx.txn.hash()
         );
     }
 
@@ -58,11 +58,11 @@ contract OneInchLOPV4Listener is
             makerAsset,
             takerAsset,
             AddressLib.get(Address.wrap(inputs.order.maker)),
-            target == address(0) ? ctx.txn.call.caller : target,
+            target == address(0) ? ctx.txn.call.caller() : target,
             outputs.outArg0,
             outputs.outArg1,
-            ctx.txn.call.callee,
-            ctx.txn.hash
+            ctx.txn.call.callee(),
+            ctx.txn.hash()
         );
     }
 
@@ -87,11 +87,11 @@ contract OneInchLOPV4Listener is
             makerAsset,
             takerAsset,
             AddressLib.get(Address.wrap(inputs.order.maker)),
-            target == address(0) ? ctx.txn.call.caller : target,
+            target == address(0) ? ctx.txn.call.caller() : target,
             outputs.outArg0,
             outputs.outArg1,
-            ctx.txn.call.callee,
-            ctx.txn.hash
+            ctx.txn.call.callee(),
+            ctx.txn.hash()
         );
     }
 
@@ -108,11 +108,11 @@ contract OneInchLOPV4Listener is
             makerAsset,
             takerAsset,
             maker,
-            ctx.txn.call.caller,
+            ctx.txn.call.caller(),
             outputs.outArg0,
             outputs.outArg1,
-            ctx.txn.call.callee,
-            ctx.txn.hash
+            ctx.txn.call.callee(),
+            ctx.txn.hash()
         );
     }
 

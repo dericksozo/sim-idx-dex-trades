@@ -24,11 +24,11 @@ contract EkuboListener is
     }
 
     function EkuboCore$preLockFunction(PreFunctionContext memory ctx) external override {
-        if (ctx.txn.call.data[4] != bytes1(0x00)) {
+        if (ctx.txn.call.callData()[4] != bytes1(0x00)) {
             // not a swap -- bail out early
             return;
         }
-        (,,,,,,,, recipient) = this.decodeSwapData(ctx.txn.call.data);
+        (,,,,,,,, recipient) = this.decodeSwapData(ctx.txn.call.callData());
     }
 
     function EkuboCore$onSwap611415377Function(
@@ -46,12 +46,12 @@ contract EkuboListener is
             : getMetadata(inputs.poolKey.token1);
         DexTradeData memory trade;
         trade.chainId = uint64(block.chainid);
-        trade.transactionHash = ctx.txn.hash;
+        trade.transactionHash = ctx.txn.hash();
         trade.blockNumber = uint64(block.number);
         trade.blockTimestamp = uint64(block.timestamp);
         trade.txnOriginator = tx.origin;
-        trade.recipient = recipient == address(0) ? ctx.txn.call.caller : recipient;
-        trade.liquidityPool = ctx.txn.call.callee;
+        trade.recipient = recipient == address(0) ? ctx.txn.call.caller() : recipient;
+        trade.liquidityPool = ctx.txn.call.callee();
         trade.dex = "Ekubo";
 
         if (!inputs.isToken1) {

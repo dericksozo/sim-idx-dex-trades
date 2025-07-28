@@ -36,10 +36,10 @@ contract BancorCarbonListener is BancorController$OnTokensTradedEvent, NativeTok
         trade.chainId = uint64(block.chainid);
         trade.blockNumber = block.number;
         trade.blockTimestamp = block.timestamp;
-        trade.transactionHash = ctx.txn.hash;
+        trade.transactionHash = ctx.txn.hash();
         trade.txnOriginator = tx.origin;
         trade.recipient = params.trader;
-        trade.liquidityPool = ctx.txn.call.callee;
+        trade.liquidityPool = ctx.txn.call.callee();
 
         emit DexTrade(trade);
     }

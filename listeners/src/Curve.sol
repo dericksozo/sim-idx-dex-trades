@@ -14,7 +14,7 @@ contract CurveListener is OldTokenExchange$OnTokenExchangeEvent, TokenExchange$O
         OldTokenExchange$TokenExchangeEventParams memory params
     ) external override {
         (address tokenTo, address tokenFrom) =
-            DexUtils.getCurvePoolToFromTokens(ctx.txn.call.callee, params.bought_id, params.sold_id);
+            DexUtils.getCurvePoolToFromTokens(ctx.txn.call.callee(), params.bought_id, params.sold_id);
         (string memory sourceTokenName, string memory sourceTokenSymbol, uint256 sourceTokenDecimals) =
             getMetadata(tokenFrom);
         (string memory targetTokenName, string memory targetTokenSymbol, uint256 targetTokenDecimals) =
@@ -34,10 +34,10 @@ contract CurveListener is OldTokenExchange$OnTokenExchangeEvent, TokenExchange$O
         trade.chainId = uint64(block.chainid);
         trade.blockNumber = block.number;
         trade.blockTimestamp = block.timestamp;
-        trade.transactionHash = ctx.txn.hash;
+        trade.transactionHash = ctx.txn.hash();
         trade.txnOriginator = tx.origin;
         trade.recipient = params.buyer;
-        trade.liquidityPool = ctx.txn.call.callee;
+        trade.liquidityPool = ctx.txn.call.callee();
 
         emit DexTrade(trade);
     }
@@ -47,7 +47,7 @@ contract CurveListener is OldTokenExchange$OnTokenExchangeEvent, TokenExchange$O
         TokenExchange$TokenExchangeEventParams memory params
     ) external override {
         (address tokenTo, address tokenFrom) = getCurvePoolToFromTokens(
-            ctx.txn.call.callee, int128(uint128(params.bought_id)), int128(uint128(params.sold_id))
+            ctx.txn.call.callee(), int128(uint128(params.bought_id)), int128(uint128(params.sold_id))
         );
         (string memory sourceTokenName, string memory sourceTokenSymbol, uint256 sourceTokenDecimals) =
             getMetadata(tokenFrom);
@@ -68,10 +68,10 @@ contract CurveListener is OldTokenExchange$OnTokenExchangeEvent, TokenExchange$O
         trade.chainId = uint64(block.chainid);
         trade.blockNumber = block.number;
         trade.blockTimestamp = block.timestamp;
-        trade.transactionHash = ctx.txn.hash;
+        trade.transactionHash = ctx.txn.hash();
         trade.txnOriginator = tx.origin;
         trade.recipient = params.buyer;
-        trade.liquidityPool = ctx.txn.call.callee;
+        trade.liquidityPool = ctx.txn.call.callee();
 
         emit DexTrade(trade);
     }
