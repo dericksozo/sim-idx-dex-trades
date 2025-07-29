@@ -12,7 +12,7 @@ import {Chains, ChainIdContract, ChainIdAbi} from "../../lib/sim-idx-sol/src/Tri
 /// 2. **Key Enumeration**: Get all keys that have been set with `keys()` function
 /// 3. **Length Tracking**: Know how many entries exist with `length()` function
 /// 4. **Existence Checking**: Reliable `contains()` to check if a key exists
-/// 5. **Index Access**: Access entries by index with `at()` function
+/// 5. **Index Access**: Access entries by index with `getIndexAt()` function
 /// 6. **Gas Efficient**: Optimized for small to medium sized collections
 ///
 /// @dev Usage Examples:
@@ -107,7 +107,7 @@ library ChainsEnumerableMapLib {
         view
         returns (Chains key, ChainIdContract memory value)
     {
-        (uint8 rawKey, ChainIdContract memory val) = EnumerableMapLib.at(map._inner, i);
+        (uint8 rawKey, ChainIdContract memory val) = EnumerableMapLib.getIndexAt(map._inner, i);
         return (Chains(rawKey), val);
     }
 
@@ -144,10 +144,7 @@ library ChainsEnumerableMapLib {
 
     /// @dev Adds a key-value pair to the map, or updates the value for an existing key.
     /// Returns true if `key` was added to the map, that is if it was not already present.
-    function set(ChainsToChainIdAbiMap storage map, Chains key, ChainIdAbi memory value)
-        internal
-        returns (bool)
-    {
+    function set(ChainsToChainIdAbiMap storage map, Chains key, ChainIdAbi memory value) internal returns (bool) {
         return EnumerableMapLib.set(map._inner, uint8(key), value);
     }
 
@@ -168,13 +165,10 @@ library ChainsEnumerableMapLib {
     }
 
     /// @dev Shorthand for `isAdd ? map.set(key, value, cap) : map.remove(key)`.
-    function update(
-        ChainsToChainIdAbiMap storage map,
-        Chains key,
-        ChainIdAbi memory value,
-        bool isAdd,
-        uint256 cap
-    ) internal returns (bool) {
+    function update(ChainsToChainIdAbiMap storage map, Chains key, ChainIdAbi memory value, bool isAdd, uint256 cap)
+        internal
+        returns (bool)
+    {
         return isAdd ? set(map, key, value, cap) : remove(map, key);
     }
 
@@ -194,7 +188,7 @@ library ChainsEnumerableMapLib {
         view
         returns (Chains key, ChainIdAbi memory value)
     {
-        (uint8 rawKey, ChainIdAbi memory val) = EnumerableMapLib.at(map._inner, i);
+        (uint8 rawKey, ChainIdAbi memory val) = EnumerableMapLib.getIndexAt(map._inner, i);
         return (Chains(rawKey), val);
     }
 
@@ -208,11 +202,7 @@ library ChainsEnumerableMapLib {
     }
 
     /// @dev Returns the value for the key. Reverts if the key is not found.
-    function get(ChainsToChainIdAbiMap storage map, Chains key)
-        internal
-        view
-        returns (ChainIdAbi memory value)
-    {
+    function get(ChainsToChainIdAbiMap storage map, Chains key) internal view returns (ChainIdAbi memory value) {
         return EnumerableMapLib.get(map._inner, uint8(key));
     }
 

@@ -91,10 +91,7 @@ library EnumerableMapLib {
 
     /// @dev Adds a key-value pair to the map, or updates the value for an existing key.
     /// Returns true if `key` was added to the map, that is if it was not already present.
-    function set(Bytes32ToBytes32Map storage map, bytes32 key, bytes32 value)
-        internal
-        returns (bool)
-    {
+    function set(Bytes32ToBytes32Map storage map, bytes32 key, bytes32 value) internal returns (bool) {
         map._values[key] = value;
         return EnumerableSetLib.add(map._keys, key);
     }
@@ -102,10 +99,7 @@ library EnumerableMapLib {
     /// @dev Adds a key-value pair to the map, or updates the value for an existing key.
     /// Returns true if `key` was added to the map, that is if it was not already present.
     /// Reverts if the map grows bigger than the custom on-the-fly capacity `cap`.
-    function set(Bytes32ToBytes32Map storage map, bytes32 key, bytes32 value, uint256 cap)
-        internal
-        returns (bool)
-    {
+    function set(Bytes32ToBytes32Map storage map, bytes32 key, bytes32 value, uint256 cap) internal returns (bool) {
         map._values[key] = value;
         return EnumerableSetLib.add(map._keys, key, cap);
     }
@@ -118,13 +112,10 @@ library EnumerableMapLib {
     }
 
     /// @dev Shorthand for `isAdd ? map.set(key, value, cap) : map.remove(key)`.
-    function update(
-        Bytes32ToBytes32Map storage map,
-        bytes32 key,
-        bytes32 value,
-        bool isAdd,
-        uint256 cap
-    ) internal returns (bool) {
+    function update(Bytes32ToBytes32Map storage map, bytes32 key, bytes32 value, bool isAdd, uint256 cap)
+        internal
+        returns (bool)
+    {
         return isAdd ? set(map, key, value, cap) : remove(map, key);
     }
 
@@ -139,29 +130,21 @@ library EnumerableMapLib {
     }
 
     /// @dev Returns the key-value pair at index `i`. Reverts if `i` is out-of-bounds.
-    function at(Bytes32ToBytes32Map storage map, uint256 i)
+    function getIndexAt(Bytes32ToBytes32Map storage map, uint256 i)
         internal
         view
         returns (bytes32 key, bytes32 value)
     {
-        value = map._values[key = EnumerableSetLib.at(map._keys, i)];
+        value = map._values[key = EnumerableSetLib.getIndexAt(map._keys, i)];
     }
 
     /// @dev Tries to return the value associated with the key.
-    function tryGet(Bytes32ToBytes32Map storage map, bytes32 key)
-        internal
-        view
-        returns (bool exists, bytes32 value)
-    {
+    function tryGet(Bytes32ToBytes32Map storage map, bytes32 key) internal view returns (bool exists, bytes32 value) {
         exists = (value = map._values[key]) != bytes32(0) || contains(map, key);
     }
 
     /// @dev Returns the value for the key. Reverts if the key is not found.
-    function get(Bytes32ToBytes32Map storage map, bytes32 key)
-        internal
-        view
-        returns (bytes32 value)
-    {
+    function get(Bytes32ToBytes32Map storage map, bytes32 key) internal view returns (bytes32 value) {
         if ((value = map._values[key]) == bytes32(0)) if (!contains(map, key)) _revertNotFound();
     }
 
@@ -172,10 +155,7 @@ library EnumerableMapLib {
 
     /// @dev Adds a key-value pair to the map, or updates the value for an existing key.
     /// Returns true if `key` was added to the map, that is if it was not already present.
-    function set(Bytes32ToUint256Map storage map, bytes32 key, uint256 value)
-        internal
-        returns (bool)
-    {
+    function set(Bytes32ToUint256Map storage map, bytes32 key, uint256 value) internal returns (bool) {
         map._values[key] = value;
         return EnumerableSetLib.add(map._keys, key);
     }
@@ -183,10 +163,7 @@ library EnumerableMapLib {
     /// @dev Adds a key-value pair to the map, or updates the value for an existing key.
     /// Returns true if `key` was added to the map, that is if it was not already present.
     /// Reverts if the map grows bigger than the custom on-the-fly capacity `cap`.
-    function set(Bytes32ToUint256Map storage map, bytes32 key, uint256 value, uint256 cap)
-        internal
-        returns (bool)
-    {
+    function set(Bytes32ToUint256Map storage map, bytes32 key, uint256 value, uint256 cap) internal returns (bool) {
         map._values[key] = value;
         return EnumerableSetLib.add(map._keys, key, cap);
     }
@@ -199,13 +176,10 @@ library EnumerableMapLib {
     }
 
     /// @dev Shorthand for `isAdd ? map.set(key, value, cap) : map.remove(key)`.
-    function update(
-        Bytes32ToUint256Map storage map,
-        bytes32 key,
-        uint256 value,
-        bool isAdd,
-        uint256 cap
-    ) internal returns (bool) {
+    function update(Bytes32ToUint256Map storage map, bytes32 key, uint256 value, bool isAdd, uint256 cap)
+        internal
+        returns (bool)
+    {
         return isAdd ? set(map, key, value, cap) : remove(map, key);
     }
 
@@ -220,29 +194,21 @@ library EnumerableMapLib {
     }
 
     /// @dev Returns the key-value pair at index `i`. Reverts if `i` is out-of-bounds.
-    function at(Bytes32ToUint256Map storage map, uint256 i)
+    function getIndexAt(Bytes32ToUint256Map storage map, uint256 i)
         internal
         view
         returns (bytes32 key, uint256 value)
     {
-        value = map._values[key = EnumerableSetLib.at(map._keys, i)];
+        value = map._values[key = EnumerableSetLib.getIndexAt(map._keys, i)];
     }
 
     /// @dev Tries to return the value associated with the key.
-    function tryGet(Bytes32ToUint256Map storage map, bytes32 key)
-        internal
-        view
-        returns (bool exists, uint256 value)
-    {
+    function tryGet(Bytes32ToUint256Map storage map, bytes32 key) internal view returns (bool exists, uint256 value) {
         exists = (value = map._values[key]) != uint256(0) || contains(map, key);
     }
 
     /// @dev Returns the value for the key. Reverts if the key is not found.
-    function get(Bytes32ToUint256Map storage map, bytes32 key)
-        internal
-        view
-        returns (uint256 value)
-    {
+    function get(Bytes32ToUint256Map storage map, bytes32 key) internal view returns (uint256 value) {
         if ((value = map._values[key]) == uint256(0)) if (!contains(map, key)) _revertNotFound();
     }
 
@@ -253,10 +219,7 @@ library EnumerableMapLib {
 
     /// @dev Adds a key-value pair to the map, or updates the value for an existing key.
     /// Returns true if `key` was added to the map, that is if it was not already present.
-    function set(Bytes32ToAddressMap storage map, bytes32 key, address value)
-        internal
-        returns (bool)
-    {
+    function set(Bytes32ToAddressMap storage map, bytes32 key, address value) internal returns (bool) {
         map._values[key] = value;
         return EnumerableSetLib.add(map._keys, key);
     }
@@ -264,10 +227,7 @@ library EnumerableMapLib {
     /// @dev Adds a key-value pair to the map, or updates the value for an existing key.
     /// Returns true if `key` was added to the map, that is if it was not already present.
     /// Reverts if the map grows bigger than the custom on-the-fly capacity `cap`.
-    function set(Bytes32ToAddressMap storage map, bytes32 key, address value, uint256 cap)
-        internal
-        returns (bool)
-    {
+    function set(Bytes32ToAddressMap storage map, bytes32 key, address value, uint256 cap) internal returns (bool) {
         map._values[key] = value;
         return EnumerableSetLib.add(map._keys, key, cap);
     }
@@ -280,13 +240,10 @@ library EnumerableMapLib {
     }
 
     /// @dev Shorthand for `isAdd ? map.set(key, value, cap) : map.remove(key)`.
-    function update(
-        Bytes32ToAddressMap storage map,
-        bytes32 key,
-        address value,
-        bool isAdd,
-        uint256 cap
-    ) internal returns (bool) {
+    function update(Bytes32ToAddressMap storage map, bytes32 key, address value, bool isAdd, uint256 cap)
+        internal
+        returns (bool)
+    {
         return isAdd ? set(map, key, value, cap) : remove(map, key);
     }
 
@@ -301,29 +258,21 @@ library EnumerableMapLib {
     }
 
     /// @dev Returns the key-value pair at index `i`. Reverts if `i` is out-of-bounds.
-    function at(Bytes32ToAddressMap storage map, uint256 i)
+    function getIndexAt(Bytes32ToAddressMap storage map, uint256 i)
         internal
         view
         returns (bytes32 key, address value)
     {
-        value = map._values[key = EnumerableSetLib.at(map._keys, i)];
+        value = map._values[key = EnumerableSetLib.getIndexAt(map._keys, i)];
     }
 
     /// @dev Tries to return the value associated with the key.
-    function tryGet(Bytes32ToAddressMap storage map, bytes32 key)
-        internal
-        view
-        returns (bool exists, address value)
-    {
+    function tryGet(Bytes32ToAddressMap storage map, bytes32 key) internal view returns (bool exists, address value) {
         exists = (value = map._values[key]) != address(0) || contains(map, key);
     }
 
     /// @dev Returns the value for the key. Reverts if the key is not found.
-    function get(Bytes32ToAddressMap storage map, bytes32 key)
-        internal
-        view
-        returns (address value)
-    {
+    function get(Bytes32ToAddressMap storage map, bytes32 key) internal view returns (address value) {
         if ((value = map._values[key]) == address(0)) if (!contains(map, key)) _revertNotFound();
     }
 
@@ -334,10 +283,7 @@ library EnumerableMapLib {
 
     /// @dev Adds a key-value pair to the map, or updates the value for an existing key.
     /// Returns true if `key` was added to the map, that is if it was not already present.
-    function set(Uint256ToBytes32Map storage map, uint256 key, bytes32 value)
-        internal
-        returns (bool)
-    {
+    function set(Uint256ToBytes32Map storage map, uint256 key, bytes32 value) internal returns (bool) {
         map._values[key] = value;
         return EnumerableSetLib.add(map._keys, key);
     }
@@ -345,10 +291,7 @@ library EnumerableMapLib {
     /// @dev Adds a key-value pair to the map, or updates the value for an existing key.
     /// Returns true if `key` was added to the map, that is if it was not already present.
     /// Reverts if the map grows bigger than the custom on-the-fly capacity `cap`.
-    function set(Uint256ToBytes32Map storage map, uint256 key, bytes32 value, uint256 cap)
-        internal
-        returns (bool)
-    {
+    function set(Uint256ToBytes32Map storage map, uint256 key, bytes32 value, uint256 cap) internal returns (bool) {
         map._values[key] = value;
         return EnumerableSetLib.add(map._keys, key, cap);
     }
@@ -361,13 +304,10 @@ library EnumerableMapLib {
     }
 
     /// @dev Shorthand for `isAdd ? map.set(key, value, cap) : map.remove(key)`.
-    function update(
-        Uint256ToBytes32Map storage map,
-        uint256 key,
-        bytes32 value,
-        bool isAdd,
-        uint256 cap
-    ) internal returns (bool) {
+    function update(Uint256ToBytes32Map storage map, uint256 key, bytes32 value, bool isAdd, uint256 cap)
+        internal
+        returns (bool)
+    {
         return isAdd ? set(map, key, value, cap) : remove(map, key);
     }
 
@@ -382,29 +322,21 @@ library EnumerableMapLib {
     }
 
     /// @dev Returns the key-value pair at index `i`. Reverts if `i` is out-of-bounds.
-    function at(Uint256ToBytes32Map storage map, uint256 i)
+    function getIndexAt(Uint256ToBytes32Map storage map, uint256 i)
         internal
         view
         returns (uint256 key, bytes32 value)
     {
-        value = map._values[key = EnumerableSetLib.at(map._keys, i)];
+        value = map._values[key = EnumerableSetLib.getIndexAt(map._keys, i)];
     }
 
     /// @dev Tries to return the value associated with the key.
-    function tryGet(Uint256ToBytes32Map storage map, uint256 key)
-        internal
-        view
-        returns (bool exists, bytes32 value)
-    {
+    function tryGet(Uint256ToBytes32Map storage map, uint256 key) internal view returns (bool exists, bytes32 value) {
         exists = (value = map._values[key]) != bytes32(0) || contains(map, key);
     }
 
     /// @dev Returns the value for the key. Reverts if the key is not found.
-    function get(Uint256ToBytes32Map storage map, uint256 key)
-        internal
-        view
-        returns (bytes32 value)
-    {
+    function get(Uint256ToBytes32Map storage map, uint256 key) internal view returns (bytes32 value) {
         if ((value = map._values[key]) == bytes32(0)) if (!contains(map, key)) _revertNotFound();
     }
 
@@ -415,10 +347,7 @@ library EnumerableMapLib {
 
     /// @dev Adds a key-value pair to the map, or updates the value for an existing key.
     /// Returns true if `key` was added to the map, that is if it was not already present.
-    function set(Uint256ToUint256Map storage map, uint256 key, uint256 value)
-        internal
-        returns (bool)
-    {
+    function set(Uint256ToUint256Map storage map, uint256 key, uint256 value) internal returns (bool) {
         map._values[key] = value;
         return EnumerableSetLib.add(map._keys, key);
     }
@@ -426,10 +355,7 @@ library EnumerableMapLib {
     /// @dev Adds a key-value pair to the map, or updates the value for an existing key.
     /// Returns true if `key` was added to the map, that is if it was not already present.
     /// Reverts if the map grows bigger than the custom on-the-fly capacity `cap`.
-    function set(Uint256ToUint256Map storage map, uint256 key, uint256 value, uint256 cap)
-        internal
-        returns (bool)
-    {
+    function set(Uint256ToUint256Map storage map, uint256 key, uint256 value, uint256 cap) internal returns (bool) {
         map._values[key] = value;
         return EnumerableSetLib.add(map._keys, key, cap);
     }
@@ -442,13 +368,10 @@ library EnumerableMapLib {
     }
 
     /// @dev Shorthand for `isAdd ? map.set(key, value, cap) : map.remove(key)`.
-    function update(
-        Uint256ToUint256Map storage map,
-        uint256 key,
-        uint256 value,
-        bool isAdd,
-        uint256 cap
-    ) internal returns (bool) {
+    function update(Uint256ToUint256Map storage map, uint256 key, uint256 value, bool isAdd, uint256 cap)
+        internal
+        returns (bool)
+    {
         return isAdd ? set(map, key, value, cap) : remove(map, key);
     }
 
@@ -463,29 +386,21 @@ library EnumerableMapLib {
     }
 
     /// @dev Returns the key-value pair at index `i`. Reverts if `i` is out-of-bounds.
-    function at(Uint256ToUint256Map storage map, uint256 i)
+    function getIndexAt(Uint256ToUint256Map storage map, uint256 i)
         internal
         view
         returns (uint256 key, uint256 value)
     {
-        value = map._values[key = EnumerableSetLib.at(map._keys, i)];
+        value = map._values[key = EnumerableSetLib.getIndexAt(map._keys, i)];
     }
 
     /// @dev Tries to return the value associated with the key.
-    function tryGet(Uint256ToUint256Map storage map, uint256 key)
-        internal
-        view
-        returns (bool exists, uint256 value)
-    {
+    function tryGet(Uint256ToUint256Map storage map, uint256 key) internal view returns (bool exists, uint256 value) {
         exists = (value = map._values[key]) != uint256(0) || contains(map, key);
     }
 
     /// @dev Returns the value for the key. Reverts if the key is not found.
-    function get(Uint256ToUint256Map storage map, uint256 key)
-        internal
-        view
-        returns (uint256 value)
-    {
+    function get(Uint256ToUint256Map storage map, uint256 key) internal view returns (uint256 value) {
         if ((value = map._values[key]) == uint256(0)) if (!contains(map, key)) _revertNotFound();
     }
 
@@ -496,10 +411,7 @@ library EnumerableMapLib {
 
     /// @dev Adds a key-value pair to the map, or updates the value for an existing key.
     /// Returns true if `key` was added to the map, that is if it was not already present.
-    function set(Uint256ToAddressMap storage map, uint256 key, address value)
-        internal
-        returns (bool)
-    {
+    function set(Uint256ToAddressMap storage map, uint256 key, address value) internal returns (bool) {
         map._values[key] = value;
         return EnumerableSetLib.add(map._keys, key);
     }
@@ -507,10 +419,7 @@ library EnumerableMapLib {
     /// @dev Adds a key-value pair to the map, or updates the value for an existing key.
     /// Returns true if `key` was added to the map, that is if it was not already present.
     /// Reverts if the map grows bigger than the custom on-the-fly capacity `cap`.
-    function set(Uint256ToAddressMap storage map, uint256 key, address value, uint256 cap)
-        internal
-        returns (bool)
-    {
+    function set(Uint256ToAddressMap storage map, uint256 key, address value, uint256 cap) internal returns (bool) {
         map._values[key] = value;
         return EnumerableSetLib.add(map._keys, key, cap);
     }
@@ -523,13 +432,10 @@ library EnumerableMapLib {
     }
 
     /// @dev Shorthand for `isAdd ? map.set(key, value, cap) : map.remove(key)`.
-    function update(
-        Uint256ToAddressMap storage map,
-        uint256 key,
-        address value,
-        bool isAdd,
-        uint256 cap
-    ) internal returns (bool) {
+    function update(Uint256ToAddressMap storage map, uint256 key, address value, bool isAdd, uint256 cap)
+        internal
+        returns (bool)
+    {
         return isAdd ? set(map, key, value, cap) : remove(map, key);
     }
 
@@ -544,29 +450,21 @@ library EnumerableMapLib {
     }
 
     /// @dev Returns the key-value pair at index `i`. Reverts if `i` is out-of-bounds.
-    function at(Uint256ToAddressMap storage map, uint256 i)
+    function getIndexAt(Uint256ToAddressMap storage map, uint256 i)
         internal
         view
         returns (uint256 key, address value)
     {
-        value = map._values[key = EnumerableSetLib.at(map._keys, i)];
+        value = map._values[key = EnumerableSetLib.getIndexAt(map._keys, i)];
     }
 
     /// @dev Tries to return the value associated with the key.
-    function tryGet(Uint256ToAddressMap storage map, uint256 key)
-        internal
-        view
-        returns (bool exists, address value)
-    {
+    function tryGet(Uint256ToAddressMap storage map, uint256 key) internal view returns (bool exists, address value) {
         exists = (value = map._values[key]) != address(0) || contains(map, key);
     }
 
     /// @dev Returns the value for the key. Reverts if the key is not found.
-    function get(Uint256ToAddressMap storage map, uint256 key)
-        internal
-        view
-        returns (address value)
-    {
+    function get(Uint256ToAddressMap storage map, uint256 key) internal view returns (address value) {
         if ((value = map._values[key]) == address(0)) if (!contains(map, key)) _revertNotFound();
     }
 
@@ -577,10 +475,7 @@ library EnumerableMapLib {
 
     /// @dev Adds a key-value pair to the map, or updates the value for an existing key.
     /// Returns true if `key` was added to the map, that is if it was not already present.
-    function set(AddressToBytes32Map storage map, address key, bytes32 value)
-        internal
-        returns (bool)
-    {
+    function set(AddressToBytes32Map storage map, address key, bytes32 value) internal returns (bool) {
         map._values[key] = value;
         return EnumerableSetLib.add(map._keys, key);
     }
@@ -588,10 +483,7 @@ library EnumerableMapLib {
     /// @dev Adds a key-value pair to the map, or updates the value for an existing key.
     /// Returns true if `key` was added to the map, that is if it was not already present.
     /// Reverts if the map grows bigger than the custom on-the-fly capacity `cap`.
-    function set(AddressToBytes32Map storage map, address key, bytes32 value, uint256 cap)
-        internal
-        returns (bool)
-    {
+    function set(AddressToBytes32Map storage map, address key, bytes32 value, uint256 cap) internal returns (bool) {
         map._values[key] = value;
         return EnumerableSetLib.add(map._keys, key, cap);
     }
@@ -604,13 +496,10 @@ library EnumerableMapLib {
     }
 
     /// @dev Shorthand for `isAdd ? map.set(key, value, cap) : map.remove(key)`.
-    function update(
-        AddressToBytes32Map storage map,
-        address key,
-        bytes32 value,
-        bool isAdd,
-        uint256 cap
-    ) internal returns (bool) {
+    function update(AddressToBytes32Map storage map, address key, bytes32 value, bool isAdd, uint256 cap)
+        internal
+        returns (bool)
+    {
         return isAdd ? set(map, key, value, cap) : remove(map, key);
     }
 
@@ -625,29 +514,21 @@ library EnumerableMapLib {
     }
 
     /// @dev Returns the key-value pair at index `i`. Reverts if `i` is out-of-bounds.
-    function at(AddressToBytes32Map storage map, uint256 i)
+    function getIndexAt(AddressToBytes32Map storage map, uint256 i)
         internal
         view
         returns (address key, bytes32 value)
     {
-        value = map._values[key = EnumerableSetLib.at(map._keys, i)];
+        value = map._values[key = EnumerableSetLib.getIndexAt(map._keys, i)];
     }
 
     /// @dev Tries to return the value associated with the key.
-    function tryGet(AddressToBytes32Map storage map, address key)
-        internal
-        view
-        returns (bool exists, bytes32 value)
-    {
+    function tryGet(AddressToBytes32Map storage map, address key) internal view returns (bool exists, bytes32 value) {
         exists = (value = map._values[key]) != bytes32(0) || contains(map, key);
     }
 
     /// @dev Returns the value for the key. Reverts if the key is not found.
-    function get(AddressToBytes32Map storage map, address key)
-        internal
-        view
-        returns (bytes32 value)
-    {
+    function get(AddressToBytes32Map storage map, address key) internal view returns (bytes32 value) {
         if ((value = map._values[key]) == bytes32(0)) if (!contains(map, key)) _revertNotFound();
     }
 
@@ -658,10 +539,7 @@ library EnumerableMapLib {
 
     /// @dev Adds a key-value pair to the map, or updates the value for an existing key.
     /// Returns true if `key` was added to the map, that is if it was not already present.
-    function set(AddressToUint256Map storage map, address key, uint256 value)
-        internal
-        returns (bool)
-    {
+    function set(AddressToUint256Map storage map, address key, uint256 value) internal returns (bool) {
         map._values[key] = value;
         return EnumerableSetLib.add(map._keys, key);
     }
@@ -669,10 +547,7 @@ library EnumerableMapLib {
     /// @dev Adds a key-value pair to the map, or updates the value for an existing key.
     /// Returns true if `key` was added to the map, that is if it was not already present.
     /// Reverts if the map grows bigger than the custom on-the-fly capacity `cap`.
-    function set(AddressToUint256Map storage map, address key, uint256 value, uint256 cap)
-        internal
-        returns (bool)
-    {
+    function set(AddressToUint256Map storage map, address key, uint256 value, uint256 cap) internal returns (bool) {
         map._values[key] = value;
         return EnumerableSetLib.add(map._keys, key, cap);
     }
@@ -685,13 +560,10 @@ library EnumerableMapLib {
     }
 
     /// @dev Shorthand for `isAdd ? map.set(key, value, cap) : map.remove(key)`.
-    function update(
-        AddressToUint256Map storage map,
-        address key,
-        uint256 value,
-        bool isAdd,
-        uint256 cap
-    ) internal returns (bool) {
+    function update(AddressToUint256Map storage map, address key, uint256 value, bool isAdd, uint256 cap)
+        internal
+        returns (bool)
+    {
         return isAdd ? set(map, key, value, cap) : remove(map, key);
     }
 
@@ -706,29 +578,21 @@ library EnumerableMapLib {
     }
 
     /// @dev Returns the key-value pair at index `i`. Reverts if `i` is out-of-bounds.
-    function at(AddressToUint256Map storage map, uint256 i)
+    function getIndexAt(AddressToUint256Map storage map, uint256 i)
         internal
         view
         returns (address key, uint256 value)
     {
-        value = map._values[key = EnumerableSetLib.at(map._keys, i)];
+        value = map._values[key = EnumerableSetLib.getIndexAt(map._keys, i)];
     }
 
     /// @dev Tries to return the value associated with the key.
-    function tryGet(AddressToUint256Map storage map, address key)
-        internal
-        view
-        returns (bool exists, uint256 value)
-    {
+    function tryGet(AddressToUint256Map storage map, address key) internal view returns (bool exists, uint256 value) {
         exists = (value = map._values[key]) != uint256(0) || contains(map, key);
     }
 
     /// @dev Returns the value for the key. Reverts if the key is not found.
-    function get(AddressToUint256Map storage map, address key)
-        internal
-        view
-        returns (uint256 value)
-    {
+    function get(AddressToUint256Map storage map, address key) internal view returns (uint256 value) {
         if ((value = map._values[key]) == uint256(0)) if (!contains(map, key)) _revertNotFound();
     }
 
@@ -739,10 +603,7 @@ library EnumerableMapLib {
 
     /// @dev Adds a key-value pair to the map, or updates the value for an existing key.
     /// Returns true if `key` was added to the map, that is if it was not already present.
-    function set(AddressToAddressMap storage map, address key, address value)
-        internal
-        returns (bool)
-    {
+    function set(AddressToAddressMap storage map, address key, address value) internal returns (bool) {
         map._values[key] = value;
         return EnumerableSetLib.add(map._keys, key);
     }
@@ -750,10 +611,7 @@ library EnumerableMapLib {
     /// @dev Adds a key-value pair to the map, or updates the value for an existing key.
     /// Returns true if `key` was added to the map, that is if it was not already present.
     /// Reverts if the map grows bigger than the custom on-the-fly capacity `cap`.
-    function set(AddressToAddressMap storage map, address key, address value, uint256 cap)
-        internal
-        returns (bool)
-    {
+    function set(AddressToAddressMap storage map, address key, address value, uint256 cap) internal returns (bool) {
         map._values[key] = value;
         return EnumerableSetLib.add(map._keys, key, cap);
     }
@@ -766,13 +624,10 @@ library EnumerableMapLib {
     }
 
     /// @dev Shorthand for `isAdd ? map.set(key, value, cap) : map.remove(key)`.
-    function update(
-        AddressToAddressMap storage map,
-        address key,
-        address value,
-        bool isAdd,
-        uint256 cap
-    ) internal returns (bool) {
+    function update(AddressToAddressMap storage map, address key, address value, bool isAdd, uint256 cap)
+        internal
+        returns (bool)
+    {
         return isAdd ? set(map, key, value, cap) : remove(map, key);
     }
 
@@ -787,29 +642,21 @@ library EnumerableMapLib {
     }
 
     /// @dev Returns the key-value pair at index `i`. Reverts if `i` is out-of-bounds.
-    function at(AddressToAddressMap storage map, uint256 i)
+    function getIndexAt(AddressToAddressMap storage map, uint256 i)
         internal
         view
         returns (address key, address value)
     {
-        value = map._values[key = EnumerableSetLib.at(map._keys, i)];
+        value = map._values[key = EnumerableSetLib.getIndexAt(map._keys, i)];
     }
 
     /// @dev Tries to return the value associated with the key.
-    function tryGet(AddressToAddressMap storage map, address key)
-        internal
-        view
-        returns (bool exists, address value)
-    {
+    function tryGet(AddressToAddressMap storage map, address key) internal view returns (bool exists, address value) {
         exists = (value = map._values[key]) != address(0) || contains(map, key);
     }
 
     /// @dev Returns the value for the key. Reverts if the key is not found.
-    function get(AddressToAddressMap storage map, address key)
-        internal
-        view
-        returns (address value)
-    {
+    function get(AddressToAddressMap storage map, address key) internal view returns (address value) {
         if ((value = map._values[key]) == address(0)) if (!contains(map, key)) _revertNotFound();
     }
 
@@ -868,12 +715,12 @@ library EnumerableMapLib {
     }
 
     /// @dev Returns the key-value pair at index `i`. Reverts if `i` is out-of-bounds.
-    function at(Uint8ToChainIdContractMap storage map, uint256 i)
+    function getIndexAt(Uint8ToChainIdContractMap storage map, uint256 i)
         internal
         view
         returns (uint8 key, ChainIdContract memory value)
     {
-        value = map._values[key = EnumerableSetLib.at(map._keys, i)];
+        value = map._values[key = EnumerableSetLib.getIndexAt(map._keys, i)];
     }
 
     /// @dev Tries to return the value associated with the key.
@@ -903,10 +750,7 @@ library EnumerableMapLib {
 
     /// @dev Adds a key-value pair to the map, or updates the value for an existing key.
     /// Returns true if `key` was added to the map, that is if it was not already present.
-    function set(Uint8ToChainIdAbiMap storage map, uint8 key, ChainIdAbi memory value)
-        internal
-        returns (bool)
-    {
+    function set(Uint8ToChainIdAbiMap storage map, uint8 key, ChainIdAbi memory value) internal returns (bool) {
         map._values[key] = value;
         return EnumerableSetLib.add(map._keys, key);
     }
@@ -930,13 +774,10 @@ library EnumerableMapLib {
     }
 
     /// @dev Shorthand for `isAdd ? map.set(key, value, cap) : map.remove(key)`.
-    function update(
-        Uint8ToChainIdAbiMap storage map,
-        uint8 key,
-        ChainIdAbi memory value,
-        bool isAdd,
-        uint256 cap
-    ) internal returns (bool) {
+    function update(Uint8ToChainIdAbiMap storage map, uint8 key, ChainIdAbi memory value, bool isAdd, uint256 cap)
+        internal
+        returns (bool)
+    {
         return isAdd ? set(map, key, value, cap) : remove(map, key);
     }
 
@@ -951,12 +792,12 @@ library EnumerableMapLib {
     }
 
     /// @dev Returns the key-value pair at index `i`. Reverts if `i` is out-of-bounds.
-    function at(Uint8ToChainIdAbiMap storage map, uint256 i)
+    function getIndexAt(Uint8ToChainIdAbiMap storage map, uint256 i)
         internal
         view
         returns (uint8 key, ChainIdAbi memory value)
     {
-        value = map._values[key = EnumerableSetLib.at(map._keys, i)];
+        value = map._values[key = EnumerableSetLib.getIndexAt(map._keys, i)];
     }
 
     /// @dev Tries to return the value associated with the key.
@@ -970,11 +811,7 @@ library EnumerableMapLib {
     }
 
     /// @dev Returns the value for the key. Reverts if the key is not found.
-    function get(Uint8ToChainIdAbiMap storage map, uint8 key)
-        internal
-        view
-        returns (ChainIdAbi memory value)
-    {
+    function get(Uint8ToChainIdAbiMap storage map, uint8 key) internal view returns (ChainIdAbi memory value) {
         if (!contains(map, key)) _revertNotFound();
         value = map._values[key];
     }
