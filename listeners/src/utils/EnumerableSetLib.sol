@@ -375,28 +375,19 @@ library EnumerableSetLib {
 
     /// @dev Adds `value` to the set. Returns whether `value` was not in the set.
     /// Reverts if the set grows bigger than the custom on-the-fly capacity `cap`.
-    function add(AddressSet storage set, address value, uint256 cap)
-        internal
-        returns (bool result)
-    {
+    function add(AddressSet storage set, address value, uint256 cap) internal returns (bool result) {
         if (result = add(set, value)) if (length(set) > cap) revert ExceedsCapacity();
     }
 
     /// @dev Adds `value` to the set. Returns whether `value` was not in the set.
     /// Reverts if the set grows bigger than the custom on-the-fly capacity `cap`.
-    function add(Bytes32Set storage set, bytes32 value, uint256 cap)
-        internal
-        returns (bool result)
-    {
+    function add(Bytes32Set storage set, bytes32 value, uint256 cap) internal returns (bool result) {
         if (result = add(set, value)) if (length(set) > cap) revert ExceedsCapacity();
     }
 
     /// @dev Adds `value` to the set. Returns whether `value` was not in the set.
     /// Reverts if the set grows bigger than the custom on-the-fly capacity `cap`.
-    function add(Uint256Set storage set, uint256 value, uint256 cap)
-        internal
-        returns (bool result)
-    {
+    function add(Uint256Set storage set, uint256 value, uint256 cap) internal returns (bool result) {
         if (result = add(set, value)) if (length(set) > cap) revert ExceedsCapacity();
     }
 
@@ -538,42 +529,27 @@ library EnumerableSetLib {
     }
 
     /// @dev Shorthand for `isAdd ? set.add(value, cap) : set.remove(value)`.
-    function update(AddressSet storage set, address value, bool isAdd, uint256 cap)
-        internal
-        returns (bool)
-    {
+    function update(AddressSet storage set, address value, bool isAdd, uint256 cap) internal returns (bool) {
         return isAdd ? add(set, value, cap) : remove(set, value);
     }
 
     /// @dev Shorthand for `isAdd ? set.add(value, cap) : set.remove(value)`.
-    function update(Bytes32Set storage set, bytes32 value, bool isAdd, uint256 cap)
-        internal
-        returns (bool)
-    {
+    function update(Bytes32Set storage set, bytes32 value, bool isAdd, uint256 cap) internal returns (bool) {
         return isAdd ? add(set, value, cap) : remove(set, value);
     }
 
     /// @dev Shorthand for `isAdd ? set.add(value, cap) : set.remove(value)`.
-    function update(Uint256Set storage set, uint256 value, bool isAdd, uint256 cap)
-        internal
-        returns (bool)
-    {
+    function update(Uint256Set storage set, uint256 value, bool isAdd, uint256 cap) internal returns (bool) {
         return isAdd ? add(set, value, cap) : remove(set, value);
     }
 
     /// @dev Shorthand for `isAdd ? set.add(value, cap) : set.remove(value)`.
-    function update(Int256Set storage set, int256 value, bool isAdd, uint256 cap)
-        internal
-        returns (bool)
-    {
+    function update(Int256Set storage set, int256 value, bool isAdd, uint256 cap) internal returns (bool) {
         return isAdd ? add(set, value, cap) : remove(set, value);
     }
 
     /// @dev Shorthand for `isAdd ? set.add(value, cap) : set.remove(value)`.
-    function update(Uint8Set storage set, uint8 value, bool isAdd, uint256 cap)
-        internal
-        returns (bool)
-    {
+    function update(Uint8Set storage set, uint8 value, bool isAdd, uint256 cap) internal returns (bool) {
         return isAdd ? add(set, value, cap) : remove(set, value);
     }
 
@@ -696,7 +672,7 @@ library EnumerableSetLib {
     }
 
     /// @dev Returns the element at index `i` in the set. Reverts if `i` is out-of-bounds.
-    function at(AddressSet storage set, uint256 i) internal view returns (address result) {
+    function getIndexAt(AddressSet storage set, uint256 i) internal view returns (address result) {
         bytes32 rootSlot = _rootSlot(set);
         /// @solidity memory-safe-assembly
         assembly {
@@ -707,7 +683,7 @@ library EnumerableSetLib {
     }
 
     /// @dev Returns the element at index `i` in the set. Reverts if `i` is out-of-bounds.
-    function at(Bytes32Set storage set, uint256 i) internal view returns (bytes32 result) {
+    function getIndexAt(Bytes32Set storage set, uint256 i) internal view returns (bytes32 result) {
         result = _rootSlot(set);
         /// @solidity memory-safe-assembly
         assembly {
@@ -718,17 +694,17 @@ library EnumerableSetLib {
     }
 
     /// @dev Returns the element at index `i` in the set. Reverts if `i` is out-of-bounds.
-    function at(Uint256Set storage set, uint256 i) internal view returns (uint256 result) {
-        result = uint256(at(_toBytes32Set(set), i));
+    function getIndexAt(Uint256Set storage set, uint256 i) internal view returns (uint256 result) {
+        result = uint256(getIndexAt(_toBytes32Set(set), i));
     }
 
     /// @dev Returns the element at index `i` in the set. Reverts if `i` is out-of-bounds.
-    function at(Int256Set storage set, uint256 i) internal view returns (int256 result) {
-        result = int256(uint256(at(_toBytes32Set(set), i)));
+    function getIndexAt(Int256Set storage set, uint256 i) internal view returns (int256 result) {
+        result = int256(uint256(getIndexAt(_toBytes32Set(set), i)));
     }
 
     /// @dev Returns the element at index `i` in the set. Reverts if `i` is out-of-bounds.
-    function at(Uint8Set storage set, uint256 i) internal view returns (uint8 result) {
+    function getIndexAt(Uint8Set storage set, uint256 i) internal view returns (uint8 result) {
         /// @solidity memory-safe-assembly
         assembly {
             let packed := sload(set.slot)
