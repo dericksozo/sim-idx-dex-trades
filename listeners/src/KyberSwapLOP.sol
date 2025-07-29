@@ -25,7 +25,14 @@ contract KyberSwapLOPListener is
         address taker = inputs.params.target;
 
         emitMakerTakerTrades(
-            makerAsset, takerAsset, maker, taker, outputs.outArg0, outputs.outArg1, ctx.txn.call.callee, ctx.txn.hash
+            makerAsset,
+            takerAsset,
+            maker,
+            taker,
+            outputs.outArg0,
+            outputs.outArg1,
+            ctx.txn.call.callee(),
+            ctx.txn.hash()
         );
     }
 
@@ -40,7 +47,14 @@ contract KyberSwapLOPListener is
         address taker = inputs.target;
 
         emitMakerTakerTrades(
-            makerAsset, takerAsset, maker, taker, outputs.outArg0, outputs.outArg1, ctx.txn.call.callee, ctx.txn.hash
+            makerAsset,
+            takerAsset,
+            maker,
+            taker,
+            outputs.outArg0,
+            outputs.outArg1,
+            ctx.txn.call.callee(),
+            ctx.txn.hash()
         );
     }
 
@@ -57,11 +71,11 @@ contract KyberSwapLOPListener is
             makerAsset,
             takerAsset,
             maker,
-            ctx.txn.call.caller,
+            ctx.txn.call.caller(),
             outputs.outArg0,
             outputs.outArg1,
-            ctx.txn.call.callee,
-            ctx.txn.hash
+            ctx.txn.call.callee(),
+            ctx.txn.hash()
         );
     }
 
@@ -83,8 +97,8 @@ contract KyberSwapLOPListener is
                 taker,
                 outputs.outArg0,
                 outputs.outArg1,
-                ctx.txn.call.callee,
-                ctx.txn.hash
+                ctx.txn.call.callee(),
+                ctx.txn.hash()
             );
         }
     }
@@ -100,7 +114,14 @@ contract KyberSwapLOPListener is
         address taker = inputs.target;
 
         emitMakerTakerTrades(
-            makerAsset, takerAsset, maker, taker, outputs.outArg0, outputs.outArg1, ctx.txn.call.callee, ctx.txn.hash
+            makerAsset,
+            takerAsset,
+            maker,
+            taker,
+            outputs.outArg0,
+            outputs.outArg1,
+            ctx.txn.call.callee(),
+            ctx.txn.hash()
         );
     }
 

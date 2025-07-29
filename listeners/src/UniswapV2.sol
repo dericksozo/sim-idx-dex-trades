@@ -14,11 +14,11 @@ contract UniswapV2Listener is UniswapV2Pair$OnSwapEvent, DexUtils {
         external
         override
     {
-        (address token0, address token1) = DexUtils.getUniswapV2PairMetadata(ctx.txn.call.callee);
+        (address token0, address token1) = DexUtils.getUniswapV2PairMetadata(ctx.txn.call.callee());
         (string memory token0Name, string memory token0Symbol, uint256 token0Decimals) = getMetadata(token0);
         (string memory token1Name, string memory token1Symbol, uint256 token1Decimals) = getMetadata(token1);
         DexTradeData memory trade;
-        address factory = IUniswapV2Pair(ctx.txn.call.callee).factory();
+        address factory = IUniswapV2Pair(ctx.txn.call.callee()).factory();
         if (factory == DexUtils.getUniswapV2Factory()) {
             trade.dex = "UniswapV2";
         } else if (factory == DexUtils.getSushiSwapV2Factory()) {
@@ -77,10 +77,10 @@ contract UniswapV2Listener is UniswapV2Pair$OnSwapEvent, DexUtils {
         trade.chainId = uint64(block.chainid);
         trade.blockNumber = block.number;
         trade.blockTimestamp = block.timestamp;
-        trade.transactionHash = ctx.txn.hash;
+        trade.transactionHash = ctx.txn.hash();
         trade.txnOriginator = tx.origin;
         trade.recipient = params.to;
-        trade.liquidityPool = ctx.txn.call.callee;
+        trade.liquidityPool = ctx.txn.call.callee();
 
         emit DexTrade(trade);
     }

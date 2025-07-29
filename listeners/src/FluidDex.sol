@@ -14,7 +14,7 @@ contract FluidDexListener is FluidDexT1$OnSwapEvent, NativeTokenResolver {
         external
         override
     {
-        IFluidDexT1.ConstantViews memory constantsView = IFluidDexT1(ctx.txn.call.callee).constantsView();
+        IFluidDexT1.ConstantViews memory constantsView = IFluidDexT1(ctx.txn.call.callee()).constantsView();
 
         (string memory token0Name, string memory token0Symbol, uint256 token0Decimals) = constantsView.token0
             == 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE
@@ -51,10 +51,10 @@ contract FluidDexListener is FluidDexT1$OnSwapEvent, NativeTokenResolver {
         trade.chainId = uint64(block.chainid);
         trade.blockNumber = block.number;
         trade.blockTimestamp = block.timestamp;
-        trade.transactionHash = ctx.txn.hash;
+        trade.transactionHash = ctx.txn.hash();
         trade.txnOriginator = tx.origin;
         trade.recipient = params.to;
-        trade.liquidityPool = ctx.txn.call.callee;
+        trade.liquidityPool = ctx.txn.call.callee();
 
         emit DexTrade(trade);
     }

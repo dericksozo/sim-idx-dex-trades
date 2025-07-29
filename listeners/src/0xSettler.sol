@@ -12,9 +12,9 @@ contract ZeroExSettlerListener is MainnetSettler$OnExecuteFunction, ZeroExUtils 
     function MainnetSettler$onExecuteFunction(
         FunctionContext memory ctx,
         MainnetSettler$ExecuteFunctionInputs memory inputs,
-        MainnetSettler$ExecuteFunctionOutputs memory outputs
+        MainnetSettler$ExecuteFunctionOutputs memory
     ) external override {
-        RFQOrder[] memory orders = this.decodeCalls(inputs.actions, ctx.txn.call.callee);
+        RFQOrder[] memory orders = this.decodeCalls(inputs.actions, ctx.txn.call.callee());
         for (uint256 i = 0; i < orders.length; i++) {
             if (orders[i].maker == address(0)) {
                 continue;
@@ -38,10 +38,10 @@ contract ZeroExSettlerListener is MainnetSettler$OnExecuteFunction, ZeroExUtils 
             trade.chainId = uint64(block.chainid);
             trade.blockNumber = block.number;
             trade.blockTimestamp = block.timestamp;
-            trade.transactionHash = ctx.txn.hash;
+            trade.transactionHash = ctx.txn.hash();
             trade.txnOriginator = tx.origin;
             trade.recipient = orders[i].maker;
-            trade.liquidityPool = ctx.txn.call.callee;
+            trade.liquidityPool = ctx.txn.call.callee();
 
             emit DexTrade(trade);
         }

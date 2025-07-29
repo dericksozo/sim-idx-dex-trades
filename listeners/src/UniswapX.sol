@@ -24,21 +24,21 @@ contract UniswapXListener is
         external
         override
     {
-        txnHash = ctx.txn.hash;
+        txnHash = ctx.txn.hash();
         ResolvedOrder memory order = this.quote(inputs.order.order, inputs.order.sig);
         FeeInjector._injectFees(order, IReactor(order.info.reactor).feeController());
-        emitTradesFromOrder(order, ctx.txn.call.caller);
+        emitTradesFromOrder(order, ctx.txn.call.caller());
     }
 
     function Reactor$preExecuteBatchFunction(
         PreFunctionContext memory ctx,
         Reactor$ExecuteBatchFunctionInputs memory inputs
     ) external override {
-        txnHash = ctx.txn.hash;
+        txnHash = ctx.txn.hash();
         for (uint256 i = 0; i < inputs.orders.length; i++) {
             ResolvedOrder memory order = this.quote(inputs.orders[i].order, inputs.orders[i].sig);
             FeeInjector._injectFees(order, IReactor(order.info.reactor).feeController());
-            emitTradesFromOrder(order, ctx.txn.call.caller);
+            emitTradesFromOrder(order, ctx.txn.call.caller());
         }
     }
 
@@ -46,11 +46,11 @@ contract UniswapXListener is
         PreFunctionContext memory ctx,
         Reactor$ExecuteBatchWithCallbackFunctionInputs memory inputs
     ) external override {
-        txnHash = ctx.txn.hash;
+        txnHash = ctx.txn.hash();
         for (uint256 i = 0; i < inputs.orders.length; i++) {
             ResolvedOrder memory order = this.quote(inputs.orders[i].order, inputs.orders[i].sig);
             FeeInjector._injectFees(order, IReactor(order.info.reactor).feeController());
-            emitTradesFromOrder(order, ctx.txn.call.caller);
+            emitTradesFromOrder(order, ctx.txn.call.caller());
         }
     }
 
@@ -58,11 +58,11 @@ contract UniswapXListener is
         PreFunctionContext memory ctx,
         Reactor$ExecuteWithCallbackFunctionInputs memory inputs
     ) external override {
-        if (ctx.txn.call.caller != address(this)) {
-            txnHash = ctx.txn.hash;
+        if (ctx.txn.call.caller() != address(this)) {
+            txnHash = ctx.txn.hash();
             ResolvedOrder memory order = this.quote(inputs.order.order, inputs.order.sig);
             FeeInjector._injectFees(order, IReactor(order.info.reactor).feeController());
-            emitTradesFromOrder(order, ctx.txn.call.caller);
+            emitTradesFromOrder(order, ctx.txn.call.caller());
         }
     }
 

@@ -14,9 +14,9 @@ contract MaverickV1Listener is MaverickPool$OnSwapEvent, DexUtils {
         external
         override
     {
-        address tokenA = IPool(ctx.txn.call.callee).tokenA();
-        address tokenB = IPool(ctx.txn.call.callee).tokenB();
-        if (!IFactory(DexUtils.getMaverickV1Factory()).isFactoryPool(IPool(ctx.txn.call.callee))) {
+        address tokenA = IPool(ctx.txn.call.callee()).tokenA();
+        address tokenB = IPool(ctx.txn.call.callee()).tokenB();
+        if (!IFactory(DexUtils.getMaverickV1Factory()).isFactoryPool(IPool(ctx.txn.call.callee()))) {
             return;
         }
         (string memory tokenAName, string memory tokenASymbol, uint256 tokenADecimals) = getMetadata(tokenA);
@@ -48,10 +48,10 @@ contract MaverickV1Listener is MaverickPool$OnSwapEvent, DexUtils {
         trade.chainId = uint64(block.chainid);
         trade.blockNumber = block.number;
         trade.blockTimestamp = block.timestamp;
-        trade.transactionHash = ctx.txn.hash;
+        trade.transactionHash = ctx.txn.hash();
         trade.txnOriginator = tx.origin;
         trade.recipient = params.recipient;
-        trade.liquidityPool = ctx.txn.call.callee;
+        trade.liquidityPool = ctx.txn.call.callee();
 
         emit DexTrade(trade);
     }

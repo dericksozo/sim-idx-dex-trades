@@ -27,14 +27,14 @@ contract BalancerV2Listener is Vault$PreSwapFunction, Vault$PreBatchSwapFunction
     }
 
     function Vault$onSwapEvent(EventContext memory ctx, Vault$SwapEventParams memory params) external override {
-        (address pool,) = IVault(ctx.txn.call.callee).getPool(params.poolId);
+        (address pool,) = IVault(ctx.txn.call.callee()).getPool(params.poolId);
         (string memory tokenInName, string memory tokenInSymbol, uint256 tokenInDecimals) = getMetadata(params.tokenIn);
         (string memory tokenOutName, string memory tokenOutSymbol, uint256 tokenOutDecimals) =
             getMetadata(params.tokenOut);
         DexTradeData memory trade;
-        if (ctx.txn.call.callee == DexUtils.getBalancerV2Vault()) {
+        if (ctx.txn.call.callee() == DexUtils.getBalancerV2Vault()) {
             trade.dex = "BalancerV2";
-        } else if (ctx.txn.call.callee == DexUtils.getSwaapV2Vault()) {
+        } else if (ctx.txn.call.callee() == DexUtils.getSwaapV2Vault()) {
             trade.dex = "SwaapV2";
         } else {
             return;
@@ -52,7 +52,7 @@ contract BalancerV2Listener is Vault$PreSwapFunction, Vault$PreBatchSwapFunction
         trade.chainId = uint64(block.chainid);
         trade.blockNumber = block.number;
         trade.blockTimestamp = block.timestamp;
-        trade.transactionHash = ctx.txn.hash;
+        trade.transactionHash = ctx.txn.hash();
         trade.txnOriginator = tx.origin;
         trade.recipient = recipient;
         trade.liquidityPool = pool;

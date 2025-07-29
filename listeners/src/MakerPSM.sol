@@ -13,16 +13,16 @@ contract MakerPSMListener is PSM$OnBuyGemFunction, PSM$OnSellGemFunction {
         external
         override
     {
-        address fromToken = MakerUtils.getDai(ctx.txn.call.callee);
-        address toToken = MakerUtils.getGem(ctx.txn.call.callee);
-        uint256 daiAmt = MakerUtils.getDaiAmt(ctx.txn.call.callee, inputs.gemAmt, false);
+        address fromToken = MakerUtils.getDai(ctx.txn.call.callee());
+        address toToken = MakerUtils.getGem(ctx.txn.call.callee());
+        uint256 daiAmt = MakerUtils.getDaiAmt(ctx.txn.call.callee(), inputs.gemAmt, false);
         (string memory fromTokenName, string memory fromTokenSymbol, uint256 fromTokenDecimals) = getMetadata(fromToken);
         (string memory toTokenName, string memory toTokenSymbol, uint256 toTokenDecimals) = getMetadata(toToken);
         DexTradeData memory trade = DexTradeData({
             chainId: uint64(block.chainid),
             blockNumber: block.number,
             blockTimestamp: block.timestamp,
-            transactionHash: ctx.txn.hash,
+            transactionHash: ctx.txn.hash(),
             dex: "MakerPSM",
             fromToken: fromToken,
             fromTokenAmt: daiAmt,
@@ -36,7 +36,7 @@ contract MakerPSMListener is PSM$OnBuyGemFunction, PSM$OnSellGemFunction {
             toTokenDecimals: uint8(toTokenDecimals),
             txnOriginator: tx.origin,
             recipient: inputs.usr,
-            liquidityPool: ctx.txn.call.callee
+            liquidityPool: ctx.txn.call.callee()
         });
         emit DexTrade(trade);
     }
@@ -45,16 +45,16 @@ contract MakerPSMListener is PSM$OnBuyGemFunction, PSM$OnSellGemFunction {
         external
         override
     {
-        address toToken = MakerUtils.getDai(ctx.txn.call.callee);
-        address fromToken = MakerUtils.getGem(ctx.txn.call.callee);
-        uint256 daiAmt = MakerUtils.getDaiAmt(ctx.txn.call.callee, inputs.gemAmt, true);
+        address toToken = MakerUtils.getDai(ctx.txn.call.callee());
+        address fromToken = MakerUtils.getGem(ctx.txn.call.callee());
+        uint256 daiAmt = MakerUtils.getDaiAmt(ctx.txn.call.callee(), inputs.gemAmt, true);
         (string memory fromTokenName, string memory fromTokenSymbol, uint256 fromTokenDecimals) = getMetadata(fromToken);
         (string memory toTokenName, string memory toTokenSymbol, uint256 toTokenDecimals) = getMetadata(toToken);
         DexTradeData memory trade = DexTradeData({
             chainId: uint64(block.chainid),
             blockNumber: block.number,
             blockTimestamp: block.timestamp,
-            transactionHash: ctx.txn.hash,
+            transactionHash: ctx.txn.hash(),
             dex: "MakerPSM",
             fromToken: fromToken,
             fromTokenAmt: inputs.gemAmt,
@@ -68,7 +68,7 @@ contract MakerPSMListener is PSM$OnBuyGemFunction, PSM$OnSellGemFunction {
             toTokenDecimals: uint8(toTokenDecimals),
             txnOriginator: tx.origin,
             recipient: inputs.usr,
-            liquidityPool: ctx.txn.call.callee
+            liquidityPool: ctx.txn.call.callee()
         });
         emit DexTrade(trade);
     }

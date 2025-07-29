@@ -13,7 +13,7 @@ contract DODOV2Listener is DODOSwap$OnDodoSwapEvent, DexUtils {
         external
         override
     {
-        (address baseToken, address quoteToken) = DexUtils.getDodoV2PoolMetadata(ctx.txn.call.callee);
+        (address baseToken, address quoteToken) = DexUtils.getDodoV2PoolMetadata(ctx.txn.call.callee());
 
         (string memory baseTokenName, string memory baseTokenSymbol, uint256 baseTokenDecimals) = getMetadata(baseToken);
         (string memory quoteTokenName, string memory quoteTokenSymbol, uint256 quoteTokenDecimals) =
@@ -45,10 +45,10 @@ contract DODOV2Listener is DODOSwap$OnDodoSwapEvent, DexUtils {
         trade.chainId = uint64(block.chainid);
         trade.blockNumber = block.number;
         trade.blockTimestamp = block.timestamp;
-        trade.transactionHash = ctx.txn.hash;
+        trade.transactionHash = ctx.txn.hash();
         trade.txnOriginator = tx.origin;
         trade.recipient = params.receiver;
-        trade.liquidityPool = ctx.txn.call.callee;
+        trade.liquidityPool = ctx.txn.call.callee();
 
         emit DexTrade(trade);
     }
