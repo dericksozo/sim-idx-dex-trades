@@ -58,14 +58,12 @@ contract Triggers is BaseTriggers {
     struct ProtocolConfigAddress {
         Chains[] chains;
         Trigger[] triggers;
-        //mapping(Chains => ChainIdContract) chainIdToAddress;
         ChainsEnumerableMapLib.ChainsToChainIdContractMap chainIdToAddressEnumerable;
     }
 
     struct ProtocolConfigAbi {
         Chains[] chains;
         Trigger[] triggers;
-        //mapping(Chains => ChainIdAbi) chainIdToAbi;
         ChainsEnumerableMapLib.ChainsToChainIdAbiMap chainIdToAbiEnumerable;
     }
 
