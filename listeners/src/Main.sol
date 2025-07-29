@@ -56,13 +56,11 @@ contract Triggers is BaseTriggers {
 
     // per protocol config
     struct ProtocolConfigAddress {
-        Chains[] chains;
         Trigger[] triggers;
         ChainsEnumerableMapLib.ChainsToChainIdContractMap chainIdToAddressEnumerable;
     }
 
     struct ProtocolConfigAbi {
-        Chains[] chains;
         Trigger[] triggers;
         ChainsEnumerableMapLib.ChainsToChainIdAbiMap chainIdToAbiEnumerable;
     }
@@ -285,7 +283,7 @@ contract Triggers is BaseTriggers {
     }
 
     function addTriggerForProtocol(ProtocolConfigAddress storage config) internal {
-        for (uint256 i = 0; i < config.chains.length; i++) {
+        for (uint256 i = 0; i < config.chainIdToAddressEnumerable.length(); i++) {
             (, ChainIdContract memory _contract) = config.chainIdToAddressEnumerable.getAtIndex(i);
             addTriggers(_contract, config.triggers);
         }
