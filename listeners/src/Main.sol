@@ -166,8 +166,12 @@ contract Triggers is BaseTriggers {
         curveOldExchangeConfig.chainIdToAbi[Chains.Base] = chainAbi(Chains.Base, OldTokenExchange$Abi());
         curveExchangeConfig.chainIdToAbi[Chains.Base] = chainAbi(Chains.Base, TokenExchange$Abi());
         balancerV2Config.chainIdToAbi[Chains.Ethereum] = chainAbi(Chains.Ethereum, Vault$Abi());
+        balancerV2Config.chainIdToAbi[Chains.Base] = chainAbi(Chains.Base, Vault$Abi());
         maverickV1Config.chainIdToAbi[Chains.Ethereum] = chainAbi(Chains.Ethereum, MaverickPool$Abi());
+        maverickV1Config.chainIdToAbi[Chains.Base] = chainAbi(Chains.Base, MaverickPool$Abi());
         uniswapXConfig.chainIdToAbi[Chains.Ethereum] = chainAbi(Chains.Ethereum, Reactor$Abi());
+        uniswapXConfig.chainIdToAbi[Chains.Base] = chainAbi(Chains.Base, Reactor$Abi());
+        uniswapXConfig.chainIdToAbi[Chains.Unichain] = chainAbi(Chains.Unichain, Reactor$Abi());
         dodoV2Config.chainIdToAbi[Chains.Ethereum] = chainAbi(Chains.Ethereum, DODOSwap$Abi());
         dodoV2Config.chainIdToAbi[Chains.Base] = chainAbi(Chains.Base, DODOSwap$Abi());
         wooFiConfig.chainIdToAbi[Chains.Ethereum] = chainAbi(Chains.Ethereum, WooSwap$Abi());
