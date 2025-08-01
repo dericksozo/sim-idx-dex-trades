@@ -187,8 +187,18 @@ contract Triggers is BaseTriggers {
         psmConfig.chainIdToAbiEnumerable.set(Chains.Ethereum, chainAbi(Chains.Ethereum, PSM$Abi()));
         univ2Config.chainIdToAbiEnumerable.set(Chains.Ethereum, chainAbi(Chains.Ethereum, UniswapV2Pair$Abi()));
         univ2Config.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, UniswapV2Pair$Abi()));
+        univ2Config.chainIdToAbiEnumerable.set(Chains.Ink, chainAbi(Chains.Ink, UniswapV2Pair$Abi()));
+        univ2Config.chainIdToAbiEnumerable.set(Chains.WorldChain, chainAbi(Chains.WorldChain, UniswapV2Pair$Abi()));
+        univ2Config.chainIdToAbiEnumerable.set(Chains.Soneium, chainAbi(Chains.Soneium, UniswapV2Pair$Abi()));
+        univ2Config.chainIdToAbiEnumerable.set(Chains.Unichain, chainAbi(Chains.Unichain, UniswapV2Pair$Abi()));
+        univ2Config.chainIdToAbiEnumerable.set(Chains.Zora, chainAbi(Chains.Zora, UniswapV2Pair$Abi()));
         univ3Config.chainIdToAbiEnumerable.set(Chains.Ethereum, chainAbi(Chains.Ethereum, UniswapV3Pool$Abi()));
         univ3Config.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, UniswapV3Pool$Abi()));
+        univ3Config.chainIdToAbiEnumerable.set(Chains.Ink, chainAbi(Chains.Ink, UniswapV3Pool$Abi()));
+        univ3Config.chainIdToAbiEnumerable.set(Chains.Unichain, chainAbi(Chains.Unichain, UniswapV3Pool$Abi()));
+        univ3Config.chainIdToAbiEnumerable.set(Chains.Zora, chainAbi(Chains.Zora, UniswapV3Pool$Abi()));
+        univ3Config.chainIdToAbiEnumerable.set(Chains.WorldChain, chainAbi(Chains.WorldChain, UniswapV3Pool$Abi()));
+        univ3Config.chainIdToAbiEnumerable.set(Chains.Soneium, chainAbi(Chains.Soneium, UniswapV3Pool$Abi()));
         crocSwapConfig.chainIdToAbiEnumerable.set(Chains.Ethereum, chainAbi(Chains.Ethereum, HotProxy$Abi()));
         crocSwapConfig.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, HotProxy$Abi()));
         curveOldExchangeConfig.chainIdToAbiEnumerable.set(
@@ -197,6 +207,8 @@ contract Triggers is BaseTriggers {
         curveExchangeConfig.chainIdToAbiEnumerable.set(Chains.Ethereum, chainAbi(Chains.Ethereum, TokenExchange$Abi()));
         curveOldExchangeConfig.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, OldTokenExchange$Abi()));
         curveExchangeConfig.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, TokenExchange$Abi()));
+        curveOldExchangeConfig.chainIdToAbiEnumerable.set(Chains.Ink, chainAbi(Chains.Ink, OldTokenExchange$Abi()));
+        curveExchangeConfig.chainIdToAbiEnumerable.set(Chains.Ink, chainAbi(Chains.Ink, TokenExchange$Abi()));
         balancerV2Config.chainIdToAbiEnumerable.set(Chains.Ethereum, chainAbi(Chains.Ethereum, Vault$Abi()));
         balancerV2Config.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, Vault$Abi()));
         maverickV1Config.chainIdToAbiEnumerable.set(Chains.Ethereum, chainAbi(Chains.Ethereum, MaverickPool$Abi()));
@@ -213,6 +225,10 @@ contract Triggers is BaseTriggers {
         maverickV2Config.chainIdToAbiEnumerable.set(Chains.Ethereum, chainAbi(Chains.Ethereum, MaverickV2Pool$Abi()));
         maverickV2Config.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, MaverickV2Pool$Abi()));
         zeroExSettlerConfig.chainIdToAbiEnumerable.set(Chains.Ethereum, chainAbi(Chains.Ethereum, MainnetSettler$Abi()));
+        zeroExSettlerConfig.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, MainnetSettler$Abi()));
+        zeroExSettlerConfig.chainIdToAbiEnumerable.set(Chains.Ink, chainAbi(Chains.Ink, MainnetSettler$Abi()));
+        zeroExSettlerConfig.chainIdToAbiEnumerable.set(Chains.Unichain, chainAbi(Chains.Unichain, MainnetSettler$Abi()));
+        zeroExSettlerConfig.chainIdToAbiEnumerable.set(Chains.WorldChain, chainAbi(Chains.WorldChain, MainnetSettler$Abi()));
 
         // per protocol triggers
         psmConfig.triggers = [psmListener.PSM$triggerOnBuyGemFunction(), psmListener.PSM$triggerOnSellGemFunction()];
