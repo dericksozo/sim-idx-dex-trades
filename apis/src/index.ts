@@ -1,6 +1,6 @@
-import { desc, eq } from "drizzle-orm";
+import { desc } from "drizzle-orm";
 import { dexTrade } from "./db/schema/Listener";
-import { types, db, App, middlewares } from "@duneanalytics/sim-idx"; // Import schema to ensure it's registered
+import { db, App, middlewares } from "@duneanalytics/sim-idx"; // Import schema to ensure it's registered
 
 const app = App.create();
 app.use("*", middlewares.authentication);
