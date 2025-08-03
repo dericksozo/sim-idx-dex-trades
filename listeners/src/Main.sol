@@ -25,6 +25,7 @@ import "./MaverickV2.sol";
 import "./Ekubo.sol";
 import "./0xProtocol.sol";
 import "./0xSettler.sol";
+import "./BalancerV3.sol";
 import {ChainsEnumerableMapLib} from "./utils/ChainsEnumerableMapLib.sol";
 
 contract Triggers is BaseTriggers {
@@ -53,6 +54,7 @@ contract Triggers is BaseTriggers {
     EkuboListener ekuboListener;
     ZeroExProtocolListener zeroExProtocolListener;
     ZeroExSettlerListener zeroExSettlerListener;
+    BalancerV3Listener balancerV3Listener;
 
     // per protocol config
     struct ProtocolConfigAddress {
@@ -89,6 +91,7 @@ contract Triggers is BaseTriggers {
     ProtocolConfigAddress internal ekuboConfig;
     ProtocolConfigAddress internal zeroExProtocolConfig;
     ProtocolConfigAbi internal zeroExSettlerConfig;
+    ProtocolConfigAddress internal balancerV3Config;
 
     constructor() {
         // init listeners
@@ -114,6 +117,7 @@ contract Triggers is BaseTriggers {
         ekuboListener = new EkuboListener();
         zeroExProtocolListener = new ZeroExProtocolListener();
         zeroExSettlerListener = new ZeroExSettlerListener();
+        balancerV3Listener = new BalancerV3Listener();
 
         // address resolving
         bancorCarbonConfig.chainIdToAddressEnumerable.set(
@@ -182,6 +186,12 @@ contract Triggers is BaseTriggers {
         oneInchLOPV4Config.chainIdToAddressEnumerable.set(
             Chains.Base, chainContract(Chains.Base, 0x111111125421cA6dc452d289314280a0f8842A65)
         );
+        balancerV3Config.chainIdToAddressEnumerable.set(
+            Chains.Ethereum, chainContract(Chains.Ethereum, 0xbA1333333333a1BA1108E8412f11850A5C319bA9)
+        );
+        balancerV3Config.chainIdToAddressEnumerable.set(
+            Chains.Base, chainContract(Chains.Base, 0xbA1333333333a1BA1108E8412f11850A5C319bA9)
+        );
 
         // protocol to abi
         psmConfig.chainIdToAbiEnumerable.set(Chains.Ethereum, chainAbi(Chains.Ethereum, PSM$Abi()));
@@ -228,7 +238,9 @@ contract Triggers is BaseTriggers {
         zeroExSettlerConfig.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, MainnetSettler$Abi()));
         zeroExSettlerConfig.chainIdToAbiEnumerable.set(Chains.Ink, chainAbi(Chains.Ink, MainnetSettler$Abi()));
         zeroExSettlerConfig.chainIdToAbiEnumerable.set(Chains.Unichain, chainAbi(Chains.Unichain, MainnetSettler$Abi()));
-        zeroExSettlerConfig.chainIdToAbiEnumerable.set(Chains.WorldChain, chainAbi(Chains.WorldChain, MainnetSettler$Abi()));
+        zeroExSettlerConfig.chainIdToAbiEnumerable.set(
+            Chains.WorldChain, chainAbi(Chains.WorldChain, MainnetSettler$Abi())
+        );
 
         // per protocol triggers
         psmConfig.triggers = [psmListener.PSM$triggerOnBuyGemFunction(), psmListener.PSM$triggerOnSellGemFunction()];
@@ -289,6 +301,7 @@ contract Triggers is BaseTriggers {
             zeroExProtocolListener.ExchangeV4$triggerOnRfqOrderFilledEvent(),
             zeroExProtocolListener.ExchangeV4$triggerOnLimitOrderFilledEvent()
         ];
+        balancerV3Config.triggers = [balancerV3Listener.BalancerV3Vault$triggerOnSwapFunction()];
     }
 
     function addTriggerForProtocol(ProtocolConfigAbi storage config) internal {
@@ -330,5 +343,6 @@ contract Triggers is BaseTriggers {
         addTriggerForProtocol(ekuboConfig);
         addTriggerForProtocol(zeroExProtocolConfig);
         addTriggerForProtocol(zeroExSettlerConfig);
+        addTriggerForProtocol(balancerV3Config);
     }
 }
