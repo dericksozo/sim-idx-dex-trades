@@ -6,6 +6,7 @@ import "./AirSwapV4.sol";
 import "./AirSwapV5.sol";
 import "./BalancerV3Vault.sol";
 import "./BancorController.sol";
+import "./CLPool.sol";
 import "./DODOSwap.sol";
 import "./DSLOProtocol.sol";
 import "./EkuboCore.sol";
