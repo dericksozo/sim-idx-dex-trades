@@ -28,6 +28,7 @@ import "./0xSettler.sol";
 import "./BalancerV3.sol";
 import "./EulerSwap.sol";
 import "./AerodromeSlipstream.sol";
+import "./Aerodrome.sol";
 import {ChainsEnumerableMapLib} from "./utils/ChainsEnumerableMapLib.sol";
 
 contract Triggers is BaseTriggers {
@@ -59,6 +60,7 @@ contract Triggers is BaseTriggers {
     BalancerV3Listener balancerV3Listener;
     EulerSwapListener eulerSwapListener;
     AerodromeSlipstreamListener aerodromeSlipstreamListener;
+    AerodromeListener aerodromeListener;
 
     // per protocol config
     struct ProtocolConfigAddress {
@@ -98,6 +100,7 @@ contract Triggers is BaseTriggers {
     ProtocolConfigAddress internal balancerV3Config;
     ProtocolConfigAbi internal eulerSwapConfig;
     ProtocolConfigAbi internal aerodromeSlipstreamConfig;
+    ProtocolConfigAbi internal aerodromeConfig;
 
     constructor() {
         // init listeners
@@ -126,6 +129,7 @@ contract Triggers is BaseTriggers {
         balancerV3Listener = new BalancerV3Listener();
         eulerSwapListener = new EulerSwapListener();
         aerodromeSlipstreamListener = new AerodromeSlipstreamListener();
+        aerodromeListener = new AerodromeListener();
 
         // address resolving
         bancorCarbonConfig.chainIdToAddressEnumerable.set(
@@ -254,6 +258,7 @@ contract Triggers is BaseTriggers {
         eulerSwapConfig.chainIdToAbiEnumerable.set(Chains.Unichain, chainAbi(Chains.Unichain, EulerSwap$Abi()));
         eulerSwapConfig.chainIdToAbiEnumerable.set(Chains.BOB, chainAbi(Chains.BOB, EulerSwap$Abi()));
         aerodromeSlipstreamConfig.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, CLPool$Abi()));
+        aerodromeConfig.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, AerodromePool$Abi()));
 
         // per protocol triggers
         psmConfig.triggers = [psmListener.PSM$triggerOnBuyGemFunction(), psmListener.PSM$triggerOnSellGemFunction()];
@@ -317,6 +322,7 @@ contract Triggers is BaseTriggers {
         balancerV3Config.triggers = [balancerV3Listener.BalancerV3Vault$triggerOnSwapFunction()];
         eulerSwapConfig.triggers = [eulerSwapListener.EulerSwap$triggerOnSwapEvent()];
         aerodromeSlipstreamConfig.triggers = [aerodromeSlipstreamListener.CLPool$triggerOnSwapFunction()];
+        aerodromeConfig.triggers = [aerodromeListener.AerodromePool$triggerOnSwapEvent()];
     }
 
     function addTriggerForProtocol(ProtocolConfigAbi storage config) internal {
@@ -361,5 +367,6 @@ contract Triggers is BaseTriggers {
         addTriggerForProtocol(balancerV3Config);
         addTriggerForProtocol(eulerSwapConfig);
         addTriggerForProtocol(aerodromeSlipstreamConfig);
+        addTriggerForProtocol(aerodromeConfig);
     }
 }

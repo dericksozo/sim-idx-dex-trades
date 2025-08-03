@@ -29,6 +29,7 @@
 - Balancer V3
 - EulerSwap
 - Aerodrome Slipstream
+- Aerodrome
 
 ## Schema
 
