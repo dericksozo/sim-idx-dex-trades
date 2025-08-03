@@ -27,6 +27,7 @@
 - 0x Protocol
 - 0x Settler (currently we only support `MainnetSettler` RFQ orders, i.e., no support for `MainnetSettlerIntent` or `MainnetSettlerMetaTxn`)
 - Balancer V3
+- EulerSwap
 
 ## Schema
 

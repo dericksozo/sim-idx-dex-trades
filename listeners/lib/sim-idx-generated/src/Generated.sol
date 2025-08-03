@@ -9,6 +9,7 @@ import "./BancorController.sol";
 import "./DODOSwap.sol";
 import "./DSLOProtocol.sol";
 import "./EkuboCore.sol";
+import "./EulerSwap.sol";
 import "./ExchangeV4.sol";
 import "./FluidDexT1.sol";
 import "./GPv2Settlement.sol";
