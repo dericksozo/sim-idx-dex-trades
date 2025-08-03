@@ -26,6 +26,7 @@ import "./Ekubo.sol";
 import "./0xProtocol.sol";
 import "./0xSettler.sol";
 import "./BalancerV3.sol";
+import "./EulerSwap.sol";
 import {ChainsEnumerableMapLib} from "./utils/ChainsEnumerableMapLib.sol";
 
 contract Triggers is BaseTriggers {
@@ -55,6 +56,7 @@ contract Triggers is BaseTriggers {
     ZeroExProtocolListener zeroExProtocolListener;
     ZeroExSettlerListener zeroExSettlerListener;
     BalancerV3Listener balancerV3Listener;
+    EulerSwapListener eulerSwapListener;
 
     // per protocol config
     struct ProtocolConfigAddress {
@@ -92,6 +94,7 @@ contract Triggers is BaseTriggers {
     ProtocolConfigAddress internal zeroExProtocolConfig;
     ProtocolConfigAbi internal zeroExSettlerConfig;
     ProtocolConfigAddress internal balancerV3Config;
+    ProtocolConfigAbi internal eulerSwapConfig;
 
     constructor() {
         // init listeners
@@ -118,6 +121,7 @@ contract Triggers is BaseTriggers {
         zeroExProtocolListener = new ZeroExProtocolListener();
         zeroExSettlerListener = new ZeroExSettlerListener();
         balancerV3Listener = new BalancerV3Listener();
+        eulerSwapListener = new EulerSwapListener();
 
         // address resolving
         bancorCarbonConfig.chainIdToAddressEnumerable.set(
@@ -241,6 +245,10 @@ contract Triggers is BaseTriggers {
         zeroExSettlerConfig.chainIdToAbiEnumerable.set(
             Chains.WorldChain, chainAbi(Chains.WorldChain, MainnetSettler$Abi())
         );
+        eulerSwapConfig.chainIdToAbiEnumerable.set(Chains.Ethereum, chainAbi(Chains.Ethereum, EulerSwap$Abi()));
+        eulerSwapConfig.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, EulerSwap$Abi()));
+        eulerSwapConfig.chainIdToAbiEnumerable.set(Chains.Unichain, chainAbi(Chains.Unichain, EulerSwap$Abi()));
+        eulerSwapConfig.chainIdToAbiEnumerable.set(Chains.BOB, chainAbi(Chains.BOB, EulerSwap$Abi()));
 
         // per protocol triggers
         psmConfig.triggers = [psmListener.PSM$triggerOnBuyGemFunction(), psmListener.PSM$triggerOnSellGemFunction()];
@@ -302,6 +310,7 @@ contract Triggers is BaseTriggers {
             zeroExProtocolListener.ExchangeV4$triggerOnLimitOrderFilledEvent()
         ];
         balancerV3Config.triggers = [balancerV3Listener.BalancerV3Vault$triggerOnSwapFunction()];
+        eulerSwapConfig.triggers = [eulerSwapListener.EulerSwap$triggerOnSwapEvent()];
     }
 
     function addTriggerForProtocol(ProtocolConfigAbi storage config) internal {
@@ -344,5 +353,6 @@ contract Triggers is BaseTriggers {
         addTriggerForProtocol(zeroExProtocolConfig);
         addTriggerForProtocol(zeroExSettlerConfig);
         addTriggerForProtocol(balancerV3Config);
+        addTriggerForProtocol(eulerSwapConfig);
     }
 }
