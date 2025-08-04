@@ -24,8 +24,6 @@ contract UniswapV3Listener is UniswapV3Pool$OnSwapFunction, DexUtils {
             trade.dex = "UniswapV3";
         } else if (factory == DexUtils.getSushiSwapV3Factory()) {
             trade.dex = "SushiSwapV3";
-        } else if (factory == DexUtils.getPancakeSwapV3Factory()) {
-            trade.dex = "PancakeSwapV3";
         } else if (factory == DexUtils.getBaseXFactory()) {
             trade.dex = "BaseX";
         } else if (factory == DexUtils.getAlienBaseFactory()) {
