@@ -22,6 +22,7 @@ import "./MaverickPool.sol";
 import "./MaverickV2Pool.sol";
 import "./OldTokenExchange.sol";
 import "./PSM.sol";
+import "./PancakeV3Pool.sol";
 import "./PoolManager.sol";
 import "./Reactor.sol";
 import "./TokenExchange.sol";

@@ -29,6 +29,7 @@ import "./BalancerV3.sol";
 import "./EulerSwap.sol";
 import "./AerodromeSlipstream.sol";
 import "./Aerodrome.sol";
+import "./PancakeSwapV3.sol";
 import {ChainsEnumerableMapLib} from "./utils/ChainsEnumerableMapLib.sol";
 
 contract Triggers is BaseTriggers {
@@ -61,6 +62,7 @@ contract Triggers is BaseTriggers {
     EulerSwapListener eulerSwapListener;
     AerodromeSlipstreamListener aerodromeSlipstreamListener;
     AerodromeListener aerodromeListener;
+    PancakeSwapV3Listener pancakeSwapV3Listener;
 
     // per protocol config
     struct ProtocolConfigAddress {
@@ -101,6 +103,7 @@ contract Triggers is BaseTriggers {
     ProtocolConfigAbi internal eulerSwapConfig;
     ProtocolConfigAbi internal aerodromeSlipstreamConfig;
     ProtocolConfigAbi internal aerodromeConfig;
+    ProtocolConfigAbi internal pancakeSwapV3Config;
 
     constructor() {
         // init listeners
@@ -130,6 +133,7 @@ contract Triggers is BaseTriggers {
         eulerSwapListener = new EulerSwapListener();
         aerodromeSlipstreamListener = new AerodromeSlipstreamListener();
         aerodromeListener = new AerodromeListener();
+        pancakeSwapV3Listener = new PancakeSwapV3Listener();
 
         // address resolving
         bancorCarbonConfig.chainIdToAddressEnumerable.set(
@@ -259,6 +263,8 @@ contract Triggers is BaseTriggers {
         eulerSwapConfig.chainIdToAbiEnumerable.set(Chains.BOB, chainAbi(Chains.BOB, EulerSwap$Abi()));
         aerodromeSlipstreamConfig.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, CLPool$Abi()));
         aerodromeConfig.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, AerodromePool$Abi()));
+        pancakeSwapV3Config.chainIdToAbiEnumerable.set(Chains.Ethereum, chainAbi(Chains.Ethereum, PancakeV3Pool$Abi()));
+        pancakeSwapV3Config.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, PancakeV3Pool$Abi()));
 
         // per protocol triggers
         psmConfig.triggers = [psmListener.PSM$triggerOnBuyGemFunction(), psmListener.PSM$triggerOnSellGemFunction()];
@@ -323,6 +329,7 @@ contract Triggers is BaseTriggers {
         eulerSwapConfig.triggers = [eulerSwapListener.EulerSwap$triggerOnSwapEvent()];
         aerodromeSlipstreamConfig.triggers = [aerodromeSlipstreamListener.CLPool$triggerOnSwapFunction()];
         aerodromeConfig.triggers = [aerodromeListener.AerodromePool$triggerOnSwapEvent()];
+        pancakeSwapV3Config.triggers = [pancakeSwapV3Listener.PancakeV3Pool$triggerOnSwapFunction()];
     }
 
     function addTriggerForProtocol(ProtocolConfigAbi storage config) internal {
@@ -368,5 +375,6 @@ contract Triggers is BaseTriggers {
         addTriggerForProtocol(eulerSwapConfig);
         addTriggerForProtocol(aerodromeSlipstreamConfig);
         addTriggerForProtocol(aerodromeConfig);
+        addTriggerForProtocol(pancakeSwapV3Config);
     }
 }
