@@ -46,6 +46,8 @@ contract DexUtils {
     mapping(uint256 => address) internal trebleSwapV2Factories;
     mapping(uint256 => address) internal sharkSwapFactories;
     mapping(uint256 => address) internal alienBaseFactories;
+    mapping(uint256 => address) internal dackieSwapFactories;
+    mapping(uint256 => address) internal swapBasedFactories;
 
     constructor() {
         uniV3Factories[1] = 0x1F98431c8aD98523631AE4a59f267346ea31F984;
@@ -123,6 +125,10 @@ contract DexUtils {
 
         balancerV2Vaults[8453] = 0xBA12222222228d8Ba445958a75a0704d566BF2C8;
         balancerV2Vaults[1] = 0xBA12222222228d8Ba445958a75a0704d566BF2C8;
+
+        dackieSwapFactories[8453] = 0x3D237AC6D2f425D2E890Cc99198818cc1FA48870;
+
+        swapBasedFactories[8453] = 0xB5A0f8BAc329E0ed1aC0a8a65b84a7CD76e1a1Ad;
     }
 
     /// @notice Resolves the official Uniswap V2 Factory's address.
@@ -279,6 +285,18 @@ contract DexUtils {
     /// @return The address of AlienBaseSwap Factory for the current chain.
     function getAlienBaseFactory() public view returns (address) {
         return safeReturnAddress(alienBaseFactories[block.chainid]);
+    }
+
+    /// @notice Resolves the official DackieSwap Factory's address.
+    /// @return The address of DackieSwap Factory for the current chain.
+    function getDackieSwapFactory() public view returns (address) {
+        return safeReturnAddress(dackieSwapFactories[block.chainid]);
+    }
+
+    /// @notice Resolves the official SwapBased Factory's address.
+    /// @return The address of SwapBased Factory for the current chain.
+    function getSwapBasedFactory() public view returns (address) {
+        return safeReturnAddress(swapBasedFactories[block.chainid]);
     }
 
     /// @notice Resolves the official Balancer V2 Vault's address.
