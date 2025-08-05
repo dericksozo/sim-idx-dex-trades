@@ -30,6 +30,8 @@ import "./EulerSwap.sol";
 import "./AerodromeSlipstream.sol";
 import "./Aerodrome.sol";
 import "./PancakeSwapV3.sol";
+import "./BinPoolManager.sol";
+import "./CLPoolManager.sol";
 import {ChainsEnumerableMapLib} from "./utils/ChainsEnumerableMapLib.sol";
 
 contract Triggers is BaseTriggers {
@@ -63,6 +65,8 @@ contract Triggers is BaseTriggers {
     AerodromeSlipstreamListener aerodromeSlipstreamListener;
     AerodromeListener aerodromeListener;
     PancakeSwapV3Listener pancakeSwapV3Listener;
+    BinPoolManagerListener binPoolManagerListener;
+    CLPoolManagerListener cLPoolManagerListener;
 
     // per protocol config
     struct ProtocolConfigAddress {
@@ -104,6 +108,8 @@ contract Triggers is BaseTriggers {
     ProtocolConfigAbi internal aerodromeSlipstreamConfig;
     ProtocolConfigAbi internal aerodromeConfig;
     ProtocolConfigAbi internal pancakeSwapV3Config;
+    ProtocolConfigAddress internal binPoolManagerConfig;
+    ProtocolConfigAddress internal cLPoolManagerConfig;
 
     constructor() {
         // init listeners
@@ -134,6 +140,8 @@ contract Triggers is BaseTriggers {
         aerodromeSlipstreamListener = new AerodromeSlipstreamListener();
         aerodromeListener = new AerodromeListener();
         pancakeSwapV3Listener = new PancakeSwapV3Listener();
+        binPoolManagerListener = new BinPoolManagerListener();
+        cLPoolManagerListener = new CLPoolManagerListener();
 
         // address resolving
         bancorCarbonConfig.chainIdToAddressEnumerable.set(
@@ -207,6 +215,12 @@ contract Triggers is BaseTriggers {
         );
         balancerV3Config.chainIdToAddressEnumerable.set(
             Chains.Base, chainContract(Chains.Base, 0xbA1333333333a1BA1108E8412f11850A5C319bA9)
+        );
+        binPoolManagerConfig.chainIdToAddressEnumerable.set(
+            Chains.Base, chainContract(Chains.Base, 0xC697d2898e0D09264376196696c51D7aBbbAA4a9)
+        );
+        cLPoolManagerConfig.chainIdToAddressEnumerable.set(
+            Chains.Base, chainContract(Chains.Base, 0xa0FfB9c1CE1Fe56963B0321B32E7A0302114058b)
         );
 
         // protocol to abi
@@ -330,6 +344,8 @@ contract Triggers is BaseTriggers {
         aerodromeSlipstreamConfig.triggers = [aerodromeSlipstreamListener.CLPool$triggerOnSwapFunction()];
         aerodromeConfig.triggers = [aerodromeListener.AerodromePool$triggerOnSwapEvent()];
         pancakeSwapV3Config.triggers = [pancakeSwapV3Listener.PancakeV3Pool$triggerOnSwapFunction()];
+        binPoolManagerConfig.triggers = [binPoolManagerListener.BinPoolManager$triggerOnSwapFunction()];
+        cLPoolManagerConfig.triggers = [cLPoolManagerListener.CLPoolManager$triggerOnSwapFunction()];
     }
 
     function addTriggerForProtocol(ProtocolConfigAbi storage config) internal {
@@ -376,5 +392,7 @@ contract Triggers is BaseTriggers {
         addTriggerForProtocol(aerodromeSlipstreamConfig);
         addTriggerForProtocol(aerodromeConfig);
         addTriggerForProtocol(pancakeSwapV3Config);
+        addTriggerForProtocol(binPoolManagerConfig);
+        addTriggerForProtocol(cLPoolManagerConfig);
     }
 }
