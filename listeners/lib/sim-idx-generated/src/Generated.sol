@@ -5,6 +5,7 @@ import "./AerodromePool.sol";
 import "./AggregationRouterV6.sol";
 import "./AirSwapV4.sol";
 import "./AirSwapV5.sol";
+import "./AlgebraIntegralPool.sol";
 import "./BalancerV3Vault.sol";
 import "./BancorController.sol";
 import "./BinPoolManager.sol";
