@@ -32,6 +32,7 @@ import "./Aerodrome.sol";
 import "./PancakeSwapV3.sol";
 import "./BinPoolManager.sol";
 import "./CLPoolManager.sol";
+import "./AlgebraIntegral.sol";
 import {ChainsEnumerableMapLib} from "./utils/ChainsEnumerableMapLib.sol";
 
 contract Triggers is BaseTriggers {
@@ -67,6 +68,7 @@ contract Triggers is BaseTriggers {
     PancakeSwapV3Listener pancakeSwapV3Listener;
     BinPoolManagerListener binPoolManagerListener;
     CLPoolManagerListener cLPoolManagerListener;
+    AlgebraIntegralListener algebraIntegralListener;
 
     // per protocol config
     struct ProtocolConfigAddress {
@@ -110,6 +112,7 @@ contract Triggers is BaseTriggers {
     ProtocolConfigAbi internal pancakeSwapV3Config;
     ProtocolConfigAddress internal binPoolManagerConfig;
     ProtocolConfigAddress internal cLPoolManagerConfig;
+    ProtocolConfigAbi internal algebraIntegralConfig;
 
     constructor() {
         // init listeners
@@ -142,6 +145,7 @@ contract Triggers is BaseTriggers {
         pancakeSwapV3Listener = new PancakeSwapV3Listener();
         binPoolManagerListener = new BinPoolManagerListener();
         cLPoolManagerListener = new CLPoolManagerListener();
+        algebraIntegralListener = new AlgebraIntegralListener();
 
         // address resolving
         bancorCarbonConfig.chainIdToAddressEnumerable.set(
@@ -279,6 +283,7 @@ contract Triggers is BaseTriggers {
         aerodromeConfig.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, AerodromePool$Abi()));
         pancakeSwapV3Config.chainIdToAbiEnumerable.set(Chains.Ethereum, chainAbi(Chains.Ethereum, PancakeV3Pool$Abi()));
         pancakeSwapV3Config.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, PancakeV3Pool$Abi()));
+        algebraIntegralConfig.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, AlgebraIntegralPool$Abi()));
 
         // per protocol triggers
         psmConfig.triggers = [psmListener.PSM$triggerOnBuyGemFunction(), psmListener.PSM$triggerOnSellGemFunction()];
@@ -346,6 +351,7 @@ contract Triggers is BaseTriggers {
         pancakeSwapV3Config.triggers = [pancakeSwapV3Listener.PancakeV3Pool$triggerOnSwapFunction()];
         binPoolManagerConfig.triggers = [binPoolManagerListener.BinPoolManager$triggerOnSwapFunction()];
         cLPoolManagerConfig.triggers = [cLPoolManagerListener.CLPoolManager$triggerOnSwapFunction()];
+        algebraIntegralConfig.triggers = [algebraIntegralListener.AlgebraIntegralPool$triggerOnSwapEvent()];
     }
 
     function addTriggerForProtocol(ProtocolConfigAbi storage config) internal {
@@ -394,5 +400,6 @@ contract Triggers is BaseTriggers {
         addTriggerForProtocol(pancakeSwapV3Config);
         addTriggerForProtocol(binPoolManagerConfig);
         addTriggerForProtocol(cLPoolManagerConfig);
+        addTriggerForProtocol(algebraIntegralConfig);
     }
 }

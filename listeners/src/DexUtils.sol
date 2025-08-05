@@ -48,6 +48,8 @@ contract DexUtils {
     mapping(uint256 => address) internal alienBaseFactories;
     mapping(uint256 => address) internal dackieSwapFactories;
     mapping(uint256 => address) internal swapBasedFactories;
+    mapping(uint256 => address) internal hydrexFactories;
+    mapping(uint256 => address) internal trebleSwapFactories;
 
     constructor() {
         uniV3Factories[1] = 0x1F98431c8aD98523631AE4a59f267346ea31F984;
@@ -129,6 +131,10 @@ contract DexUtils {
         dackieSwapFactories[8453] = 0x3D237AC6D2f425D2E890Cc99198818cc1FA48870;
 
         swapBasedFactories[8453] = 0xB5A0f8BAc329E0ed1aC0a8a65b84a7CD76e1a1Ad;
+
+        hydrexFactories[8453] = 0x36077D39cdC65E1e3FB65810430E5b2c4D5fA29E;
+
+        trebleSwapFactories[8453] = 0xAC900f12fB25d514e3ccFE8572B153A9991cA4e7;
     }
 
     /// @notice Resolves the official Uniswap V2 Factory's address.
@@ -303,6 +309,18 @@ contract DexUtils {
     /// @return The address of Balancer V2 Vault for the current chain.
     function getBalancerV2Vault() public view returns (address) {
         return safeReturnAddress(balancerV2Vaults[block.chainid]);
+    }
+
+    /// @notice Resolves the official Hydrex Factory's address.
+    /// @return The address of Hydrex Factory for the current chain.
+    function getHydrexFactory() public view returns (address) {
+        return safeReturnAddress(hydrexFactories[block.chainid]);
+    }
+
+    /// @notice Resolves the official TrebleSwap Factory's address.
+    /// @return The address of TrebleSwap Factory for the current chain.
+    function getTrebleSwapFactory() public view returns (address) {
+        return safeReturnAddress(trebleSwapFactories[block.chainid]);
     }
 
     /// @notice Gets a Uniswap V2 pair from a factory for token0 and token1.
