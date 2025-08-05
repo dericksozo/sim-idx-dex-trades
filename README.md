@@ -30,6 +30,7 @@
 - EulerSwap
 - Aerodrome Slipstream
 - Aerodrome
+- PancakeSwap Infinity (both `CLPoolManager` and `BinPoolManager`)
 
 ## Schema
 
