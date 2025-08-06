@@ -8,17 +8,17 @@ import {IReactor} from "./interfaces/UniswapX/IReactor.sol";
 import {getMetadata} from "./utils/ERC20Metadata.sol";
 import {FeeInjector} from "./libs/UniswapX/FeeInjector.sol";
 import "./types/DexTrades.sol";
+import "./interfaces/IDexListener.sol";
 
 contract UniswapXListener is
     OrderQuoter,
     Reactor$PreExecuteFunction,
     Reactor$PreExecuteBatchFunction,
     Reactor$PreExecuteBatchWithCallbackFunction,
-    Reactor$PreExecuteWithCallbackFunction
+    Reactor$PreExecuteWithCallbackFunction,
+    IDexListener
 {
     bytes32 internal txnHash;
-
-    event DexTrade(DexTradeData);
 
     function Reactor$preExecuteFunction(PreFunctionContext memory ctx, Reactor$ExecuteFunctionInputs memory inputs)
         external

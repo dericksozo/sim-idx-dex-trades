@@ -5,10 +5,9 @@ import "sim-idx-generated/Generated.sol";
 import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
 import "./NativeTokenResolver.sol";
+import "./interfaces/IDexListener.sol";
 
-contract BancorCarbonListener is BancorController$OnTokensTradedEvent, NativeTokenResolver {
-    event DexTrade(DexTradeData);
-
+contract BancorCarbonListener is BancorController$OnTokensTradedEvent, NativeTokenResolver, IDexListener {
     function BancorController$onTokensTradedEvent(
         EventContext memory ctx,
         BancorController$TokensTradedEventParams memory params

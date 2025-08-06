@@ -6,10 +6,9 @@ import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
 import {IFluidDexT1} from "./interfaces/FluidDex/FluidDex.sol";
 import "./NativeTokenResolver.sol";
+import "./interfaces/IDexListener.sol";
 
-contract FluidDexListener is FluidDexT1$OnSwapEvent, NativeTokenResolver {
-    event DexTrade(DexTradeData);
-
+contract FluidDexListener is FluidDexT1$OnSwapEvent, NativeTokenResolver, IDexListener {
     function FluidDexT1$onSwapEvent(EventContext memory ctx, FluidDexT1$SwapEventParams memory params)
         external
         override

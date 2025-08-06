@@ -5,10 +5,9 @@ import "sim-idx-generated/Generated.sol";
 import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
 import "./DexUtils.sol";
+import "./interfaces/IDexListener.sol";
 
-contract DODOV2Listener is DODOSwap$OnDodoSwapEvent, DexUtils {
-    event DexTrade(DexTradeData);
-
+contract DODOV2Listener is DODOSwap$OnDodoSwapEvent, DexUtils, IDexListener {
     function DODOSwap$onDodoSwapEvent(EventContext memory ctx, DODOSwap$DodoSwapEventParams memory params)
         external
         override

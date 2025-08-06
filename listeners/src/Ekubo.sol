@@ -8,16 +8,16 @@ import {BalanceDelta, BalanceDeltaLibrary} from "./libs/UniswapV4/BalanceDelta.s
 import {NativeTokenResolver} from "./NativeTokenResolver.sol";
 import {EkuboPoolKey} from "./types/Ekubo/PoolKey.sol";
 import {SqrtRatio} from "./types/Ekubo/SqrtRatio.sol";
+import "./interfaces/IDexListener.sol";
 
 contract EkuboListener is
     EkuboCore$OnSwap611415377Function,
     EkuboCore$PreLockFunction,
     EkuboCore$OnLockFunction,
-    NativeTokenResolver
+    NativeTokenResolver,
+    IDexListener
 {
     address internal recipient;
-
-    event DexTrade(DexTradeData);
 
     function EkuboCore$onLockFunction(FunctionContext memory) external override {
         recipient = address(0);

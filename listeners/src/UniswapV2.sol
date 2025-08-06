@@ -6,10 +6,9 @@ import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
 import "./DexUtils.sol";
 import "./interfaces/Uniswap/UniswapInterfaces.sol";
+import "./interfaces/IDexListener.sol";
 
-contract UniswapV2Listener is UniswapV2Pair$OnSwapEvent, DexUtils {
-    event DexTrade(DexTradeData);
-
+contract UniswapV2Listener is UniswapV2Pair$OnSwapEvent, DexUtils, IDexListener {
     function UniswapV2Pair$onSwapEvent(EventContext memory ctx, UniswapV2Pair$SwapEventParams memory params)
         external
         override

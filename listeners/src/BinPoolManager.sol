@@ -10,10 +10,9 @@ import {PoolKey} from "./libs/UniswapV4/PoolKey.sol";
 import {BalanceDelta, BalanceDeltaLibrary} from "./libs/UniswapV4/BalanceDelta.sol";
 import {IHooks} from "./interfaces/UniswapV4/IHooks.sol";
 import {NativeTokenResolver} from "./NativeTokenResolver.sol";
+import "./interfaces/IDexListener.sol";
 
-contract BinPoolManagerListener is BinPoolManager$OnSwapFunction, NativeTokenResolver {
-    event DexTrade(DexTradeData);
-
+contract BinPoolManagerListener is BinPoolManager$OnSwapFunction, NativeTokenResolver, IDexListener {
     function BinPoolManager$onSwapFunction(
         FunctionContext memory ctx,
         BinPoolManager$SwapFunctionInputs memory inputs,

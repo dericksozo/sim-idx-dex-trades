@@ -5,10 +5,14 @@ import "sim-idx-generated/Generated.sol";
 import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
 import "./DexUtils.sol";
+import "./interfaces/IDexListener.sol";
 
-contract CurveListener is OldTokenExchange$OnTokenExchangeEvent, TokenExchange$OnTokenExchangeEvent, DexUtils {
-    event DexTrade(DexTradeData);
-
+contract CurveListener is
+    OldTokenExchange$OnTokenExchangeEvent,
+    TokenExchange$OnTokenExchangeEvent,
+    DexUtils,
+    IDexListener
+{
     function OldTokenExchange$onTokenExchangeEvent(
         EventContext memory ctx,
         OldTokenExchange$TokenExchangeEventParams memory params

@@ -6,10 +6,9 @@ import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
 import "./DexUtils.sol";
 import "./interfaces/Maverick/MaverickV2.sol";
+import "./interfaces/IDexListener.sol";
 
-contract MaverickV2Listener is MaverickV2Pool$OnPoolSwapEvent, DexUtils {
-    event DexTrade(DexTradeData);
-
+contract MaverickV2Listener is MaverickV2Pool$OnPoolSwapEvent, DexUtils, IDexListener {
     function MaverickV2Pool$onPoolSwapEvent(EventContext memory ctx, MaverickV2Pool$PoolSwapEventParams memory params)
         external
         override

@@ -4,16 +4,16 @@ pragma solidity ^0.8.13;
 import "sim-idx-generated/Generated.sol";
 import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
+import "./interfaces/IDexListener.sol";
 
 contract KyberSwapLOPListener is
     DSLOProtocol$OnFillOrderToFunction,
     LimitOrderProtocol$OnFillOrderRfqToFunction,
     LimitOrderProtocol$OnFillOrderFunction,
     LimitOrderProtocol$OnFillBatchOrdersToFunction,
-    LimitOrderProtocol$OnFillOrderToWithPermitFunction
+    LimitOrderProtocol$OnFillOrderToWithPermitFunction,
+    IDexListener
 {
-    event DexTrade(DexTradeData);
-
     function DSLOProtocol$onFillOrderToFunction(
         FunctionContext memory ctx,
         DSLOProtocol$FillOrderToFunctionInputs memory inputs,

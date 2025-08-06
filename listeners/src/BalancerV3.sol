@@ -4,10 +4,9 @@ pragma solidity ^0.8.13;
 import "sim-idx-generated/Generated.sol";
 import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
+import "./interfaces/IDexListener.sol";
 
-contract BalancerV3Listener is BalancerV3Vault$OnSwapFunction {
-    event DexTrade(DexTradeData);
-
+contract BalancerV3Listener is BalancerV3Vault$OnSwapFunction, IDexListener {
     function BalancerV3Vault$onSwapFunction(
         FunctionContext memory ctx,
         BalancerV3Vault$SwapFunctionInputs memory inputs,

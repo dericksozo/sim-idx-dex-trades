@@ -6,10 +6,9 @@ import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
 import "./DexUtils.sol";
 import "./interfaces/Uniswap/UniswapInterfaces.sol";
+import "./interfaces/IDexListener.sol";
 
-contract UniswapV3Listener is UniswapV3Pool$OnSwapFunction, DexUtils {
-    event DexTrade(DexTradeData);
-
+contract UniswapV3Listener is UniswapV3Pool$OnSwapFunction, DexUtils, IDexListener {
     function UniswapV3Pool$onSwapFunction(
         FunctionContext memory ctx,
         UniswapV3Pool$SwapFunctionInputs memory inputs,

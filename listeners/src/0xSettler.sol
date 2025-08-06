@@ -5,10 +5,9 @@ import "sim-idx-generated/Generated.sol";
 import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
 import "./0xUtils.sol";
+import "./interfaces/IDexListener.sol";
 
-contract ZeroExSettlerListener is MainnetSettler$OnExecuteFunction, ZeroExUtils {
-    event DexTrade(DexTradeData);
-
+contract ZeroExSettlerListener is MainnetSettler$OnExecuteFunction, ZeroExUtils, IDexListener {
     function MainnetSettler$onExecuteFunction(
         FunctionContext memory ctx,
         MainnetSettler$ExecuteFunctionInputs memory inputs,

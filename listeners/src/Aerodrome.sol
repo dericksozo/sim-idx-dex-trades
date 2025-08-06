@@ -6,10 +6,9 @@ import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
 import "./DexUtils.sol";
 import "./interfaces/Aerodrome/IAerodromePool.sol";
+import "./interfaces/IDexListener.sol";
 
-contract AerodromeListener is AerodromePool$OnSwapEvent, DexUtils {
-    event DexTrade(DexTradeData);
-
+contract AerodromeListener is AerodromePool$OnSwapEvent, DexUtils, IDexListener {
     function AerodromePool$onSwapEvent(EventContext memory ctx, AerodromePool$SwapEventParams memory params)
         external
         override

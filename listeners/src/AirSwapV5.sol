@@ -5,15 +5,15 @@ import "sim-idx-generated/Generated.sol";
 import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
 import "./DexUtils.sol";
+import "./interfaces/IDexListener.sol";
 
 contract AirSwapV5Listener is
     AirSwapV5$OnSwapFunction,
     AirSwapV5$OnSwapAnySenderFunction,
     AirSwapV5$OnSwapLightFunction,
-    DexUtils
+    DexUtils,
+    IDexListener
 {
-    event DexTrade(DexTradeData);
-
     function AirSwapV5$onSwapFunction(FunctionContext memory ctx, AirSwapV5$SwapFunctionInputs memory inputs)
         external
         override
