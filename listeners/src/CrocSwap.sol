@@ -5,10 +5,9 @@ import "sim-idx-generated/Generated.sol";
 import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
 import "./NativeTokenResolver.sol";
+import "./interfaces/IDexListener.sol";
 
-contract CrocSwapListener is HotProxy$OnUserCmdFunction, NativeTokenResolver {
-    event DexTrade(DexTradeData);
-
+contract CrocSwapListener is HotProxy$OnUserCmdFunction, NativeTokenResolver, IDexListener {
     function HotProxy$onUserCmdFunction(
         FunctionContext memory ctx,
         HotProxy$UserCmdFunctionInputs memory inputs,

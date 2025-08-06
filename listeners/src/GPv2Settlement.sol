@@ -4,15 +4,15 @@ pragma solidity ^0.8.13;
 import "sim-idx-generated/Generated.sol";
 import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
+import "./interfaces/IDexListener.sol";
 
 contract GPv2SettlementListener is
     GPv2Settlement$PreSettleFunction,
     GPv2Settlement$OnSettleFunction,
-    GPv2Settlement$OnTradeEvent
+    GPv2Settlement$OnTradeEvent,
+    IDexListener
 {
     bool internal inSettlement = false;
-
-    event DexTrade(DexTradeData);
 
     function GPv2Settlement$preSettleFunction(PreFunctionContext memory, GPv2Settlement$SettleFunctionInputs memory)
         external

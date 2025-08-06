@@ -6,16 +6,16 @@ import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
 import "./libs/1inch/AddressLib.sol";
 import "./1inchUtils.sol";
+import "./interfaces/IDexListener.sol";
 
 contract OneInchLOPV4Listener is
     AggregationRouterV6$OnFillOrderFunction,
     AggregationRouterV6$OnFillOrderArgsFunction,
     AggregationRouterV6$OnFillContractOrderArgsFunction,
     AggregationRouterV6$OnFillContractOrderFunction,
-    OneInchUtils
+    OneInchUtils,
+    IDexListener
 {
-    event DexTrade(DexTradeData);
-
     function AggregationRouterV6$onFillContractOrderFunction(
         FunctionContext memory ctx,
         AggregationRouterV6$FillContractOrderFunctionInputs memory inputs,

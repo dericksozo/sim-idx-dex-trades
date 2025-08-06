@@ -6,11 +6,16 @@ import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
 import "./DexUtils.sol";
 import {IVault} from "./interfaces/Balancer/BalancerInterfaces.sol";
+import "./interfaces/IDexListener.sol";
 
-contract BalancerV2Listener is Vault$PreSwapFunction, Vault$PreBatchSwapFunction, Vault$OnSwapEvent, DexUtils {
+contract BalancerV2Listener is
+    Vault$PreSwapFunction,
+    Vault$PreBatchSwapFunction,
+    Vault$OnSwapEvent,
+    DexUtils,
+    IDexListener
+{
     address internal recipient;
-
-    event DexTrade(DexTradeData);
 
     function Vault$preSwapFunction(PreFunctionContext memory, Vault$SwapFunctionInputs memory inputs)
         external

@@ -5,10 +5,9 @@ import "sim-idx-generated/Generated.sol";
 import "./types/DexTrades.sol";
 import "./libs/Maker/MakerLib.sol";
 import "./utils/ERC20Metadata.sol";
+import "./interfaces/IDexListener.sol";
 
-contract MakerPSMListener is PSM$OnBuyGemFunction, PSM$OnSellGemFunction {
-    event DexTrade(DexTradeData);
-
+contract MakerPSMListener is PSM$OnBuyGemFunction, PSM$OnSellGemFunction, IDexListener {
     function PSM$onBuyGemFunction(FunctionContext memory ctx, PSM$BuyGemFunctionInputs memory inputs)
         external
         override

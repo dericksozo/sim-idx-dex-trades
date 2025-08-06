@@ -5,15 +5,15 @@ import "sim-idx-generated/Generated.sol";
 import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
 import "./DexUtils.sol";
+import "./interfaces/IDexListener.sol";
 
 contract ZeroExProtocolListener is
     ExchangeV4$OnOtcOrderFilledEvent,
     ExchangeV4$OnRfqOrderFilledEvent,
     ExchangeV4$OnLimitOrderFilledEvent,
-    DexUtils
+    DexUtils,
+    IDexListener
 {
-    event DexTrade(DexTradeData);
-
     function ExchangeV4$onOtcOrderFilledEvent(
         EventContext memory ctx,
         ExchangeV4$OtcOrderFilledEventParams memory params

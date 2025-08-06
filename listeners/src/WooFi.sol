@@ -5,10 +5,9 @@ import "sim-idx-generated/Generated.sol";
 import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
 import "./DexUtils.sol";
+import "./interfaces/IDexListener.sol";
 
-contract WooFiListener is WooSwap$OnWooSwapEvent, DexUtils {
-    event DexTrade(DexTradeData);
-
+contract WooFiListener is WooSwap$OnWooSwapEvent, DexUtils, IDexListener {
     function WooSwap$onWooSwapEvent(EventContext memory ctx, WooSwap$WooSwapEventParams memory params)
         external
         override

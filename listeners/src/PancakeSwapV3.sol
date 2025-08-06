@@ -6,10 +6,9 @@ import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
 import "./DexUtils.sol";
 import "./interfaces/Uniswap/UniswapInterfaces.sol";
+import "./interfaces/IDexListener.sol";
 
-contract PancakeSwapV3Listener is PancakeV3Pool$OnSwapFunction, DexUtils {
-    event DexTrade(DexTradeData);
-
+contract PancakeSwapV3Listener is PancakeV3Pool$OnSwapFunction, DexUtils, IDexListener {
     function PancakeV3Pool$onSwapFunction(
         FunctionContext memory ctx,
         PancakeV3Pool$SwapFunctionInputs memory inputs,

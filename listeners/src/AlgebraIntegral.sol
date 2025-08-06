@@ -6,10 +6,9 @@ import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
 import "./DexUtils.sol";
 import "./interfaces/Uniswap/UniswapInterfaces.sol";
+import "./interfaces/IDexListener.sol";
 
-contract AlgebraIntegralListener is AlgebraIntegralPool$OnSwapEvent, DexUtils {
-    event DexTrade(DexTradeData);
-
+contract AlgebraIntegralListener is AlgebraIntegralPool$OnSwapEvent, DexUtils, IDexListener {
     function AlgebraIntegralPool$onSwapEvent(EventContext memory ctx, AlgebraIntegralPool$SwapEventParams memory params)
         external
         override

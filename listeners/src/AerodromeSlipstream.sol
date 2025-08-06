@@ -6,10 +6,9 @@ import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
 import "./DexUtils.sol";
 import "./interfaces/Aerodrome/AerodromeSlipstream.sol";
+import "./interfaces/IDexListener.sol";
 
-contract AerodromeSlipstreamListener is CLPool$OnSwapFunction, DexUtils {
-    event DexTrade(DexTradeData);
-
+contract AerodromeSlipstreamListener is CLPool$OnSwapFunction, DexUtils, IDexListener {
     function CLPool$onSwapFunction(
         FunctionContext memory ctx,
         CLPool$SwapFunctionInputs memory inputs,

@@ -5,10 +5,9 @@ import "sim-idx-generated/Generated.sol";
 import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
 import "./interfaces/EulerSwap/IEulerSwap.sol";
+import "./interfaces/IDexListener.sol";
 
-contract EulerSwapListener is EulerSwap$OnSwapEvent {
-    event DexTrade(DexTradeData);
-
+contract EulerSwapListener is EulerSwap$OnSwapEvent, IDexListener {
     function EulerSwap$onSwapEvent(EventContext memory ctx, EulerSwap$SwapEventParams memory params)
         external
         override
