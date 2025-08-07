@@ -1,6 +1,6 @@
 # DEX Trades
 
-**Index DEX trades from a variety of DEXs across multi-chains**
+**Index trades from a variety of DEXs across multi-chains**
 
 ## Supported DEXs
 
