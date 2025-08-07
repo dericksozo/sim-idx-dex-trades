@@ -19,7 +19,7 @@
 - CoW Protocol
 - Ambient.finance (prev. CrocSwap)
 - Curve.fi
-- Balancer V2 (and its Swaap V2 fork)
+- Balancer V2 (and the Swaap V2 fork)
 - DODO V2
 - WooFi
 - Maverick V1
