@@ -160,6 +160,9 @@ contract Triggers is BaseTriggers {
         gpv2SettlementConfig.chainIdToAddressEnumerable.set(
             Chains.Base, chainContract(Chains.Base, 0x9008D19f58AAbD9eD0D60971565AA8510560ab41)
         );
+        gpv2SettlementConfig.chainIdToAddressEnumerable.set(
+            Chains.Arbitrum, chainContract(Chains.Arbitrum, 0x9008D19f58AAbD9eD0D60971565AA8510560ab41)
+        );
         uniswapV4Config.chainIdToAddressEnumerable.set(
             Chains.Unichain, chainContract(Chains.Unichain, 0x1F98400000000000000000000000000000000004)
         );
@@ -181,11 +184,17 @@ contract Triggers is BaseTriggers {
         uniswapV4Config.chainIdToAddressEnumerable.set(
             Chains.Ethereum, chainContract(Chains.Ethereum, 0x000000000004444c5dc75cB358380D2e3dE08A90)
         );
+        uniswapV4Config.chainIdToAddressEnumerable.set(
+            Chains.Arbitrum, chainContract(Chains.Arbitrum, 0x360E68faCcca8cA495c1B759Fd9EEe466db9FB32)
+        );
         airSwapV4Config.chainIdToAddressEnumerable.set(
             Chains.Ethereum, chainContract(Chains.Ethereum, 0xd82FA167727a4dc6D6F55830A2c47aBbB4b3a0F8)
         );
         airSwapV5Config.chainIdToAddressEnumerable.set(
             Chains.Ethereum, chainContract(Chains.Ethereum, 0xD82E10B9A4107939e55fCCa9B53A9ede6CF2fC46)
+        );
+        airSwapV5Config.chainIdToAddressEnumerable.set(
+            Chains.Arbitrum, chainContract(Chains.Arbitrum, 0xD82E10B9A4107939e55fCCa9B53A9ede6CF2fC46)
         );
         kyberSwapLOPConfig.chainIdToAddressEnumerable.set(
             Chains.Ethereum, chainContract(Chains.Ethereum, 0x227B0c196eA8db17A665EA6824D972A64202E936)
@@ -199,6 +208,12 @@ contract Triggers is BaseTriggers {
         kyberSwapDSLOPConfig.chainIdToAddressEnumerable.set(
             Chains.Base, chainContract(Chains.Base, 0xcab2FA2eeab7065B45CBcF6E3936dDE2506b4f6C)
         );
+        kyberSwapLOPConfig.chainIdToAddressEnumerable.set(
+            Chains.Arbitrum, chainContract(Chains.Arbitrum, 0x227B0c196eA8db17A665EA6824D972A64202E936)
+        );
+        kyberSwapDSLOPConfig.chainIdToAddressEnumerable.set(
+            Chains.Arbitrum, chainContract(Chains.Arbitrum, 0xcab2FA2eeab7065B45CBcF6E3936dDE2506b4f6C)
+        );
         ekuboConfig.chainIdToAddressEnumerable.set(
             Chains.Ethereum, chainContract(Chains.Ethereum, 0xe0e0e08A6A4b9Dc7bD67BCB7aadE5cF48157d444)
         );
@@ -208,17 +223,26 @@ contract Triggers is BaseTriggers {
         zeroExProtocolConfig.chainIdToAddressEnumerable.set(
             Chains.Base, chainContract(Chains.Base, 0xDef1C0ded9bec7F1a1670819833240f027b25EfF)
         );
+        zeroExProtocolConfig.chainIdToAddressEnumerable.set(
+            Chains.Arbitrum, chainContract(Chains.Arbitrum, 0xDef1C0ded9bec7F1a1670819833240f027b25EfF)
+        );
         oneInchLOPV4Config.chainIdToAddressEnumerable.set(
             Chains.Ethereum, chainContract(Chains.Ethereum, 0x111111125421cA6dc452d289314280a0f8842A65)
         );
         oneInchLOPV4Config.chainIdToAddressEnumerable.set(
             Chains.Base, chainContract(Chains.Base, 0x111111125421cA6dc452d289314280a0f8842A65)
         );
+        oneInchLOPV4Config.chainIdToAddressEnumerable.set(
+            Chains.Arbitrum, chainContract(Chains.Arbitrum, 0x111111125421cA6dc452d289314280a0f8842A65)
+        );
         balancerV3Config.chainIdToAddressEnumerable.set(
             Chains.Ethereum, chainContract(Chains.Ethereum, 0xbA1333333333a1BA1108E8412f11850A5C319bA9)
         );
         balancerV3Config.chainIdToAddressEnumerable.set(
             Chains.Base, chainContract(Chains.Base, 0xbA1333333333a1BA1108E8412f11850A5C319bA9)
+        );
+        balancerV3Config.chainIdToAddressEnumerable.set(
+            Chains.Arbitrum, chainContract(Chains.Arbitrum, 0xbA1333333333a1BA1108E8412f11850A5C319bA9)
         );
         binPoolManagerConfig.chainIdToAddressEnumerable.set(
             Chains.Base, chainContract(Chains.Base, 0xC697d2898e0D09264376196696c51D7aBbbAA4a9)
@@ -236,6 +260,7 @@ contract Triggers is BaseTriggers {
         univ2Config.chainIdToAbiEnumerable.set(Chains.Soneium, chainAbi(Chains.Soneium, UniswapV2Pair$Abi()));
         univ2Config.chainIdToAbiEnumerable.set(Chains.Unichain, chainAbi(Chains.Unichain, UniswapV2Pair$Abi()));
         univ2Config.chainIdToAbiEnumerable.set(Chains.Zora, chainAbi(Chains.Zora, UniswapV2Pair$Abi()));
+        univ2Config.chainIdToAbiEnumerable.set(Chains.Arbitrum, chainAbi(Chains.Arbitrum, UniswapV2Pair$Abi()));
         univ3Config.chainIdToAbiEnumerable.set(Chains.Ethereum, chainAbi(Chains.Ethereum, UniswapV3Pool$Abi()));
         univ3Config.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, UniswapV3Pool$Abi()));
         univ3Config.chainIdToAbiEnumerable.set(Chains.Ink, chainAbi(Chains.Ink, UniswapV3Pool$Abi()));
@@ -243,6 +268,7 @@ contract Triggers is BaseTriggers {
         univ3Config.chainIdToAbiEnumerable.set(Chains.Zora, chainAbi(Chains.Zora, UniswapV3Pool$Abi()));
         univ3Config.chainIdToAbiEnumerable.set(Chains.WorldChain, chainAbi(Chains.WorldChain, UniswapV3Pool$Abi()));
         univ3Config.chainIdToAbiEnumerable.set(Chains.Soneium, chainAbi(Chains.Soneium, UniswapV3Pool$Abi()));
+        univ3Config.chainIdToAbiEnumerable.set(Chains.Arbitrum, chainAbi(Chains.Arbitrum, UniswapV3Pool$Abi()));
         crocSwapConfig.chainIdToAbiEnumerable.set(Chains.Ethereum, chainAbi(Chains.Ethereum, HotProxy$Abi()));
         crocSwapConfig.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, HotProxy$Abi()));
         curveOldExchangeConfig.chainIdToAbiEnumerable.set(
@@ -253,21 +279,29 @@ contract Triggers is BaseTriggers {
         curveExchangeConfig.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, TokenExchange$Abi()));
         curveOldExchangeConfig.chainIdToAbiEnumerable.set(Chains.Ink, chainAbi(Chains.Ink, OldTokenExchange$Abi()));
         curveExchangeConfig.chainIdToAbiEnumerable.set(Chains.Ink, chainAbi(Chains.Ink, TokenExchange$Abi()));
+        curveOldExchangeConfig.chainIdToAbiEnumerable.set(Chains.Arbitrum, chainAbi(Chains.Arbitrum, OldTokenExchange$Abi()));
+        curveExchangeConfig.chainIdToAbiEnumerable.set(Chains.Arbitrum, chainAbi(Chains.Arbitrum, TokenExchange$Abi()));
         balancerV2Config.chainIdToAbiEnumerable.set(Chains.Ethereum, chainAbi(Chains.Ethereum, Vault$Abi()));
         balancerV2Config.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, Vault$Abi()));
+        balancerV2Config.chainIdToAbiEnumerable.set(Chains.Arbitrum, chainAbi(Chains.Arbitrum, Vault$Abi()));
         maverickV1Config.chainIdToAbiEnumerable.set(Chains.Ethereum, chainAbi(Chains.Ethereum, MaverickPool$Abi()));
         maverickV1Config.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, MaverickPool$Abi()));
         uniswapXConfig.chainIdToAbiEnumerable.set(Chains.Ethereum, chainAbi(Chains.Ethereum, Reactor$Abi()));
         uniswapXConfig.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, Reactor$Abi()));
         uniswapXConfig.chainIdToAbiEnumerable.set(Chains.Unichain, chainAbi(Chains.Unichain, Reactor$Abi()));
+        uniswapXConfig.chainIdToAbiEnumerable.set(Chains.Arbitrum, chainAbi(Chains.Arbitrum, Reactor$Abi()));
         dodoV2Config.chainIdToAbiEnumerable.set(Chains.Ethereum, chainAbi(Chains.Ethereum, DODOSwap$Abi()));
         dodoV2Config.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, DODOSwap$Abi()));
+        dodoV2Config.chainIdToAbiEnumerable.set(Chains.Arbitrum, chainAbi(Chains.Arbitrum, DODOSwap$Abi()));
         wooFiConfig.chainIdToAbiEnumerable.set(Chains.Ethereum, chainAbi(Chains.Ethereum, WooSwap$Abi()));
         wooFiConfig.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, WooSwap$Abi()));
+        wooFiConfig.chainIdToAbiEnumerable.set(Chains.Arbitrum, chainAbi(Chains.Arbitrum, WooSwap$Abi()));
         fluidDexConfig.chainIdToAbiEnumerable.set(Chains.Ethereum, chainAbi(Chains.Ethereum, FluidDexT1$Abi()));
         fluidDexConfig.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, FluidDexT1$Abi()));
+        fluidDexConfig.chainIdToAbiEnumerable.set(Chains.Arbitrum, chainAbi(Chains.Arbitrum, FluidDexT1$Abi()));
         maverickV2Config.chainIdToAbiEnumerable.set(Chains.Ethereum, chainAbi(Chains.Ethereum, MaverickV2Pool$Abi()));
         maverickV2Config.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, MaverickV2Pool$Abi()));
+        maverickV2Config.chainIdToAbiEnumerable.set(Chains.Arbitrum, chainAbi(Chains.Arbitrum, MaverickV2Pool$Abi()));
         zeroExSettlerConfig.chainIdToAbiEnumerable.set(Chains.Ethereum, chainAbi(Chains.Ethereum, MainnetSettler$Abi()));
         zeroExSettlerConfig.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, MainnetSettler$Abi()));
         zeroExSettlerConfig.chainIdToAbiEnumerable.set(Chains.Ink, chainAbi(Chains.Ink, MainnetSettler$Abi()));
@@ -275,14 +309,17 @@ contract Triggers is BaseTriggers {
         zeroExSettlerConfig.chainIdToAbiEnumerable.set(
             Chains.WorldChain, chainAbi(Chains.WorldChain, MainnetSettler$Abi())
         );
+        zeroExSettlerConfig.chainIdToAbiEnumerable.set(Chains.Arbitrum, chainAbi(Chains.Arbitrum, MainnetSettler$Abi()));
         eulerSwapConfig.chainIdToAbiEnumerable.set(Chains.Ethereum, chainAbi(Chains.Ethereum, EulerSwap$Abi()));
         eulerSwapConfig.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, EulerSwap$Abi()));
         eulerSwapConfig.chainIdToAbiEnumerable.set(Chains.Unichain, chainAbi(Chains.Unichain, EulerSwap$Abi()));
         eulerSwapConfig.chainIdToAbiEnumerable.set(Chains.BOB, chainAbi(Chains.BOB, EulerSwap$Abi()));
+        eulerSwapConfig.chainIdToAbiEnumerable.set(Chains.Arbitrum, chainAbi(Chains.Arbitrum, EulerSwap$Abi()));
         aerodromeSlipstreamConfig.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, CLPool$Abi()));
         aerodromeConfig.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, AerodromePool$Abi()));
         pancakeSwapV3Config.chainIdToAbiEnumerable.set(Chains.Ethereum, chainAbi(Chains.Ethereum, PancakeV3Pool$Abi()));
         pancakeSwapV3Config.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, PancakeV3Pool$Abi()));
+        pancakeSwapV3Config.chainIdToAbiEnumerable.set(Chains.Arbitrum, chainAbi(Chains.Arbitrum, PancakeV3Pool$Abi()));
         algebraIntegralConfig.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, AlgebraIntegralPool$Abi()));
 
         // per protocol triggers
