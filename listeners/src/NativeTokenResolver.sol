@@ -21,5 +21,6 @@ contract NativeTokenResolver {
         nativeToken[1868] = NativeToken("Ether", "ETH", 18);
         nativeToken[360] = NativeToken("Ether", "ETH", 18);
         nativeToken[60808] = NativeToken("Ether", "ETH", 18);
+        nativeToken[42161] = NativeToken("Ether", "ETH", 18);
     }
 }
