@@ -22,7 +22,7 @@ contract AlgebraListener is AlgebraPool$OnSwapFunction, DexUtils, IDexListener {
         if (factory == DexUtils.getCamelotV3Factory()) {
             trade.dex = "CamelotV3";
         } else {
-            return;
+            trade.dex = "Unknown";
         }
         if (inputs.zeroToOne) {
             trade.fromToken = token0;

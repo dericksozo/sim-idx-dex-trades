@@ -52,6 +52,7 @@ contract DexUtils {
     mapping(uint256 => address) internal trebleSwapFactories;
     mapping(uint256 => address) internal camelotV4Factories;
     mapping(uint256 => address) internal camelotV3Factories;
+    mapping(uint256 => address) internal gammaSwapV2Factories;
 
     constructor() {
         uniV3Factories[1] = 0x1F98431c8aD98523631AE4a59f267346ea31F984;
@@ -79,6 +80,7 @@ contract DexUtils {
 
         sushiSwapV2Factories[1] = 0xC0AEe478e3658e2610c5F7A4A2E1777cE9e4f2Ac;
         sushiSwapV2Factories[8453] = 0x71524B4f93c58fcbF659783284E38825f0622859;
+        sushiSwapV2Factories[42161] = 0xc35DADB65012eC5796536bD9864eD8773aBc74C4;
 
         sushiSwapV3Factories[1] = 0xbACEB8eC6b9355Dfc0269C18bac9d6E2Bdc29C4F;
         sushiSwapV3Factories[8453] = 0xc35DADB65012eC5796536bD9864eD8773aBc74C4;
@@ -143,6 +145,8 @@ contract DexUtils {
         camelotV4Factories[42161] = 0x6b692b588DeF775A92A6d0F3b6CCCc8a4a4e5bb8;
 
         camelotV3Factories[42161] = 0x1a3c9B1d2F0529D97f2afC5136Cc23e58f1FD35B;
+
+        gammaSwapV2Factories[42161] = 0xCb85E1222f715a81b8edaeB73b28182fa37cffA8;
     }
 
     /// @notice Resolves the official Uniswap V2 Factory's address.
@@ -341,6 +345,12 @@ contract DexUtils {
     /// @return The address of Camelot V3 Factory for the current chain.
     function getCamelotV3Factory() internal view returns (address) {
         return safeReturnAddress(camelotV3Factories[block.chainid]);
+    }
+
+    /// @notice Resolves the official GammaSwap V2 Factory's address.
+    /// @return The address of GammaSwap V2 Factory for the current chain.
+    function getGammaSwapV2Factory() internal view returns (address) {
+        return safeReturnAddress(gammaSwapV2Factories[block.chainid]);
     }
 
     /// @notice Gets a Uniswap V2 pair from a factory for token0 and token1.

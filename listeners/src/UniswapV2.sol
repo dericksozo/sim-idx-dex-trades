@@ -46,6 +46,8 @@ contract UniswapV2Listener is UniswapV2Pair$OnSwapEvent, DexUtils, IDexListener 
             trade.dex = "Aerodrome";
         } else if (factory == DexUtils.getInfusionFactory()) {
             trade.dex = "Infusion";
+        } else if (factory == DexUtils.getGammaSwapV2Factory()) {
+            trade.dex = "GammaSwap";
         } else {
             return;
         }
