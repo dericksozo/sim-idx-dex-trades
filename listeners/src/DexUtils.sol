@@ -51,6 +51,7 @@ contract DexUtils {
     mapping(uint256 => address) internal hydrexFactories;
     mapping(uint256 => address) internal trebleSwapFactories;
     mapping(uint256 => address) internal camelotV4Factories;
+    mapping(uint256 => address) internal camelotV3Factories;
 
     constructor() {
         uniV3Factories[1] = 0x1F98431c8aD98523631AE4a59f267346ea31F984;
@@ -140,6 +141,8 @@ contract DexUtils {
         trebleSwapFactories[8453] = 0xAC900f12fB25d514e3ccFE8572B153A9991cA4e7;
 
         camelotV4Factories[42161] = 0x6b692b588DeF775A92A6d0F3b6CCCc8a4a4e5bb8;
+
+        camelotV3Factories[42161] = 0x1a3c9B1d2F0529D97f2afC5136Cc23e58f1FD35B;
     }
 
     /// @notice Resolves the official Uniswap V2 Factory's address.
@@ -332,6 +335,12 @@ contract DexUtils {
     /// @return The address of Camelot V4 Factory for the current chain.
     function getCamelotV4Factory() internal view returns (address) {
         return safeReturnAddress(camelotV4Factories[block.chainid]);
+    }
+
+    /// @notice Resolves the official Camelot V3 Factory's address.
+    /// @return The address of Camelot V3 Factory for the current chain.
+    function getCamelotV3Factory() internal view returns (address) {
+        return safeReturnAddress(camelotV3Factories[block.chainid]);
     }
 
     /// @notice Gets a Uniswap V2 pair from a factory for token0 and token1.
