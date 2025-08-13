@@ -50,6 +50,7 @@ contract DexUtils {
     mapping(uint256 => address) internal swapBasedFactories;
     mapping(uint256 => address) internal hydrexFactories;
     mapping(uint256 => address) internal trebleSwapFactories;
+    mapping(uint256 => address) internal camelotV4Factories;
 
     constructor() {
         uniV3Factories[1] = 0x1F98431c8aD98523631AE4a59f267346ea31F984;
@@ -137,192 +138,200 @@ contract DexUtils {
         hydrexFactories[8453] = 0x36077D39cdC65E1e3FB65810430E5b2c4D5fA29E;
 
         trebleSwapFactories[8453] = 0xAC900f12fB25d514e3ccFE8572B153A9991cA4e7;
+
+        camelotV4Factories[42161] = 0x6b692b588DeF775A92A6d0F3b6CCCc8a4a4e5bb8;
     }
 
     /// @notice Resolves the official Uniswap V2 Factory's address.
     /// @return The address of Uniswap V2 Factory for the current chain.
-    function getUniswapV2Factory() public view returns (address) {
+    function getUniswapV2Factory() internal view returns (address) {
         return safeReturnAddress(uniV2Factories[block.chainid]);
     }
 
     /// @notice Resolves the official Uniswap V3 Factory's address.
     /// @return The address of Uniswap V3 Factory for the current chain.
-    function getUniswapV3Factory() public view returns (address) {
+    function getUniswapV3Factory() internal view returns (address) {
         return safeReturnAddress(uniV3Factories[block.chainid]);
     }
 
     /// @notice Resolves the official PancakeSwap V2 Factory's address.
     /// @return The address of PancakeSwap V2 Factory for the current chain.
-    function getPancakeSwapV2Factory() public view returns (address) {
+    function getPancakeSwapV2Factory() internal view returns (address) {
         return safeReturnAddress(pancakeSwapV2Factories[block.chainid]);
     }
 
     /// @notice Resolves the official PancakeSwap V3 Factory's address.
     /// @return The address of PancakeSwap V3 Factory for the current chain.
-    function getPancakeSwapV3Factory() public view returns (address) {
+    function getPancakeSwapV3Factory() internal view returns (address) {
         return safeReturnAddress(pancakeSwapV3Factories[block.chainid]);
     }
 
     /// @notice Resolves the official SushiSwap V2 Factory's address.
     /// @return The address of SushiSwap V2 Factory for the current chain.
-    function getSushiSwapV2Factory() public view returns (address) {
+    function getSushiSwapV2Factory() internal view returns (address) {
         return safeReturnAddress(sushiSwapV2Factories[block.chainid]);
     }
 
     /// @notice Resolves the official SushiSwap V3 Factory's address.
     /// @return The address of SushiSwap V3 Factory for the current chain.
-    function getSushiSwapV3Factory() public view returns (address) {
+    function getSushiSwapV3Factory() internal view returns (address) {
         return safeReturnAddress(sushiSwapV3Factories[block.chainid]);
     }
 
     /// @notice Resolves the official ShibaSwap V2 Factory's address.
     /// @return The address of ShibaSwap V2 Factory for the current chain.
-    function getShibaSwapV2Factory() public view returns (address) {
+    function getShibaSwapV2Factory() internal view returns (address) {
         return safeReturnAddress(shibaSwapV2Factories[block.chainid]);
     }
 
     /// @notice Resolves the official BaseX Factory's address.
     /// @return The address of BaseX Factory for the current chain.
-    function getBaseXFactory() public view returns (address) {
+    function getBaseXFactory() internal view returns (address) {
         return safeReturnAddress(baseXFactories[block.chainid]);
     }
 
     /// @notice Resolves the official RocketSwap Factory's address.
     /// @return The address of RocketSwap Factory for the current chain.
-    function getRocketSwapFactory() public view returns (address) {
+    function getRocketSwapFactory() internal view returns (address) {
         return safeReturnAddress(rocketSwapFactories[block.chainid]);
     }
 
     /// @notice Resolves the official Aerodrome Factory's address.
     /// @return The address of Aerodrome Factory for the current chain.
-    function getAerodromeFactory() public view returns (address) {
+    function getAerodromeFactory() internal view returns (address) {
         return safeReturnAddress(aerodromeFactories[block.chainid]);
     }
 
     /// @notice Resolves the official Aerodrome Slipstream Factory's address.
     /// @return The address of Aerodrome Slipstream Factory for the current chain.
-    function getAerodromeSlipstreamFactory() public view returns (address) {
+    function getAerodromeSlipstreamFactory() internal view returns (address) {
         return safeReturnAddress(aerodromeSlipstreamFactories[block.chainid]);
     }
 
     /// @notice Resolves the official Infusion Factory's address.
     /// @return The address of Infusion Factory for the current chain.
-    function getInfusionFactory() public view returns (address) {
+    function getInfusionFactory() internal view returns (address) {
         return safeReturnAddress(infusionFactories[block.chainid]);
     }
 
     /// @notice Resolves the official Maverick V1 Factory's address.
     /// @return The address of Maverick V1 Factory for the current chain.
-    function getMaverickV1Factory() public view returns (address) {
+    function getMaverickV1Factory() internal view returns (address) {
         return safeReturnAddress(maverickV1Factories[block.chainid]);
     }
 
     /// @notice Resolves the official Maverick V2 Factory's address.
     /// @return The address of Maverick V2 Factory for the current chain.
-    function getMaverickV2Factory() public view returns (address) {
+    function getMaverickV2Factory() internal view returns (address) {
         return safeReturnAddress(maverickV2Factories[block.chainid]);
     }
 
     /// @notice Resolves the official Swaap V2 Vault's address.
     /// @return The address of Swaap V2 Vault for the current chain.
-    function getSwaapV2Vault() public view returns (address) {
+    function getSwaapV2Vault() internal view returns (address) {
         return safeReturnAddress(swaapV2Vaults[block.chainid]);
     }
 
     /// @notice Resolves the official BaseSwap Factory's address.
     /// @return The address of BaseSwap Factory for the current chain.
-    function getBaseSwapFactory() public view returns (address) {
+    function getBaseSwapFactory() internal view returns (address) {
         return safeReturnAddress(baseSwapFactories[block.chainid]);
     }
 
     /// @notice Resolves the official Dodo V2 DPP Factory's address.
     /// @return The address of Dodo V2 DPP Factory for the current chain.
-    function getDodoV2DppFactory() public view returns (address) {
+    function getDodoV2DppFactory() internal view returns (address) {
         return safeReturnAddress(dodoV2DppFactories[block.chainid]);
     }
 
     /// @notice Resolves the official Dodo V2 DSP Factory's address.
     /// @return The address of Dodo V2 DSP Factory for the current chain.
-    function getDodoV2DspFactory() public view returns (address) {
+    function getDodoV2DspFactory() internal view returns (address) {
         return safeReturnAddress(dodoV2DspFactories[block.chainid]);
     }
 
     /// @notice Resolves the official Dodo V2 DVM Factory's address.
     /// @return The address of Dodo V2 DVM Factory for the current chain.
-    function getDodoV2DvmFactory() public view returns (address) {
+    function getDodoV2DvmFactory() internal view returns (address) {
         return safeReturnAddress(dodoV2DvmFactories[block.chainid]);
     }
 
     /// @notice Resolves the official RingSwap Factory's address.
     /// @return The address of RingSwap Factory for the current chain.
-    function getRingSwapFactory() public view returns (address) {
+    function getRingSwapFactory() internal view returns (address) {
         return safeReturnAddress(ringSwapFactories[block.chainid]);
     }
 
     /// @notice Resolves the official CroDefiSwap Factory's address.
     /// @return The address of CroDefiSwap Factory for the current chain.
-    function getCroDefiSwapFactory() public view returns (address) {
+    function getCroDefiSwapFactory() internal view returns (address) {
         return safeReturnAddress(croDefiSwapFactories[block.chainid]);
     }
 
     /// @notice Resolves the official DXSwap Factory's address.
     /// @return The address of DXSwap Factory for the current chain.
-    function getDXSwapFactory() public view returns (address) {
+    function getDXSwapFactory() internal view returns (address) {
         return safeReturnAddress(dxSwapFactories[block.chainid]);
     }
 
     /// @notice Resolves the official SquadSwap Factory's address.
     /// @return The address of SquadSwap Factory for the current chain.
-    function getSquadSwapFactory() public view returns (address) {
+    function getSquadSwapFactory() internal view returns (address) {
         return safeReturnAddress(squadSwapFactories[block.chainid]);
     }
 
     /// @notice Resolves the official TrebleSwap V2 Factory's address.
     /// @return The address of TrebleSwap V2 Factory for the current chain.
-    function getTrebleSwapV2Factory() public view returns (address) {
+    function getTrebleSwapV2Factory() internal view returns (address) {
         return safeReturnAddress(trebleSwapV2Factories[block.chainid]);
     }
 
     /// @notice Resolves the official SharkSwap Factory's address.
     /// @return The address of SharkSwap Factory for the current chain.
-    function getSharkSwapFactory() public view returns (address) {
+    function getSharkSwapFactory() internal view returns (address) {
         return safeReturnAddress(sharkSwapFactories[block.chainid]);
     }
 
     /// @notice Resolves the official AlienBaseSwap Factory's address.
     /// @return The address of AlienBaseSwap Factory for the current chain.
-    function getAlienBaseFactory() public view returns (address) {
+    function getAlienBaseFactory() internal view returns (address) {
         return safeReturnAddress(alienBaseFactories[block.chainid]);
     }
 
     /// @notice Resolves the official DackieSwap Factory's address.
     /// @return The address of DackieSwap Factory for the current chain.
-    function getDackieSwapFactory() public view returns (address) {
+    function getDackieSwapFactory() internal view returns (address) {
         return safeReturnAddress(dackieSwapFactories[block.chainid]);
     }
 
     /// @notice Resolves the official SwapBased Factory's address.
     /// @return The address of SwapBased Factory for the current chain.
-    function getSwapBasedFactory() public view returns (address) {
+    function getSwapBasedFactory() internal view returns (address) {
         return safeReturnAddress(swapBasedFactories[block.chainid]);
     }
 
     /// @notice Resolves the official Balancer V2 Vault's address.
     /// @return The address of Balancer V2 Vault for the current chain.
-    function getBalancerV2Vault() public view returns (address) {
+    function getBalancerV2Vault() internal view returns (address) {
         return safeReturnAddress(balancerV2Vaults[block.chainid]);
     }
 
     /// @notice Resolves the official Hydrex Factory's address.
     /// @return The address of Hydrex Factory for the current chain.
-    function getHydrexFactory() public view returns (address) {
+    function getHydrexFactory() internal view returns (address) {
         return safeReturnAddress(hydrexFactories[block.chainid]);
     }
 
     /// @notice Resolves the official TrebleSwap Factory's address.
     /// @return The address of TrebleSwap Factory for the current chain.
-    function getTrebleSwapFactory() public view returns (address) {
+    function getTrebleSwapFactory() internal view returns (address) {
         return safeReturnAddress(trebleSwapFactories[block.chainid]);
+    }
+
+    /// @notice Resolves the official Camelot V4 Factory's address.
+    /// @return The address of Camelot V4 Factory for the current chain.
+    function getCamelotV4Factory() internal view returns (address) {
+        return safeReturnAddress(camelotV4Factories[block.chainid]);
     }
 
     /// @notice Gets a Uniswap V2 pair from a factory for token0 and token1.
@@ -330,7 +339,7 @@ contract DexUtils {
     /// @param token1 The token1 address.
     /// @param factory The Uniswap V2 Factory.
     /// @return The pool's address or `address(0)` in case the factory doesn't exist.
-    function getUniswapV2Pool(address token0, address token1, address factory) public view returns (address) {
+    function getUniswapV2Pool(address token0, address token1, address factory) internal view returns (address) {
         if (factory == address(0)) {
             return address(0);
         }
@@ -342,7 +351,7 @@ contract DexUtils {
     /// @param token1 The token1 address.
     /// @param factory The Uniswap V3 Factory.
     /// @return The pool's address or `address(0)` in case the factory doesn't exist.
-    function getUniswapV3Pool(address token0, address token1, address factory) public returns (address) {
+    function getUniswapV3Pool(address token0, address token1, address factory) internal returns (address) {
         if (factory == address(0)) {
             return address(0);
         }
@@ -373,7 +382,7 @@ contract DexUtils {
     /// @param factory The Uniswap V3 Factory.
     /// @return The pool's address.
     function getUniswapV3Pool(address token0, address token1, uint24 fee, address factory)
-        public
+        internal
         view
         returns (address)
     {
@@ -387,7 +396,7 @@ contract DexUtils {
     /// @param pair The pair's address.
     /// @return The token0 address.
     /// @return The token1 address.
-    function getUniswapV2PairMetadata(address pair) public returns (address, address) {
+    function getUniswapV2PairMetadata(address pair) internal returns (address, address) {
         address token0 = IUniswapV2Pair(pair).token0();
         address token1 = IUniswapV2Pair(pair).token1();
         return (token0, token1);
@@ -398,7 +407,7 @@ contract DexUtils {
     /// @return The token0 address.
     /// @return The token1 address.
     /// @return The pool's fee.
-    function getUniswapV3PoolMetadata(address pool) public returns (address, address, uint24) {
+    function getUniswapV3PoolMetadata(address pool) internal returns (address, address, uint24) {
         address token0 = IUniswapV3Pool(pool).token0();
         address token1 = IUniswapV3Pool(pool).token1();
         uint24 fee = IUniswapV3Pool(pool).fee();
@@ -409,7 +418,7 @@ contract DexUtils {
     /// @param pool The pool's address.
     /// @return The token0 address.
     /// @return The token1 address.
-    function getAerodromeSlipstreamPoolMetadata(address pool) public view returns (address, address) {
+    function getAerodromeSlipstreamPoolMetadata(address pool) internal view returns (address, address) {
         address token0 = ICLPoolConstants(pool).token0();
         address token1 = ICLPoolConstants(pool).token1();
         return (token0, token1);
@@ -419,7 +428,7 @@ contract DexUtils {
     /// @param pool The pool's address.
     /// @param factory The factory's address.
     /// @return true if the pool belongs to the factory, false otherwise.
-    function checkIfPool(address pool, address factory) public view returns (bool) {
+    function checkIfPool(address pool, address factory) internal view returns (bool) {
         if (factory == address(0) || pool == address(0)) {
             return false;
         }
@@ -430,7 +439,7 @@ contract DexUtils {
     /// @param pool The pool's address.
     /// @return The baseToken address.
     /// @return The quoteToken address.
-    function getDodoV2PoolMetadata(address pool) public view returns (address, address) {
+    function getDodoV2PoolMetadata(address pool) internal view returns (address, address) {
         if (pool == address(0)) {
             return (address(0), address(0));
         }
@@ -439,7 +448,7 @@ contract DexUtils {
         return (baseToken, quoteToken);
     }
 
-    function checkIfDodoV2PoolWithFactory(address pool, address factory) public view returns (bool) {
+    function checkIfDodoV2PoolWithFactory(address pool, address factory) internal view returns (bool) {
         if (factory == address(0) || pool == address(0)) {
             return false;
         }
@@ -457,7 +466,7 @@ contract DexUtils {
     /// @notice Given a DODO V2 pool, check if it's a DPP, DSP or a DVM pool.
     /// @param pool The pool's address.
     /// @return true if the pool is a DODOV2 pool, false otherwise.
-    function checkIfDodoV2Pool(address pool) public view returns (bool) {
+    function checkIfDodoV2Pool(address pool) internal view returns (bool) {
         if (pool == address(0)) {
             return false;
         }
@@ -474,7 +483,7 @@ contract DexUtils {
     /// @param sId The sold token's id.
     /// @return The bought token's address.
     /// @return The sold token's address.
-    function getCurvePoolToFromTokens(address pool, int128 bId, int128 sId) public returns (address, address) {
+    function getCurvePoolToFromTokens(address pool, int128 bId, int128 sId) internal returns (address, address) {
         address tokenTo;
         address tokenFrom;
         uint256 boughtId = uint256(uint128(bId));

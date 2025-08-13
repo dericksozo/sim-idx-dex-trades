@@ -22,6 +22,8 @@ contract AlgebraIntegralListener is AlgebraIntegralPool$OnSwapEvent, DexUtils, I
             trade.dex = "Hydrex";
         } else if (factory == DexUtils.getTrebleSwapFactory()) {
             trade.dex = "TrebleSwap";
+        } else if (factory == DexUtils.getCamelotV4Factory()) {
+            trade.dex = "CamelotV4";
         } else {
             return;
         }
