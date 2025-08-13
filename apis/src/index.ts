@@ -3,7 +3,7 @@ import { dexTrade } from "./db/schema/Listener";
 import { types, db, App, middlewares } from "@duneanalytics/sim-idx"; // Import schema to ensure it's registered
 
 const supportedChains: types.Uint[] = [
-  1, 8453, 480, 34443, 57073, 130, 7777777, 60808, 1868, 360,
+  1, 8453, 480, 34443, 57073, 130, 7777777, 60808, 1868, 360, 42161,
 ].map((id) => new types.Uint(BigInt(id)));
 
 const app = App.create();
