@@ -34,12 +34,11 @@ import "./BinPoolManager.sol";
 import "./CLPoolManager.sol";
 import "./AlgebraIntegral.sol";
 import "./Algebra.sol";
-import {ChainsEnumerableMapLib} from "./utils/ChainsEnumerableMapLib.sol";
 
-contract Triggers is BaseTriggers {
+contract Triggers is ProtocolTriggers {
     using ChainsEnumerableMapLib for ChainsEnumerableMapLib.ChainsToChainIdContractMap;
     using ChainsEnumerableMapLib for ChainsEnumerableMapLib.ChainsToChainIdAbiMap;
-
+    
     MakerPSMListener psmListener;
     UniswapV2Listener uniswapV2Listener;
     UniswapV3Listener uniswapV3Listener;
@@ -71,17 +70,6 @@ contract Triggers is BaseTriggers {
     CLPoolManagerListener cLPoolManagerListener;
     AlgebraIntegralListener algebraIntegralListener;
     AlgebraListener algebraListener;
-
-    // per protocol config
-    struct ProtocolConfigAddress {
-        Trigger[] triggers;
-        ChainsEnumerableMapLib.ChainsToChainIdContractMap chainIdToAddressEnumerable;
-    }
-
-    struct ProtocolConfigAbi {
-        Trigger[] triggers;
-        ChainsEnumerableMapLib.ChainsToChainIdAbiMap chainIdToAbiEnumerable;
-    }
 
     ProtocolConfigAbi internal psmConfig;
     ProtocolConfigAbi internal univ2Config;
@@ -395,20 +383,6 @@ contract Triggers is BaseTriggers {
         cLPoolManagerConfig.triggers = [cLPoolManagerListener.CLPoolManager$triggerOnSwapFunction()];
         algebraIntegralConfig.triggers = [algebraIntegralListener.AlgebraIntegralPool$triggerOnSwapEvent()];
         algebraConfig.triggers = [algebraListener.AlgebraPool$triggerOnSwapFunction()];
-    }
-
-    function addTriggerForProtocol(ProtocolConfigAbi storage config) internal {
-        for (uint256 i = 0; i < config.chainIdToAbiEnumerable.length(); i++) {
-            (, ChainIdAbi memory _abi) = config.chainIdToAbiEnumerable.getAtIndex(i);
-            addTriggers(_abi, config.triggers);
-        }
-    }
-
-    function addTriggerForProtocol(ProtocolConfigAddress storage config) internal {
-        for (uint256 i = 0; i < config.chainIdToAddressEnumerable.length(); i++) {
-            (, ChainIdContract memory _contract) = config.chainIdToAddressEnumerable.getAtIndex(i);
-            addTriggers(_contract, config.triggers);
-        }
     }
 
     function triggers() external virtual override {
