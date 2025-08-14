@@ -34,11 +34,12 @@ import "./BinPoolManager.sol";
 import "./CLPoolManager.sol";
 import "./AlgebraIntegral.sol";
 import "./Algebra.sol";
+import "./GMXV2.sol";
 
 contract Triggers is ProtocolTriggers {
     using ChainsEnumerableMapLib for ChainsEnumerableMapLib.ChainsToChainIdContractMap;
     using ChainsEnumerableMapLib for ChainsEnumerableMapLib.ChainsToChainIdAbiMap;
-    
+
     MakerPSMListener psmListener;
     UniswapV2Listener uniswapV2Listener;
     UniswapV3Listener uniswapV3Listener;
@@ -70,6 +71,7 @@ contract Triggers is ProtocolTriggers {
     CLPoolManagerListener cLPoolManagerListener;
     AlgebraIntegralListener algebraIntegralListener;
     AlgebraListener algebraListener;
+    GMXV2Listener gmxV2Listener;
 
     ProtocolConfigAbi internal psmConfig;
     ProtocolConfigAbi internal univ2Config;
@@ -104,6 +106,7 @@ contract Triggers is ProtocolTriggers {
     ProtocolConfigAddress internal cLPoolManagerConfig;
     ProtocolConfigAbi internal algebraIntegralConfig;
     ProtocolConfigAbi internal algebraConfig;
+    ProtocolConfigAddress internal gmxV2Config;
 
     constructor() {
         // init listeners
@@ -138,6 +141,7 @@ contract Triggers is ProtocolTriggers {
         cLPoolManagerListener = new CLPoolManagerListener();
         algebraIntegralListener = new AlgebraIntegralListener();
         algebraListener = new AlgebraListener();
+        gmxV2Listener = new GMXV2Listener();
 
         // address resolving
         bancorCarbonConfig.chainIdToAddressEnumerable.set(
@@ -242,6 +246,9 @@ contract Triggers is ProtocolTriggers {
         cLPoolManagerConfig.chainIdToAddressEnumerable.set(
             Chains.Base, chainContract(Chains.Base, 0xa0FfB9c1CE1Fe56963B0321B32E7A0302114058b)
         );
+        gmxV2Config.chainIdToAddressEnumerable.set(
+            Chains.Arbitrum, chainContract(Chains.Arbitrum, 0xC8ee91A54287DB53897056e12D9819156D3822Fb)
+        );
 
         // protocol to abi
         psmConfig.chainIdToAbiEnumerable.set(Chains.Ethereum, chainAbi(Chains.Ethereum, PSM$Abi()));
@@ -271,7 +278,9 @@ contract Triggers is ProtocolTriggers {
         curveExchangeConfig.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, TokenExchange$Abi()));
         curveOldExchangeConfig.chainIdToAbiEnumerable.set(Chains.Ink, chainAbi(Chains.Ink, OldTokenExchange$Abi()));
         curveExchangeConfig.chainIdToAbiEnumerable.set(Chains.Ink, chainAbi(Chains.Ink, TokenExchange$Abi()));
-        curveOldExchangeConfig.chainIdToAbiEnumerable.set(Chains.Arbitrum, chainAbi(Chains.Arbitrum, OldTokenExchange$Abi()));
+        curveOldExchangeConfig.chainIdToAbiEnumerable.set(
+            Chains.Arbitrum, chainAbi(Chains.Arbitrum, OldTokenExchange$Abi())
+        );
         curveExchangeConfig.chainIdToAbiEnumerable.set(Chains.Arbitrum, chainAbi(Chains.Arbitrum, TokenExchange$Abi()));
         balancerV2Config.chainIdToAbiEnumerable.set(Chains.Ethereum, chainAbi(Chains.Ethereum, Vault$Abi()));
         balancerV2Config.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, Vault$Abi()));
@@ -383,6 +392,7 @@ contract Triggers is ProtocolTriggers {
         cLPoolManagerConfig.triggers = [cLPoolManagerListener.CLPoolManager$triggerOnSwapFunction()];
         algebraIntegralConfig.triggers = [algebraIntegralListener.AlgebraIntegralPool$triggerOnSwapEvent()];
         algebraConfig.triggers = [algebraListener.AlgebraPool$triggerOnSwapFunction()];
+        gmxV2Config.triggers = [gmxV2Listener.EventEmitter$triggerOnEventLog1Event()];
     }
 
     function triggers() external virtual override {
@@ -419,5 +429,6 @@ contract Triggers is ProtocolTriggers {
         addTriggerForProtocol(cLPoolManagerConfig);
         addTriggerForProtocol(algebraIntegralConfig);
         addTriggerForProtocol(algebraConfig);
+        addTriggerForProtocol(gmxV2Config);
     }
 }

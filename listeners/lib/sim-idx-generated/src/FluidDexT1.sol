@@ -946,13 +946,21 @@ abstract contract FluidDexT1$PreWithdrawPerfectInOneTokenFunction {
     }
 }
 
+
+struct FluidDexT1$EmitAllEvents$Swap {
+  bool swap0to1;
+  uint256 amountIn;
+  uint256 amountOut;
+  address to;
+}
+
 contract FluidDexT1$EmitAllEvents is
   FluidDexT1$OnSwapEvent
 {
-  event Swap(bool swap0to1, uint256 amountIn, uint256 amountOut, address to);
+  event Swap(FluidDexT1$EmitAllEvents$Swap);
 
   function FluidDexT1$onSwapEvent(EventContext memory ctx, FluidDexT1$SwapEventParams memory inputs) virtual external override {
-    emit Swap(inputs.swap0to1, inputs.amountIn, inputs.amountOut, inputs.to);
+    emit Swap(FluidDexT1$EmitAllEvents$Swap(inputs.swap0to1, inputs.amountIn, inputs.amountOut, inputs.to));
   }
 
   function allTriggers() view external returns (Trigger[] memory) {

@@ -1526,13 +1526,24 @@ abstract contract CLPool$PreUpdateRewardsGrowthGlobalFunction {
     }
 }
 
+
+struct CLPool$EmitAllEvents$Swap {
+  address sender;
+  address recipient;
+  int256 amount0;
+  int256 amount1;
+  uint160 sqrtPriceX96;
+  uint128 liquidity;
+  int24 tick;
+}
+
 contract CLPool$EmitAllEvents is
   CLPool$OnSwapEvent
 {
-  event Swap(address sender, address recipient, int256 amount0, int256 amount1, uint160 sqrtPriceX96, uint128 liquidity, int24 tick);
+  event Swap(CLPool$EmitAllEvents$Swap);
 
   function CLPool$onSwapEvent(EventContext memory ctx, CLPool$SwapEventParams memory inputs) virtual external override {
-    emit Swap(inputs.sender, inputs.recipient, inputs.amount0, inputs.amount1, inputs.sqrtPriceX96, inputs.liquidity, inputs.tick);
+    emit Swap(CLPool$EmitAllEvents$Swap(inputs.sender, inputs.recipient, inputs.amount0, inputs.amount1, inputs.sqrtPriceX96, inputs.liquidity, inputs.tick));
   }
 
   function allTriggers() view external returns (Trigger[] memory) {

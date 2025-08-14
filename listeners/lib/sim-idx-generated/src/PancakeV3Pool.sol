@@ -1214,6 +1214,84 @@ abstract contract PancakeV3Pool$PreToken1Function {
     }
 }
 
+
+struct PancakeV3Pool$EmitAllEvents$Burn {
+  address owner;
+  int24 tickLower;
+  int24 tickUpper;
+  uint128 amount;
+  uint256 amount0;
+  uint256 amount1;
+}
+
+struct PancakeV3Pool$EmitAllEvents$Collect {
+  address owner;
+  address recipient;
+  int24 tickLower;
+  int24 tickUpper;
+  uint128 amount0;
+  uint128 amount1;
+}
+
+struct PancakeV3Pool$EmitAllEvents$CollectProtocol {
+  address sender;
+  address recipient;
+  uint128 amount0;
+  uint128 amount1;
+}
+
+struct PancakeV3Pool$EmitAllEvents$Flash {
+  address sender;
+  address recipient;
+  uint256 amount0;
+  uint256 amount1;
+  uint256 paid0;
+  uint256 paid1;
+}
+
+struct PancakeV3Pool$EmitAllEvents$IncreaseObservationCardinalityNext {
+  uint16 observationCardinalityNextOld;
+  uint16 observationCardinalityNextNew;
+}
+
+struct PancakeV3Pool$EmitAllEvents$Initialize {
+  uint160 sqrtPriceX96;
+  int24 tick;
+}
+
+struct PancakeV3Pool$EmitAllEvents$Mint {
+  address sender;
+  address owner;
+  int24 tickLower;
+  int24 tickUpper;
+  uint128 amount;
+  uint256 amount0;
+  uint256 amount1;
+}
+
+struct PancakeV3Pool$EmitAllEvents$SetFeeProtocol {
+  uint32 feeProtocol0Old;
+  uint32 feeProtocol1Old;
+  uint32 feeProtocol0New;
+  uint32 feeProtocol1New;
+}
+
+struct PancakeV3Pool$EmitAllEvents$SetLmPoolEvent {
+  address addr;
+}
+
+struct PancakeV3Pool$EmitAllEvents$Swap {
+  address sender;
+  address recipient;
+  int256 amount0;
+  int256 amount1;
+  uint160 sqrtPriceX96;
+  uint128 liquidity;
+  int24 tick;
+  uint128 protocolFeesToken0;
+  uint128 protocolFeesToken1;
+}
+
 contract PancakeV3Pool$EmitAllEvents is
   PancakeV3Pool$OnBurnEvent,
 PancakeV3Pool$OnCollectEvent,
@@ -1226,46 +1304,46 @@ PancakeV3Pool$OnSetFeeProtocolEvent,
 PancakeV3Pool$OnSetLmPoolEventEvent,
 PancakeV3Pool$OnSwapEvent
 {
-  event Burn(address owner, int24 tickLower, int24 tickUpper, uint128 amount, uint256 amount0, uint256 amount1);
-event Collect(address owner, address recipient, int24 tickLower, int24 tickUpper, uint128 amount0, uint128 amount1);
-event CollectProtocol(address sender, address recipient, uint128 amount0, uint128 amount1);
-event Flash(address sender, address recipient, uint256 amount0, uint256 amount1, uint256 paid0, uint256 paid1);
-event IncreaseObservationCardinalityNext(uint16 observationCardinalityNextOld, uint16 observationCardinalityNextNew);
-event Initialize(uint160 sqrtPriceX96, int24 tick);
-event Mint(address sender, address owner, int24 tickLower, int24 tickUpper, uint128 amount, uint256 amount0, uint256 amount1);
-event SetFeeProtocol(uint32 feeProtocol0Old, uint32 feeProtocol1Old, uint32 feeProtocol0New, uint32 feeProtocol1New);
-event SetLmPoolEvent(address addr);
-event Swap(address sender, address recipient, int256 amount0, int256 amount1, uint160 sqrtPriceX96, uint128 liquidity, int24 tick, uint128 protocolFeesToken0, uint128 protocolFeesToken1);
+  event Burn(PancakeV3Pool$EmitAllEvents$Burn);
+  event Collect(PancakeV3Pool$EmitAllEvents$Collect);
+  event CollectProtocol(PancakeV3Pool$EmitAllEvents$CollectProtocol);
+  event Flash(PancakeV3Pool$EmitAllEvents$Flash);
+  event IncreaseObservationCardinalityNext(PancakeV3Pool$EmitAllEvents$IncreaseObservationCardinalityNext);
+  event Initialize(PancakeV3Pool$EmitAllEvents$Initialize);
+  event Mint(PancakeV3Pool$EmitAllEvents$Mint);
+  event SetFeeProtocol(PancakeV3Pool$EmitAllEvents$SetFeeProtocol);
+  event SetLmPoolEvent(PancakeV3Pool$EmitAllEvents$SetLmPoolEvent);
+  event Swap(PancakeV3Pool$EmitAllEvents$Swap);
 
   function PancakeV3Pool$onBurnEvent(EventContext memory ctx, PancakeV3Pool$BurnEventParams memory inputs) virtual external override {
-    emit Burn(inputs.owner, inputs.tickLower, inputs.tickUpper, inputs.amount, inputs.amount0, inputs.amount1);
+    emit Burn(PancakeV3Pool$EmitAllEvents$Burn(inputs.owner, inputs.tickLower, inputs.tickUpper, inputs.amount, inputs.amount0, inputs.amount1));
   }
 function PancakeV3Pool$onCollectEvent(EventContext memory ctx, PancakeV3Pool$CollectEventParams memory inputs) virtual external override {
-    emit Collect(inputs.owner, inputs.recipient, inputs.tickLower, inputs.tickUpper, inputs.amount0, inputs.amount1);
+    emit Collect(PancakeV3Pool$EmitAllEvents$Collect(inputs.owner, inputs.recipient, inputs.tickLower, inputs.tickUpper, inputs.amount0, inputs.amount1));
   }
 function PancakeV3Pool$onCollectProtocolEvent(EventContext memory ctx, PancakeV3Pool$CollectProtocolEventParams memory inputs) virtual external override {
-    emit CollectProtocol(inputs.sender, inputs.recipient, inputs.amount0, inputs.amount1);
+    emit CollectProtocol(PancakeV3Pool$EmitAllEvents$CollectProtocol(inputs.sender, inputs.recipient, inputs.amount0, inputs.amount1));
   }
 function PancakeV3Pool$onFlashEvent(EventContext memory ctx, PancakeV3Pool$FlashEventParams memory inputs) virtual external override {
-    emit Flash(inputs.sender, inputs.recipient, inputs.amount0, inputs.amount1, inputs.paid0, inputs.paid1);
+    emit Flash(PancakeV3Pool$EmitAllEvents$Flash(inputs.sender, inputs.recipient, inputs.amount0, inputs.amount1, inputs.paid0, inputs.paid1));
   }
 function PancakeV3Pool$onIncreaseObservationCardinalityNextEvent(EventContext memory ctx, PancakeV3Pool$IncreaseObservationCardinalityNextEventParams memory inputs) virtual external override {
-    emit IncreaseObservationCardinalityNext(inputs.observationCardinalityNextOld, inputs.observationCardinalityNextNew);
+    emit IncreaseObservationCardinalityNext(PancakeV3Pool$EmitAllEvents$IncreaseObservationCardinalityNext(inputs.observationCardinalityNextOld, inputs.observationCardinalityNextNew));
   }
 function PancakeV3Pool$onInitializeEvent(EventContext memory ctx, PancakeV3Pool$InitializeEventParams memory inputs) virtual external override {
-    emit Initialize(inputs.sqrtPriceX96, inputs.tick);
+    emit Initialize(PancakeV3Pool$EmitAllEvents$Initialize(inputs.sqrtPriceX96, inputs.tick));
   }
 function PancakeV3Pool$onMintEvent(EventContext memory ctx, PancakeV3Pool$MintEventParams memory inputs) virtual external override {
-    emit Mint(inputs.sender, inputs.owner, inputs.tickLower, inputs.tickUpper, inputs.amount, inputs.amount0, inputs.amount1);
+    emit Mint(PancakeV3Pool$EmitAllEvents$Mint(inputs.sender, inputs.owner, inputs.tickLower, inputs.tickUpper, inputs.amount, inputs.amount0, inputs.amount1));
   }
 function PancakeV3Pool$onSetFeeProtocolEvent(EventContext memory ctx, PancakeV3Pool$SetFeeProtocolEventParams memory inputs) virtual external override {
-    emit SetFeeProtocol(inputs.feeProtocol0Old, inputs.feeProtocol1Old, inputs.feeProtocol0New, inputs.feeProtocol1New);
+    emit SetFeeProtocol(PancakeV3Pool$EmitAllEvents$SetFeeProtocol(inputs.feeProtocol0Old, inputs.feeProtocol1Old, inputs.feeProtocol0New, inputs.feeProtocol1New));
   }
 function PancakeV3Pool$onSetLmPoolEventEvent(EventContext memory ctx, PancakeV3Pool$SetLmPoolEventEventParams memory inputs) virtual external override {
-    emit SetLmPoolEvent(inputs.addr);
+    emit SetLmPoolEvent(PancakeV3Pool$EmitAllEvents$SetLmPoolEvent(inputs.addr));
   }
 function PancakeV3Pool$onSwapEvent(EventContext memory ctx, PancakeV3Pool$SwapEventParams memory inputs) virtual external override {
-    emit Swap(inputs.sender, inputs.recipient, inputs.amount0, inputs.amount1, inputs.sqrtPriceX96, inputs.liquidity, inputs.tick, inputs.protocolFeesToken0, inputs.protocolFeesToken1);
+    emit Swap(PancakeV3Pool$EmitAllEvents$Swap(inputs.sender, inputs.recipient, inputs.amount0, inputs.amount1, inputs.sqrtPriceX96, inputs.liquidity, inputs.tick, inputs.protocolFeesToken0, inputs.protocolFeesToken1));
   }
 
   function allTriggers() view external returns (Trigger[] memory) {

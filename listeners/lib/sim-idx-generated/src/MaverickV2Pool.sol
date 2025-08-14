@@ -1060,13 +1060,22 @@ abstract contract MaverickV2Pool$PreTokenBScaleFunction {
     }
 }
 
+
+struct MaverickV2Pool$EmitAllEvents$PoolSwap {
+  address sender;
+  address recipient;
+  MaverickV2Pool$IMaverickV2Pool$SwapParams params;
+  uint256 amountIn;
+  uint256 amountOut;
+}
+
 contract MaverickV2Pool$EmitAllEvents is
   MaverickV2Pool$OnPoolSwapEvent
 {
-  event PoolSwap(address sender, address recipient, MaverickV2Pool$IMaverickV2Pool$SwapParams params, uint256 amountIn, uint256 amountOut);
+  event PoolSwap(MaverickV2Pool$EmitAllEvents$PoolSwap);
 
   function MaverickV2Pool$onPoolSwapEvent(EventContext memory ctx, MaverickV2Pool$PoolSwapEventParams memory inputs) virtual external override {
-    emit PoolSwap(inputs.sender, inputs.recipient, inputs.params, inputs.amountIn, inputs.amountOut);
+    emit PoolSwap(MaverickV2Pool$EmitAllEvents$PoolSwap(inputs.sender, inputs.recipient, inputs.params, inputs.amountIn, inputs.amountOut));
   }
 
   function allTriggers() view external returns (Trigger[] memory) {

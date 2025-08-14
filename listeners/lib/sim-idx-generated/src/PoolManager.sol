@@ -1414,6 +1414,80 @@ abstract contract PoolManager$PreUpdateDynamicLpFeeFunction {
     }
 }
 
+
+struct PoolManager$EmitAllEvents$Approval {
+  address owner;
+  address spender;
+  uint256 id;
+  uint256 amount;
+}
+
+struct PoolManager$EmitAllEvents$Donate {
+  bytes32 id;
+  address sender;
+  uint256 amount0;
+  uint256 amount1;
+}
+
+struct PoolManager$EmitAllEvents$Initialize {
+  bytes32 id;
+  address currency0;
+  address currency1;
+  uint24 fee;
+  int24 tickSpacing;
+  address hooks;
+  uint160 sqrtPriceX96;
+  int24 tick;
+}
+
+struct PoolManager$EmitAllEvents$ModifyLiquidity {
+  bytes32 id;
+  address sender;
+  int24 tickLower;
+  int24 tickUpper;
+  int256 liquidityDelta;
+  bytes32 salt;
+}
+
+struct PoolManager$EmitAllEvents$OperatorSet {
+  address owner;
+  address operator;
+  bool approved;
+}
+
+struct PoolManager$EmitAllEvents$OwnershipTransferred {
+  address user;
+  address newOwner;
+}
+
+struct PoolManager$EmitAllEvents$ProtocolFeeControllerUpdated {
+  address protocolFeeController;
+}
+
+struct PoolManager$EmitAllEvents$ProtocolFeeUpdated {
+  bytes32 id;
+  uint24 protocolFee;
+}
+
+struct PoolManager$EmitAllEvents$Swap {
+  bytes32 id;
+  address sender;
+  int128 amount0;
+  int128 amount1;
+  uint160 sqrtPriceX96;
+  uint128 liquidity;
+  int24 tick;
+  uint24 fee;
+}
+
+struct PoolManager$EmitAllEvents$Transfer {
+  address caller;
+  address from;
+  address to;
+  uint256 id;
+  uint256 amount;
+}
+
 contract PoolManager$EmitAllEvents is
   PoolManager$OnApprovalEvent,
 PoolManager$OnDonateEvent,
@@ -1426,46 +1500,46 @@ PoolManager$OnProtocolFeeUpdatedEvent,
 PoolManager$OnSwapEvent,
 PoolManager$OnTransferEvent
 {
-  event Approval(address owner, address spender, uint256 id, uint256 amount);
-event Donate(bytes32 id, address sender, uint256 amount0, uint256 amount1);
-event Initialize(bytes32 id, address currency0, address currency1, uint24 fee, int24 tickSpacing, address hooks, uint160 sqrtPriceX96, int24 tick);
-event ModifyLiquidity(bytes32 id, address sender, int24 tickLower, int24 tickUpper, int256 liquidityDelta, bytes32 salt);
-event OperatorSet(address owner, address operator, bool approved);
-event OwnershipTransferred(address user, address newOwner);
-event ProtocolFeeControllerUpdated(address protocolFeeController);
-event ProtocolFeeUpdated(bytes32 id, uint24 protocolFee);
-event Swap(bytes32 id, address sender, int128 amount0, int128 amount1, uint160 sqrtPriceX96, uint128 liquidity, int24 tick, uint24 fee);
-event Transfer(address caller, address from, address to, uint256 id, uint256 amount);
+  event Approval(PoolManager$EmitAllEvents$Approval);
+  event Donate(PoolManager$EmitAllEvents$Donate);
+  event Initialize(PoolManager$EmitAllEvents$Initialize);
+  event ModifyLiquidity(PoolManager$EmitAllEvents$ModifyLiquidity);
+  event OperatorSet(PoolManager$EmitAllEvents$OperatorSet);
+  event OwnershipTransferred(PoolManager$EmitAllEvents$OwnershipTransferred);
+  event ProtocolFeeControllerUpdated(PoolManager$EmitAllEvents$ProtocolFeeControllerUpdated);
+  event ProtocolFeeUpdated(PoolManager$EmitAllEvents$ProtocolFeeUpdated);
+  event Swap(PoolManager$EmitAllEvents$Swap);
+  event Transfer(PoolManager$EmitAllEvents$Transfer);
 
   function PoolManager$onApprovalEvent(EventContext memory ctx, PoolManager$ApprovalEventParams memory inputs) virtual external override {
-    emit Approval(inputs.owner, inputs.spender, inputs.id, inputs.amount);
+    emit Approval(PoolManager$EmitAllEvents$Approval(inputs.owner, inputs.spender, inputs.id, inputs.amount));
   }
 function PoolManager$onDonateEvent(EventContext memory ctx, PoolManager$DonateEventParams memory inputs) virtual external override {
-    emit Donate(inputs.id, inputs.sender, inputs.amount0, inputs.amount1);
+    emit Donate(PoolManager$EmitAllEvents$Donate(inputs.id, inputs.sender, inputs.amount0, inputs.amount1));
   }
 function PoolManager$onInitializeEvent(EventContext memory ctx, PoolManager$InitializeEventParams memory inputs) virtual external override {
-    emit Initialize(inputs.id, inputs.currency0, inputs.currency1, inputs.fee, inputs.tickSpacing, inputs.hooks, inputs.sqrtPriceX96, inputs.tick);
+    emit Initialize(PoolManager$EmitAllEvents$Initialize(inputs.id, inputs.currency0, inputs.currency1, inputs.fee, inputs.tickSpacing, inputs.hooks, inputs.sqrtPriceX96, inputs.tick));
   }
 function PoolManager$onModifyLiquidityEvent(EventContext memory ctx, PoolManager$ModifyLiquidityEventParams memory inputs) virtual external override {
-    emit ModifyLiquidity(inputs.id, inputs.sender, inputs.tickLower, inputs.tickUpper, inputs.liquidityDelta, inputs.salt);
+    emit ModifyLiquidity(PoolManager$EmitAllEvents$ModifyLiquidity(inputs.id, inputs.sender, inputs.tickLower, inputs.tickUpper, inputs.liquidityDelta, inputs.salt));
   }
 function PoolManager$onOperatorSetEvent(EventContext memory ctx, PoolManager$OperatorSetEventParams memory inputs) virtual external override {
-    emit OperatorSet(inputs.owner, inputs.operator, inputs.approved);
+    emit OperatorSet(PoolManager$EmitAllEvents$OperatorSet(inputs.owner, inputs.operator, inputs.approved));
   }
 function PoolManager$onOwnershipTransferredEvent(EventContext memory ctx, PoolManager$OwnershipTransferredEventParams memory inputs) virtual external override {
-    emit OwnershipTransferred(inputs.user, inputs.newOwner);
+    emit OwnershipTransferred(PoolManager$EmitAllEvents$OwnershipTransferred(inputs.user, inputs.newOwner));
   }
 function PoolManager$onProtocolFeeControllerUpdatedEvent(EventContext memory ctx, PoolManager$ProtocolFeeControllerUpdatedEventParams memory inputs) virtual external override {
-    emit ProtocolFeeControllerUpdated(inputs.protocolFeeController);
+    emit ProtocolFeeControllerUpdated(PoolManager$EmitAllEvents$ProtocolFeeControllerUpdated(inputs.protocolFeeController));
   }
 function PoolManager$onProtocolFeeUpdatedEvent(EventContext memory ctx, PoolManager$ProtocolFeeUpdatedEventParams memory inputs) virtual external override {
-    emit ProtocolFeeUpdated(inputs.id, inputs.protocolFee);
+    emit ProtocolFeeUpdated(PoolManager$EmitAllEvents$ProtocolFeeUpdated(inputs.id, inputs.protocolFee));
   }
 function PoolManager$onSwapEvent(EventContext memory ctx, PoolManager$SwapEventParams memory inputs) virtual external override {
-    emit Swap(inputs.id, inputs.sender, inputs.amount0, inputs.amount1, inputs.sqrtPriceX96, inputs.liquidity, inputs.tick, inputs.fee);
+    emit Swap(PoolManager$EmitAllEvents$Swap(inputs.id, inputs.sender, inputs.amount0, inputs.amount1, inputs.sqrtPriceX96, inputs.liquidity, inputs.tick, inputs.fee));
   }
 function PoolManager$onTransferEvent(EventContext memory ctx, PoolManager$TransferEventParams memory inputs) virtual external override {
-    emit Transfer(inputs.caller, inputs.from, inputs.to, inputs.id, inputs.amount);
+    emit Transfer(PoolManager$EmitAllEvents$Transfer(inputs.caller, inputs.from, inputs.to, inputs.id, inputs.amount));
   }
 
   function allTriggers() view external returns (Trigger[] memory) {

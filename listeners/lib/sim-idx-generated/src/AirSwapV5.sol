@@ -1422,6 +1422,64 @@ abstract contract AirSwapV5$PreTransferOwnershipFunction {
     }
 }
 
+
+struct AirSwapV5$EmitAllEvents$Authorize {
+  address signer;
+  address signerWallet;
+}
+
+struct AirSwapV5$EmitAllEvents$Cancel {
+  uint256 nonce;
+  address signerWallet;
+}
+
+struct AirSwapV5$EmitAllEvents$OwnershipHandoverCanceled {
+  address pendingOwner;
+}
+
+struct AirSwapV5$EmitAllEvents$OwnershipHandoverRequested {
+  address pendingOwner;
+}
+
+struct AirSwapV5$EmitAllEvents$OwnershipTransferred {
+  address oldOwner;
+  address newOwner;
+}
+
+struct AirSwapV5$EmitAllEvents$Revoke {
+  address signer;
+  address signerWallet;
+}
+
+struct AirSwapV5$EmitAllEvents$SetBonusMax {
+  uint256 bonusMax;
+}
+
+struct AirSwapV5$EmitAllEvents$SetBonusScale {
+  uint256 bonusScale;
+}
+
+struct AirSwapV5$EmitAllEvents$SetProtocolFee {
+  uint256 protocolFee;
+}
+
+struct AirSwapV5$EmitAllEvents$SetProtocolFeeLight {
+  uint256 protocolFeeLight;
+}
+
+struct AirSwapV5$EmitAllEvents$SetProtocolFeeWallet {
+  address feeWallet;
+}
+
+struct AirSwapV5$EmitAllEvents$SetStaking {
+  address staking;
+}
+
+struct AirSwapV5$EmitAllEvents$SwapErc20 {
+  uint256 nonce;
+  address signerWallet;
+}
+
 contract AirSwapV5$EmitAllEvents is
   AirSwapV5$OnAuthorizeEvent,
 AirSwapV5$OnCancelEvent,
@@ -1437,58 +1495,58 @@ AirSwapV5$OnSetProtocolFeeWalletEvent,
 AirSwapV5$OnSetStakingEvent,
 AirSwapV5$OnSwapErc20Event
 {
-  event Authorize(address signer, address signerWallet);
-event Cancel(uint256 nonce, address signerWallet);
-event OwnershipHandoverCanceled(address pendingOwner);
-event OwnershipHandoverRequested(address pendingOwner);
-event OwnershipTransferred(address oldOwner, address newOwner);
-event Revoke(address signer, address signerWallet);
-event SetBonusMax(uint256 bonusMax);
-event SetBonusScale(uint256 bonusScale);
-event SetProtocolFee(uint256 protocolFee);
-event SetProtocolFeeLight(uint256 protocolFeeLight);
-event SetProtocolFeeWallet(address feeWallet);
-event SetStaking(address staking);
-event SwapErc20(uint256 nonce, address signerWallet);
+  event Authorize(AirSwapV5$EmitAllEvents$Authorize);
+  event Cancel(AirSwapV5$EmitAllEvents$Cancel);
+  event OwnershipHandoverCanceled(AirSwapV5$EmitAllEvents$OwnershipHandoverCanceled);
+  event OwnershipHandoverRequested(AirSwapV5$EmitAllEvents$OwnershipHandoverRequested);
+  event OwnershipTransferred(AirSwapV5$EmitAllEvents$OwnershipTransferred);
+  event Revoke(AirSwapV5$EmitAllEvents$Revoke);
+  event SetBonusMax(AirSwapV5$EmitAllEvents$SetBonusMax);
+  event SetBonusScale(AirSwapV5$EmitAllEvents$SetBonusScale);
+  event SetProtocolFee(AirSwapV5$EmitAllEvents$SetProtocolFee);
+  event SetProtocolFeeLight(AirSwapV5$EmitAllEvents$SetProtocolFeeLight);
+  event SetProtocolFeeWallet(AirSwapV5$EmitAllEvents$SetProtocolFeeWallet);
+  event SetStaking(AirSwapV5$EmitAllEvents$SetStaking);
+  event SwapErc20(AirSwapV5$EmitAllEvents$SwapErc20);
 
   function AirSwapV5$onAuthorizeEvent(EventContext memory ctx, AirSwapV5$AuthorizeEventParams memory inputs) virtual external override {
-    emit Authorize(inputs.signer, inputs.signerWallet);
+    emit Authorize(AirSwapV5$EmitAllEvents$Authorize(inputs.signer, inputs.signerWallet));
   }
 function AirSwapV5$onCancelEvent(EventContext memory ctx, AirSwapV5$CancelEventParams memory inputs) virtual external override {
-    emit Cancel(inputs.nonce, inputs.signerWallet);
+    emit Cancel(AirSwapV5$EmitAllEvents$Cancel(inputs.nonce, inputs.signerWallet));
   }
 function AirSwapV5$onOwnershipHandoverCanceledEvent(EventContext memory ctx, AirSwapV5$OwnershipHandoverCanceledEventParams memory inputs) virtual external override {
-    emit OwnershipHandoverCanceled(inputs.pendingOwner);
+    emit OwnershipHandoverCanceled(AirSwapV5$EmitAllEvents$OwnershipHandoverCanceled(inputs.pendingOwner));
   }
 function AirSwapV5$onOwnershipHandoverRequestedEvent(EventContext memory ctx, AirSwapV5$OwnershipHandoverRequestedEventParams memory inputs) virtual external override {
-    emit OwnershipHandoverRequested(inputs.pendingOwner);
+    emit OwnershipHandoverRequested(AirSwapV5$EmitAllEvents$OwnershipHandoverRequested(inputs.pendingOwner));
   }
 function AirSwapV5$onOwnershipTransferredEvent(EventContext memory ctx, AirSwapV5$OwnershipTransferredEventParams memory inputs) virtual external override {
-    emit OwnershipTransferred(inputs.oldOwner, inputs.newOwner);
+    emit OwnershipTransferred(AirSwapV5$EmitAllEvents$OwnershipTransferred(inputs.oldOwner, inputs.newOwner));
   }
 function AirSwapV5$onRevokeEvent(EventContext memory ctx, AirSwapV5$RevokeEventParams memory inputs) virtual external override {
-    emit Revoke(inputs.signer, inputs.signerWallet);
+    emit Revoke(AirSwapV5$EmitAllEvents$Revoke(inputs.signer, inputs.signerWallet));
   }
 function AirSwapV5$onSetBonusMaxEvent(EventContext memory ctx, AirSwapV5$SetBonusMaxEventParams memory inputs) virtual external override {
-    emit SetBonusMax(inputs.bonusMax);
+    emit SetBonusMax(AirSwapV5$EmitAllEvents$SetBonusMax(inputs.bonusMax));
   }
 function AirSwapV5$onSetBonusScaleEvent(EventContext memory ctx, AirSwapV5$SetBonusScaleEventParams memory inputs) virtual external override {
-    emit SetBonusScale(inputs.bonusScale);
+    emit SetBonusScale(AirSwapV5$EmitAllEvents$SetBonusScale(inputs.bonusScale));
   }
 function AirSwapV5$onSetProtocolFeeEvent(EventContext memory ctx, AirSwapV5$SetProtocolFeeEventParams memory inputs) virtual external override {
-    emit SetProtocolFee(inputs.protocolFee);
+    emit SetProtocolFee(AirSwapV5$EmitAllEvents$SetProtocolFee(inputs.protocolFee));
   }
 function AirSwapV5$onSetProtocolFeeLightEvent(EventContext memory ctx, AirSwapV5$SetProtocolFeeLightEventParams memory inputs) virtual external override {
-    emit SetProtocolFeeLight(inputs.protocolFeeLight);
+    emit SetProtocolFeeLight(AirSwapV5$EmitAllEvents$SetProtocolFeeLight(inputs.protocolFeeLight));
   }
 function AirSwapV5$onSetProtocolFeeWalletEvent(EventContext memory ctx, AirSwapV5$SetProtocolFeeWalletEventParams memory inputs) virtual external override {
-    emit SetProtocolFeeWallet(inputs.feeWallet);
+    emit SetProtocolFeeWallet(AirSwapV5$EmitAllEvents$SetProtocolFeeWallet(inputs.feeWallet));
   }
 function AirSwapV5$onSetStakingEvent(EventContext memory ctx, AirSwapV5$SetStakingEventParams memory inputs) virtual external override {
-    emit SetStaking(inputs.staking);
+    emit SetStaking(AirSwapV5$EmitAllEvents$SetStaking(inputs.staking));
   }
 function AirSwapV5$onSwapErc20Event(EventContext memory ctx, AirSwapV5$SwapErc20EventParams memory inputs) virtual external override {
-    emit SwapErc20(inputs.nonce, inputs.signerWallet);
+    emit SwapErc20(AirSwapV5$EmitAllEvents$SwapErc20(inputs.nonce, inputs.signerWallet));
   }
 
   function allTriggers() view external returns (Trigger[] memory) {

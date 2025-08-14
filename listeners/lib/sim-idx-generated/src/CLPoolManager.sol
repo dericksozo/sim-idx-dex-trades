@@ -1169,6 +1169,74 @@ abstract contract CLPoolManager$PreVaultFunction {
     }
 }
 
+
+struct CLPoolManager$EmitAllEvents$Donate {
+  bytes32 id;
+  address sender;
+  uint256 amount0;
+  uint256 amount1;
+  int24 tick;
+}
+
+struct CLPoolManager$EmitAllEvents$DynamicLpFeeUpdated {
+  bytes32 id;
+  uint24 dynamicLPFee;
+}
+
+struct CLPoolManager$EmitAllEvents$Initialize {
+  bytes32 id;
+  address currency0;
+  address currency1;
+  address hooks;
+  uint24 fee;
+  bytes32 parameters;
+  uint160 sqrtPriceX96;
+  int24 tick;
+}
+
+struct CLPoolManager$EmitAllEvents$ModifyLiquidity {
+  bytes32 id;
+  address sender;
+  int24 tickLower;
+  int24 tickUpper;
+  int256 liquidityDelta;
+  bytes32 salt;
+}
+
+struct CLPoolManager$EmitAllEvents$OwnershipTransferred {
+  address previousOwner;
+  address newOwner;
+}
+
+struct CLPoolManager$EmitAllEvents$Paused {
+  address account;
+}
+
+struct CLPoolManager$EmitAllEvents$ProtocolFeeControllerUpdated {
+  address protocolFeeController;
+}
+
+struct CLPoolManager$EmitAllEvents$ProtocolFeeUpdated {
+  bytes32 id;
+  uint24 protocolFee;
+}
+
+struct CLPoolManager$EmitAllEvents$Swap {
+  bytes32 id;
+  address sender;
+  int128 amount0;
+  int128 amount1;
+  uint160 sqrtPriceX96;
+  uint128 liquidity;
+  int24 tick;
+  uint24 fee;
+  uint16 protocolFee;
+}
+
+struct CLPoolManager$EmitAllEvents$Unpaused {
+  address account;
+}
+
 contract CLPoolManager$EmitAllEvents is
   CLPoolManager$OnDonateEvent,
 CLPoolManager$OnDynamicLpFeeUpdatedEvent,
@@ -1181,46 +1249,46 @@ CLPoolManager$OnProtocolFeeUpdatedEvent,
 CLPoolManager$OnSwapEvent,
 CLPoolManager$OnUnpausedEvent
 {
-  event Donate(bytes32 id, address sender, uint256 amount0, uint256 amount1, int24 tick);
-event DynamicLpFeeUpdated(bytes32 id, uint24 dynamicLPFee);
-event Initialize(bytes32 id, address currency0, address currency1, address hooks, uint24 fee, bytes32 parameters, uint160 sqrtPriceX96, int24 tick);
-event ModifyLiquidity(bytes32 id, address sender, int24 tickLower, int24 tickUpper, int256 liquidityDelta, bytes32 salt);
-event OwnershipTransferred(address previousOwner, address newOwner);
-event Paused(address account);
-event ProtocolFeeControllerUpdated(address protocolFeeController);
-event ProtocolFeeUpdated(bytes32 id, uint24 protocolFee);
-event Swap(bytes32 id, address sender, int128 amount0, int128 amount1, uint160 sqrtPriceX96, uint128 liquidity, int24 tick, uint24 fee, uint16 protocolFee);
-event Unpaused(address account);
+  event Donate(CLPoolManager$EmitAllEvents$Donate);
+  event DynamicLpFeeUpdated(CLPoolManager$EmitAllEvents$DynamicLpFeeUpdated);
+  event Initialize(CLPoolManager$EmitAllEvents$Initialize);
+  event ModifyLiquidity(CLPoolManager$EmitAllEvents$ModifyLiquidity);
+  event OwnershipTransferred(CLPoolManager$EmitAllEvents$OwnershipTransferred);
+  event Paused(CLPoolManager$EmitAllEvents$Paused);
+  event ProtocolFeeControllerUpdated(CLPoolManager$EmitAllEvents$ProtocolFeeControllerUpdated);
+  event ProtocolFeeUpdated(CLPoolManager$EmitAllEvents$ProtocolFeeUpdated);
+  event Swap(CLPoolManager$EmitAllEvents$Swap);
+  event Unpaused(CLPoolManager$EmitAllEvents$Unpaused);
 
   function CLPoolManager$onDonateEvent(EventContext memory ctx, CLPoolManager$DonateEventParams memory inputs) virtual external override {
-    emit Donate(inputs.id, inputs.sender, inputs.amount0, inputs.amount1, inputs.tick);
+    emit Donate(CLPoolManager$EmitAllEvents$Donate(inputs.id, inputs.sender, inputs.amount0, inputs.amount1, inputs.tick));
   }
 function CLPoolManager$onDynamicLpFeeUpdatedEvent(EventContext memory ctx, CLPoolManager$DynamicLpFeeUpdatedEventParams memory inputs) virtual external override {
-    emit DynamicLpFeeUpdated(inputs.id, inputs.dynamicLPFee);
+    emit DynamicLpFeeUpdated(CLPoolManager$EmitAllEvents$DynamicLpFeeUpdated(inputs.id, inputs.dynamicLPFee));
   }
 function CLPoolManager$onInitializeEvent(EventContext memory ctx, CLPoolManager$InitializeEventParams memory inputs) virtual external override {
-    emit Initialize(inputs.id, inputs.currency0, inputs.currency1, inputs.hooks, inputs.fee, inputs.parameters, inputs.sqrtPriceX96, inputs.tick);
+    emit Initialize(CLPoolManager$EmitAllEvents$Initialize(inputs.id, inputs.currency0, inputs.currency1, inputs.hooks, inputs.fee, inputs.parameters, inputs.sqrtPriceX96, inputs.tick));
   }
 function CLPoolManager$onModifyLiquidityEvent(EventContext memory ctx, CLPoolManager$ModifyLiquidityEventParams memory inputs) virtual external override {
-    emit ModifyLiquidity(inputs.id, inputs.sender, inputs.tickLower, inputs.tickUpper, inputs.liquidityDelta, inputs.salt);
+    emit ModifyLiquidity(CLPoolManager$EmitAllEvents$ModifyLiquidity(inputs.id, inputs.sender, inputs.tickLower, inputs.tickUpper, inputs.liquidityDelta, inputs.salt));
   }
 function CLPoolManager$onOwnershipTransferredEvent(EventContext memory ctx, CLPoolManager$OwnershipTransferredEventParams memory inputs) virtual external override {
-    emit OwnershipTransferred(inputs.previousOwner, inputs.newOwner);
+    emit OwnershipTransferred(CLPoolManager$EmitAllEvents$OwnershipTransferred(inputs.previousOwner, inputs.newOwner));
   }
 function CLPoolManager$onPausedEvent(EventContext memory ctx, CLPoolManager$PausedEventParams memory inputs) virtual external override {
-    emit Paused(inputs.account);
+    emit Paused(CLPoolManager$EmitAllEvents$Paused(inputs.account));
   }
 function CLPoolManager$onProtocolFeeControllerUpdatedEvent(EventContext memory ctx, CLPoolManager$ProtocolFeeControllerUpdatedEventParams memory inputs) virtual external override {
-    emit ProtocolFeeControllerUpdated(inputs.protocolFeeController);
+    emit ProtocolFeeControllerUpdated(CLPoolManager$EmitAllEvents$ProtocolFeeControllerUpdated(inputs.protocolFeeController));
   }
 function CLPoolManager$onProtocolFeeUpdatedEvent(EventContext memory ctx, CLPoolManager$ProtocolFeeUpdatedEventParams memory inputs) virtual external override {
-    emit ProtocolFeeUpdated(inputs.id, inputs.protocolFee);
+    emit ProtocolFeeUpdated(CLPoolManager$EmitAllEvents$ProtocolFeeUpdated(inputs.id, inputs.protocolFee));
   }
 function CLPoolManager$onSwapEvent(EventContext memory ctx, CLPoolManager$SwapEventParams memory inputs) virtual external override {
-    emit Swap(inputs.id, inputs.sender, inputs.amount0, inputs.amount1, inputs.sqrtPriceX96, inputs.liquidity, inputs.tick, inputs.fee, inputs.protocolFee);
+    emit Swap(CLPoolManager$EmitAllEvents$Swap(inputs.id, inputs.sender, inputs.amount0, inputs.amount1, inputs.sqrtPriceX96, inputs.liquidity, inputs.tick, inputs.fee, inputs.protocolFee));
   }
 function CLPoolManager$onUnpausedEvent(EventContext memory ctx, CLPoolManager$UnpausedEventParams memory inputs) virtual external override {
-    emit Unpaused(inputs.account);
+    emit Unpaused(CLPoolManager$EmitAllEvents$Unpaused(inputs.account));
   }
 
   function allTriggers() view external returns (Trigger[] memory) {

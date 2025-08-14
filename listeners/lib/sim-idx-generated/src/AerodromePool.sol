@@ -1951,6 +1951,46 @@ abstract contract AerodromePool$PreTransferFromFunction {
     }
 }
 
+
+struct AerodromePool$EmitAllEvents$Claim {
+  address sender;
+  address recipient;
+  uint256 amount0;
+  uint256 amount1;
+}
+
+struct AerodromePool$EmitAllEvents$Fees {
+  address sender;
+  uint256 amount0;
+  uint256 amount1;
+}
+
+struct AerodromePool$EmitAllEvents$Mint {
+  address sender;
+  uint256 amount0;
+  uint256 amount1;
+}
+
+struct AerodromePool$EmitAllEvents$Swap {
+  address sender;
+  address to;
+  uint256 amount0In;
+  uint256 amount1In;
+  uint256 amount0Out;
+  uint256 amount1Out;
+}
+
+struct AerodromePool$EmitAllEvents$Sync {
+  uint256 reserve0;
+  uint256 reserve1;
+}
+
+struct AerodromePool$EmitAllEvents$Transfer {
+  address from;
+  address to;
+  uint256 value;
+}
+
 contract AerodromePool$EmitAllEvents is
   AerodromePool$OnClaimEvent,
 AerodromePool$OnFeesEvent,
@@ -1959,30 +1999,30 @@ AerodromePool$OnSwapEvent,
 AerodromePool$OnSyncEvent,
 AerodromePool$OnTransferEvent
 {
-  event Claim(address sender, address recipient, uint256 amount0, uint256 amount1);
-event Fees(address sender, uint256 amount0, uint256 amount1);
-event Mint(address sender, uint256 amount0, uint256 amount1);
-event Swap(address sender, address to, uint256 amount0In, uint256 amount1In, uint256 amount0Out, uint256 amount1Out);
-event Sync(uint256 reserve0, uint256 reserve1);
-event Transfer(address from, address to, uint256 value);
+  event Claim(AerodromePool$EmitAllEvents$Claim);
+  event Fees(AerodromePool$EmitAllEvents$Fees);
+  event Mint(AerodromePool$EmitAllEvents$Mint);
+  event Swap(AerodromePool$EmitAllEvents$Swap);
+  event Sync(AerodromePool$EmitAllEvents$Sync);
+  event Transfer(AerodromePool$EmitAllEvents$Transfer);
 
   function AerodromePool$onClaimEvent(EventContext memory ctx, AerodromePool$ClaimEventParams memory inputs) virtual external override {
-    emit Claim(inputs.sender, inputs.recipient, inputs.amount0, inputs.amount1);
+    emit Claim(AerodromePool$EmitAllEvents$Claim(inputs.sender, inputs.recipient, inputs.amount0, inputs.amount1));
   }
 function AerodromePool$onFeesEvent(EventContext memory ctx, AerodromePool$FeesEventParams memory inputs) virtual external override {
-    emit Fees(inputs.sender, inputs.amount0, inputs.amount1);
+    emit Fees(AerodromePool$EmitAllEvents$Fees(inputs.sender, inputs.amount0, inputs.amount1));
   }
 function AerodromePool$onMintEvent(EventContext memory ctx, AerodromePool$MintEventParams memory inputs) virtual external override {
-    emit Mint(inputs.sender, inputs.amount0, inputs.amount1);
+    emit Mint(AerodromePool$EmitAllEvents$Mint(inputs.sender, inputs.amount0, inputs.amount1));
   }
 function AerodromePool$onSwapEvent(EventContext memory ctx, AerodromePool$SwapEventParams memory inputs) virtual external override {
-    emit Swap(inputs.sender, inputs.to, inputs.amount0In, inputs.amount1In, inputs.amount0Out, inputs.amount1Out);
+    emit Swap(AerodromePool$EmitAllEvents$Swap(inputs.sender, inputs.to, inputs.amount0In, inputs.amount1In, inputs.amount0Out, inputs.amount1Out));
   }
 function AerodromePool$onSyncEvent(EventContext memory ctx, AerodromePool$SyncEventParams memory inputs) virtual external override {
-    emit Sync(inputs.reserve0, inputs.reserve1);
+    emit Sync(AerodromePool$EmitAllEvents$Sync(inputs.reserve0, inputs.reserve1));
   }
 function AerodromePool$onTransferEvent(EventContext memory ctx, AerodromePool$TransferEventParams memory inputs) virtual external override {
-    emit Transfer(inputs.from, inputs.to, inputs.value);
+    emit Transfer(AerodromePool$EmitAllEvents$Transfer(inputs.from, inputs.to, inputs.value));
   }
 
   function allTriggers() view external returns (Trigger[] memory) {

@@ -33,13 +33,26 @@ abstract contract WooSwap$OnWooSwapEvent {
     }
 }
 
+
+struct WooSwap$EmitAllEvents$WooSwap {
+  address fromToken;
+  address toToken;
+  uint256 fromAmount;
+  uint256 toAmount;
+  address from;
+  address to;
+  address rebateTo;
+  uint256 swapVol;
+  uint256 swapFee;
+}
+
 contract WooSwap$EmitAllEvents is
   WooSwap$OnWooSwapEvent
 {
-  event WooSwap(address fromToken, address toToken, uint256 fromAmount, uint256 toAmount, address from, address to, address rebateTo, uint256 swapVol, uint256 swapFee);
+  event WooSwap(WooSwap$EmitAllEvents$WooSwap);
 
   function WooSwap$onWooSwapEvent(EventContext memory ctx, WooSwap$WooSwapEventParams memory inputs) virtual external override {
-    emit WooSwap(inputs.fromToken, inputs.toToken, inputs.fromAmount, inputs.toAmount, inputs.from, inputs.to, inputs.rebateTo, inputs.swapVol, inputs.swapFee);
+    emit WooSwap(WooSwap$EmitAllEvents$WooSwap(inputs.fromToken, inputs.toToken, inputs.fromAmount, inputs.toAmount, inputs.from, inputs.to, inputs.rebateTo, inputs.swapVol, inputs.swapFee));
   }
 
   function allTriggers() view external returns (Trigger[] memory) {

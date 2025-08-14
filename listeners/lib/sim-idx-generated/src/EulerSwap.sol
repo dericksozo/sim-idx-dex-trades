@@ -913,18 +913,35 @@ abstract contract EulerSwap$PreSwapFunction {
     }
 }
 
+
+struct EulerSwap$EmitAllEvents$EulerSwapActivated {
+  address asset0;
+  address asset1;
+}
+
+struct EulerSwap$EmitAllEvents$Swap {
+  address sender;
+  uint256 amount0In;
+  uint256 amount1In;
+  uint256 amount0Out;
+  uint256 amount1Out;
+  uint112 reserve0;
+  uint112 reserve1;
+  address to;
+}
+
 contract EulerSwap$EmitAllEvents is
   EulerSwap$OnEulerSwapActivatedEvent,
 EulerSwap$OnSwapEvent
 {
-  event EulerSwapActivated(address asset0, address asset1);
-event Swap(address sender, uint256 amount0In, uint256 amount1In, uint256 amount0Out, uint256 amount1Out, uint112 reserve0, uint112 reserve1, address to);
+  event EulerSwapActivated(EulerSwap$EmitAllEvents$EulerSwapActivated);
+  event Swap(EulerSwap$EmitAllEvents$Swap);
 
   function EulerSwap$onEulerSwapActivatedEvent(EventContext memory ctx, EulerSwap$EulerSwapActivatedEventParams memory inputs) virtual external override {
-    emit EulerSwapActivated(inputs.asset0, inputs.asset1);
+    emit EulerSwapActivated(EulerSwap$EmitAllEvents$EulerSwapActivated(inputs.asset0, inputs.asset1));
   }
 function EulerSwap$onSwapEvent(EventContext memory ctx, EulerSwap$SwapEventParams memory inputs) virtual external override {
-    emit Swap(inputs.sender, inputs.amount0In, inputs.amount1In, inputs.amount0Out, inputs.amount1Out, inputs.reserve0, inputs.reserve1, inputs.to);
+    emit Swap(EulerSwap$EmitAllEvents$Swap(inputs.sender, inputs.amount0In, inputs.amount1In, inputs.amount0Out, inputs.amount1Out, inputs.reserve0, inputs.reserve1, inputs.to));
   }
 
   function allTriggers() view external returns (Trigger[] memory) {

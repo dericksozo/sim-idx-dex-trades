@@ -1654,6 +1654,97 @@ abstract contract AlgebraIntegralPool$PreTotalFeeGrowth1TokenFunction {
     }
 }
 
+
+struct AlgebraIntegralPool$EmitAllEvents$Burn {
+  address owner;
+  int24 bottomTick;
+  int24 topTick;
+  uint128 liquidityAmount;
+  uint256 amount0;
+  uint256 amount1;
+  uint24 pluginFee;
+}
+
+struct AlgebraIntegralPool$EmitAllEvents$Collect {
+  address owner;
+  address recipient;
+  int24 bottomTick;
+  int24 topTick;
+  uint128 amount0;
+  uint128 amount1;
+}
+
+struct AlgebraIntegralPool$EmitAllEvents$CommunityFee {
+  uint16 communityFeeNew;
+}
+
+struct AlgebraIntegralPool$EmitAllEvents$CommunityVault {
+  address newCommunityVault;
+}
+
+struct AlgebraIntegralPool$EmitAllEvents$ExcessTokens {
+  uint256 amount0;
+  uint256 amount1;
+}
+
+struct AlgebraIntegralPool$EmitAllEvents$Fee {
+  uint16 fee;
+}
+
+struct AlgebraIntegralPool$EmitAllEvents$Flash {
+  address sender;
+  address recipient;
+  uint256 amount0;
+  uint256 amount1;
+  uint256 paid0;
+  uint256 paid1;
+}
+
+struct AlgebraIntegralPool$EmitAllEvents$Initialize {
+  uint160 price;
+  int24 tick;
+}
+
+struct AlgebraIntegralPool$EmitAllEvents$Mint {
+  address sender;
+  address owner;
+  int24 bottomTick;
+  int24 topTick;
+  uint128 liquidityAmount;
+  uint256 amount0;
+  uint256 amount1;
+}
+
+struct AlgebraIntegralPool$EmitAllEvents$Plugin {
+  address newPluginAddress;
+}
+
+struct AlgebraIntegralPool$EmitAllEvents$PluginConfig {
+  uint8 newPluginConfig;
+}
+
+struct AlgebraIntegralPool$EmitAllEvents$Skim {
+  address to;
+  uint256 amount0;
+  uint256 amount1;
+}
+
+struct AlgebraIntegralPool$EmitAllEvents$Swap {
+  address sender;
+  address recipient;
+  int256 amount0;
+  int256 amount1;
+  uint160 price;
+  uint128 liquidity;
+  int24 tick;
+  uint24 overrideFee;
+  uint24 pluginFee;
+}
+
+struct AlgebraIntegralPool$EmitAllEvents$TickSpacing {
+  int24 newTickSpacing;
+}
+
 contract AlgebraIntegralPool$EmitAllEvents is
   AlgebraIntegralPool$OnBurnEvent,
 AlgebraIntegralPool$OnCollectEvent,
@@ -1670,62 +1761,62 @@ AlgebraIntegralPool$OnSkimEvent,
 AlgebraIntegralPool$OnSwapEvent,
 AlgebraIntegralPool$OnTickSpacingEvent
 {
-  event Burn(address owner, int24 bottomTick, int24 topTick, uint128 liquidityAmount, uint256 amount0, uint256 amount1, uint24 pluginFee);
-event Collect(address owner, address recipient, int24 bottomTick, int24 topTick, uint128 amount0, uint128 amount1);
-event CommunityFee(uint16 communityFeeNew);
-event CommunityVault(address newCommunityVault);
-event ExcessTokens(uint256 amount0, uint256 amount1);
-event Fee(uint16 fee);
-event Flash(address sender, address recipient, uint256 amount0, uint256 amount1, uint256 paid0, uint256 paid1);
-event Initialize(uint160 price, int24 tick);
-event Mint(address sender, address owner, int24 bottomTick, int24 topTick, uint128 liquidityAmount, uint256 amount0, uint256 amount1);
-event Plugin(address newPluginAddress);
-event PluginConfig(uint8 newPluginConfig);
-event Skim(address to, uint256 amount0, uint256 amount1);
-event Swap(address sender, address recipient, int256 amount0, int256 amount1, uint160 price, uint128 liquidity, int24 tick, uint24 overrideFee, uint24 pluginFee);
-event TickSpacing(int24 newTickSpacing);
+  event Burn(AlgebraIntegralPool$EmitAllEvents$Burn);
+  event Collect(AlgebraIntegralPool$EmitAllEvents$Collect);
+  event CommunityFee(AlgebraIntegralPool$EmitAllEvents$CommunityFee);
+  event CommunityVault(AlgebraIntegralPool$EmitAllEvents$CommunityVault);
+  event ExcessTokens(AlgebraIntegralPool$EmitAllEvents$ExcessTokens);
+  event Fee(AlgebraIntegralPool$EmitAllEvents$Fee);
+  event Flash(AlgebraIntegralPool$EmitAllEvents$Flash);
+  event Initialize(AlgebraIntegralPool$EmitAllEvents$Initialize);
+  event Mint(AlgebraIntegralPool$EmitAllEvents$Mint);
+  event Plugin(AlgebraIntegralPool$EmitAllEvents$Plugin);
+  event PluginConfig(AlgebraIntegralPool$EmitAllEvents$PluginConfig);
+  event Skim(AlgebraIntegralPool$EmitAllEvents$Skim);
+  event Swap(AlgebraIntegralPool$EmitAllEvents$Swap);
+  event TickSpacing(AlgebraIntegralPool$EmitAllEvents$TickSpacing);
 
   function AlgebraIntegralPool$onBurnEvent(EventContext memory ctx, AlgebraIntegralPool$BurnEventParams memory inputs) virtual external override {
-    emit Burn(inputs.owner, inputs.bottomTick, inputs.topTick, inputs.liquidityAmount, inputs.amount0, inputs.amount1, inputs.pluginFee);
+    emit Burn(AlgebraIntegralPool$EmitAllEvents$Burn(inputs.owner, inputs.bottomTick, inputs.topTick, inputs.liquidityAmount, inputs.amount0, inputs.amount1, inputs.pluginFee));
   }
 function AlgebraIntegralPool$onCollectEvent(EventContext memory ctx, AlgebraIntegralPool$CollectEventParams memory inputs) virtual external override {
-    emit Collect(inputs.owner, inputs.recipient, inputs.bottomTick, inputs.topTick, inputs.amount0, inputs.amount1);
+    emit Collect(AlgebraIntegralPool$EmitAllEvents$Collect(inputs.owner, inputs.recipient, inputs.bottomTick, inputs.topTick, inputs.amount0, inputs.amount1));
   }
 function AlgebraIntegralPool$onCommunityFeeEvent(EventContext memory ctx, AlgebraIntegralPool$CommunityFeeEventParams memory inputs) virtual external override {
-    emit CommunityFee(inputs.communityFeeNew);
+    emit CommunityFee(AlgebraIntegralPool$EmitAllEvents$CommunityFee(inputs.communityFeeNew));
   }
 function AlgebraIntegralPool$onCommunityVaultEvent(EventContext memory ctx, AlgebraIntegralPool$CommunityVaultEventParams memory inputs) virtual external override {
-    emit CommunityVault(inputs.newCommunityVault);
+    emit CommunityVault(AlgebraIntegralPool$EmitAllEvents$CommunityVault(inputs.newCommunityVault));
   }
 function AlgebraIntegralPool$onExcessTokensEvent(EventContext memory ctx, AlgebraIntegralPool$ExcessTokensEventParams memory inputs) virtual external override {
-    emit ExcessTokens(inputs.amount0, inputs.amount1);
+    emit ExcessTokens(AlgebraIntegralPool$EmitAllEvents$ExcessTokens(inputs.amount0, inputs.amount1));
   }
 function AlgebraIntegralPool$onFeeEvent(EventContext memory ctx, AlgebraIntegralPool$FeeEventParams memory inputs) virtual external override {
-    emit Fee(inputs.fee);
+    emit Fee(AlgebraIntegralPool$EmitAllEvents$Fee(inputs.fee));
   }
 function AlgebraIntegralPool$onFlashEvent(EventContext memory ctx, AlgebraIntegralPool$FlashEventParams memory inputs) virtual external override {
-    emit Flash(inputs.sender, inputs.recipient, inputs.amount0, inputs.amount1, inputs.paid0, inputs.paid1);
+    emit Flash(AlgebraIntegralPool$EmitAllEvents$Flash(inputs.sender, inputs.recipient, inputs.amount0, inputs.amount1, inputs.paid0, inputs.paid1));
   }
 function AlgebraIntegralPool$onInitializeEvent(EventContext memory ctx, AlgebraIntegralPool$InitializeEventParams memory inputs) virtual external override {
-    emit Initialize(inputs.price, inputs.tick);
+    emit Initialize(AlgebraIntegralPool$EmitAllEvents$Initialize(inputs.price, inputs.tick));
   }
 function AlgebraIntegralPool$onMintEvent(EventContext memory ctx, AlgebraIntegralPool$MintEventParams memory inputs) virtual external override {
-    emit Mint(inputs.sender, inputs.owner, inputs.bottomTick, inputs.topTick, inputs.liquidityAmount, inputs.amount0, inputs.amount1);
+    emit Mint(AlgebraIntegralPool$EmitAllEvents$Mint(inputs.sender, inputs.owner, inputs.bottomTick, inputs.topTick, inputs.liquidityAmount, inputs.amount0, inputs.amount1));
   }
 function AlgebraIntegralPool$onPluginEvent(EventContext memory ctx, AlgebraIntegralPool$PluginEventParams memory inputs) virtual external override {
-    emit Plugin(inputs.newPluginAddress);
+    emit Plugin(AlgebraIntegralPool$EmitAllEvents$Plugin(inputs.newPluginAddress));
   }
 function AlgebraIntegralPool$onPluginConfigEvent(EventContext memory ctx, AlgebraIntegralPool$PluginConfigEventParams memory inputs) virtual external override {
-    emit PluginConfig(inputs.newPluginConfig);
+    emit PluginConfig(AlgebraIntegralPool$EmitAllEvents$PluginConfig(inputs.newPluginConfig));
   }
 function AlgebraIntegralPool$onSkimEvent(EventContext memory ctx, AlgebraIntegralPool$SkimEventParams memory inputs) virtual external override {
-    emit Skim(inputs.to, inputs.amount0, inputs.amount1);
+    emit Skim(AlgebraIntegralPool$EmitAllEvents$Skim(inputs.to, inputs.amount0, inputs.amount1));
   }
 function AlgebraIntegralPool$onSwapEvent(EventContext memory ctx, AlgebraIntegralPool$SwapEventParams memory inputs) virtual external override {
-    emit Swap(inputs.sender, inputs.recipient, inputs.amount0, inputs.amount1, inputs.price, inputs.liquidity, inputs.tick, inputs.overrideFee, inputs.pluginFee);
+    emit Swap(AlgebraIntegralPool$EmitAllEvents$Swap(inputs.sender, inputs.recipient, inputs.amount0, inputs.amount1, inputs.price, inputs.liquidity, inputs.tick, inputs.overrideFee, inputs.pluginFee));
   }
 function AlgebraIntegralPool$onTickSpacingEvent(EventContext memory ctx, AlgebraIntegralPool$TickSpacingEventParams memory inputs) virtual external override {
-    emit TickSpacing(inputs.newTickSpacing);
+    emit TickSpacing(AlgebraIntegralPool$EmitAllEvents$TickSpacing(inputs.newTickSpacing));
   }
 
   function allTriggers() view external returns (Trigger[] memory) {

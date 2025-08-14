@@ -1343,6 +1343,88 @@ abstract contract BinPoolManager$PreVaultFunction {
     }
 }
 
+
+struct BinPoolManager$EmitAllEvents$Burn {
+  bytes32 id;
+  address sender;
+  uint256[] ids;
+  bytes32 salt;
+  bytes32[] amounts;
+}
+
+struct BinPoolManager$EmitAllEvents$Donate {
+  bytes32 id;
+  address sender;
+  int128 amount0;
+  int128 amount1;
+  uint24 binId;
+}
+
+struct BinPoolManager$EmitAllEvents$DynamicLpFeeUpdated {
+  bytes32 id;
+  uint24 dynamicLPFee;
+}
+
+struct BinPoolManager$EmitAllEvents$Initialize {
+  bytes32 id;
+  address currency0;
+  address currency1;
+  address hooks;
+  uint24 fee;
+  bytes32 parameters;
+  uint24 activeId;
+}
+
+struct BinPoolManager$EmitAllEvents$Mint {
+  bytes32 id;
+  address sender;
+  uint256[] ids;
+  bytes32 salt;
+  bytes32[] amounts;
+  bytes32 compositionFeeAmount;
+  bytes32 feeAmountToProtocol;
+}
+
+struct BinPoolManager$EmitAllEvents$OwnershipTransferred {
+  address previousOwner;
+  address newOwner;
+}
+
+struct BinPoolManager$EmitAllEvents$Paused {
+  address account;
+}
+
+struct BinPoolManager$EmitAllEvents$ProtocolFeeControllerUpdated {
+  address protocolFeeController;
+}
+
+struct BinPoolManager$EmitAllEvents$ProtocolFeeUpdated {
+  bytes32 id;
+  uint24 protocolFee;
+}
+
+struct BinPoolManager$EmitAllEvents$SetMaxBinStep {
+  uint16 maxBinStep;
+}
+
+struct BinPoolManager$EmitAllEvents$SetMinBinSharesForDonate {
+  uint256 minLiquidity;
+}
+
+struct BinPoolManager$EmitAllEvents$Swap {
+  bytes32 id;
+  address sender;
+  int128 amount0;
+  int128 amount1;
+  uint24 activeId;
+  uint24 fee;
+  uint16 protocolFee;
+}
+
+struct BinPoolManager$EmitAllEvents$Unpaused {
+  address account;
+}
+
 contract BinPoolManager$EmitAllEvents is
   BinPoolManager$OnBurnEvent,
 BinPoolManager$OnDonateEvent,
@@ -1358,58 +1440,58 @@ BinPoolManager$OnSetMinBinSharesForDonateEvent,
 BinPoolManager$OnSwapEvent,
 BinPoolManager$OnUnpausedEvent
 {
-  event Burn(bytes32 id, address sender, uint256[] ids, bytes32 salt, bytes32[] amounts);
-event Donate(bytes32 id, address sender, int128 amount0, int128 amount1, uint24 binId);
-event DynamicLpFeeUpdated(bytes32 id, uint24 dynamicLPFee);
-event Initialize(bytes32 id, address currency0, address currency1, address hooks, uint24 fee, bytes32 parameters, uint24 activeId);
-event Mint(bytes32 id, address sender, uint256[] ids, bytes32 salt, bytes32[] amounts, bytes32 compositionFeeAmount, bytes32 feeAmountToProtocol);
-event OwnershipTransferred(address previousOwner, address newOwner);
-event Paused(address account);
-event ProtocolFeeControllerUpdated(address protocolFeeController);
-event ProtocolFeeUpdated(bytes32 id, uint24 protocolFee);
-event SetMaxBinStep(uint16 maxBinStep);
-event SetMinBinSharesForDonate(uint256 minLiquidity);
-event Swap(bytes32 id, address sender, int128 amount0, int128 amount1, uint24 activeId, uint24 fee, uint16 protocolFee);
-event Unpaused(address account);
+  event Burn(BinPoolManager$EmitAllEvents$Burn);
+  event Donate(BinPoolManager$EmitAllEvents$Donate);
+  event DynamicLpFeeUpdated(BinPoolManager$EmitAllEvents$DynamicLpFeeUpdated);
+  event Initialize(BinPoolManager$EmitAllEvents$Initialize);
+  event Mint(BinPoolManager$EmitAllEvents$Mint);
+  event OwnershipTransferred(BinPoolManager$EmitAllEvents$OwnershipTransferred);
+  event Paused(BinPoolManager$EmitAllEvents$Paused);
+  event ProtocolFeeControllerUpdated(BinPoolManager$EmitAllEvents$ProtocolFeeControllerUpdated);
+  event ProtocolFeeUpdated(BinPoolManager$EmitAllEvents$ProtocolFeeUpdated);
+  event SetMaxBinStep(BinPoolManager$EmitAllEvents$SetMaxBinStep);
+  event SetMinBinSharesForDonate(BinPoolManager$EmitAllEvents$SetMinBinSharesForDonate);
+  event Swap(BinPoolManager$EmitAllEvents$Swap);
+  event Unpaused(BinPoolManager$EmitAllEvents$Unpaused);
 
   function BinPoolManager$onBurnEvent(EventContext memory ctx, BinPoolManager$BurnEventParams memory inputs) virtual external override {
-    emit Burn(inputs.id, inputs.sender, inputs.ids, inputs.salt, inputs.amounts);
+    emit Burn(BinPoolManager$EmitAllEvents$Burn(inputs.id, inputs.sender, inputs.ids, inputs.salt, inputs.amounts));
   }
 function BinPoolManager$onDonateEvent(EventContext memory ctx, BinPoolManager$DonateEventParams memory inputs) virtual external override {
-    emit Donate(inputs.id, inputs.sender, inputs.amount0, inputs.amount1, inputs.binId);
+    emit Donate(BinPoolManager$EmitAllEvents$Donate(inputs.id, inputs.sender, inputs.amount0, inputs.amount1, inputs.binId));
   }
 function BinPoolManager$onDynamicLpFeeUpdatedEvent(EventContext memory ctx, BinPoolManager$DynamicLpFeeUpdatedEventParams memory inputs) virtual external override {
-    emit DynamicLpFeeUpdated(inputs.id, inputs.dynamicLPFee);
+    emit DynamicLpFeeUpdated(BinPoolManager$EmitAllEvents$DynamicLpFeeUpdated(inputs.id, inputs.dynamicLPFee));
   }
 function BinPoolManager$onInitializeEvent(EventContext memory ctx, BinPoolManager$InitializeEventParams memory inputs) virtual external override {
-    emit Initialize(inputs.id, inputs.currency0, inputs.currency1, inputs.hooks, inputs.fee, inputs.parameters, inputs.activeId);
+    emit Initialize(BinPoolManager$EmitAllEvents$Initialize(inputs.id, inputs.currency0, inputs.currency1, inputs.hooks, inputs.fee, inputs.parameters, inputs.activeId));
   }
 function BinPoolManager$onMintEvent(EventContext memory ctx, BinPoolManager$MintEventParams memory inputs) virtual external override {
-    emit Mint(inputs.id, inputs.sender, inputs.ids, inputs.salt, inputs.amounts, inputs.compositionFeeAmount, inputs.feeAmountToProtocol);
+    emit Mint(BinPoolManager$EmitAllEvents$Mint(inputs.id, inputs.sender, inputs.ids, inputs.salt, inputs.amounts, inputs.compositionFeeAmount, inputs.feeAmountToProtocol));
   }
 function BinPoolManager$onOwnershipTransferredEvent(EventContext memory ctx, BinPoolManager$OwnershipTransferredEventParams memory inputs) virtual external override {
-    emit OwnershipTransferred(inputs.previousOwner, inputs.newOwner);
+    emit OwnershipTransferred(BinPoolManager$EmitAllEvents$OwnershipTransferred(inputs.previousOwner, inputs.newOwner));
   }
 function BinPoolManager$onPausedEvent(EventContext memory ctx, BinPoolManager$PausedEventParams memory inputs) virtual external override {
-    emit Paused(inputs.account);
+    emit Paused(BinPoolManager$EmitAllEvents$Paused(inputs.account));
   }
 function BinPoolManager$onProtocolFeeControllerUpdatedEvent(EventContext memory ctx, BinPoolManager$ProtocolFeeControllerUpdatedEventParams memory inputs) virtual external override {
-    emit ProtocolFeeControllerUpdated(inputs.protocolFeeController);
+    emit ProtocolFeeControllerUpdated(BinPoolManager$EmitAllEvents$ProtocolFeeControllerUpdated(inputs.protocolFeeController));
   }
 function BinPoolManager$onProtocolFeeUpdatedEvent(EventContext memory ctx, BinPoolManager$ProtocolFeeUpdatedEventParams memory inputs) virtual external override {
-    emit ProtocolFeeUpdated(inputs.id, inputs.protocolFee);
+    emit ProtocolFeeUpdated(BinPoolManager$EmitAllEvents$ProtocolFeeUpdated(inputs.id, inputs.protocolFee));
   }
 function BinPoolManager$onSetMaxBinStepEvent(EventContext memory ctx, BinPoolManager$SetMaxBinStepEventParams memory inputs) virtual external override {
-    emit SetMaxBinStep(inputs.maxBinStep);
+    emit SetMaxBinStep(BinPoolManager$EmitAllEvents$SetMaxBinStep(inputs.maxBinStep));
   }
 function BinPoolManager$onSetMinBinSharesForDonateEvent(EventContext memory ctx, BinPoolManager$SetMinBinSharesForDonateEventParams memory inputs) virtual external override {
-    emit SetMinBinSharesForDonate(inputs.minLiquidity);
+    emit SetMinBinSharesForDonate(BinPoolManager$EmitAllEvents$SetMinBinSharesForDonate(inputs.minLiquidity));
   }
 function BinPoolManager$onSwapEvent(EventContext memory ctx, BinPoolManager$SwapEventParams memory inputs) virtual external override {
-    emit Swap(inputs.id, inputs.sender, inputs.amount0, inputs.amount1, inputs.activeId, inputs.fee, inputs.protocolFee);
+    emit Swap(BinPoolManager$EmitAllEvents$Swap(inputs.id, inputs.sender, inputs.amount0, inputs.amount1, inputs.activeId, inputs.fee, inputs.protocolFee));
   }
 function BinPoolManager$onUnpausedEvent(EventContext memory ctx, BinPoolManager$UnpausedEventParams memory inputs) virtual external override {
-    emit Unpaused(inputs.account);
+    emit Unpaused(BinPoolManager$EmitAllEvents$Unpaused(inputs.account));
   }
 
   function allTriggers() view external returns (Trigger[] memory) {

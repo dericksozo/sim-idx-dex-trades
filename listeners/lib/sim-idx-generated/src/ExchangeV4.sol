@@ -84,23 +84,59 @@ abstract contract ExchangeV4$OnRfqOrderFilledEvent {
     }
 }
 
+
+struct ExchangeV4$EmitAllEvents$LimitOrderFilled {
+  bytes32 orderHash;
+  address maker;
+  address taker;
+  address feeRecipient;
+  address makerToken;
+  address takerToken;
+  uint128 takerTokenFilledAmount;
+  uint128 makerTokenFilledAmount;
+  uint128 takerTokenFeeFilledAmount;
+  uint256 protocolFeePaid;
+  bytes32 pool;
+}
+
+struct ExchangeV4$EmitAllEvents$OtcOrderFilled {
+  bytes32 orderHash;
+  address maker;
+  address taker;
+  address makerToken;
+  address takerToken;
+  uint128 takerTokenFilledAmount;
+  uint128 makerTokenFilledAmount;
+}
+
+struct ExchangeV4$EmitAllEvents$RfqOrderFilled {
+  bytes32 orderHash;
+  address maker;
+  address taker;
+  address makerToken;
+  address takerToken;
+  uint128 takerTokenFilledAmount;
+  uint128 makerTokenFilledAmount;
+  bytes32 pool;
+}
+
 contract ExchangeV4$EmitAllEvents is
   ExchangeV4$OnLimitOrderFilledEvent,
 ExchangeV4$OnOtcOrderFilledEvent,
 ExchangeV4$OnRfqOrderFilledEvent
 {
-  event LimitOrderFilled(bytes32 orderHash, address maker, address taker, address feeRecipient, address makerToken, address takerToken, uint128 takerTokenFilledAmount, uint128 makerTokenFilledAmount, uint128 takerTokenFeeFilledAmount, uint256 protocolFeePaid, bytes32 pool);
-event OtcOrderFilled(bytes32 orderHash, address maker, address taker, address makerToken, address takerToken, uint128 takerTokenFilledAmount, uint128 makerTokenFilledAmount);
-event RfqOrderFilled(bytes32 orderHash, address maker, address taker, address makerToken, address takerToken, uint128 takerTokenFilledAmount, uint128 makerTokenFilledAmount, bytes32 pool);
+  event LimitOrderFilled(ExchangeV4$EmitAllEvents$LimitOrderFilled);
+  event OtcOrderFilled(ExchangeV4$EmitAllEvents$OtcOrderFilled);
+  event RfqOrderFilled(ExchangeV4$EmitAllEvents$RfqOrderFilled);
 
   function ExchangeV4$onLimitOrderFilledEvent(EventContext memory ctx, ExchangeV4$LimitOrderFilledEventParams memory inputs) virtual external override {
-    emit LimitOrderFilled(inputs.orderHash, inputs.maker, inputs.taker, inputs.feeRecipient, inputs.makerToken, inputs.takerToken, inputs.takerTokenFilledAmount, inputs.makerTokenFilledAmount, inputs.takerTokenFeeFilledAmount, inputs.protocolFeePaid, inputs.pool);
+    emit LimitOrderFilled(ExchangeV4$EmitAllEvents$LimitOrderFilled(inputs.orderHash, inputs.maker, inputs.taker, inputs.feeRecipient, inputs.makerToken, inputs.takerToken, inputs.takerTokenFilledAmount, inputs.makerTokenFilledAmount, inputs.takerTokenFeeFilledAmount, inputs.protocolFeePaid, inputs.pool));
   }
 function ExchangeV4$onOtcOrderFilledEvent(EventContext memory ctx, ExchangeV4$OtcOrderFilledEventParams memory inputs) virtual external override {
-    emit OtcOrderFilled(inputs.orderHash, inputs.maker, inputs.taker, inputs.makerToken, inputs.takerToken, inputs.takerTokenFilledAmount, inputs.makerTokenFilledAmount);
+    emit OtcOrderFilled(ExchangeV4$EmitAllEvents$OtcOrderFilled(inputs.orderHash, inputs.maker, inputs.taker, inputs.makerToken, inputs.takerToken, inputs.takerTokenFilledAmount, inputs.makerTokenFilledAmount));
   }
 function ExchangeV4$onRfqOrderFilledEvent(EventContext memory ctx, ExchangeV4$RfqOrderFilledEventParams memory inputs) virtual external override {
-    emit RfqOrderFilled(inputs.orderHash, inputs.maker, inputs.taker, inputs.makerToken, inputs.takerToken, inputs.takerTokenFilledAmount, inputs.makerTokenFilledAmount, inputs.pool);
+    emit RfqOrderFilled(ExchangeV4$EmitAllEvents$RfqOrderFilled(inputs.orderHash, inputs.maker, inputs.taker, inputs.makerToken, inputs.takerToken, inputs.takerTokenFilledAmount, inputs.makerTokenFilledAmount, inputs.pool));
   }
 
   function allTriggers() view external returns (Trigger[] memory) {

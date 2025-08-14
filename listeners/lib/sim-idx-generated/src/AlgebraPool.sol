@@ -1268,6 +1268,81 @@ abstract contract AlgebraPool$PreTotalFeeGrowth1TokenFunction {
     }
 }
 
+
+struct AlgebraPool$EmitAllEvents$Burn {
+  address owner;
+  int24 bottomTick;
+  int24 topTick;
+  uint128 liquidityAmount;
+  uint256 amount0;
+  uint256 amount1;
+}
+
+struct AlgebraPool$EmitAllEvents$Collect {
+  address owner;
+  address recipient;
+  int24 bottomTick;
+  int24 topTick;
+  uint128 amount0;
+  uint128 amount1;
+}
+
+struct AlgebraPool$EmitAllEvents$CommunityFee {
+  uint8 communityFee0New;
+  uint8 communityFee1New;
+}
+
+struct AlgebraPool$EmitAllEvents$Fee {
+  uint16 feeZto;
+  uint16 feeOtz;
+}
+
+struct AlgebraPool$EmitAllEvents$Flash {
+  address sender;
+  address recipient;
+  uint256 amount0;
+  uint256 amount1;
+  uint256 paid0;
+  uint256 paid1;
+}
+
+struct AlgebraPool$EmitAllEvents$Incentive {
+  address virtualPoolAddress;
+}
+
+struct AlgebraPool$EmitAllEvents$Initialize {
+  uint160 price;
+  int24 tick;
+}
+
+struct AlgebraPool$EmitAllEvents$LiquidityCooldown {
+  uint32 liquidityCooldown;
+}
+
+struct AlgebraPool$EmitAllEvents$Mint {
+  address sender;
+  address owner;
+  int24 bottomTick;
+  int24 topTick;
+  uint128 liquidityAmount;
+  uint256 amount0;
+  uint256 amount1;
+}
+
+struct AlgebraPool$EmitAllEvents$Swap {
+  address sender;
+  address recipient;
+  int256 amount0;
+  int256 amount1;
+  uint160 price;
+  uint128 liquidity;
+  int24 tick;
+}
+
+struct AlgebraPool$EmitAllEvents$TickSpacing {
+  int24 newTickSpacing;
+}
+
 contract AlgebraPool$EmitAllEvents is
   AlgebraPool$OnBurnEvent,
 AlgebraPool$OnCollectEvent,
@@ -1281,50 +1356,50 @@ AlgebraPool$OnMintEvent,
 AlgebraPool$OnSwapEvent,
 AlgebraPool$OnTickSpacingEvent
 {
-  event Burn(address owner, int24 bottomTick, int24 topTick, uint128 liquidityAmount, uint256 amount0, uint256 amount1);
-event Collect(address owner, address recipient, int24 bottomTick, int24 topTick, uint128 amount0, uint128 amount1);
-event CommunityFee(uint8 communityFee0New, uint8 communityFee1New);
-event Fee(uint16 feeZto, uint16 feeOtz);
-event Flash(address sender, address recipient, uint256 amount0, uint256 amount1, uint256 paid0, uint256 paid1);
-event Incentive(address virtualPoolAddress);
-event Initialize(uint160 price, int24 tick);
-event LiquidityCooldown(uint32 liquidityCooldown);
-event Mint(address sender, address owner, int24 bottomTick, int24 topTick, uint128 liquidityAmount, uint256 amount0, uint256 amount1);
-event Swap(address sender, address recipient, int256 amount0, int256 amount1, uint160 price, uint128 liquidity, int24 tick);
-event TickSpacing(int24 newTickSpacing);
+  event Burn(AlgebraPool$EmitAllEvents$Burn);
+  event Collect(AlgebraPool$EmitAllEvents$Collect);
+  event CommunityFee(AlgebraPool$EmitAllEvents$CommunityFee);
+  event Fee(AlgebraPool$EmitAllEvents$Fee);
+  event Flash(AlgebraPool$EmitAllEvents$Flash);
+  event Incentive(AlgebraPool$EmitAllEvents$Incentive);
+  event Initialize(AlgebraPool$EmitAllEvents$Initialize);
+  event LiquidityCooldown(AlgebraPool$EmitAllEvents$LiquidityCooldown);
+  event Mint(AlgebraPool$EmitAllEvents$Mint);
+  event Swap(AlgebraPool$EmitAllEvents$Swap);
+  event TickSpacing(AlgebraPool$EmitAllEvents$TickSpacing);
 
   function AlgebraPool$onBurnEvent(EventContext memory ctx, AlgebraPool$BurnEventParams memory inputs) virtual external override {
-    emit Burn(inputs.owner, inputs.bottomTick, inputs.topTick, inputs.liquidityAmount, inputs.amount0, inputs.amount1);
+    emit Burn(AlgebraPool$EmitAllEvents$Burn(inputs.owner, inputs.bottomTick, inputs.topTick, inputs.liquidityAmount, inputs.amount0, inputs.amount1));
   }
 function AlgebraPool$onCollectEvent(EventContext memory ctx, AlgebraPool$CollectEventParams memory inputs) virtual external override {
-    emit Collect(inputs.owner, inputs.recipient, inputs.bottomTick, inputs.topTick, inputs.amount0, inputs.amount1);
+    emit Collect(AlgebraPool$EmitAllEvents$Collect(inputs.owner, inputs.recipient, inputs.bottomTick, inputs.topTick, inputs.amount0, inputs.amount1));
   }
 function AlgebraPool$onCommunityFeeEvent(EventContext memory ctx, AlgebraPool$CommunityFeeEventParams memory inputs) virtual external override {
-    emit CommunityFee(inputs.communityFee0New, inputs.communityFee1New);
+    emit CommunityFee(AlgebraPool$EmitAllEvents$CommunityFee(inputs.communityFee0New, inputs.communityFee1New));
   }
 function AlgebraPool$onFeeEvent(EventContext memory ctx, AlgebraPool$FeeEventParams memory inputs) virtual external override {
-    emit Fee(inputs.feeZto, inputs.feeOtz);
+    emit Fee(AlgebraPool$EmitAllEvents$Fee(inputs.feeZto, inputs.feeOtz));
   }
 function AlgebraPool$onFlashEvent(EventContext memory ctx, AlgebraPool$FlashEventParams memory inputs) virtual external override {
-    emit Flash(inputs.sender, inputs.recipient, inputs.amount0, inputs.amount1, inputs.paid0, inputs.paid1);
+    emit Flash(AlgebraPool$EmitAllEvents$Flash(inputs.sender, inputs.recipient, inputs.amount0, inputs.amount1, inputs.paid0, inputs.paid1));
   }
 function AlgebraPool$onIncentiveEvent(EventContext memory ctx, AlgebraPool$IncentiveEventParams memory inputs) virtual external override {
-    emit Incentive(inputs.virtualPoolAddress);
+    emit Incentive(AlgebraPool$EmitAllEvents$Incentive(inputs.virtualPoolAddress));
   }
 function AlgebraPool$onInitializeEvent(EventContext memory ctx, AlgebraPool$InitializeEventParams memory inputs) virtual external override {
-    emit Initialize(inputs.price, inputs.tick);
+    emit Initialize(AlgebraPool$EmitAllEvents$Initialize(inputs.price, inputs.tick));
   }
 function AlgebraPool$onLiquidityCooldownEvent(EventContext memory ctx, AlgebraPool$LiquidityCooldownEventParams memory inputs) virtual external override {
-    emit LiquidityCooldown(inputs.liquidityCooldown);
+    emit LiquidityCooldown(AlgebraPool$EmitAllEvents$LiquidityCooldown(inputs.liquidityCooldown));
   }
 function AlgebraPool$onMintEvent(EventContext memory ctx, AlgebraPool$MintEventParams memory inputs) virtual external override {
-    emit Mint(inputs.sender, inputs.owner, inputs.bottomTick, inputs.topTick, inputs.liquidityAmount, inputs.amount0, inputs.amount1);
+    emit Mint(AlgebraPool$EmitAllEvents$Mint(inputs.sender, inputs.owner, inputs.bottomTick, inputs.topTick, inputs.liquidityAmount, inputs.amount0, inputs.amount1));
   }
 function AlgebraPool$onSwapEvent(EventContext memory ctx, AlgebraPool$SwapEventParams memory inputs) virtual external override {
-    emit Swap(inputs.sender, inputs.recipient, inputs.amount0, inputs.amount1, inputs.price, inputs.liquidity, inputs.tick);
+    emit Swap(AlgebraPool$EmitAllEvents$Swap(inputs.sender, inputs.recipient, inputs.amount0, inputs.amount1, inputs.price, inputs.liquidity, inputs.tick));
   }
 function AlgebraPool$onTickSpacingEvent(EventContext memory ctx, AlgebraPool$TickSpacingEventParams memory inputs) virtual external override {
-    emit TickSpacing(inputs.newTickSpacing);
+    emit TickSpacing(AlgebraPool$EmitAllEvents$TickSpacing(inputs.newTickSpacing));
   }
 
   function allTriggers() view external returns (Trigger[] memory) {

@@ -1578,6 +1578,65 @@ abstract contract DSLOProtocol$PreUpdateOperatorFunction {
     }
 }
 
+
+struct DSLOProtocol$EmitAllEvents$FeeCollected {
+  address recipient;
+  address token;
+  uint256 amount;
+}
+
+struct DSLOProtocol$EmitAllEvents$NonceIncreased {
+  address maker;
+  uint256 oldNonce;
+  uint256 newNonce;
+}
+
+struct DSLOProtocol$EmitAllEvents$OrderCanceled {
+  address maker;
+  bytes32 orderHash;
+  uint256 remainingRaw;
+}
+
+struct DSLOProtocol$EmitAllEvents$OrderFilled {
+  address taker;
+  bytes32 orderHash;
+  uint256 remaining;
+  uint256 makingAmount;
+  uint256 takingAmount;
+}
+
+struct DSLOProtocol$EmitAllEvents$OwnershipTransferred {
+  address previousOwner;
+  address newOwner;
+}
+
+struct DSLOProtocol$EmitAllEvents$Paused {
+  address account;
+}
+
+struct DSLOProtocol$EmitAllEvents$Unpaused {
+  address account;
+}
+
+struct DSLOProtocol$EmitAllEvents$UpdateGuardian {
+  address user;
+  bool grantOrRevoke;
+}
+
+struct DSLOProtocol$EmitAllEvents$UpdateOperator {
+  address user;
+  bool grantOrRevoke;
+}
+
+struct DSLOProtocol$EmitAllEvents$UpdatedDsOrderSigner {
+  address _address;
+}
+
+struct DSLOProtocol$EmitAllEvents$UpdatedInteractionWhitelist {
+  address _address;
+  bool isWhitelist;
+}
+
 contract DSLOProtocol$EmitAllEvents is
   DSLOProtocol$OnFeeCollectedEvent,
 DSLOProtocol$OnNonceIncreasedEvent,
@@ -1591,50 +1650,50 @@ DSLOProtocol$OnUpdateOperatorEvent,
 DSLOProtocol$OnUpdatedDsOrderSignerEvent,
 DSLOProtocol$OnUpdatedInteractionWhitelistEvent
 {
-  event FeeCollected(address recipient, address token, uint256 amount);
-event NonceIncreased(address maker, uint256 oldNonce, uint256 newNonce);
-event OrderCanceled(address maker, bytes32 orderHash, uint256 remainingRaw);
-event OrderFilled(address taker, bytes32 orderHash, uint256 remaining, uint256 makingAmount, uint256 takingAmount);
-event OwnershipTransferred(address previousOwner, address newOwner);
-event Paused(address account);
-event Unpaused(address account);
-event UpdateGuardian(address user, bool grantOrRevoke);
-event UpdateOperator(address user, bool grantOrRevoke);
-event UpdatedDsOrderSigner(address _address);
-event UpdatedInteractionWhitelist(address _address, bool isWhitelist);
+  event FeeCollected(DSLOProtocol$EmitAllEvents$FeeCollected);
+  event NonceIncreased(DSLOProtocol$EmitAllEvents$NonceIncreased);
+  event OrderCanceled(DSLOProtocol$EmitAllEvents$OrderCanceled);
+  event OrderFilled(DSLOProtocol$EmitAllEvents$OrderFilled);
+  event OwnershipTransferred(DSLOProtocol$EmitAllEvents$OwnershipTransferred);
+  event Paused(DSLOProtocol$EmitAllEvents$Paused);
+  event Unpaused(DSLOProtocol$EmitAllEvents$Unpaused);
+  event UpdateGuardian(DSLOProtocol$EmitAllEvents$UpdateGuardian);
+  event UpdateOperator(DSLOProtocol$EmitAllEvents$UpdateOperator);
+  event UpdatedDsOrderSigner(DSLOProtocol$EmitAllEvents$UpdatedDsOrderSigner);
+  event UpdatedInteractionWhitelist(DSLOProtocol$EmitAllEvents$UpdatedInteractionWhitelist);
 
   function DSLOProtocol$onFeeCollectedEvent(EventContext memory ctx, DSLOProtocol$FeeCollectedEventParams memory inputs) virtual external override {
-    emit FeeCollected(inputs.recipient, inputs.token, inputs.amount);
+    emit FeeCollected(DSLOProtocol$EmitAllEvents$FeeCollected(inputs.recipient, inputs.token, inputs.amount));
   }
 function DSLOProtocol$onNonceIncreasedEvent(EventContext memory ctx, DSLOProtocol$NonceIncreasedEventParams memory inputs) virtual external override {
-    emit NonceIncreased(inputs.maker, inputs.oldNonce, inputs.newNonce);
+    emit NonceIncreased(DSLOProtocol$EmitAllEvents$NonceIncreased(inputs.maker, inputs.oldNonce, inputs.newNonce));
   }
 function DSLOProtocol$onOrderCanceledEvent(EventContext memory ctx, DSLOProtocol$OrderCanceledEventParams memory inputs) virtual external override {
-    emit OrderCanceled(inputs.maker, inputs.orderHash, inputs.remainingRaw);
+    emit OrderCanceled(DSLOProtocol$EmitAllEvents$OrderCanceled(inputs.maker, inputs.orderHash, inputs.remainingRaw));
   }
 function DSLOProtocol$onOrderFilledEvent(EventContext memory ctx, DSLOProtocol$OrderFilledEventParams memory inputs) virtual external override {
-    emit OrderFilled(inputs.taker, inputs.orderHash, inputs.remaining, inputs.makingAmount, inputs.takingAmount);
+    emit OrderFilled(DSLOProtocol$EmitAllEvents$OrderFilled(inputs.taker, inputs.orderHash, inputs.remaining, inputs.makingAmount, inputs.takingAmount));
   }
 function DSLOProtocol$onOwnershipTransferredEvent(EventContext memory ctx, DSLOProtocol$OwnershipTransferredEventParams memory inputs) virtual external override {
-    emit OwnershipTransferred(inputs.previousOwner, inputs.newOwner);
+    emit OwnershipTransferred(DSLOProtocol$EmitAllEvents$OwnershipTransferred(inputs.previousOwner, inputs.newOwner));
   }
 function DSLOProtocol$onPausedEvent(EventContext memory ctx, DSLOProtocol$PausedEventParams memory inputs) virtual external override {
-    emit Paused(inputs.account);
+    emit Paused(DSLOProtocol$EmitAllEvents$Paused(inputs.account));
   }
 function DSLOProtocol$onUnpausedEvent(EventContext memory ctx, DSLOProtocol$UnpausedEventParams memory inputs) virtual external override {
-    emit Unpaused(inputs.account);
+    emit Unpaused(DSLOProtocol$EmitAllEvents$Unpaused(inputs.account));
   }
 function DSLOProtocol$onUpdateGuardianEvent(EventContext memory ctx, DSLOProtocol$UpdateGuardianEventParams memory inputs) virtual external override {
-    emit UpdateGuardian(inputs.user, inputs.grantOrRevoke);
+    emit UpdateGuardian(DSLOProtocol$EmitAllEvents$UpdateGuardian(inputs.user, inputs.grantOrRevoke));
   }
 function DSLOProtocol$onUpdateOperatorEvent(EventContext memory ctx, DSLOProtocol$UpdateOperatorEventParams memory inputs) virtual external override {
-    emit UpdateOperator(inputs.user, inputs.grantOrRevoke);
+    emit UpdateOperator(DSLOProtocol$EmitAllEvents$UpdateOperator(inputs.user, inputs.grantOrRevoke));
   }
 function DSLOProtocol$onUpdatedDsOrderSignerEvent(EventContext memory ctx, DSLOProtocol$UpdatedDsOrderSignerEventParams memory inputs) virtual external override {
-    emit UpdatedDsOrderSigner(inputs._address);
+    emit UpdatedDsOrderSigner(DSLOProtocol$EmitAllEvents$UpdatedDsOrderSigner(inputs._address));
   }
 function DSLOProtocol$onUpdatedInteractionWhitelistEvent(EventContext memory ctx, DSLOProtocol$UpdatedInteractionWhitelistEventParams memory inputs) virtual external override {
-    emit UpdatedInteractionWhitelist(inputs._address, inputs.isWhitelist);
+    emit UpdatedInteractionWhitelist(DSLOProtocol$EmitAllEvents$UpdatedInteractionWhitelist(inputs._address, inputs.isWhitelist));
   }
 
   function allTriggers() view external returns (Trigger[] memory) {

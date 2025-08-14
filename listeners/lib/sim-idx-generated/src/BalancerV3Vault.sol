@@ -1009,6 +1009,151 @@ abstract contract BalancerV3Vault$PreUnlockFunction {
     }
 }
 
+
+struct BalancerV3Vault$EmitAllEvents$AggregateSwapFeePercentageChanged {
+  address pool;
+  uint256 aggregateSwapFeePercentage;
+}
+
+struct BalancerV3Vault$EmitAllEvents$AggregateYieldFeePercentageChanged {
+  address pool;
+  uint256 aggregateYieldFeePercentage;
+}
+
+struct BalancerV3Vault$EmitAllEvents$Approval {
+  address pool;
+  address owner;
+  address spender;
+  uint256 value;
+}
+
+struct BalancerV3Vault$EmitAllEvents$AuthorizerChanged {
+  address newAuthorizer;
+}
+
+struct BalancerV3Vault$EmitAllEvents$BufferSharesBurned {
+  address wrappedToken;
+  address from;
+  uint256 burnedShares;
+}
+
+struct BalancerV3Vault$EmitAllEvents$BufferSharesMinted {
+  address wrappedToken;
+  address to;
+  uint256 issuedShares;
+}
+
+struct BalancerV3Vault$EmitAllEvents$LiquidityAdded {
+  address pool;
+  address liquidityProvider;
+  uint8 kind;
+  uint256 totalSupply;
+  uint256[] amountsAddedRaw;
+  uint256[] swapFeeAmountsRaw;
+}
+
+struct BalancerV3Vault$EmitAllEvents$LiquidityAddedToBuffer {
+  address wrappedToken;
+  uint256 amountUnderlying;
+  uint256 amountWrapped;
+  bytes32 bufferBalances;
+}
+
+struct BalancerV3Vault$EmitAllEvents$LiquidityRemoved {
+  address pool;
+  address liquidityProvider;
+  uint8 kind;
+  uint256 totalSupply;
+  uint256[] amountsRemovedRaw;
+  uint256[] swapFeeAmountsRaw;
+}
+
+struct BalancerV3Vault$EmitAllEvents$LiquidityRemovedFromBuffer {
+  address wrappedToken;
+  uint256 amountUnderlying;
+  uint256 amountWrapped;
+  bytes32 bufferBalances;
+}
+
+struct BalancerV3Vault$EmitAllEvents$PoolInitialized {
+  address pool;
+}
+
+struct BalancerV3Vault$EmitAllEvents$PoolPausedStateChanged {
+  address pool;
+  bool paused;
+}
+
+struct BalancerV3Vault$EmitAllEvents$PoolRecoveryModeStateChanged {
+  address pool;
+  bool recoveryMode;
+}
+
+struct BalancerV3Vault$EmitAllEvents$PoolRegistered {
+  address pool;
+  address factory;
+  BalancerV3Vault$TokenConfig[] tokenConfig;
+  uint256 swapFeePercentage;
+  uint32 pauseWindowEndTime;
+  BalancerV3Vault$PoolRoleAccounts roleAccounts;
+  BalancerV3Vault$HooksConfig hooksConfig;
+  BalancerV3Vault$LiquidityManagement liquidityManagement;
+}
+
+struct BalancerV3Vault$EmitAllEvents$ProtocolFeeControllerChanged {
+  address newProtocolFeeController;
+}
+
+struct BalancerV3Vault$EmitAllEvents$Swap {
+  address pool;
+  address tokenIn;
+  address tokenOut;
+  uint256 amountIn;
+  uint256 amountOut;
+  uint256 swapFeePercentage;
+  uint256 swapFeeAmount;
+}
+
+struct BalancerV3Vault$EmitAllEvents$SwapFeePercentageChanged {
+  address pool;
+  uint256 swapFeePercentage;
+}
+
+struct BalancerV3Vault$EmitAllEvents$Transfer {
+  address pool;
+  address from;
+  address to;
+  uint256 value;
+}
+
+struct BalancerV3Vault$EmitAllEvents$Unwrap {
+  address wrappedToken;
+  uint256 burnedShares;
+  uint256 withdrawnUnderlying;
+  bytes32 bufferBalances;
+}
+
+struct BalancerV3Vault$EmitAllEvents$VaultAuxiliary {
+  address pool;
+  bytes32 eventKey;
+  bytes eventData;
+}
+
+struct BalancerV3Vault$EmitAllEvents$VaultBuffersPausedStateChanged {
+  bool paused;
+}
+
+struct BalancerV3Vault$EmitAllEvents$VaultPausedStateChanged {
+  bool paused;
+}
+
+struct BalancerV3Vault$EmitAllEvents$Wrap {
+  address wrappedToken;
+  uint256 depositedUnderlying;
+  uint256 mintedShares;
+  bytes32 bufferBalances;
+}
+
 contract BalancerV3Vault$EmitAllEvents is
   BalancerV3Vault$OnAggregateSwapFeePercentageChangedEvent,
 BalancerV3Vault$OnAggregateYieldFeePercentageChangedEvent,
@@ -1036,97 +1181,97 @@ BalancerV3Vault$OnVaultQueriesDisabledEvent,
 BalancerV3Vault$OnVaultQueriesEnabledEvent,
 BalancerV3Vault$OnWrapEvent
 {
-  event AggregateSwapFeePercentageChanged(address pool, uint256 aggregateSwapFeePercentage);
-event AggregateYieldFeePercentageChanged(address pool, uint256 aggregateYieldFeePercentage);
-event Approval(address pool, address owner, address spender, uint256 value);
-event AuthorizerChanged(address newAuthorizer);
-event BufferSharesBurned(address wrappedToken, address from, uint256 burnedShares);
-event BufferSharesMinted(address wrappedToken, address to, uint256 issuedShares);
-event LiquidityAdded(address pool, address liquidityProvider, uint8 kind, uint256 totalSupply, uint256[] amountsAddedRaw, uint256[] swapFeeAmountsRaw);
-event LiquidityAddedToBuffer(address wrappedToken, uint256 amountUnderlying, uint256 amountWrapped, bytes32 bufferBalances);
-event LiquidityRemoved(address pool, address liquidityProvider, uint8 kind, uint256 totalSupply, uint256[] amountsRemovedRaw, uint256[] swapFeeAmountsRaw);
-event LiquidityRemovedFromBuffer(address wrappedToken, uint256 amountUnderlying, uint256 amountWrapped, bytes32 bufferBalances);
-event PoolInitialized(address pool);
-event PoolPausedStateChanged(address pool, bool paused);
-event PoolRecoveryModeStateChanged(address pool, bool recoveryMode);
-event PoolRegistered(address pool, address factory, BalancerV3Vault$TokenConfig[] tokenConfig, uint256 swapFeePercentage, uint32 pauseWindowEndTime, BalancerV3Vault$PoolRoleAccounts roleAccounts, BalancerV3Vault$HooksConfig hooksConfig, BalancerV3Vault$LiquidityManagement liquidityManagement);
-event ProtocolFeeControllerChanged(address newProtocolFeeController);
-event Swap(address pool, address tokenIn, address tokenOut, uint256 amountIn, uint256 amountOut, uint256 swapFeePercentage, uint256 swapFeeAmount);
-event SwapFeePercentageChanged(address pool, uint256 swapFeePercentage);
-event Transfer(address pool, address from, address to, uint256 value);
-event Unwrap(address wrappedToken, uint256 burnedShares, uint256 withdrawnUnderlying, bytes32 bufferBalances);
-event VaultAuxiliary(address pool, bytes32 eventKey, bytes eventData);
-event VaultBuffersPausedStateChanged(bool paused);
-event VaultPausedStateChanged(bool paused);
-event VaultQueriesDisabled();
-event VaultQueriesEnabled();
-event Wrap(address wrappedToken, uint256 depositedUnderlying, uint256 mintedShares, bytes32 bufferBalances);
+  event AggregateSwapFeePercentageChanged(BalancerV3Vault$EmitAllEvents$AggregateSwapFeePercentageChanged);
+  event AggregateYieldFeePercentageChanged(BalancerV3Vault$EmitAllEvents$AggregateYieldFeePercentageChanged);
+  event Approval(BalancerV3Vault$EmitAllEvents$Approval);
+  event AuthorizerChanged(BalancerV3Vault$EmitAllEvents$AuthorizerChanged);
+  event BufferSharesBurned(BalancerV3Vault$EmitAllEvents$BufferSharesBurned);
+  event BufferSharesMinted(BalancerV3Vault$EmitAllEvents$BufferSharesMinted);
+  event LiquidityAdded(BalancerV3Vault$EmitAllEvents$LiquidityAdded);
+  event LiquidityAddedToBuffer(BalancerV3Vault$EmitAllEvents$LiquidityAddedToBuffer);
+  event LiquidityRemoved(BalancerV3Vault$EmitAllEvents$LiquidityRemoved);
+  event LiquidityRemovedFromBuffer(BalancerV3Vault$EmitAllEvents$LiquidityRemovedFromBuffer);
+  event PoolInitialized(BalancerV3Vault$EmitAllEvents$PoolInitialized);
+  event PoolPausedStateChanged(BalancerV3Vault$EmitAllEvents$PoolPausedStateChanged);
+  event PoolRecoveryModeStateChanged(BalancerV3Vault$EmitAllEvents$PoolRecoveryModeStateChanged);
+  event PoolRegistered(BalancerV3Vault$EmitAllEvents$PoolRegistered);
+  event ProtocolFeeControllerChanged(BalancerV3Vault$EmitAllEvents$ProtocolFeeControllerChanged);
+  event Swap(BalancerV3Vault$EmitAllEvents$Swap);
+  event SwapFeePercentageChanged(BalancerV3Vault$EmitAllEvents$SwapFeePercentageChanged);
+  event Transfer(BalancerV3Vault$EmitAllEvents$Transfer);
+  event Unwrap(BalancerV3Vault$EmitAllEvents$Unwrap);
+  event VaultAuxiliary(BalancerV3Vault$EmitAllEvents$VaultAuxiliary);
+  event VaultBuffersPausedStateChanged(BalancerV3Vault$EmitAllEvents$VaultBuffersPausedStateChanged);
+  event VaultPausedStateChanged(BalancerV3Vault$EmitAllEvents$VaultPausedStateChanged);
+  event VaultQueriesDisabled();
+  event VaultQueriesEnabled();
+  event Wrap(BalancerV3Vault$EmitAllEvents$Wrap);
 
   function BalancerV3Vault$onAggregateSwapFeePercentageChangedEvent(EventContext memory ctx, BalancerV3Vault$AggregateSwapFeePercentageChangedEventParams memory inputs) virtual external override {
-    emit AggregateSwapFeePercentageChanged(inputs.pool, inputs.aggregateSwapFeePercentage);
+    emit AggregateSwapFeePercentageChanged(BalancerV3Vault$EmitAllEvents$AggregateSwapFeePercentageChanged(inputs.pool, inputs.aggregateSwapFeePercentage));
   }
 function BalancerV3Vault$onAggregateYieldFeePercentageChangedEvent(EventContext memory ctx, BalancerV3Vault$AggregateYieldFeePercentageChangedEventParams memory inputs) virtual external override {
-    emit AggregateYieldFeePercentageChanged(inputs.pool, inputs.aggregateYieldFeePercentage);
+    emit AggregateYieldFeePercentageChanged(BalancerV3Vault$EmitAllEvents$AggregateYieldFeePercentageChanged(inputs.pool, inputs.aggregateYieldFeePercentage));
   }
 function BalancerV3Vault$onApprovalEvent(EventContext memory ctx, BalancerV3Vault$ApprovalEventParams memory inputs) virtual external override {
-    emit Approval(inputs.pool, inputs.owner, inputs.spender, inputs.value);
+    emit Approval(BalancerV3Vault$EmitAllEvents$Approval(inputs.pool, inputs.owner, inputs.spender, inputs.value));
   }
 function BalancerV3Vault$onAuthorizerChangedEvent(EventContext memory ctx, BalancerV3Vault$AuthorizerChangedEventParams memory inputs) virtual external override {
-    emit AuthorizerChanged(inputs.newAuthorizer);
+    emit AuthorizerChanged(BalancerV3Vault$EmitAllEvents$AuthorizerChanged(inputs.newAuthorizer));
   }
 function BalancerV3Vault$onBufferSharesBurnedEvent(EventContext memory ctx, BalancerV3Vault$BufferSharesBurnedEventParams memory inputs) virtual external override {
-    emit BufferSharesBurned(inputs.wrappedToken, inputs.from, inputs.burnedShares);
+    emit BufferSharesBurned(BalancerV3Vault$EmitAllEvents$BufferSharesBurned(inputs.wrappedToken, inputs.from, inputs.burnedShares));
   }
 function BalancerV3Vault$onBufferSharesMintedEvent(EventContext memory ctx, BalancerV3Vault$BufferSharesMintedEventParams memory inputs) virtual external override {
-    emit BufferSharesMinted(inputs.wrappedToken, inputs.to, inputs.issuedShares);
+    emit BufferSharesMinted(BalancerV3Vault$EmitAllEvents$BufferSharesMinted(inputs.wrappedToken, inputs.to, inputs.issuedShares));
   }
 function BalancerV3Vault$onLiquidityAddedEvent(EventContext memory ctx, BalancerV3Vault$LiquidityAddedEventParams memory inputs) virtual external override {
-    emit LiquidityAdded(inputs.pool, inputs.liquidityProvider, inputs.kind, inputs.totalSupply, inputs.amountsAddedRaw, inputs.swapFeeAmountsRaw);
+    emit LiquidityAdded(BalancerV3Vault$EmitAllEvents$LiquidityAdded(inputs.pool, inputs.liquidityProvider, inputs.kind, inputs.totalSupply, inputs.amountsAddedRaw, inputs.swapFeeAmountsRaw));
   }
 function BalancerV3Vault$onLiquidityAddedToBufferEvent(EventContext memory ctx, BalancerV3Vault$LiquidityAddedToBufferEventParams memory inputs) virtual external override {
-    emit LiquidityAddedToBuffer(inputs.wrappedToken, inputs.amountUnderlying, inputs.amountWrapped, inputs.bufferBalances);
+    emit LiquidityAddedToBuffer(BalancerV3Vault$EmitAllEvents$LiquidityAddedToBuffer(inputs.wrappedToken, inputs.amountUnderlying, inputs.amountWrapped, inputs.bufferBalances));
   }
 function BalancerV3Vault$onLiquidityRemovedEvent(EventContext memory ctx, BalancerV3Vault$LiquidityRemovedEventParams memory inputs) virtual external override {
-    emit LiquidityRemoved(inputs.pool, inputs.liquidityProvider, inputs.kind, inputs.totalSupply, inputs.amountsRemovedRaw, inputs.swapFeeAmountsRaw);
+    emit LiquidityRemoved(BalancerV3Vault$EmitAllEvents$LiquidityRemoved(inputs.pool, inputs.liquidityProvider, inputs.kind, inputs.totalSupply, inputs.amountsRemovedRaw, inputs.swapFeeAmountsRaw));
   }
 function BalancerV3Vault$onLiquidityRemovedFromBufferEvent(EventContext memory ctx, BalancerV3Vault$LiquidityRemovedFromBufferEventParams memory inputs) virtual external override {
-    emit LiquidityRemovedFromBuffer(inputs.wrappedToken, inputs.amountUnderlying, inputs.amountWrapped, inputs.bufferBalances);
+    emit LiquidityRemovedFromBuffer(BalancerV3Vault$EmitAllEvents$LiquidityRemovedFromBuffer(inputs.wrappedToken, inputs.amountUnderlying, inputs.amountWrapped, inputs.bufferBalances));
   }
 function BalancerV3Vault$onPoolInitializedEvent(EventContext memory ctx, BalancerV3Vault$PoolInitializedEventParams memory inputs) virtual external override {
-    emit PoolInitialized(inputs.pool);
+    emit PoolInitialized(BalancerV3Vault$EmitAllEvents$PoolInitialized(inputs.pool));
   }
 function BalancerV3Vault$onPoolPausedStateChangedEvent(EventContext memory ctx, BalancerV3Vault$PoolPausedStateChangedEventParams memory inputs) virtual external override {
-    emit PoolPausedStateChanged(inputs.pool, inputs.paused);
+    emit PoolPausedStateChanged(BalancerV3Vault$EmitAllEvents$PoolPausedStateChanged(inputs.pool, inputs.paused));
   }
 function BalancerV3Vault$onPoolRecoveryModeStateChangedEvent(EventContext memory ctx, BalancerV3Vault$PoolRecoveryModeStateChangedEventParams memory inputs) virtual external override {
-    emit PoolRecoveryModeStateChanged(inputs.pool, inputs.recoveryMode);
+    emit PoolRecoveryModeStateChanged(BalancerV3Vault$EmitAllEvents$PoolRecoveryModeStateChanged(inputs.pool, inputs.recoveryMode));
   }
 function BalancerV3Vault$onPoolRegisteredEvent(EventContext memory ctx, BalancerV3Vault$PoolRegisteredEventParams memory inputs) virtual external override {
-    emit PoolRegistered(inputs.pool, inputs.factory, inputs.tokenConfig, inputs.swapFeePercentage, inputs.pauseWindowEndTime, inputs.roleAccounts, inputs.hooksConfig, inputs.liquidityManagement);
+    emit PoolRegistered(BalancerV3Vault$EmitAllEvents$PoolRegistered(inputs.pool, inputs.factory, inputs.tokenConfig, inputs.swapFeePercentage, inputs.pauseWindowEndTime, inputs.roleAccounts, inputs.hooksConfig, inputs.liquidityManagement));
   }
 function BalancerV3Vault$onProtocolFeeControllerChangedEvent(EventContext memory ctx, BalancerV3Vault$ProtocolFeeControllerChangedEventParams memory inputs) virtual external override {
-    emit ProtocolFeeControllerChanged(inputs.newProtocolFeeController);
+    emit ProtocolFeeControllerChanged(BalancerV3Vault$EmitAllEvents$ProtocolFeeControllerChanged(inputs.newProtocolFeeController));
   }
 function BalancerV3Vault$onSwapEvent(EventContext memory ctx, BalancerV3Vault$SwapEventParams memory inputs) virtual external override {
-    emit Swap(inputs.pool, inputs.tokenIn, inputs.tokenOut, inputs.amountIn, inputs.amountOut, inputs.swapFeePercentage, inputs.swapFeeAmount);
+    emit Swap(BalancerV3Vault$EmitAllEvents$Swap(inputs.pool, inputs.tokenIn, inputs.tokenOut, inputs.amountIn, inputs.amountOut, inputs.swapFeePercentage, inputs.swapFeeAmount));
   }
 function BalancerV3Vault$onSwapFeePercentageChangedEvent(EventContext memory ctx, BalancerV3Vault$SwapFeePercentageChangedEventParams memory inputs) virtual external override {
-    emit SwapFeePercentageChanged(inputs.pool, inputs.swapFeePercentage);
+    emit SwapFeePercentageChanged(BalancerV3Vault$EmitAllEvents$SwapFeePercentageChanged(inputs.pool, inputs.swapFeePercentage));
   }
 function BalancerV3Vault$onTransferEvent(EventContext memory ctx, BalancerV3Vault$TransferEventParams memory inputs) virtual external override {
-    emit Transfer(inputs.pool, inputs.from, inputs.to, inputs.value);
+    emit Transfer(BalancerV3Vault$EmitAllEvents$Transfer(inputs.pool, inputs.from, inputs.to, inputs.value));
   }
 function BalancerV3Vault$onUnwrapEvent(EventContext memory ctx, BalancerV3Vault$UnwrapEventParams memory inputs) virtual external override {
-    emit Unwrap(inputs.wrappedToken, inputs.burnedShares, inputs.withdrawnUnderlying, inputs.bufferBalances);
+    emit Unwrap(BalancerV3Vault$EmitAllEvents$Unwrap(inputs.wrappedToken, inputs.burnedShares, inputs.withdrawnUnderlying, inputs.bufferBalances));
   }
 function BalancerV3Vault$onVaultAuxiliaryEvent(EventContext memory ctx, BalancerV3Vault$VaultAuxiliaryEventParams memory inputs) virtual external override {
-    emit VaultAuxiliary(inputs.pool, inputs.eventKey, inputs.eventData);
+    emit VaultAuxiliary(BalancerV3Vault$EmitAllEvents$VaultAuxiliary(inputs.pool, inputs.eventKey, inputs.eventData));
   }
 function BalancerV3Vault$onVaultBuffersPausedStateChangedEvent(EventContext memory ctx, BalancerV3Vault$VaultBuffersPausedStateChangedEventParams memory inputs) virtual external override {
-    emit VaultBuffersPausedStateChanged(inputs.paused);
+    emit VaultBuffersPausedStateChanged(BalancerV3Vault$EmitAllEvents$VaultBuffersPausedStateChanged(inputs.paused));
   }
 function BalancerV3Vault$onVaultPausedStateChangedEvent(EventContext memory ctx, BalancerV3Vault$VaultPausedStateChangedEventParams memory inputs) virtual external override {
-    emit VaultPausedStateChanged(inputs.paused);
+    emit VaultPausedStateChanged(BalancerV3Vault$EmitAllEvents$VaultPausedStateChanged(inputs.paused));
   }
 function BalancerV3Vault$onVaultQueriesDisabledEvent(EventContext memory ctx) virtual external override {
     emit VaultQueriesDisabled();
@@ -1135,7 +1280,7 @@ function BalancerV3Vault$onVaultQueriesEnabledEvent(EventContext memory ctx) vir
     emit VaultQueriesEnabled();
   }
 function BalancerV3Vault$onWrapEvent(EventContext memory ctx, BalancerV3Vault$WrapEventParams memory inputs) virtual external override {
-    emit Wrap(inputs.wrappedToken, inputs.depositedUnderlying, inputs.mintedShares, inputs.bufferBalances);
+    emit Wrap(BalancerV3Vault$EmitAllEvents$Wrap(inputs.wrappedToken, inputs.depositedUnderlying, inputs.mintedShares, inputs.bufferBalances));
   }
 
   function allTriggers() view external returns (Trigger[] memory) {
