@@ -9,9 +9,6 @@ import "./libs/Renegade/RenegadePostcardBuffer.sol";
 import "./libs/Renegade/ProtobufLib.sol";
 
 contract RenegadeListener is DarkPool$OnProcessAtomicMatchSettleWithReceiverFunction, IDexListener {
-    event Debug(uint256 message);
-    event Debug(bytes message);
-
     function DarkPool$onProcessAtomicMatchSettleWithReceiverFunction(
         FunctionContext memory ctx,
         DarkPool$ProcessAtomicMatchSettleWithReceiverFunctionInputs memory inputs,
