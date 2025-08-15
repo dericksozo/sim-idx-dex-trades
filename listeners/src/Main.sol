@@ -35,6 +35,7 @@ import "./CLPoolManager.sol";
 import "./AlgebraIntegral.sol";
 import "./Algebra.sol";
 import "./GMXV2.sol";
+import "./Renegade.sol";
 
 contract Triggers is ProtocolTriggers {
     using ChainsEnumerableMapLib for ChainsEnumerableMapLib.ChainsToChainIdContractMap;
@@ -72,6 +73,7 @@ contract Triggers is ProtocolTriggers {
     AlgebraIntegralListener algebraIntegralListener;
     AlgebraListener algebraListener;
     GMXV2Listener gmxV2Listener;
+    RenegadeListener renegadeListener;
 
     ProtocolConfigAbi internal psmConfig;
     ProtocolConfigAbi internal univ2Config;
@@ -107,6 +109,7 @@ contract Triggers is ProtocolTriggers {
     ProtocolConfigAbi internal algebraIntegralConfig;
     ProtocolConfigAbi internal algebraConfig;
     ProtocolConfigAddress internal gmxV2Config;
+    ProtocolConfigAddress internal renegadeConfig;
 
     constructor() {
         // init listeners
@@ -142,6 +145,7 @@ contract Triggers is ProtocolTriggers {
         algebraIntegralListener = new AlgebraIntegralListener();
         algebraListener = new AlgebraListener();
         gmxV2Listener = new GMXV2Listener();
+        renegadeListener = new RenegadeListener();
 
         // address resolving
         bancorCarbonConfig.chainIdToAddressEnumerable.set(
@@ -248,6 +252,9 @@ contract Triggers is ProtocolTriggers {
         );
         gmxV2Config.chainIdToAddressEnumerable.set(
             Chains.Arbitrum, chainContract(Chains.Arbitrum, 0xC8ee91A54287DB53897056e12D9819156D3822Fb)
+        );
+        renegadeConfig.chainIdToAddressEnumerable.set(
+            Chains.Arbitrum, chainContract(Chains.Arbitrum, 0x30bD8eAb29181F790D7e495786d4B96d7AfDC518)
         );
 
         // protocol to abi
@@ -393,6 +400,7 @@ contract Triggers is ProtocolTriggers {
         algebraIntegralConfig.triggers = [algebraIntegralListener.AlgebraIntegralPool$triggerOnSwapEvent()];
         algebraConfig.triggers = [algebraListener.AlgebraPool$triggerOnSwapFunction()];
         gmxV2Config.triggers = [gmxV2Listener.EventEmitter$triggerOnEventLog1Event()];
+        renegadeConfig.triggers = [renegadeListener.DarkPool$triggerOnProcessAtomicMatchSettleWithReceiverFunction()];
     }
 
     function triggers() external virtual override {
@@ -430,5 +438,6 @@ contract Triggers is ProtocolTriggers {
         addTriggerForProtocol(algebraIntegralConfig);
         addTriggerForProtocol(algebraConfig);
         addTriggerForProtocol(gmxV2Config);
+        addTriggerForProtocol(renegadeConfig);
     }
 }

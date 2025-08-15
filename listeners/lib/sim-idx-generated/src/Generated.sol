@@ -14,6 +14,7 @@ import "./CLPool.sol";
 import "./CLPoolManager.sol";
 import "./DODOSwap.sol";
 import "./DSLOProtocol.sol";
+import "./DarkPool.sol";
 import "./EkuboCore.sol";
 import "./EulerSwap.sol";
 import "./EventEmitter.sol";
