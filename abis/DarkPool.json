@@ -1,0 +1,88 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "quoteAmount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "baseAmount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "receiver",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes",
+        "name": "internalPartyMatchPayload",
+        "type": "bytes"
+      },
+      {
+        "internalType": "bytes",
+        "name": "malleableMatchSettleAtomicStatement",
+        "type": "bytes"
+      },
+      {
+        "internalType": "bytes",
+        "name": "proofs",
+        "type": "bytes"
+      },
+      {
+        "internalType": "bytes",
+        "name": "linkingProofs",
+        "type": "bytes"
+      }
+    ],
+    "name": "processMalleableAtomicMatchSettleWithReceiver",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "amountOut",
+        "type": "uint256"
+      }
+    ],
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "receiver",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes",
+        "name": "internalPartyMatchPayload",
+        "type": "bytes"
+      },
+      {
+        "internalType": "bytes",
+        "name": "validMatchSettleAtomicStatement",
+        "type": "bytes"
+      },
+      {
+        "internalType": "bytes",
+        "name": "matchProofs",
+        "type": "bytes"
+      },
+      {
+        "internalType": "bytes",
+        "name": "matchLinkingProofs",
+        "type": "bytes"
+      }
+    ],
+    "name": "processAtomicMatchSettleWithReceiver",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "amountOut",
+        "type": "uint256"
+      }
+    ],
+    "type": "function"
+  }
+]
