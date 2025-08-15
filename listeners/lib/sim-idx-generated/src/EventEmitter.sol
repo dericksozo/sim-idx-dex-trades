@@ -173,14 +173,14 @@ struct EventEmitter$RoleStoreFunctionOutputs {
 struct EventEmitter$EventLogEventParams {
     address msgSender;
     string eventName;
-    string eventNameHash;
+    bytes32 eventNameHash;
     EventEmitter$EventUtils$EventLogData eventData;
 }
 
 struct EventEmitter$EventLog1EventParams {
     address msgSender;
     string eventName;
-    string eventNameHash;
+    bytes32 eventNameHash;
     bytes32 topic1;
     EventEmitter$EventUtils$EventLogData eventData;
 }
@@ -188,7 +188,7 @@ struct EventEmitter$EventLog1EventParams {
 struct EventEmitter$EventLog2EventParams {
     address msgSender;
     string eventName;
-    string eventNameHash;
+    bytes32 eventNameHash;
     bytes32 topic1;
     bytes32 topic2;
     EventEmitter$EventUtils$EventLogData eventData;
@@ -464,14 +464,14 @@ abstract contract EventEmitter$PreRoleStoreFunction {
 struct EventEmitter$EmitAllEvents$EventLog {
   address msgSender;
   string eventName;
-  string eventNameHash;
+  bytes32 eventNameHash;
   EventEmitter$EventUtils$EventLogData eventData;
 }
 
 struct EventEmitter$EmitAllEvents$EventLog1 {
   address msgSender;
   string eventName;
-  string eventNameHash;
+  bytes32 eventNameHash;
   bytes32 topic1;
   EventEmitter$EventUtils$EventLogData eventData;
 }
@@ -479,7 +479,7 @@ struct EventEmitter$EmitAllEvents$EventLog1 {
 struct EventEmitter$EmitAllEvents$EventLog2 {
   address msgSender;
   string eventName;
-  string eventNameHash;
+  bytes32 eventNameHash;
   bytes32 topic1;
   bytes32 topic2;
   EventEmitter$EventUtils$EventLogData eventData;
