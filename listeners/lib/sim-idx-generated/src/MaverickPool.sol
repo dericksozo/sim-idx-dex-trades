@@ -987,6 +987,64 @@ abstract contract MaverickPool$PreTransferLiquidityFunction {
     }
 }
 
+
+struct MaverickPool$EmitAllEvents$AddLiquidity {
+  address sender;
+  uint256 tokenId;
+  MaverickPool$IPool$BinDelta[] binDeltas;
+}
+
+struct MaverickPool$EmitAllEvents$BinMerged {
+  uint128 binId;
+  uint128 reserveA;
+  uint128 reserveB;
+  uint128 mergeId;
+}
+
+struct MaverickPool$EmitAllEvents$BinMoved {
+  uint128 binId;
+  int128 previousTick;
+  int128 newTick;
+}
+
+struct MaverickPool$EmitAllEvents$MigrateBinsUpStack {
+  address sender;
+  uint128 binId;
+  uint32 maxRecursion;
+}
+
+struct MaverickPool$EmitAllEvents$ProtocolFeeCollected {
+  uint256 protocolFee;
+  bool isTokenA;
+}
+
+struct MaverickPool$EmitAllEvents$RemoveLiquidity {
+  address sender;
+  address recipient;
+  uint256 tokenId;
+  MaverickPool$IPool$BinDelta[] binDeltas;
+}
+
+struct MaverickPool$EmitAllEvents$SetProtocolFeeRatio {
+  uint256 protocolFee;
+}
+
+struct MaverickPool$EmitAllEvents$Swap {
+  address sender;
+  address recipient;
+  bool tokenAIn;
+  bool exactOutput;
+  uint256 amountIn;
+  uint256 amountOut;
+  int32 activeTick;
+}
+
+struct MaverickPool$EmitAllEvents$TransferLiquidity {
+  uint256 fromTokenId;
+  uint256 toTokenId;
+  MaverickPool$IPool$RemoveLiquidityParams[] params;
+}
+
 contract MaverickPool$EmitAllEvents is
   MaverickPool$OnAddLiquidityEvent,
 MaverickPool$OnBinMergedEvent,
@@ -998,42 +1056,42 @@ MaverickPool$OnSetProtocolFeeRatioEvent,
 MaverickPool$OnSwapEvent,
 MaverickPool$OnTransferLiquidityEvent
 {
-  event AddLiquidity(address sender, uint256 tokenId, MaverickPool$IPool$BinDelta[] binDeltas);
-event BinMerged(uint128 binId, uint128 reserveA, uint128 reserveB, uint128 mergeId);
-event BinMoved(uint128 binId, int128 previousTick, int128 newTick);
-event MigrateBinsUpStack(address sender, uint128 binId, uint32 maxRecursion);
-event ProtocolFeeCollected(uint256 protocolFee, bool isTokenA);
-event RemoveLiquidity(address sender, address recipient, uint256 tokenId, MaverickPool$IPool$BinDelta[] binDeltas);
-event SetProtocolFeeRatio(uint256 protocolFee);
-event Swap(address sender, address recipient, bool tokenAIn, bool exactOutput, uint256 amountIn, uint256 amountOut, int32 activeTick);
-event TransferLiquidity(uint256 fromTokenId, uint256 toTokenId, MaverickPool$IPool$RemoveLiquidityParams[] params);
+  event AddLiquidity(MaverickPool$EmitAllEvents$AddLiquidity);
+  event BinMerged(MaverickPool$EmitAllEvents$BinMerged);
+  event BinMoved(MaverickPool$EmitAllEvents$BinMoved);
+  event MigrateBinsUpStack(MaverickPool$EmitAllEvents$MigrateBinsUpStack);
+  event ProtocolFeeCollected(MaverickPool$EmitAllEvents$ProtocolFeeCollected);
+  event RemoveLiquidity(MaverickPool$EmitAllEvents$RemoveLiquidity);
+  event SetProtocolFeeRatio(MaverickPool$EmitAllEvents$SetProtocolFeeRatio);
+  event Swap(MaverickPool$EmitAllEvents$Swap);
+  event TransferLiquidity(MaverickPool$EmitAllEvents$TransferLiquidity);
 
   function MaverickPool$onAddLiquidityEvent(EventContext memory ctx, MaverickPool$AddLiquidityEventParams memory inputs) virtual external override {
-    emit AddLiquidity(inputs.sender, inputs.tokenId, inputs.binDeltas);
+    emit AddLiquidity(MaverickPool$EmitAllEvents$AddLiquidity(inputs.sender, inputs.tokenId, inputs.binDeltas));
   }
 function MaverickPool$onBinMergedEvent(EventContext memory ctx, MaverickPool$BinMergedEventParams memory inputs) virtual external override {
-    emit BinMerged(inputs.binId, inputs.reserveA, inputs.reserveB, inputs.mergeId);
+    emit BinMerged(MaverickPool$EmitAllEvents$BinMerged(inputs.binId, inputs.reserveA, inputs.reserveB, inputs.mergeId));
   }
 function MaverickPool$onBinMovedEvent(EventContext memory ctx, MaverickPool$BinMovedEventParams memory inputs) virtual external override {
-    emit BinMoved(inputs.binId, inputs.previousTick, inputs.newTick);
+    emit BinMoved(MaverickPool$EmitAllEvents$BinMoved(inputs.binId, inputs.previousTick, inputs.newTick));
   }
 function MaverickPool$onMigrateBinsUpStackEvent(EventContext memory ctx, MaverickPool$MigrateBinsUpStackEventParams memory inputs) virtual external override {
-    emit MigrateBinsUpStack(inputs.sender, inputs.binId, inputs.maxRecursion);
+    emit MigrateBinsUpStack(MaverickPool$EmitAllEvents$MigrateBinsUpStack(inputs.sender, inputs.binId, inputs.maxRecursion));
   }
 function MaverickPool$onProtocolFeeCollectedEvent(EventContext memory ctx, MaverickPool$ProtocolFeeCollectedEventParams memory inputs) virtual external override {
-    emit ProtocolFeeCollected(inputs.protocolFee, inputs.isTokenA);
+    emit ProtocolFeeCollected(MaverickPool$EmitAllEvents$ProtocolFeeCollected(inputs.protocolFee, inputs.isTokenA));
   }
 function MaverickPool$onRemoveLiquidityEvent(EventContext memory ctx, MaverickPool$RemoveLiquidityEventParams memory inputs) virtual external override {
-    emit RemoveLiquidity(inputs.sender, inputs.recipient, inputs.tokenId, inputs.binDeltas);
+    emit RemoveLiquidity(MaverickPool$EmitAllEvents$RemoveLiquidity(inputs.sender, inputs.recipient, inputs.tokenId, inputs.binDeltas));
   }
 function MaverickPool$onSetProtocolFeeRatioEvent(EventContext memory ctx, MaverickPool$SetProtocolFeeRatioEventParams memory inputs) virtual external override {
-    emit SetProtocolFeeRatio(inputs.protocolFee);
+    emit SetProtocolFeeRatio(MaverickPool$EmitAllEvents$SetProtocolFeeRatio(inputs.protocolFee));
   }
 function MaverickPool$onSwapEvent(EventContext memory ctx, MaverickPool$SwapEventParams memory inputs) virtual external override {
-    emit Swap(inputs.sender, inputs.recipient, inputs.tokenAIn, inputs.exactOutput, inputs.amountIn, inputs.amountOut, inputs.activeTick);
+    emit Swap(MaverickPool$EmitAllEvents$Swap(inputs.sender, inputs.recipient, inputs.tokenAIn, inputs.exactOutput, inputs.amountIn, inputs.amountOut, inputs.activeTick));
   }
 function MaverickPool$onTransferLiquidityEvent(EventContext memory ctx, MaverickPool$TransferLiquidityEventParams memory inputs) virtual external override {
-    emit TransferLiquidity(inputs.fromTokenId, inputs.toTokenId, inputs.params);
+    emit TransferLiquidity(MaverickPool$EmitAllEvents$TransferLiquidity(inputs.fromTokenId, inputs.toTokenId, inputs.params));
   }
 
   function allTriggers() view external returns (Trigger[] memory) {

@@ -1317,6 +1317,91 @@ abstract contract BancorController$PreWithdrawFeesFunction {
     }
 }
 
+
+struct BancorController$EmitAllEvents$FeesWithdrawn {
+  address token;
+  address recipient;
+  uint256 amount;
+  address sender;
+}
+
+struct BancorController$EmitAllEvents$Initialized {
+  uint8 version;
+}
+
+struct BancorController$EmitAllEvents$PairCreated {
+  uint128 pairId;
+  address token0;
+  address token1;
+}
+
+struct BancorController$EmitAllEvents$PairTradingFeePpmUpdated {
+  address token0;
+  address token1;
+  uint32 prevFeePPM;
+  uint32 newFeePPM;
+}
+
+struct BancorController$EmitAllEvents$RoleAdminChanged {
+  bytes32 role;
+  bytes32 previousAdminRole;
+  bytes32 newAdminRole;
+}
+
+struct BancorController$EmitAllEvents$RoleGranted {
+  bytes32 role;
+  address account;
+  address sender;
+}
+
+struct BancorController$EmitAllEvents$RoleRevoked {
+  bytes32 role;
+  address account;
+  address sender;
+}
+
+struct BancorController$EmitAllEvents$StrategyCreated {
+  uint256 id;
+  address owner;
+  address token0;
+  address token1;
+  BancorController$Order order0;
+  BancorController$Order order1;
+}
+
+struct BancorController$EmitAllEvents$StrategyDeleted {
+  uint256 id;
+  address owner;
+  address token0;
+  address token1;
+  BancorController$Order order0;
+  BancorController$Order order1;
+}
+
+struct BancorController$EmitAllEvents$StrategyUpdated {
+  uint256 id;
+  address token0;
+  address token1;
+  BancorController$Order order0;
+  BancorController$Order order1;
+  uint8 reason;
+}
+
+struct BancorController$EmitAllEvents$TokensTraded {
+  address trader;
+  address sourceToken;
+  address targetToken;
+  uint256 sourceAmount;
+  uint256 targetAmount;
+  uint128 tradingFeeAmount;
+  bool byTargetAmount;
+}
+
+struct BancorController$EmitAllEvents$TradingFeePpmUpdated {
+  uint32 prevFeePPM;
+  uint32 newFeePPM;
+}
+
 contract BancorController$EmitAllEvents is
   BancorController$OnFeesWithdrawnEvent,
 BancorController$OnInitializedEvent,
@@ -1331,54 +1416,54 @@ BancorController$OnStrategyUpdatedEvent,
 BancorController$OnTokensTradedEvent,
 BancorController$OnTradingFeePpmUpdatedEvent
 {
-  event FeesWithdrawn(address token, address recipient, uint256 amount, address sender);
-event Initialized(uint8 version);
-event PairCreated(uint128 pairId, address token0, address token1);
-event PairTradingFeePpmUpdated(address token0, address token1, uint32 prevFeePPM, uint32 newFeePPM);
-event RoleAdminChanged(bytes32 role, bytes32 previousAdminRole, bytes32 newAdminRole);
-event RoleGranted(bytes32 role, address account, address sender);
-event RoleRevoked(bytes32 role, address account, address sender);
-event StrategyCreated(uint256 id, address owner, address token0, address token1, BancorController$Order order0, BancorController$Order order1);
-event StrategyDeleted(uint256 id, address owner, address token0, address token1, BancorController$Order order0, BancorController$Order order1);
-event StrategyUpdated(uint256 id, address token0, address token1, BancorController$Order order0, BancorController$Order order1, uint8 reason);
-event TokensTraded(address trader, address sourceToken, address targetToken, uint256 sourceAmount, uint256 targetAmount, uint128 tradingFeeAmount, bool byTargetAmount);
-event TradingFeePpmUpdated(uint32 prevFeePPM, uint32 newFeePPM);
+  event FeesWithdrawn(BancorController$EmitAllEvents$FeesWithdrawn);
+  event Initialized(BancorController$EmitAllEvents$Initialized);
+  event PairCreated(BancorController$EmitAllEvents$PairCreated);
+  event PairTradingFeePpmUpdated(BancorController$EmitAllEvents$PairTradingFeePpmUpdated);
+  event RoleAdminChanged(BancorController$EmitAllEvents$RoleAdminChanged);
+  event RoleGranted(BancorController$EmitAllEvents$RoleGranted);
+  event RoleRevoked(BancorController$EmitAllEvents$RoleRevoked);
+  event StrategyCreated(BancorController$EmitAllEvents$StrategyCreated);
+  event StrategyDeleted(BancorController$EmitAllEvents$StrategyDeleted);
+  event StrategyUpdated(BancorController$EmitAllEvents$StrategyUpdated);
+  event TokensTraded(BancorController$EmitAllEvents$TokensTraded);
+  event TradingFeePpmUpdated(BancorController$EmitAllEvents$TradingFeePpmUpdated);
 
   function BancorController$onFeesWithdrawnEvent(EventContext memory ctx, BancorController$FeesWithdrawnEventParams memory inputs) virtual external override {
-    emit FeesWithdrawn(inputs.token, inputs.recipient, inputs.amount, inputs.sender);
+    emit FeesWithdrawn(BancorController$EmitAllEvents$FeesWithdrawn(inputs.token, inputs.recipient, inputs.amount, inputs.sender));
   }
 function BancorController$onInitializedEvent(EventContext memory ctx, BancorController$InitializedEventParams memory inputs) virtual external override {
-    emit Initialized(inputs.version);
+    emit Initialized(BancorController$EmitAllEvents$Initialized(inputs.version));
   }
 function BancorController$onPairCreatedEvent(EventContext memory ctx, BancorController$PairCreatedEventParams memory inputs) virtual external override {
-    emit PairCreated(inputs.pairId, inputs.token0, inputs.token1);
+    emit PairCreated(BancorController$EmitAllEvents$PairCreated(inputs.pairId, inputs.token0, inputs.token1));
   }
 function BancorController$onPairTradingFeePpmUpdatedEvent(EventContext memory ctx, BancorController$PairTradingFeePpmUpdatedEventParams memory inputs) virtual external override {
-    emit PairTradingFeePpmUpdated(inputs.token0, inputs.token1, inputs.prevFeePPM, inputs.newFeePPM);
+    emit PairTradingFeePpmUpdated(BancorController$EmitAllEvents$PairTradingFeePpmUpdated(inputs.token0, inputs.token1, inputs.prevFeePPM, inputs.newFeePPM));
   }
 function BancorController$onRoleAdminChangedEvent(EventContext memory ctx, BancorController$RoleAdminChangedEventParams memory inputs) virtual external override {
-    emit RoleAdminChanged(inputs.role, inputs.previousAdminRole, inputs.newAdminRole);
+    emit RoleAdminChanged(BancorController$EmitAllEvents$RoleAdminChanged(inputs.role, inputs.previousAdminRole, inputs.newAdminRole));
   }
 function BancorController$onRoleGrantedEvent(EventContext memory ctx, BancorController$RoleGrantedEventParams memory inputs) virtual external override {
-    emit RoleGranted(inputs.role, inputs.account, inputs.sender);
+    emit RoleGranted(BancorController$EmitAllEvents$RoleGranted(inputs.role, inputs.account, inputs.sender));
   }
 function BancorController$onRoleRevokedEvent(EventContext memory ctx, BancorController$RoleRevokedEventParams memory inputs) virtual external override {
-    emit RoleRevoked(inputs.role, inputs.account, inputs.sender);
+    emit RoleRevoked(BancorController$EmitAllEvents$RoleRevoked(inputs.role, inputs.account, inputs.sender));
   }
 function BancorController$onStrategyCreatedEvent(EventContext memory ctx, BancorController$StrategyCreatedEventParams memory inputs) virtual external override {
-    emit StrategyCreated(inputs.id, inputs.owner, inputs.token0, inputs.token1, inputs.order0, inputs.order1);
+    emit StrategyCreated(BancorController$EmitAllEvents$StrategyCreated(inputs.id, inputs.owner, inputs.token0, inputs.token1, inputs.order0, inputs.order1));
   }
 function BancorController$onStrategyDeletedEvent(EventContext memory ctx, BancorController$StrategyDeletedEventParams memory inputs) virtual external override {
-    emit StrategyDeleted(inputs.id, inputs.owner, inputs.token0, inputs.token1, inputs.order0, inputs.order1);
+    emit StrategyDeleted(BancorController$EmitAllEvents$StrategyDeleted(inputs.id, inputs.owner, inputs.token0, inputs.token1, inputs.order0, inputs.order1));
   }
 function BancorController$onStrategyUpdatedEvent(EventContext memory ctx, BancorController$StrategyUpdatedEventParams memory inputs) virtual external override {
-    emit StrategyUpdated(inputs.id, inputs.token0, inputs.token1, inputs.order0, inputs.order1, inputs.reason);
+    emit StrategyUpdated(BancorController$EmitAllEvents$StrategyUpdated(inputs.id, inputs.token0, inputs.token1, inputs.order0, inputs.order1, inputs.reason));
   }
 function BancorController$onTokensTradedEvent(EventContext memory ctx, BancorController$TokensTradedEventParams memory inputs) virtual external override {
-    emit TokensTraded(inputs.trader, inputs.sourceToken, inputs.targetToken, inputs.sourceAmount, inputs.targetAmount, inputs.tradingFeeAmount, inputs.byTargetAmount);
+    emit TokensTraded(BancorController$EmitAllEvents$TokensTraded(inputs.trader, inputs.sourceToken, inputs.targetToken, inputs.sourceAmount, inputs.targetAmount, inputs.tradingFeeAmount, inputs.byTargetAmount));
   }
 function BancorController$onTradingFeePpmUpdatedEvent(EventContext memory ctx, BancorController$TradingFeePpmUpdatedEventParams memory inputs) virtual external override {
-    emit TradingFeePpmUpdated(inputs.prevFeePPM, inputs.newFeePPM);
+    emit TradingFeePpmUpdated(BancorController$EmitAllEvents$TradingFeePpmUpdated(inputs.prevFeePPM, inputs.newFeePPM));
   }
 
   function allTriggers() view external returns (Trigger[] memory) {

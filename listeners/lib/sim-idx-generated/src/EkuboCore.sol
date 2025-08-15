@@ -1070,6 +1070,58 @@ abstract contract EkuboCore$PreWithdrawProtocolFeesFunction {
     }
 }
 
+
+struct EkuboCore$EmitAllEvents$ExtensionRegistered {
+  address extension;
+}
+
+struct EkuboCore$EmitAllEvents$FeesAccumulated {
+  bytes32 poolId;
+  uint128 amount0;
+  uint128 amount1;
+}
+
+struct EkuboCore$EmitAllEvents$OwnershipHandoverCanceled {
+  address pendingOwner;
+}
+
+struct EkuboCore$EmitAllEvents$OwnershipHandoverRequested {
+  address pendingOwner;
+}
+
+struct EkuboCore$EmitAllEvents$OwnershipTransferred {
+  address oldOwner;
+  address newOwner;
+}
+
+struct EkuboCore$EmitAllEvents$PoolInitialized {
+  bytes32 poolId;
+  EkuboCore$PoolKey poolKey;
+  int32 tick;
+  uint96 sqrtRatio;
+}
+
+struct EkuboCore$EmitAllEvents$PositionFeesCollected {
+  bytes32 poolId;
+  EkuboCore$PositionKey positionKey;
+  uint128 amount0;
+  uint128 amount1;
+}
+
+struct EkuboCore$EmitAllEvents$PositionUpdated {
+  address locker;
+  bytes32 poolId;
+  EkuboCore$UpdatePositionParameters params;
+  int128 delta0;
+  int128 delta1;
+}
+
+struct EkuboCore$EmitAllEvents$ProtocolFeesWithdrawn {
+  address recipient;
+  address token;
+  uint256 amount;
+}
+
 contract EkuboCore$EmitAllEvents is
   EkuboCore$OnExtensionRegisteredEvent,
 EkuboCore$OnFeesAccumulatedEvent,
@@ -1081,42 +1133,42 @@ EkuboCore$OnPositionFeesCollectedEvent,
 EkuboCore$OnPositionUpdatedEvent,
 EkuboCore$OnProtocolFeesWithdrawnEvent
 {
-  event ExtensionRegistered(address extension);
-event FeesAccumulated(bytes32 poolId, uint128 amount0, uint128 amount1);
-event OwnershipHandoverCanceled(address pendingOwner);
-event OwnershipHandoverRequested(address pendingOwner);
-event OwnershipTransferred(address oldOwner, address newOwner);
-event PoolInitialized(bytes32 poolId, EkuboCore$PoolKey poolKey, int32 tick, uint96 sqrtRatio);
-event PositionFeesCollected(bytes32 poolId, EkuboCore$PositionKey positionKey, uint128 amount0, uint128 amount1);
-event PositionUpdated(address locker, bytes32 poolId, EkuboCore$UpdatePositionParameters params, int128 delta0, int128 delta1);
-event ProtocolFeesWithdrawn(address recipient, address token, uint256 amount);
+  event ExtensionRegistered(EkuboCore$EmitAllEvents$ExtensionRegistered);
+  event FeesAccumulated(EkuboCore$EmitAllEvents$FeesAccumulated);
+  event OwnershipHandoverCanceled(EkuboCore$EmitAllEvents$OwnershipHandoverCanceled);
+  event OwnershipHandoverRequested(EkuboCore$EmitAllEvents$OwnershipHandoverRequested);
+  event OwnershipTransferred(EkuboCore$EmitAllEvents$OwnershipTransferred);
+  event PoolInitialized(EkuboCore$EmitAllEvents$PoolInitialized);
+  event PositionFeesCollected(EkuboCore$EmitAllEvents$PositionFeesCollected);
+  event PositionUpdated(EkuboCore$EmitAllEvents$PositionUpdated);
+  event ProtocolFeesWithdrawn(EkuboCore$EmitAllEvents$ProtocolFeesWithdrawn);
 
   function EkuboCore$onExtensionRegisteredEvent(EventContext memory ctx, EkuboCore$ExtensionRegisteredEventParams memory inputs) virtual external override {
-    emit ExtensionRegistered(inputs.extension);
+    emit ExtensionRegistered(EkuboCore$EmitAllEvents$ExtensionRegistered(inputs.extension));
   }
 function EkuboCore$onFeesAccumulatedEvent(EventContext memory ctx, EkuboCore$FeesAccumulatedEventParams memory inputs) virtual external override {
-    emit FeesAccumulated(inputs.poolId, inputs.amount0, inputs.amount1);
+    emit FeesAccumulated(EkuboCore$EmitAllEvents$FeesAccumulated(inputs.poolId, inputs.amount0, inputs.amount1));
   }
 function EkuboCore$onOwnershipHandoverCanceledEvent(EventContext memory ctx, EkuboCore$OwnershipHandoverCanceledEventParams memory inputs) virtual external override {
-    emit OwnershipHandoverCanceled(inputs.pendingOwner);
+    emit OwnershipHandoverCanceled(EkuboCore$EmitAllEvents$OwnershipHandoverCanceled(inputs.pendingOwner));
   }
 function EkuboCore$onOwnershipHandoverRequestedEvent(EventContext memory ctx, EkuboCore$OwnershipHandoverRequestedEventParams memory inputs) virtual external override {
-    emit OwnershipHandoverRequested(inputs.pendingOwner);
+    emit OwnershipHandoverRequested(EkuboCore$EmitAllEvents$OwnershipHandoverRequested(inputs.pendingOwner));
   }
 function EkuboCore$onOwnershipTransferredEvent(EventContext memory ctx, EkuboCore$OwnershipTransferredEventParams memory inputs) virtual external override {
-    emit OwnershipTransferred(inputs.oldOwner, inputs.newOwner);
+    emit OwnershipTransferred(EkuboCore$EmitAllEvents$OwnershipTransferred(inputs.oldOwner, inputs.newOwner));
   }
 function EkuboCore$onPoolInitializedEvent(EventContext memory ctx, EkuboCore$PoolInitializedEventParams memory inputs) virtual external override {
-    emit PoolInitialized(inputs.poolId, inputs.poolKey, inputs.tick, inputs.sqrtRatio);
+    emit PoolInitialized(EkuboCore$EmitAllEvents$PoolInitialized(inputs.poolId, inputs.poolKey, inputs.tick, inputs.sqrtRatio));
   }
 function EkuboCore$onPositionFeesCollectedEvent(EventContext memory ctx, EkuboCore$PositionFeesCollectedEventParams memory inputs) virtual external override {
-    emit PositionFeesCollected(inputs.poolId, inputs.positionKey, inputs.amount0, inputs.amount1);
+    emit PositionFeesCollected(EkuboCore$EmitAllEvents$PositionFeesCollected(inputs.poolId, inputs.positionKey, inputs.amount0, inputs.amount1));
   }
 function EkuboCore$onPositionUpdatedEvent(EventContext memory ctx, EkuboCore$PositionUpdatedEventParams memory inputs) virtual external override {
-    emit PositionUpdated(inputs.locker, inputs.poolId, inputs.params, inputs.delta0, inputs.delta1);
+    emit PositionUpdated(EkuboCore$EmitAllEvents$PositionUpdated(inputs.locker, inputs.poolId, inputs.params, inputs.delta0, inputs.delta1));
   }
 function EkuboCore$onProtocolFeesWithdrawnEvent(EventContext memory ctx, EkuboCore$ProtocolFeesWithdrawnEventParams memory inputs) virtual external override {
-    emit ProtocolFeesWithdrawn(inputs.recipient, inputs.token, inputs.amount);
+    emit ProtocolFeesWithdrawn(EkuboCore$EmitAllEvents$ProtocolFeesWithdrawn(inputs.recipient, inputs.token, inputs.amount));
   }
 
   function allTriggers() view external returns (Trigger[] memory) {

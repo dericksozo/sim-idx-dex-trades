@@ -645,6 +645,38 @@ abstract contract GPv2Settlement$PreVaultRelayerFunction {
     }
 }
 
+
+struct GPv2Settlement$EmitAllEvents$Interaction {
+  address target;
+  uint256 value;
+  bytes4 selector;
+}
+
+struct GPv2Settlement$EmitAllEvents$OrderInvalidated {
+  address owner;
+  bytes orderUid;
+}
+
+struct GPv2Settlement$EmitAllEvents$PreSignature {
+  address owner;
+  bytes orderUid;
+  bool signed;
+}
+
+struct GPv2Settlement$EmitAllEvents$Settlement {
+  address solver;
+}
+
+struct GPv2Settlement$EmitAllEvents$Trade {
+  address owner;
+  address sellToken;
+  address buyToken;
+  uint256 sellAmount;
+  uint256 buyAmount;
+  uint256 feeAmount;
+  bytes orderUid;
+}
+
 contract GPv2Settlement$EmitAllEvents is
   GPv2Settlement$OnInteractionEvent,
 GPv2Settlement$OnOrderInvalidatedEvent,
@@ -652,26 +684,26 @@ GPv2Settlement$OnPreSignatureEvent,
 GPv2Settlement$OnSettlementEvent,
 GPv2Settlement$OnTradeEvent
 {
-  event Interaction(address target, uint256 value, bytes4 selector);
-event OrderInvalidated(address owner, bytes orderUid);
-event PreSignature(address owner, bytes orderUid, bool signed);
-event Settlement(address solver);
-event Trade(address owner, address sellToken, address buyToken, uint256 sellAmount, uint256 buyAmount, uint256 feeAmount, bytes orderUid);
+  event Interaction(GPv2Settlement$EmitAllEvents$Interaction);
+  event OrderInvalidated(GPv2Settlement$EmitAllEvents$OrderInvalidated);
+  event PreSignature(GPv2Settlement$EmitAllEvents$PreSignature);
+  event Settlement(GPv2Settlement$EmitAllEvents$Settlement);
+  event Trade(GPv2Settlement$EmitAllEvents$Trade);
 
   function GPv2Settlement$onInteractionEvent(EventContext memory ctx, GPv2Settlement$InteractionEventParams memory inputs) virtual external override {
-    emit Interaction(inputs.target, inputs.value, inputs.selector);
+    emit Interaction(GPv2Settlement$EmitAllEvents$Interaction(inputs.target, inputs.value, inputs.selector));
   }
 function GPv2Settlement$onOrderInvalidatedEvent(EventContext memory ctx, GPv2Settlement$OrderInvalidatedEventParams memory inputs) virtual external override {
-    emit OrderInvalidated(inputs.owner, inputs.orderUid);
+    emit OrderInvalidated(GPv2Settlement$EmitAllEvents$OrderInvalidated(inputs.owner, inputs.orderUid));
   }
 function GPv2Settlement$onPreSignatureEvent(EventContext memory ctx, GPv2Settlement$PreSignatureEventParams memory inputs) virtual external override {
-    emit PreSignature(inputs.owner, inputs.orderUid, inputs.signed);
+    emit PreSignature(GPv2Settlement$EmitAllEvents$PreSignature(inputs.owner, inputs.orderUid, inputs.signed));
   }
 function GPv2Settlement$onSettlementEvent(EventContext memory ctx, GPv2Settlement$SettlementEventParams memory inputs) virtual external override {
-    emit Settlement(inputs.solver);
+    emit Settlement(GPv2Settlement$EmitAllEvents$Settlement(inputs.solver));
   }
 function GPv2Settlement$onTradeEvent(EventContext memory ctx, GPv2Settlement$TradeEventParams memory inputs) virtual external override {
-    emit Trade(inputs.owner, inputs.sellToken, inputs.buyToken, inputs.sellAmount, inputs.buyAmount, inputs.feeAmount, inputs.orderUid);
+    emit Trade(GPv2Settlement$EmitAllEvents$Trade(inputs.owner, inputs.sellToken, inputs.buyToken, inputs.sellAmount, inputs.buyAmount, inputs.feeAmount, inputs.orderUid));
   }
 
   function allTriggers() view external returns (Trigger[] memory) {

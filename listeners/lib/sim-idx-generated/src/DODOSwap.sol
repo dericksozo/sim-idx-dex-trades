@@ -30,13 +30,23 @@ abstract contract DODOSwap$OnDodoSwapEvent {
     }
 }
 
+
+struct DODOSwap$EmitAllEvents$DodoSwap {
+  address fromToken;
+  address toToken;
+  uint256 fromAmount;
+  uint256 toAmount;
+  address trader;
+  address receiver;
+}
+
 contract DODOSwap$EmitAllEvents is
   DODOSwap$OnDodoSwapEvent
 {
-  event DodoSwap(address fromToken, address toToken, uint256 fromAmount, uint256 toAmount, address trader, address receiver);
+  event DodoSwap(DODOSwap$EmitAllEvents$DodoSwap);
 
   function DODOSwap$onDodoSwapEvent(EventContext memory ctx, DODOSwap$DodoSwapEventParams memory inputs) virtual external override {
-    emit DodoSwap(inputs.fromToken, inputs.toToken, inputs.fromAmount, inputs.toAmount, inputs.trader, inputs.receiver);
+    emit DodoSwap(DODOSwap$EmitAllEvents$DodoSwap(inputs.fromToken, inputs.toToken, inputs.fromAmount, inputs.toAmount, inputs.trader, inputs.receiver));
   }
 
   function allTriggers() view external returns (Trigger[] memory) {

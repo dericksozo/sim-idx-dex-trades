@@ -1040,6 +1040,46 @@ abstract contract UniswapV2Pair$PreTransferFromFunction {
     }
 }
 
+
+struct UniswapV2Pair$EmitAllEvents$Approval {
+  address owner;
+  address spender;
+  uint256 value;
+}
+
+struct UniswapV2Pair$EmitAllEvents$Burn {
+  address sender;
+  uint256 amount0;
+  uint256 amount1;
+  address to;
+}
+
+struct UniswapV2Pair$EmitAllEvents$Mint {
+  address sender;
+  uint256 amount0;
+  uint256 amount1;
+}
+
+struct UniswapV2Pair$EmitAllEvents$Swap {
+  address sender;
+  uint256 amount0In;
+  uint256 amount1In;
+  uint256 amount0Out;
+  uint256 amount1Out;
+  address to;
+}
+
+struct UniswapV2Pair$EmitAllEvents$Sync {
+  uint112 reserve0;
+  uint112 reserve1;
+}
+
+struct UniswapV2Pair$EmitAllEvents$Transfer {
+  address from;
+  address to;
+  uint256 value;
+}
+
 contract UniswapV2Pair$EmitAllEvents is
   UniswapV2Pair$OnApprovalEvent,
 UniswapV2Pair$OnBurnEvent,
@@ -1048,30 +1088,30 @@ UniswapV2Pair$OnSwapEvent,
 UniswapV2Pair$OnSyncEvent,
 UniswapV2Pair$OnTransferEvent
 {
-  event Approval(address owner, address spender, uint256 value);
-event Burn(address sender, uint256 amount0, uint256 amount1, address to);
-event Mint(address sender, uint256 amount0, uint256 amount1);
-event Swap(address sender, uint256 amount0In, uint256 amount1In, uint256 amount0Out, uint256 amount1Out, address to);
-event Sync(uint112 reserve0, uint112 reserve1);
-event Transfer(address from, address to, uint256 value);
+  event Approval(UniswapV2Pair$EmitAllEvents$Approval);
+  event Burn(UniswapV2Pair$EmitAllEvents$Burn);
+  event Mint(UniswapV2Pair$EmitAllEvents$Mint);
+  event Swap(UniswapV2Pair$EmitAllEvents$Swap);
+  event Sync(UniswapV2Pair$EmitAllEvents$Sync);
+  event Transfer(UniswapV2Pair$EmitAllEvents$Transfer);
 
   function UniswapV2Pair$onApprovalEvent(EventContext memory ctx, UniswapV2Pair$ApprovalEventParams memory inputs) virtual external override {
-    emit Approval(inputs.owner, inputs.spender, inputs.value);
+    emit Approval(UniswapV2Pair$EmitAllEvents$Approval(inputs.owner, inputs.spender, inputs.value));
   }
 function UniswapV2Pair$onBurnEvent(EventContext memory ctx, UniswapV2Pair$BurnEventParams memory inputs) virtual external override {
-    emit Burn(inputs.sender, inputs.amount0, inputs.amount1, inputs.to);
+    emit Burn(UniswapV2Pair$EmitAllEvents$Burn(inputs.sender, inputs.amount0, inputs.amount1, inputs.to));
   }
 function UniswapV2Pair$onMintEvent(EventContext memory ctx, UniswapV2Pair$MintEventParams memory inputs) virtual external override {
-    emit Mint(inputs.sender, inputs.amount0, inputs.amount1);
+    emit Mint(UniswapV2Pair$EmitAllEvents$Mint(inputs.sender, inputs.amount0, inputs.amount1));
   }
 function UniswapV2Pair$onSwapEvent(EventContext memory ctx, UniswapV2Pair$SwapEventParams memory inputs) virtual external override {
-    emit Swap(inputs.sender, inputs.amount0In, inputs.amount1In, inputs.amount0Out, inputs.amount1Out, inputs.to);
+    emit Swap(UniswapV2Pair$EmitAllEvents$Swap(inputs.sender, inputs.amount0In, inputs.amount1In, inputs.amount0Out, inputs.amount1Out, inputs.to));
   }
 function UniswapV2Pair$onSyncEvent(EventContext memory ctx, UniswapV2Pair$SyncEventParams memory inputs) virtual external override {
-    emit Sync(inputs.reserve0, inputs.reserve1);
+    emit Sync(UniswapV2Pair$EmitAllEvents$Sync(inputs.reserve0, inputs.reserve1));
   }
 function UniswapV2Pair$onTransferEvent(EventContext memory ctx, UniswapV2Pair$TransferEventParams memory inputs) virtual external override {
-    emit Transfer(inputs.from, inputs.to, inputs.value);
+    emit Transfer(UniswapV2Pair$EmitAllEvents$Transfer(inputs.from, inputs.to, inputs.value));
   }
 
   function allTriggers() view external returns (Trigger[] memory) {

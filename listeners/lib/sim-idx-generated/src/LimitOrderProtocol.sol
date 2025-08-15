@@ -1611,6 +1611,44 @@ abstract contract LimitOrderProtocol$PreUpdateInteractionWhitelistFunction {
     }
 }
 
+
+struct LimitOrderProtocol$EmitAllEvents$NonceIncreased {
+  address maker;
+  uint256 oldNonce;
+  uint256 newNonce;
+}
+
+struct LimitOrderProtocol$EmitAllEvents$OrderCanceled {
+  address maker;
+  bytes32 orderHash;
+  uint256 remainingRaw;
+}
+
+struct LimitOrderProtocol$EmitAllEvents$OrderFilled {
+  address taker;
+  bytes32 orderHash;
+  uint256 remaining;
+  uint256 makingAmount;
+  uint256 takingAmount;
+}
+
+struct LimitOrderProtocol$EmitAllEvents$OrderFilledRfq {
+  address taker;
+  bytes32 orderHash;
+  uint256 makingAmount;
+  uint256 takingAmount;
+}
+
+struct LimitOrderProtocol$EmitAllEvents$OwnershipTransferred {
+  address previousOwner;
+  address newOwner;
+}
+
+struct LimitOrderProtocol$EmitAllEvents$UpdatedInteractionWhitelist {
+  address _address;
+  bool isWhitelist;
+}
+
 contract LimitOrderProtocol$EmitAllEvents is
   LimitOrderProtocol$OnNonceIncreasedEvent,
 LimitOrderProtocol$OnOrderCanceledEvent,
@@ -1619,30 +1657,30 @@ LimitOrderProtocol$OnOrderFilledRfqEvent,
 LimitOrderProtocol$OnOwnershipTransferredEvent,
 LimitOrderProtocol$OnUpdatedInteractionWhitelistEvent
 {
-  event NonceIncreased(address maker, uint256 oldNonce, uint256 newNonce);
-event OrderCanceled(address maker, bytes32 orderHash, uint256 remainingRaw);
-event OrderFilled(address taker, bytes32 orderHash, uint256 remaining, uint256 makingAmount, uint256 takingAmount);
-event OrderFilledRfq(address taker, bytes32 orderHash, uint256 makingAmount, uint256 takingAmount);
-event OwnershipTransferred(address previousOwner, address newOwner);
-event UpdatedInteractionWhitelist(address _address, bool isWhitelist);
+  event NonceIncreased(LimitOrderProtocol$EmitAllEvents$NonceIncreased);
+  event OrderCanceled(LimitOrderProtocol$EmitAllEvents$OrderCanceled);
+  event OrderFilled(LimitOrderProtocol$EmitAllEvents$OrderFilled);
+  event OrderFilledRfq(LimitOrderProtocol$EmitAllEvents$OrderFilledRfq);
+  event OwnershipTransferred(LimitOrderProtocol$EmitAllEvents$OwnershipTransferred);
+  event UpdatedInteractionWhitelist(LimitOrderProtocol$EmitAllEvents$UpdatedInteractionWhitelist);
 
   function LimitOrderProtocol$onNonceIncreasedEvent(EventContext memory ctx, LimitOrderProtocol$NonceIncreasedEventParams memory inputs) virtual external override {
-    emit NonceIncreased(inputs.maker, inputs.oldNonce, inputs.newNonce);
+    emit NonceIncreased(LimitOrderProtocol$EmitAllEvents$NonceIncreased(inputs.maker, inputs.oldNonce, inputs.newNonce));
   }
 function LimitOrderProtocol$onOrderCanceledEvent(EventContext memory ctx, LimitOrderProtocol$OrderCanceledEventParams memory inputs) virtual external override {
-    emit OrderCanceled(inputs.maker, inputs.orderHash, inputs.remainingRaw);
+    emit OrderCanceled(LimitOrderProtocol$EmitAllEvents$OrderCanceled(inputs.maker, inputs.orderHash, inputs.remainingRaw));
   }
 function LimitOrderProtocol$onOrderFilledEvent(EventContext memory ctx, LimitOrderProtocol$OrderFilledEventParams memory inputs) virtual external override {
-    emit OrderFilled(inputs.taker, inputs.orderHash, inputs.remaining, inputs.makingAmount, inputs.takingAmount);
+    emit OrderFilled(LimitOrderProtocol$EmitAllEvents$OrderFilled(inputs.taker, inputs.orderHash, inputs.remaining, inputs.makingAmount, inputs.takingAmount));
   }
 function LimitOrderProtocol$onOrderFilledRfqEvent(EventContext memory ctx, LimitOrderProtocol$OrderFilledRfqEventParams memory inputs) virtual external override {
-    emit OrderFilledRfq(inputs.taker, inputs.orderHash, inputs.makingAmount, inputs.takingAmount);
+    emit OrderFilledRfq(LimitOrderProtocol$EmitAllEvents$OrderFilledRfq(inputs.taker, inputs.orderHash, inputs.makingAmount, inputs.takingAmount));
   }
 function LimitOrderProtocol$onOwnershipTransferredEvent(EventContext memory ctx, LimitOrderProtocol$OwnershipTransferredEventParams memory inputs) virtual external override {
-    emit OwnershipTransferred(inputs.previousOwner, inputs.newOwner);
+    emit OwnershipTransferred(LimitOrderProtocol$EmitAllEvents$OwnershipTransferred(inputs.previousOwner, inputs.newOwner));
   }
 function LimitOrderProtocol$onUpdatedInteractionWhitelistEvent(EventContext memory ctx, LimitOrderProtocol$UpdatedInteractionWhitelistEventParams memory inputs) virtual external override {
-    emit UpdatedInteractionWhitelist(inputs._address, inputs.isWhitelist);
+    emit UpdatedInteractionWhitelist(LimitOrderProtocol$EmitAllEvents$UpdatedInteractionWhitelist(inputs._address, inputs.isWhitelist));
   }
 
   function allTriggers() view external returns (Trigger[] memory) {

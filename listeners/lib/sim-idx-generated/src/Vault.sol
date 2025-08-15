@@ -1215,6 +1215,82 @@ abstract contract Vault$PreSwapFunction {
     }
 }
 
+
+struct Vault$EmitAllEvents$AuthorizerChanged {
+  address newAuthorizer;
+}
+
+struct Vault$EmitAllEvents$ExternalBalanceTransfer {
+  address token;
+  address sender;
+  address recipient;
+  uint256 amount;
+}
+
+struct Vault$EmitAllEvents$FlashLoan {
+  address recipient;
+  address token;
+  uint256 amount;
+  uint256 feeAmount;
+}
+
+struct Vault$EmitAllEvents$InternalBalanceChanged {
+  address user;
+  address token;
+  int256 delta;
+}
+
+struct Vault$EmitAllEvents$PausedStateChanged {
+  bool paused;
+}
+
+struct Vault$EmitAllEvents$PoolBalanceChanged {
+  bytes32 poolId;
+  address liquidityProvider;
+  address[] tokens;
+  int256[] deltas;
+  uint256[] protocolFeeAmounts;
+}
+
+struct Vault$EmitAllEvents$PoolBalanceManaged {
+  bytes32 poolId;
+  address assetManager;
+  address token;
+  int256 cashDelta;
+  int256 managedDelta;
+}
+
+struct Vault$EmitAllEvents$PoolRegistered {
+  bytes32 poolId;
+  address poolAddress;
+  uint8 specialization;
+}
+
+struct Vault$EmitAllEvents$RelayerApprovalChanged {
+  address relayer;
+  address sender;
+  bool approved;
+}
+
+struct Vault$EmitAllEvents$Swap {
+  bytes32 poolId;
+  address tokenIn;
+  address tokenOut;
+  uint256 amountIn;
+  uint256 amountOut;
+}
+
+struct Vault$EmitAllEvents$TokensDeregistered {
+  bytes32 poolId;
+  address[] tokens;
+}
+
+struct Vault$EmitAllEvents$TokensRegistered {
+  bytes32 poolId;
+  address[] tokens;
+  address[] assetManagers;
+}
+
 contract Vault$EmitAllEvents is
   Vault$OnAuthorizerChangedEvent,
 Vault$OnExternalBalanceTransferEvent,
@@ -1229,54 +1305,54 @@ Vault$OnSwapEvent,
 Vault$OnTokensDeregisteredEvent,
 Vault$OnTokensRegisteredEvent
 {
-  event AuthorizerChanged(address newAuthorizer);
-event ExternalBalanceTransfer(address token, address sender, address recipient, uint256 amount);
-event FlashLoan(address recipient, address token, uint256 amount, uint256 feeAmount);
-event InternalBalanceChanged(address user, address token, int256 delta);
-event PausedStateChanged(bool paused);
-event PoolBalanceChanged(bytes32 poolId, address liquidityProvider, address[] tokens, int256[] deltas, uint256[] protocolFeeAmounts);
-event PoolBalanceManaged(bytes32 poolId, address assetManager, address token, int256 cashDelta, int256 managedDelta);
-event PoolRegistered(bytes32 poolId, address poolAddress, uint8 specialization);
-event RelayerApprovalChanged(address relayer, address sender, bool approved);
-event Swap(bytes32 poolId, address tokenIn, address tokenOut, uint256 amountIn, uint256 amountOut);
-event TokensDeregistered(bytes32 poolId, address[] tokens);
-event TokensRegistered(bytes32 poolId, address[] tokens, address[] assetManagers);
+  event AuthorizerChanged(Vault$EmitAllEvents$AuthorizerChanged);
+  event ExternalBalanceTransfer(Vault$EmitAllEvents$ExternalBalanceTransfer);
+  event FlashLoan(Vault$EmitAllEvents$FlashLoan);
+  event InternalBalanceChanged(Vault$EmitAllEvents$InternalBalanceChanged);
+  event PausedStateChanged(Vault$EmitAllEvents$PausedStateChanged);
+  event PoolBalanceChanged(Vault$EmitAllEvents$PoolBalanceChanged);
+  event PoolBalanceManaged(Vault$EmitAllEvents$PoolBalanceManaged);
+  event PoolRegistered(Vault$EmitAllEvents$PoolRegistered);
+  event RelayerApprovalChanged(Vault$EmitAllEvents$RelayerApprovalChanged);
+  event Swap(Vault$EmitAllEvents$Swap);
+  event TokensDeregistered(Vault$EmitAllEvents$TokensDeregistered);
+  event TokensRegistered(Vault$EmitAllEvents$TokensRegistered);
 
   function Vault$onAuthorizerChangedEvent(EventContext memory ctx, Vault$AuthorizerChangedEventParams memory inputs) virtual external override {
-    emit AuthorizerChanged(inputs.newAuthorizer);
+    emit AuthorizerChanged(Vault$EmitAllEvents$AuthorizerChanged(inputs.newAuthorizer));
   }
 function Vault$onExternalBalanceTransferEvent(EventContext memory ctx, Vault$ExternalBalanceTransferEventParams memory inputs) virtual external override {
-    emit ExternalBalanceTransfer(inputs.token, inputs.sender, inputs.recipient, inputs.amount);
+    emit ExternalBalanceTransfer(Vault$EmitAllEvents$ExternalBalanceTransfer(inputs.token, inputs.sender, inputs.recipient, inputs.amount));
   }
 function Vault$onFlashLoanEvent(EventContext memory ctx, Vault$FlashLoanEventParams memory inputs) virtual external override {
-    emit FlashLoan(inputs.recipient, inputs.token, inputs.amount, inputs.feeAmount);
+    emit FlashLoan(Vault$EmitAllEvents$FlashLoan(inputs.recipient, inputs.token, inputs.amount, inputs.feeAmount));
   }
 function Vault$onInternalBalanceChangedEvent(EventContext memory ctx, Vault$InternalBalanceChangedEventParams memory inputs) virtual external override {
-    emit InternalBalanceChanged(inputs.user, inputs.token, inputs.delta);
+    emit InternalBalanceChanged(Vault$EmitAllEvents$InternalBalanceChanged(inputs.user, inputs.token, inputs.delta));
   }
 function Vault$onPausedStateChangedEvent(EventContext memory ctx, Vault$PausedStateChangedEventParams memory inputs) virtual external override {
-    emit PausedStateChanged(inputs.paused);
+    emit PausedStateChanged(Vault$EmitAllEvents$PausedStateChanged(inputs.paused));
   }
 function Vault$onPoolBalanceChangedEvent(EventContext memory ctx, Vault$PoolBalanceChangedEventParams memory inputs) virtual external override {
-    emit PoolBalanceChanged(inputs.poolId, inputs.liquidityProvider, inputs.tokens, inputs.deltas, inputs.protocolFeeAmounts);
+    emit PoolBalanceChanged(Vault$EmitAllEvents$PoolBalanceChanged(inputs.poolId, inputs.liquidityProvider, inputs.tokens, inputs.deltas, inputs.protocolFeeAmounts));
   }
 function Vault$onPoolBalanceManagedEvent(EventContext memory ctx, Vault$PoolBalanceManagedEventParams memory inputs) virtual external override {
-    emit PoolBalanceManaged(inputs.poolId, inputs.assetManager, inputs.token, inputs.cashDelta, inputs.managedDelta);
+    emit PoolBalanceManaged(Vault$EmitAllEvents$PoolBalanceManaged(inputs.poolId, inputs.assetManager, inputs.token, inputs.cashDelta, inputs.managedDelta));
   }
 function Vault$onPoolRegisteredEvent(EventContext memory ctx, Vault$PoolRegisteredEventParams memory inputs) virtual external override {
-    emit PoolRegistered(inputs.poolId, inputs.poolAddress, inputs.specialization);
+    emit PoolRegistered(Vault$EmitAllEvents$PoolRegistered(inputs.poolId, inputs.poolAddress, inputs.specialization));
   }
 function Vault$onRelayerApprovalChangedEvent(EventContext memory ctx, Vault$RelayerApprovalChangedEventParams memory inputs) virtual external override {
-    emit RelayerApprovalChanged(inputs.relayer, inputs.sender, inputs.approved);
+    emit RelayerApprovalChanged(Vault$EmitAllEvents$RelayerApprovalChanged(inputs.relayer, inputs.sender, inputs.approved));
   }
 function Vault$onSwapEvent(EventContext memory ctx, Vault$SwapEventParams memory inputs) virtual external override {
-    emit Swap(inputs.poolId, inputs.tokenIn, inputs.tokenOut, inputs.amountIn, inputs.amountOut);
+    emit Swap(Vault$EmitAllEvents$Swap(inputs.poolId, inputs.tokenIn, inputs.tokenOut, inputs.amountIn, inputs.amountOut));
   }
 function Vault$onTokensDeregisteredEvent(EventContext memory ctx, Vault$TokensDeregisteredEventParams memory inputs) virtual external override {
-    emit TokensDeregistered(inputs.poolId, inputs.tokens);
+    emit TokensDeregistered(Vault$EmitAllEvents$TokensDeregistered(inputs.poolId, inputs.tokens));
   }
 function Vault$onTokensRegisteredEvent(EventContext memory ctx, Vault$TokensRegisteredEventParams memory inputs) virtual external override {
-    emit TokensRegistered(inputs.poolId, inputs.tokens, inputs.assetManagers);
+    emit TokensRegistered(Vault$EmitAllEvents$TokensRegistered(inputs.poolId, inputs.tokens, inputs.assetManagers));
   }
 
   function allTriggers() view external returns (Trigger[] memory) {

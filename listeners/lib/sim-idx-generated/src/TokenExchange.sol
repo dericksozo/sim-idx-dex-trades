@@ -29,13 +29,22 @@ abstract contract TokenExchange$OnTokenExchangeEvent {
     }
 }
 
+
+struct TokenExchange$EmitAllEvents$TokenExchange {
+  address buyer;
+  uint256 sold_id;
+  uint256 tokens_sold;
+  uint256 bought_id;
+  uint256 tokens_bought;
+}
+
 contract TokenExchange$EmitAllEvents is
   TokenExchange$OnTokenExchangeEvent
 {
-  event TokenExchange(address buyer, uint256 sold_id, uint256 tokens_sold, uint256 bought_id, uint256 tokens_bought);
+  event TokenExchange(TokenExchange$EmitAllEvents$TokenExchange);
 
   function TokenExchange$onTokenExchangeEvent(EventContext memory ctx, TokenExchange$TokenExchangeEventParams memory inputs) virtual external override {
-    emit TokenExchange(inputs.buyer, inputs.sold_id, inputs.tokens_sold, inputs.bought_id, inputs.tokens_bought);
+    emit TokenExchange(TokenExchange$EmitAllEvents$TokenExchange(inputs.buyer, inputs.sold_id, inputs.tokens_sold, inputs.bought_id, inputs.tokens_bought));
   }
 
   function allTriggers() view external returns (Trigger[] memory) {
