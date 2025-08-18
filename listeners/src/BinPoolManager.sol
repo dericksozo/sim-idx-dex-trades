@@ -2,6 +2,7 @@
 pragma solidity ^0.8.13;
 
 import "sim-idx-generated/Generated.sol";
+import "sim-idx-sol/Simidx.sol";
 import {getMetadata} from "./utils/ERC20Metadata.sol";
 import "./types/DexTrades.sol";
 import {PoolIdLibrary, PoolId} from "./libs/UniswapV4/PoolId.sol";
@@ -31,7 +32,7 @@ contract BinPoolManagerListener is BinPoolManager$OnSwapFunction, NativeTokenRes
         DexTradeData memory trade;
         trade.chainId = uint64(block.chainid);
         trade.transactionHash = ctx.txn.hash();
-        trade.blockNumber = uint64(block.number);
+        trade.blockNumber = blockNumber();
         trade.blockTimestamp = uint64(block.timestamp);
         trade.txnOriginator = tx.origin;
         trade.recipient = ctx.txn.call.caller();

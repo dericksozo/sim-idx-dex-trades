@@ -2,6 +2,7 @@
 pragma solidity ^0.8.13;
 
 import "sim-idx-generated/Generated.sol";
+import "sim-idx-sol/Simidx.sol";
 import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
 import "./0xUtils.sol";
@@ -35,7 +36,7 @@ contract ZeroExSettlerListener is MainnetSettler$OnExecuteFunction, ZeroExUtils,
             trade.fromTokenAmt = orders[i].makerAmount;
             trade.toTokenAmt = orders[i].takerAmount;
             trade.chainId = uint64(block.chainid);
-            trade.blockNumber = block.number;
+            trade.blockNumber = blockNumber();
             trade.blockTimestamp = block.timestamp;
             trade.transactionHash = ctx.txn.hash();
             trade.txnOriginator = tx.origin;

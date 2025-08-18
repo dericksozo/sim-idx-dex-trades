@@ -2,6 +2,7 @@
 pragma solidity ^0.8.13;
 
 import "sim-idx-generated/Generated.sol";
+import "sim-idx-sol/Simidx.sol";
 import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
 import "./interfaces/EulerSwap/IEulerSwap.sol";
@@ -29,7 +30,7 @@ contract EulerSwapListener is EulerSwap$OnSwapEvent, IDexListener {
         trade.fromTokenAmt = params.amount0In > 0 ? params.amount0In : params.amount1In;
         trade.toTokenAmt = params.amount0In > 0 ? params.amount1Out : params.amount0Out;
         trade.chainId = uint64(block.chainid);
-        trade.blockNumber = block.number;
+        trade.blockNumber = blockNumber();
         trade.blockTimestamp = block.timestamp;
         trade.transactionHash = ctx.txn.hash();
         trade.txnOriginator = tx.origin;

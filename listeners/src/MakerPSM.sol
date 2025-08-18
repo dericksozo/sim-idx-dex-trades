@@ -2,6 +2,7 @@
 pragma solidity ^0.8.13;
 
 import "sim-idx-generated/Generated.sol";
+import "sim-idx-sol/Simidx.sol";
 import "./types/DexTrades.sol";
 import "./libs/Maker/MakerLib.sol";
 import "./utils/ERC20Metadata.sol";
@@ -19,7 +20,7 @@ contract MakerPSMListener is PSM$OnBuyGemFunction, PSM$OnSellGemFunction, IDexLi
         (string memory toTokenName, string memory toTokenSymbol, uint256 toTokenDecimals) = getMetadata(toToken);
         DexTradeData memory trade = DexTradeData({
             chainId: uint64(block.chainid),
-            blockNumber: block.number,
+            blockNumber: blockNumber(),
             blockTimestamp: block.timestamp,
             transactionHash: ctx.txn.hash(),
             dex: "MakerPSM",
@@ -51,7 +52,7 @@ contract MakerPSMListener is PSM$OnBuyGemFunction, PSM$OnSellGemFunction, IDexLi
         (string memory toTokenName, string memory toTokenSymbol, uint256 toTokenDecimals) = getMetadata(toToken);
         DexTradeData memory trade = DexTradeData({
             chainId: uint64(block.chainid),
-            blockNumber: block.number,
+            blockNumber: blockNumber(),
             blockTimestamp: block.timestamp,
             transactionHash: ctx.txn.hash(),
             dex: "MakerPSM",
