@@ -2,6 +2,7 @@
 pragma solidity ^0.8.13;
 
 import "sim-idx-generated/Generated.sol";
+import "sim-idx-sol/Simidx.sol";
 import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
 import "./libs/1inch/AddressLib.sol";
@@ -144,7 +145,7 @@ contract OneInchLOPV4Listener is
         trade.toTokenSymbol = takingTokenSymbol;
         trade.toTokenDecimals = uint8(takingTokenDecimals);
         trade.chainId = uint64(block.chainid);
-        trade.blockNumber = block.number;
+        trade.blockNumber = blockNumber();
         trade.blockTimestamp = block.timestamp;
         trade.transactionHash = txnHash;
         trade.txnOriginator = tx.origin;

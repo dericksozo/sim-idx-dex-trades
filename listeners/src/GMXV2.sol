@@ -2,6 +2,7 @@
 pragma solidity ^0.8.13;
 
 import "sim-idx-generated/Generated.sol";
+import "sim-idx-sol/Simidx.sol";
 import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
 import "./interfaces/IDexListener.sol";
@@ -35,7 +36,7 @@ contract GMXV2Listener is EventEmitter$OnEventLog1Event, IDexListener {
         trade.fromTokenAmt = params.eventData.uintItems.items[2].value;
         trade.toTokenAmt = params.eventData.uintItems.items[4].value;
         trade.chainId = uint64(block.chainid);
-        trade.blockNumber = block.number;
+        trade.blockNumber = blockNumber();
         trade.blockTimestamp = block.timestamp;
         trade.transactionHash = ctx.txn.hash();
         trade.txnOriginator = tx.origin;

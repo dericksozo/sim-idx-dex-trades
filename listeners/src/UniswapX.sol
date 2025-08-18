@@ -2,6 +2,7 @@
 pragma solidity ^0.8.13;
 
 import "sim-idx-generated/Generated.sol";
+import "sim-idx-sol/Simidx.sol";
 import {OrderQuoter} from "./OrderQuoter.sol";
 import {ResolvedOrder, InputToken, OutputToken} from "./interfaces/UniswapX/ReactorStructs.sol";
 import {IReactor} from "./interfaces/UniswapX/IReactor.sol";
@@ -82,7 +83,7 @@ contract UniswapXListener is
 
         DexTradeData memory trade = DexTradeData({
             chainId: uint64(block.chainid),
-            blockNumber: block.number,
+            blockNumber: blockNumber(),
             blockTimestamp: block.timestamp,
             transactionHash: txnHash,
             dex: "UniswapX",

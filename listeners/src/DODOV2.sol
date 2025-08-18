@@ -2,6 +2,7 @@
 pragma solidity ^0.8.13;
 
 import "sim-idx-generated/Generated.sol";
+import "sim-idx-sol/Simidx.sol";
 import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
 import "./DexUtils.sol";
@@ -42,7 +43,7 @@ contract DODOV2Listener is DODOSwap$OnDodoSwapEvent, DexUtils, IDexListener {
         trade.fromTokenAmt = params.fromAmount;
         trade.toTokenAmt = params.toAmount;
         trade.chainId = uint64(block.chainid);
-        trade.blockNumber = block.number;
+        trade.blockNumber = blockNumber();
         trade.blockTimestamp = block.timestamp;
         trade.transactionHash = ctx.txn.hash();
         trade.txnOriginator = tx.origin;

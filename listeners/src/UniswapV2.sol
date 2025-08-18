@@ -2,6 +2,7 @@
 pragma solidity ^0.8.13;
 
 import "sim-idx-generated/Generated.sol";
+import "sim-idx-sol/Simidx.sol";
 import "./types/DexTrades.sol";
 import "./utils/ERC20Metadata.sol";
 import "./DexUtils.sol";
@@ -76,7 +77,7 @@ contract UniswapV2Listener is UniswapV2Pair$OnSwapEvent, DexUtils, IDexListener 
             trade.toTokenDecimals = uint8(token0Decimals);
         }
         trade.chainId = uint64(block.chainid);
-        trade.blockNumber = block.number;
+        trade.blockNumber = blockNumber();
         trade.blockTimestamp = block.timestamp;
         trade.transactionHash = ctx.txn.hash();
         trade.txnOriginator = tx.origin;
