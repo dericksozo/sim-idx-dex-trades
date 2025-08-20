@@ -113,10 +113,6 @@ struct AerodromePool$GetAmountOutFunctionOutputs {
     uint256 outArg0;
 }
 
-struct AerodromePool$GetKFunctionOutputs {
-    uint256 outArg0;
-}
-
 struct AerodromePool$GetReservesFunctionOutputs {
     uint256 _reserve0;
     uint256 _reserve1;
@@ -198,10 +194,6 @@ struct AerodromePool$ObservationsFunctionOutputs {
     uint256 timestamp;
     uint256 reserve0Cumulative;
     uint256 reserve1Cumulative;
-}
-
-struct AerodromePool$PeriodSizeFunctionOutputs {
-    uint256 outArg0;
 }
 
 struct AerodromePool$PermitFunctionInputs {
@@ -887,34 +879,6 @@ abstract contract AerodromePool$PreGetAmountOutFunction {
     }
 }
 
-abstract contract AerodromePool$OnGetKFunction {
-    function AerodromePool$onGetKFunction(FunctionContext memory ctx, AerodromePool$GetKFunctionOutputs memory outputs) virtual external;
-
-    function AerodromePool$triggerOnGetKFunction() view external returns (Trigger memory) {
-        return Trigger({
-            abiName: "AerodromePool",
-            selector: bytes4(0xee39e7a0),
-            triggerType: TriggerType.FUNCTION,
-            listenerCodehash: address(this).codehash,
-            handlerSelector: this.AerodromePool$onGetKFunction.selector
-        });
-    }
-}
-
-abstract contract AerodromePool$PreGetKFunction {
-    function AerodromePool$preGetKFunction(PreFunctionContext memory ctx) virtual external;
-
-    function AerodromePool$triggerPreGetKFunction() view external returns (Trigger memory) {
-        return Trigger({
-            abiName: "AerodromePool",
-            selector: bytes4(0xee39e7a0),
-            triggerType: TriggerType.PRE_FUNCTION,
-            listenerCodehash: address(this).codehash,
-            handlerSelector: this.AerodromePool$preGetKFunction.selector
-        });
-    }
-}
-
 abstract contract AerodromePool$OnGetReservesFunction {
     function AerodromePool$onGetReservesFunction(FunctionContext memory ctx, AerodromePool$GetReservesFunctionOutputs memory outputs) virtual external;
 
@@ -1247,34 +1211,6 @@ abstract contract AerodromePool$PreObservationsFunction {
             triggerType: TriggerType.PRE_FUNCTION,
             listenerCodehash: address(this).codehash,
             handlerSelector: this.AerodromePool$preObservationsFunction.selector
-        });
-    }
-}
-
-abstract contract AerodromePool$OnPeriodSizeFunction {
-    function AerodromePool$onPeriodSizeFunction(FunctionContext memory ctx, AerodromePool$PeriodSizeFunctionOutputs memory outputs) virtual external;
-
-    function AerodromePool$triggerOnPeriodSizeFunction() view external returns (Trigger memory) {
-        return Trigger({
-            abiName: "AerodromePool",
-            selector: bytes4(0xe4463eb2),
-            triggerType: TriggerType.FUNCTION,
-            listenerCodehash: address(this).codehash,
-            handlerSelector: this.AerodromePool$onPeriodSizeFunction.selector
-        });
-    }
-}
-
-abstract contract AerodromePool$PrePeriodSizeFunction {
-    function AerodromePool$prePeriodSizeFunction(PreFunctionContext memory ctx) virtual external;
-
-    function AerodromePool$triggerPrePeriodSizeFunction() view external returns (Trigger memory) {
-        return Trigger({
-            abiName: "AerodromePool",
-            selector: bytes4(0xe4463eb2),
-            triggerType: TriggerType.PRE_FUNCTION,
-            listenerCodehash: address(this).codehash,
-            handlerSelector: this.AerodromePool$prePeriodSizeFunction.selector
         });
     }
 }

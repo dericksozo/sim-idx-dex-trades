@@ -22,6 +22,8 @@ contract AerodromeSlipstreamListener is CLPool$OnSwapFunction, DexUtils, IDexLis
         address factory = ICLPoolConstants(ctx.txn.call.callee()).factory();
         if (factory == DexUtils.getAerodromeSlipstreamFactory()) {
             trade.dex = "AerodromeSlipstream";
+        } else if (factory == DexUtils.getVelodromeSlipstreamFactory()) {
+            trade.dex = "VelodromeSlipstream";
         } else {
             return;
         }
