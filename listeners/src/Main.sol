@@ -353,6 +353,8 @@ contract Triggers is ProtocolTriggers {
         eulerSwapConfig.chainIdToAbiEnumerable.set(Chains.Arbitrum, chainAbi(Chains.Arbitrum, EulerSwap$Abi()));
         aerodromeSlipstreamConfig.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, CLPool$Abi()));
         aerodromeConfig.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, AerodromePool$Abi()));
+        aerodromeSlipstreamConfig.chainIdToAbiEnumerable.set(Chains.Optimism, chainAbi(Chains.Optimism, CLPool$Abi()));
+        aerodromeConfig.chainIdToAbiEnumerable.set(Chains.Optimism, chainAbi(Chains.Optimism, AerodromePool$Abi()));
         pancakeSwapV3Config.chainIdToAbiEnumerable.set(Chains.Ethereum, chainAbi(Chains.Ethereum, PancakeV3Pool$Abi()));
         pancakeSwapV3Config.chainIdToAbiEnumerable.set(Chains.Base, chainAbi(Chains.Base, PancakeV3Pool$Abi()));
         pancakeSwapV3Config.chainIdToAbiEnumerable.set(Chains.Arbitrum, chainAbi(Chains.Arbitrum, PancakeV3Pool$Abi()));

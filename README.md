@@ -8,6 +8,8 @@
 - Uniswap V3 (incl. forks, see a comprehensive list of supported forks [here](./listeners/src/UniswapV3.sol))
 - Uniswap V4
 - Uniswap X
+- Velodrome (and Aerodrome)
+- Velodrome (and Aerodrome) Slipstream
 - FluidDex
 - KyberSwap Limit Order Protocol (incl. Double Signature Limit Order Protocol)
 - 1inch Limit Order Protocol V4

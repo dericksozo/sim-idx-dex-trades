@@ -482,19 +482,6 @@
   },
   {
     "inputs": [],
-    "name": "getK",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "getReserves",
     "outputs": [
       {
@@ -749,19 +736,6 @@
       {
         "internalType": "uint256",
         "name": "reserve1Cumulative",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "periodSize",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
         "type": "uint256"
       }
     ],

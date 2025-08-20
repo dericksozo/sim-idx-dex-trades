@@ -21,6 +21,8 @@ contract AerodromeListener is AerodromePool$OnSwapEvent, DexUtils, IDexListener 
         address factory = IAerodromePool(ctx.txn.call.callee()).factory();
         if (factory == DexUtils.getAerodromeFactory()) {
             trade.dex = "Aerodrome";
+        } else if (factory == DexUtils.getVelodromeFactory()) {
+            trade.dex = "Velodrome";
         } else {
             return;
         }

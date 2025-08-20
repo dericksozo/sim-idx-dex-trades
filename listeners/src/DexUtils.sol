@@ -53,6 +53,8 @@ contract DexUtils {
     mapping(uint256 => address) internal camelotV4Factories;
     mapping(uint256 => address) internal camelotV3Factories;
     mapping(uint256 => address) internal gammaSwapV2Factories;
+    mapping(uint256 => address) internal velodromeFactories;
+    mapping(uint256 => address) internal velodromeSlipstreamFactories;
 
     constructor() {
         uniV3Factories[1] = 0x1F98431c8aD98523631AE4a59f267346ea31F984;
@@ -100,6 +102,9 @@ contract DexUtils {
 
         aerodromeFactories[8453] = 0x420DD381b31aEf6683db6B902084cB0FFECe40Da;
         aerodromeSlipstreamFactories[8453] = 0x5e7BB104d84c7CB9B682AaC2F3d509f5F406809A;
+
+        velodromeFactories[10] = 0xF1046053aa5682b4F9a81b5481394DA16BE5FF5a;
+        velodromeSlipstreamFactories[10] = 0xCc0bDDB707055e04e497aB22a59c2aF4391cd12F;
 
         infusionFactories[8453] = 0x2D9A3a2bd6400eE28d770c7254cA840c82faf23f;
 
@@ -226,6 +231,18 @@ contract DexUtils {
     /// @return The address of Aerodrome Slipstream Factory for the current chain.
     function getAerodromeSlipstreamFactory() internal view returns (address) {
         return safeReturnAddress(aerodromeSlipstreamFactories[block.chainid]);
+    }
+
+    /// @notice Resolves the official Velodrome Factory's address.
+    /// @return The address of Velodrome Factory for the current chain.
+    function getVelodromeFactory() internal view returns (address) {
+        return safeReturnAddress(velodromeFactories[block.chainid]);
+    }
+
+    /// @notice Resolves the official Velodrome Slipstream Factory's address.
+    /// @return The address of Velodrome Slipstream Factory for the current chain.
+    function getVelodromeSlipstreamFactory() internal view returns (address) {
+        return safeReturnAddress(velodromeSlipstreamFactories[block.chainid]);
     }
 
     /// @notice Resolves the official Infusion Factory's address.
