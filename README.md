@@ -31,6 +31,8 @@
 - Aerodrome Slipstream
 - Aerodrome
 - PancakeSwap Infinity (both `CLPoolManager` and `BinPoolManager`)
+- Renegade.fi
+- GMX V2
 
 ## Schema
 

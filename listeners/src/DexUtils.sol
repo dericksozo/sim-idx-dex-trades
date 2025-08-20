@@ -63,6 +63,7 @@ contract DexUtils {
         uniV3Factories[130] = 0x1F98400000000000000000000000000000000003;
         uniV3Factories[1868] = 0x42aE7Ec7ff020412639d443E245D936429Fbe717;
         uniV3Factories[42161] = 0x1F98431c8aD98523631AE4a59f267346ea31F984;
+        uniV3Factories[10] = 0x1F98431c8aD98523631AE4a59f267346ea31F984;
 
         uniV2Factories[1] = 0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f;
         uniV2Factories[8453] = 0x8909Dc15e40173Ff4699343b6eB8132c65e18eC6;
@@ -71,6 +72,7 @@ contract DexUtils {
         uniV2Factories[130] = 0x1F98400000000000000000000000000000000002;
         uniV2Factories[1868] = 0x97FeBbC2AdBD5644ba22736E962564B23F5828CE;
         uniV2Factories[42161] = 0xf1D7CC64Fb4452F05c498126312eBE29f30Fbcf9;
+        uniV2Factories[10] = 0x0c3c1c532F1e39EdF36BE9Fe0bE1410313E074Bf;
 
         pancakeSwapV2Factories[1] = 0x1097053Fd2ea711dad45caCcc45EfF7548fCB362;
         pancakeSwapV2Factories[8453] = 0x02a84c1b3BBD7401a5f7fa98a384EBC70bB5749E;
@@ -81,9 +83,12 @@ contract DexUtils {
         sushiSwapV2Factories[1] = 0xC0AEe478e3658e2610c5F7A4A2E1777cE9e4f2Ac;
         sushiSwapV2Factories[8453] = 0x71524B4f93c58fcbF659783284E38825f0622859;
         sushiSwapV2Factories[42161] = 0xc35DADB65012eC5796536bD9864eD8773aBc74C4;
+        sushiSwapV2Factories[10] = 0xFbc12984689e5f15626Bad03Ad60160Fe98B303C;
 
         sushiSwapV3Factories[1] = 0xbACEB8eC6b9355Dfc0269C18bac9d6E2Bdc29C4F;
         sushiSwapV3Factories[8453] = 0xc35DADB65012eC5796536bD9864eD8773aBc74C4;
+        sushiSwapV3Factories[42161] = 0x1af415a1EbA07a4986a52B6f2e7dE7003D82231e;
+        sushiSwapV3Factories[10] = 0x9c6522117e2ed1fE5bdb72bb0eD5E3f2bdE7DBe0;
 
         shibaSwapV2Factories[1] = 0x115934131916C8b277DD010Ee02de363c09d037c;
 
@@ -109,12 +114,18 @@ contract DexUtils {
 
         dodoV2DppFactories[1] = 0x5336edE8F971339F6c0e304c66ba16F1296A2Fbe;
         dodoV2DppFactories[8453] = 0xc0F9553Df63De5a97Fe64422c8578D0657C360f7;
+        dodoV2DppFactories[42161] = 0xa6Cf3d163358aF376ec5e8B7Cc5e102a05FdE63D;
+        dodoV2DppFactories[10] = 0xDb9C53F2cED34875685B607c97A61a65DA2F30a8;
 
         dodoV2DspFactories[1] = 0x6fdDB76c93299D985f4d3FC7ac468F9A168577A4;
         dodoV2DspFactories[8453] = 0x200D866Edf41070DE251Ef92715a6Ea825A5Eb80;
+        dodoV2DspFactories[42161] = 0xC8fE2440744dcd733246a4dB14093664DEFD5A53;
+        dodoV2DspFactories[10] = 0x1f83858cD6d0ae7a08aB1FD977C06DABEcE6d711;
 
         dodoV2DvmFactories[1] = 0x72d220cE168C4f361dD4deE5D826a01AD8598f6C;
         dodoV2DvmFactories[8453] = 0x0226fCE8c969604C3A0AD19c37d1FAFac73e13c2;
+        dodoV2DvmFactories[42161] = 0xDa4c4411c55B0785e501332354A036c04833B72b;
+        dodoV2DvmFactories[10] = 0x2B800DC6270726F7E2266cE8cD5A3F8436fe0B40;
 
         ringSwapFactories[1] = 0xeb2A625B704d73e82946D8d026E1F588Eed06416;
         ringSwapFactories[8453] = 0x9BfFC3B30D6659e3D84754cc38865B3D60B4980E;
@@ -133,6 +144,8 @@ contract DexUtils {
 
         balancerV2Vaults[8453] = 0xBA12222222228d8Ba445958a75a0704d566BF2C8;
         balancerV2Vaults[1] = 0xBA12222222228d8Ba445958a75a0704d566BF2C8;
+        balancerV2Vaults[10] = 0xBA12222222228d8Ba445958a75a0704d566BF2C8;
+        balancerV2Vaults[42161] = 0xBA12222222228d8Ba445958a75a0704d566BF2C8;
 
         dackieSwapFactories[8453] = 0x3D237AC6D2f425D2E890Cc99198818cc1FA48870;
 
