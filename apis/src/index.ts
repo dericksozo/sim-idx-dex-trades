@@ -1,4 +1,5 @@
 import { inArray, desc, and, max, sql, eq } from "drizzle-orm";
+import { randomUUID } from "crypto";
 import { dexTrade } from "./db/schema/Listener";
 import { types, db, App, middlewares } from "@duneanalytics/sim-idx";
 
@@ -17,6 +18,8 @@ const supportedChains: types.Uint[] = [
   1, 8453, 480, 34443, 57073, 130, 7777777, 60808, 1868, 360, 42161,
 ].map((id) => new types.Uint(BigInt(id)));
 
+// Caching intentionally removed per request; focusing on query and payload optimizations only.
+
 /**
  * Endpoint for Real-Time DEX Status Updates.
  *
@@ -28,20 +31,18 @@ app.get("/dexes/status", async (c) => {
   try {
     const twentyFourHoursAgo = Math.floor(Date.now() / 1000) - 24 * 60 * 60;
 
-    // The query groups by the `dex` column (from DexTradeData.dex)
+    // Restrict scan to last 24h and use COUNT(*) for faster aggregation
     const result = await db
       .client(c)
       .select({
         dex: dexTrade.dex,
-        // Aggregates to find the most recent blockTimestamp for each DEX
         lastTradeTimestamp: max(dexTrade.blockTimestamp),
-        // Counts trades in the last 24 hours for each DEX
-        tradesLast24h: sql<number>`SUM(CASE WHEN ${dexTrade.blockTimestamp} >= ${twentyFourHoursAgo} THEN 1 ELSE 0 END)`.mapWith(Number),
+        tradesLast24h: sql<number>`COUNT(*)`.mapWith(Number),
       })
       .from(dexTrade)
+      .where(sql`${dexTrade.blockTimestamp} >= ${twentyFourHoursAgo}`)
       .groupBy(dexTrade.dex)
-      .orderBy(desc(max(dexTrade.blockTimestamp))); // Order by the most recently active DEX
-
+      .orderBy(desc(max(dexTrade.blockTimestamp)));
     return Response.json({ result });
   } catch (e) {
     console.error("Database operation failed in /dexes/status:", e);
@@ -67,18 +68,22 @@ app.get("/trades", async (c) => {
     const dexesParam = c.req.query("dexes");
     const limitParam = c.req.query("limit");
     const offsetParam = c.req.query("offset");
+    const fieldsParam = c.req.query("fields");
+    const beforeTsParam = c.req.query("beforeTs");
 
     // Validate and parse pagination parameters
-    let limit = limitParam ? parseInt(limitParam, 10) : 100;
-    if (isNaN(limit) || limit <= 0) limit = 100;
-    if (limit > 1000) limit = 1000; // Enforce a max limit for stability
+    let limit = limitParam ? parseInt(limitParam, 10) : 50;
+    if (isNaN(limit) || limit <= 0) limit = 50;
+    if (limit > 100) limit = 100; // Reduce max limit for stability
 
     let offset = offsetParam ? parseInt(offsetParam, 10) : 0;
     if (isNaN(offset) || offset < 0) offset = 0;
 
+    const beforeTs = beforeTsParam ? parseInt(beforeTsParam, 10) : undefined;
+
     const conditions = [];
 
-    // Add chain ID filter if provided
+    // Add chain ID filter if provided; otherwise default to supported chains to bound scans
     if (chainIdsParam) {
       const chainIds = chainIdsParam
         .split(",")
@@ -86,6 +91,8 @@ app.get("/trades", async (c) => {
       if (chainIds.length > 0) {
         conditions.push(inArray(dexTrade.chainId, chainIds));
       }
+    } else {
+      conditions.push(inArray(dexTrade.chainId, supportedChains));
     }
 
     // Add DEX name filter if provided
@@ -96,16 +103,36 @@ app.get("/trades", async (c) => {
       }
     }
 
+    // Keyset pagination support (timestamp-only)
+    if (beforeTs) {
+      conditions.push(sql`${dexTrade.blockTimestamp} < ${beforeTs}`);
+    }
+
     const whereCondition = conditions.length > 0 ? and(...conditions) : undefined;
+
+    // Light payload by default unless fields=full
+    const fieldsFull = (fieldsParam || "").toLowerCase() === "full";
+    const summaryCols = {
+      chainId: dexTrade.chainId,
+      blockNumber: dexTrade.blockNumber,
+      blockTimestamp: dexTrade.blockTimestamp,
+      transactionHash: dexTrade.transactionHash,
+      dex: dexTrade.dex,
+      fromTokenSymbol: dexTrade.fromTokenSymbol,
+      toTokenSymbol: dexTrade.toTokenSymbol,
+    };
 
     const query = db
       .client(c)
-      .select()
+      .select(fieldsFull ? undefined : summaryCols)
       .from(dexTrade)
       // Orders by `block_timestamp` from DexTradeData.blockTimestamp
       .orderBy(desc(dexTrade.blockTimestamp))
-      .limit(limit)
-      .offset(offset);
+      .limit(limit);
+
+    if (!beforeTs && offset > 0) {
+      query.offset(offset);
+    }
 
     if (whereCondition) {
       query.where(whereCondition);
@@ -136,12 +163,14 @@ app.get("/trades/tx/:txHash", async (c) => {
       return Response.json({ error: "A valid transaction hash is required." }, { status: 400 });
     }
 
-    // Filters by the `transaction_hash` column
+    // Filters by the `transaction_hash` column (bytes32)
+    // Convert '0x...' hex string to bytea using SQL decode to match bytes32 column
+    const hex = txHash.slice(2); // strip 0x
     const result = await db
       .client(c)
       .select()
       .from(dexTrade)
-      .where(eq(dexTrade.transactionHash, txHash));
+      .where(eq(dexTrade.transactionHash, sql`decode(${hex}, 'hex')`));
 
     if (result.length === 0) {
       return Response.json({ error: "No trades found for this transaction hash." }, { status: 404 });
@@ -149,8 +178,9 @@ app.get("/trades/tx/:txHash", async (c) => {
 
     return Response.json({ result });
   } catch (e) {
-    console.error("Database operation failed in /trades/tx/:txHash:", e);
-    return Response.json({ error: "Failed to retrieve trade by transaction hash." }, { status: 500 });
+    const id = randomUUID();
+    console.error(`Database operation failed in /trades/tx/:txHash [${id}]:`, e);
+    return Response.json({ error: "Internal error", id }, { status: 500 });
   }
 });
 
