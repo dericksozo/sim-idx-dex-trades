@@ -11,12 +11,33 @@ const app = App.create();
 app.use("*", middlewares.authentication);
 
 /**
- * A default list of supported chain IDs for DEX trades.
- * This is used as a fallback when no specific chainIds are requested by the client.
+ * A fallback list of supported chain IDs used if the remote fetch fails.
  */
-const supportedChains: types.Uint[] = [
-  1, 8453, 480, 34443, 57073, 130, 7777777, 60808, 1868, 360, 42161,
+const fallbackSupportedChains: types.Uint[] = [
+  1, 8453, 10, 1301, 480, 7777777, 57073, 60808, 1946, 34443, 11155111, 84532,
 ].map((id) => new types.Uint(BigInt(id)));
+
+/**
+ * Fetch supported chains from the Sim IDX API.
+ */
+async function fetchSupportedChains(): Promise<types.Uint[]> {
+  try {
+    const res = await (globalThis as any).fetch(
+      "http://api.sim.dune.com/idx/supported-chains",
+      { headers: { accept: "application/json" } }
+    );
+    if (!res?.ok) throw new Error(`HTTP ${res?.status}`);
+    const data = await res.json() as { chains?: { name?: string; chain_id?: number }[] };
+    const chainIds = (data.chains ?? [])
+      .map((c) => Number(c.chain_id))
+      .filter((id) => Number.isInteger(id) && id > 0);
+    if (chainIds.length === 0) throw new Error("Empty chains list from remote");
+    return chainIds.map((id) => new types.Uint(BigInt(id)));
+  } catch (e) {
+    console.error("Failed to fetch supported chains:", e);
+    return fallbackSupportedChains;
+  }
+}
 
 // Caching intentionally removed per request; focusing on query and payload optimizations only.
 
@@ -92,7 +113,8 @@ app.get("/trades", async (c) => {
         conditions.push(inArray(dexTrade.chainId, chainIds));
       }
     } else {
-      conditions.push(inArray(dexTrade.chainId, supportedChains));
+      const fetchedChains = await fetchSupportedChains();
+      conditions.push(inArray(dexTrade.chainId, fetchedChains));
     }
 
     // Add DEX name filter if provided
