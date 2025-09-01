@@ -34,7 +34,7 @@ async function fetchSupportedChains(): Promise<types.Uint[]> {
     if (chainIds.length === 0) throw new Error("Empty chains list from remote");
     return chainIds.map((id) => new types.Uint(BigInt(id)));
   } catch (e) {
-    console.error("Failed to fetch supported chains:", e);
+    globalThis.console?.error("Failed to fetch supported chains:", e);
     return fallbackSupportedChains;
   }
 }
@@ -50,24 +50,82 @@ async function fetchSupportedChains(): Promise<types.Uint[]> {
  */
 app.get("/dexes/status", async (c) => {
   try {
-    const twentyFourHoursAgo = Math.floor(Date.now() / 1000) - 24 * 60 * 60;
+    const nowSec = Math.floor(Date.now() / 1000);
+    const windowParam = c.req.query("window");
+    const windowSecs = windowParam ? Math.max(parseInt(windowParam, 10) || 0, 60) : 24 * 60 * 60;
+    const fromTs = nowSec - windowSecs;
 
-    // Restrict scan to last 24h and use COUNT(*) for faster aggregation
     const result = await db
       .client(c)
       .select({
         dex: dexTrade.dex,
         lastTradeTimestamp: max(dexTrade.blockTimestamp),
-        tradesLast24h: sql<number>`COUNT(*)`.mapWith(Number),
+        tradesWindow: sql<number>`COUNT(*)`.mapWith(Number),
       })
       .from(dexTrade)
-      .where(sql`${dexTrade.blockTimestamp} >= ${twentyFourHoursAgo}`)
+      .where(sql`${dexTrade.blockTimestamp} >= ${fromTs}`)
       .groupBy(dexTrade.dex)
       .orderBy(desc(max(dexTrade.blockTimestamp)));
-    return Response.json({ result });
+    return c.json({ result });
   } catch (e) {
-    console.error("Database operation failed in /dexes/status:", e);
-    return Response.json({ error: "Failed to retrieve DEX status." }, { status: 500 });
+    globalThis.console?.error("Database operation failed in /dexes/status:", e);
+    return c.json({ error: "Failed to retrieve DEX status." }, 500);
+  }
+});
+
+/**
+ * Per (chain, dex) summary for the main page grid with key counts.
+ * Defaults to last 24h window and also provides 5m activity count.
+ */
+app.get("/summary", async (c) => {
+  try {
+    const chainIdsParam = c.req.query("chainIds");
+    const dexesParam = c.req.query("dexes");
+    const windowParam = c.req.query("window");
+
+    const nowSec = Math.floor(Date.now() / 1000);
+    const windowSecs = windowParam ? Math.max(parseInt(windowParam, 10) || 0, 60) : 24 * 60 * 60;
+    const fromTs = nowSec - windowSecs;
+    const fromTs5m = nowSec - 300;
+
+    const conditions = [sql`${dexTrade.blockTimestamp} >= ${fromTs}`];
+
+    if (chainIdsParam) {
+      const chainIds = chainIdsParam
+        .split(",")
+        .map((id) => new types.Uint(BigInt(parseInt(id.trim(), 10))))
+        .filter((v) => !Number.isNaN(Number(v)));
+      if (chainIds.length > 0) conditions.push(inArray(dexTrade.chainId, chainIds));
+    } else {
+      const fetchedChains = await fetchSupportedChains();
+      conditions.push(inArray(dexTrade.chainId, fetchedChains));
+    }
+
+    if (dexesParam) {
+      const dexes = dexesParam.split(",").map((d) => d.trim());
+      if (dexes.length > 0) conditions.push(inArray(dexTrade.dex, dexes));
+    }
+
+    const whereCondition = and(...conditions);
+
+    const result = await db
+      .client(c)
+      .select({
+        chainId: dexTrade.chainId,
+        dex: dexTrade.dex,
+        lastTradeTimestamp: max(dexTrade.blockTimestamp),
+        tradesWindow: sql<number>`COUNT(*)`.mapWith(Number),
+        trades5m: sql<number>`COUNT(*) FILTER (WHERE ${dexTrade.blockTimestamp} >= ${fromTs5m})`.mapWith(Number),
+      })
+      .from(dexTrade)
+      .where(whereCondition)
+      .groupBy(dexTrade.chainId, dexTrade.dex)
+      .orderBy(desc(max(dexTrade.blockTimestamp)));
+
+    return c.json({ result });
+  } catch (e) {
+    globalThis.console?.error("Database operation failed in /summary:", e);
+    return c.json({ error: "Failed to retrieve summary." }, 500);
   }
 });
 
@@ -88,51 +146,46 @@ app.get("/trades", async (c) => {
     const chainIdsParam = c.req.query("chainIds");
     const dexesParam = c.req.query("dexes");
     const limitParam = c.req.query("limit");
-    const offsetParam = c.req.query("offset");
     const fieldsParam = c.req.query("fields");
     const beforeTsParam = c.req.query("beforeTs");
+    const beforeHashParam = c.req.query("beforeHash");
 
-    // Validate and parse pagination parameters
     let limit = limitParam ? parseInt(limitParam, 10) : 50;
-    if (isNaN(limit) || limit <= 0) limit = 50;
-    if (limit > 100) limit = 100; // Reduce max limit for stability
+    if (Number.isNaN(limit) || limit <= 0) limit = 50;
+    if (limit > 100) limit = 100;
 
-    let offset = offsetParam ? parseInt(offsetParam, 10) : 0;
-    if (isNaN(offset) || offset < 0) offset = 0;
+    const conditions = [] as any[];
 
-    const beforeTs = beforeTsParam ? parseInt(beforeTsParam, 10) : undefined;
-
-    const conditions = [];
-
-    // Add chain ID filter if provided; otherwise default to supported chains to bound scans
     if (chainIdsParam) {
       const chainIds = chainIdsParam
         .split(",")
         .map((id) => new types.Uint(BigInt(parseInt(id.trim(), 10))));
-      if (chainIds.length > 0) {
-        conditions.push(inArray(dexTrade.chainId, chainIds));
-      }
+      if (chainIds.length > 0) conditions.push(inArray(dexTrade.chainId, chainIds));
     } else {
       const fetchedChains = await fetchSupportedChains();
       conditions.push(inArray(dexTrade.chainId, fetchedChains));
     }
 
-    // Add DEX name filter if provided
     if (dexesParam) {
-      const dexes = dexesParam.split(",").map(d => d.trim());
-      if (dexes.length > 0) {
-        conditions.push(inArray(dexTrade.dex, dexes));
-      }
+      const dexes = dexesParam.split(",").map((d) => d.trim());
+      if (dexes.length > 0) conditions.push(inArray(dexTrade.dex, dexes));
     }
 
-    // Keyset pagination support (timestamp-only)
-    if (beforeTs) {
+    const beforeTs = beforeTsParam ? parseInt(beforeTsParam, 10) : undefined;
+    const beforeHash = beforeHashParam && /^0x[a-fA-F0-9]{64}$/.test(beforeHashParam)
+      ? beforeHashParam
+      : undefined;
+    if (beforeTs && beforeHash) {
+      const hex = beforeHash.slice(2);
+      conditions.push(
+        sql`(${dexTrade.blockTimestamp} < ${beforeTs} OR (${dexTrade.blockTimestamp} = ${beforeTs} AND ${dexTrade.transactionHash} < decode(${hex}, 'hex')))`
+      );
+    } else if (beforeTs) {
       conditions.push(sql`${dexTrade.blockTimestamp} < ${beforeTs}`);
     }
 
     const whereCondition = conditions.length > 0 ? and(...conditions) : undefined;
 
-    // Light payload by default unless fields=full
     const fieldsFull = (fieldsParam || "").toLowerCase() === "full";
     const summaryCols = {
       chainId: dexTrade.chainId,
@@ -148,24 +201,16 @@ app.get("/trades", async (c) => {
       .client(c)
       .select(fieldsFull ? undefined : summaryCols)
       .from(dexTrade)
-      // Orders by `block_timestamp` from DexTradeData.blockTimestamp
-      .orderBy(desc(dexTrade.blockTimestamp))
+      .orderBy(desc(dexTrade.blockTimestamp), desc(dexTrade.transactionHash))
       .limit(limit);
 
-    if (!beforeTs && offset > 0) {
-      query.offset(offset);
-    }
-
-    if (whereCondition) {
-      query.where(whereCondition);
-    }
+    if (whereCondition) query.where(whereCondition);
 
     const result = await query;
-
-    return Response.json({ result });
+    return c.json({ result });
   } catch (e) {
-    console.error("Database operation failed in /trades:", e);
-    return Response.json({ error: "Failed to retrieve trades." }, { status: 500 });
+    globalThis.console?.error("Database operation failed in /trades:", e);
+    return c.json({ error: "Failed to retrieve trades." }, 500);
   }
 });
 
@@ -182,7 +227,7 @@ app.get("/trades/tx/:txHash", async (c) => {
     const txHash = c.req.param("txHash");
 
     if (!txHash || !/^0x[a-fA-F0-9]{64}$/.test(txHash)) {
-      return Response.json({ error: "A valid transaction hash is required." }, { status: 400 });
+      return c.json({ error: "A valid transaction hash is required." }, 400);
     }
 
     // Filters by the `transaction_hash` column (bytes32)
@@ -195,14 +240,48 @@ app.get("/trades/tx/:txHash", async (c) => {
       .where(eq(dexTrade.transactionHash, sql`decode(${hex}, 'hex')`));
 
     if (result.length === 0) {
-      return Response.json({ error: "No trades found for this transaction hash." }, { status: 404 });
+      return c.json({ error: "No trades found for this transaction hash." }, 404);
     }
 
-    return Response.json({ result });
+    return c.json({ result });
   } catch (e) {
     const id = randomUUID();
-    console.error(`Database operation failed in /trades/tx/:txHash [${id}]:`, e);
-    return Response.json({ error: "Internal error", id }, { status: 500 });
+    globalThis.console?.error(`Database operation failed in /trades/tx/:txHash [${id}]:`, e);
+    return c.json({ error: "Internal error", id }, 500);
+  }
+});
+
+/**
+ * Latest trade for a given (chainId, dex) pair.
+ */
+app.get("/latest", async (c) => {
+  try {
+    const chainIdParam = c.req.query("chainId");
+    const dexParam = c.req.query("dex");
+
+    if (!chainIdParam || !dexParam) {
+      return c.json({ error: "chainId and dex are required" }, 400);
+    }
+
+    const chainId = new types.Uint(BigInt(parseInt(chainIdParam, 10)));
+    const dexName = dexParam.trim();
+
+    const result = await db
+      .client(c)
+      .select()
+      .from(dexTrade)
+      .where(and(eq(dexTrade.chainId, chainId), eq(dexTrade.dex, dexName)))
+      .orderBy(desc(dexTrade.blockTimestamp), desc(dexTrade.transactionHash))
+      .limit(1);
+
+    if (result.length === 0) {
+      return c.json({ error: "No trade found for this (chainId, dex)." }, 404);
+    }
+
+    return c.json({ result: result[0] });
+  } catch (e) {
+    globalThis.console?.error("Database operation failed in /latest:", e);
+    return c.json({ error: "Failed to retrieve latest trade." }, 500);
   }
 });
 
@@ -220,12 +299,12 @@ app.get("/dexes", async (c) => {
       .from(dexTrade)
       .orderBy(dexTrade.dex);
 
-    return Response.json({
+    return c.json({
       result: result.map(r => r.dex),
     });
   } catch (e) {
-    console.error("Database operation failed in /dexes:", e);
-    return Response.json({ error: "Failed to retrieve list of DEXes." }, { status: 500 });
+    globalThis.console?.error("Database operation failed in /dexes:", e);
+    return c.json({ error: "Failed to retrieve list of DEXes." }, 500);
   }
 });
 
@@ -243,12 +322,12 @@ app.get("/chains", async (c) => {
       .from(dexTrade)
       .orderBy(dexTrade.chainId);
 
-    return Response.json({
+    return c.json({
       result: result.map(r => r.chainId.toString()),
     });
   } catch (e) {
-    console.error("Database operation failed in /chains:", e);
-    return Response.json({ error: "Failed to retrieve list of chains." }, { status: 500 });
+    globalThis.console?.error("Database operation failed in /chains:", e);
+    return c.json({ error: "Failed to retrieve list of chains." }, 500);
   }
 });
 
