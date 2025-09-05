@@ -286,49 +286,133 @@ app.get("/latest", async (c) => {
 });
 
 /**
- * Endpoint to Get a List of All Unique DEX Names.
+ * Endpoint to Get a List of All DEX Names (Static Data).
  *
- * Provides a distinct list of all DEXes present in the database.
- * This is useful for populating filter dropdowns or selection menus in the UI.
+ * Returns a static list of all DEXes based on the listener configuration.
+ * This eliminates expensive database queries and provides instant response times.
  */
-app.get("/dexes", async (c) => {
-  try {
-    const result = await db
-      .client(c)
-      .selectDistinct({ dex: dexTrade.dex })
-      .from(dexTrade)
-      .orderBy(dexTrade.dex);
+app.get("/dexes", (c) => {
+  const dexes = [
+    "MakerPSM",
+    "UniswapV2", 
+    "UniswapV3",
+    "BancorCarbon",
+    "CoWProtocol",
+    "CrocSwap",
+    "Curve",
+    "BalancerV2",
+    "MaverickV1",
+    "UniswapX",
+    "UniswapV4",
+    "DODOV2",
+    "WooFi",
+    "AirSwapV4",
+    "AirSwapV5",
+    "FluidDex",
+    "1InchLOPV4",
+    "KyberSwapLOP",
+    "KyberSwapDSLOP",
+    "MaverickV2",
+    "Ekubo",
+    "0xProtocol",
+    "0xSettler",
+    "BalancerV3",
+    "EulerSwap",
+    "AerodromeSlipstream",
+    "Aerodrome",
+    "PancakeSwapV3",
+    "PancakeSwapInfinity",
+    "PancakeSwapV4",
+    "AlgebraIntegral",
+    "Algebra",
+    "GMXV2",
+    "Renegade"
+  ].sort();
 
-    return c.json({
-      result: result.map(r => r.dex),
-    });
-  } catch (e) {
-    globalThis.console?.error("Database operation failed in /dexes:", e);
-    return c.json({ error: "Failed to retrieve list of DEXes." }, 500);
-  }
+  return c.json({ result: dexes });
 });
 
 /**
- * Endpoint to Get a List of All Unique Chain IDs.
+ * Endpoint to Get DEXes for a Specific Chain.
  *
- * Provides a distinct list of all chain IDs where trades have occurred.
- * This is useful for populating chain filter UI components.
+ * Returns all DEXes that operate on the specified chain ID.
+ * Based on the static configuration from Main.sol listener setup.
+ *
+ * Query Parameters:
+ *  - `chainId` (required): The chain ID to get DEXes for (e.g., "1", "8453").
  */
-app.get("/chains", async (c) => {
-  try {
-    const result = await db
-      .client(c)
-      .selectDistinct({ chainId: dexTrade.chainId })
-      .from(dexTrade)
-      .orderBy(dexTrade.chainId);
-
-    return c.json({
-      result: result.map(r => r.chainId.toString()),
-    });
-  } catch (e) {
-    globalThis.console?.error("Database operation failed in /chains:", e);
-    return c.json({ error: "Failed to retrieve list of chains." }, 500);
+app.get("/dex-chains", (c) => {
+  const chainIdParam = c.req.query("chainId");
+  
+  if (!chainIdParam) {
+    return c.json({ error: "chainId parameter is required" }, 400);
   }
+
+  const chainId = parseInt(chainIdParam, 10);
+  if (Number.isNaN(chainId)) {
+    return c.json({ error: "chainId must be a valid number" }, 400);
+  }
+
+  // Static mapping based on Main.sol configuration
+  const chainToDexes: Record<number, string[]> = {
+    1: [ // Ethereum
+      "MakerPSM", "UniswapV2", "UniswapV3", "BancorCarbon", "CoWProtocol", 
+      "CrocSwap", "Curve", "BalancerV2", "MaverickV1", "UniswapX", "UniswapV4",
+      "DODOV2", "WooFi", "AirSwapV4", "AirSwapV5", "FluidDex", "1InchLOPV4",
+      "KyberSwapLOP", "KyberSwapDSLOP", "MaverickV2", "Ekubo", "0xProtocol",
+      "0xSettler", "BalancerV3", "EulerSwap", "PancakeSwapV3"
+    ],
+    8453: [ // Base
+      "UniswapV2", "UniswapV3", "BancorCarbon", "CoWProtocol", "CrocSwap", 
+      "Curve", "BalancerV2", "MaverickV1", "UniswapX", "UniswapV4", "DODOV2",
+      "WooFi", "FluidDex", "1InchLOPV4", "KyberSwapLOP", "KyberSwapDSLOP",
+      "MaverickV2", "0xProtocol", "0xSettler", "BalancerV3", "EulerSwap",
+      "AerodromeSlipstream", "Aerodrome", "PancakeSwapV3", "PancakeSwapInfinity",
+      "PancakeSwapV4", "AlgebraIntegral"
+    ],
+    42161: [ // Arbitrum
+      "UniswapV2", "UniswapV3", "CoWProtocol", "Curve", "BalancerV2", "UniswapX",
+      "UniswapV4", "DODOV2", "WooFi", "AirSwapV5", "FluidDex", "1InchLOPV4",
+      "KyberSwapLOP", "KyberSwapDSLOP", "MaverickV2", "0xProtocol", "0xSettler",
+      "BalancerV3", "EulerSwap", "PancakeSwapV3", "Algebra", "GMXV2", "Renegade"
+    ],
+    10: [ // Optimism
+      "UniswapV2", "UniswapV3", "Curve", "BalancerV2", "UniswapV4", "DODOV2",
+      "WooFi", "1InchLOPV4", "KyberSwapLOP", "KyberSwapDSLOP", "0xProtocol",
+      "0xSettler", "BalancerV3", "AerodromeSlipstream", "Aerodrome"
+    ],
+    1301: [ // Unichain
+      "UniswapV2", "UniswapV3", "UniswapV4", "UniswapX", "0xSettler", "EulerSwap"
+    ],
+    57073: [ // Ink
+      "UniswapV2", "UniswapV3", "Curve", "UniswapV4", "0xSettler"
+    ],
+    480: [ // WorldChain
+      "UniswapV2", "UniswapV3", "UniswapV4", "0xSettler"
+    ],
+    1946: [ // Soneium
+      "UniswapV2", "UniswapV3", "UniswapV4"
+    ],
+    7777777: [ // Zora
+      "UniswapV2", "UniswapV3", "UniswapV4"
+    ],
+    60808: [ // BOB
+      "EulerSwap"
+    ]
+  };
+
+  const dexes = chainToDexes[chainId];
+  
+  if (!dexes) {
+    return c.json({ error: `No DEXes found for chain ID ${chainId}` }, 404);
+  }
+
+  return c.json({ 
+    result: {
+      chainId: chainId,
+      dexes: dexes.sort()
+    }
+  });
 });
 
 export default app;
